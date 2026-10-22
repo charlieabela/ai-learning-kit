@@ -1,0 +1,5592 @@
+{
+  "bank": "Fictional Mediterranean Bank plc",
+  "account": {
+    "holder": "Brightwater Logistics Ltd",
+    "iban": "MT31FICT0000000012345678901",
+    "currency": "EUR"
+  },
+  "statement_period": {
+    "from": "2026-07-01",
+    "to": "2026-09-30"
+  },
+  "generated_at": "2026-10-02T08:15:00Z",
+  "transactions": [
+    {
+      "bank_ref": "BNK20260001",
+      "value_date": "2026-07-01",
+      "amount": {
+        "value": 440.31,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Polar Refrigeration Services",
+        "iban": "MT23FICT9449729130"
+      },
+      "remittance_info": "TX-2026-01002 Compressor repair"
+    },
+    {
+      "bank_ref": "BNK20260002",
+      "value_date": "2026-07-02",
+      "amount": {
+        "value": 21572.59,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Polar Refrigeration Services Ltd",
+        "iban": "MT59FICT7643674379"
+      },
+      "remittance_info": "TX-2026-01003 Compressor repair"
+    },
+    {
+      "bank_ref": "BNK20260003",
+      "value_date": "2026-07-02",
+      "amount": {
+        "value": 523.5,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "POLAR REFRIGERATION SERVICES LTD",
+        "iban": "MT32FICT9147019146"
+      },
+      "remittance_info": "TX-2026-01008 Compressor repair"
+    },
+    {
+      "bank_ref": "BNK20260004",
+      "value_date": "2026-07-03",
+      "amount": {
+        "value": 391.95,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Kestrel Print Services",
+        "iban": "MT31FICT3450311723"
+      },
+      "remittance_info": "TX-2026-01001 Business cards"
+    },
+    {
+      "bank_ref": "BNK20260005",
+      "value_date": "2026-07-03",
+      "amount": {
+        "value": 595.21,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Northgate Fuel Distributors",
+        "iban": "MT88FICT6068056479"
+      },
+      "remittance_info": "TX-2026-01004 Diesel delivery"
+    },
+    {
+      "bank_ref": "BNK20260006",
+      "value_date": "2026-07-03",
+      "amount": {
+        "value": 395.1,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Limestone Facilities Management Ltd",
+        "iban": "MT95FICT9823207595"
+      },
+      "remittance_info": "TX-2026-01009 Plumbing works"
+    },
+    {
+      "bank_ref": "BNK20260007",
+      "value_date": "2026-07-04",
+      "amount": {
+        "value": 511.48,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Brightlink Telecom",
+        "iban": "MT28FICT2703433531"
+      },
+      "remittance_info": "TX-2026-01005 Phone handsets"
+    },
+    {
+      "bank_ref": "BNK20260008",
+      "value_date": "2026-07-04",
+      "amount": {
+        "value": 157.17,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Tidewater Insurance Brokers Ltd",
+        "iban": "MT98FICT5917751020"
+      },
+      "remittance_info": "TX-2026-01006 Cargo insurance premium"
+    },
+    {
+      "bank_ref": "BNK20260009",
+      "value_date": "2026-07-04",
+      "amount": {
+        "value": 826.05,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "NOVA MARKETING STUDIO LTD",
+        "iban": "MT17FICT8395017926"
+      },
+      "remittance_info": "TX-2026-01007 Social media management"
+    },
+    {
+      "bank_ref": "BNK20260010",
+      "value_date": "2026-07-04",
+      "amount": {
+        "value": 1830.45,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Orion Security Services Limited",
+        "iban": "MT56FICT3954707872"
+      },
+      "remittance_info": "TX-2026-01010 CCTV maintenance"
+    },
+    {
+      "bank_ref": "BNK20260011",
+      "value_date": "2026-07-04",
+      "amount": {
+        "value": 807.22,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Greenleaf Cleaning Ltd",
+        "iban": "MT34FICT4527208163"
+      },
+      "remittance_info": "TX-2026-01011 Office cleaning"
+    },
+    {
+      "bank_ref": "BNK20260012",
+      "value_date": "2026-07-04",
+      "amount": {
+        "value": 729.47,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Redwood Furniture Limited",
+        "iban": "MT43FICT1259572468"
+      },
+      "remittance_info": "TX-2026-01012 Meeting room table"
+    },
+    {
+      "bank_ref": "BNK20260013",
+      "value_date": "2026-07-04",
+      "amount": {
+        "value": 508.0,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Nova Marketing Studio Limited",
+        "iban": "MT77FICT4695451095"
+      },
+      "remittance_info": "TX-2026-01013 Campaign design"
+    },
+    {
+      "bank_ref": "BNK20260014",
+      "value_date": "2026-07-06",
+      "amount": {
+        "value": 882.57,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "GRANITE CONSTRUCTION WORKS LTD",
+        "iban": "MT45FICT4064436739"
+      },
+      "remittance_info": "TX-2026-01019 Yard resurfacing"
+    },
+    {
+      "bank_ref": "BNK20260015",
+      "value_date": "2026-07-06",
+      "amount": {
+        "value": 353.94,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Polar Refrigeration Services Limited",
+        "iban": "MT29FICT1743876012"
+      },
+      "remittance_info": "TX-2026-01020 Cold store maintenance"
+    },
+    {
+      "bank_ref": "BNK20260016",
+      "value_date": "2026-07-07",
+      "amount": {
+        "value": 130.41,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Harbour IT Services",
+        "iban": "MT90FICT2096648036"
+      },
+      "remittance_info": "TX-2026-01014 Server support"
+    },
+    {
+      "bank_ref": "BNK20260017",
+      "value_date": "2026-07-07",
+      "amount": {
+        "value": 1318.86,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Brightlink Telecom Limited",
+        "iban": "MT37FICT7069868711"
+      },
+      "remittance_info": "TX-2026-01016 Mobile plans"
+    },
+    {
+      "bank_ref": "BNK20260018",
+      "value_date": "2026-07-07",
+      "amount": {
+        "value": 360.42,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Atlas Forklift Hire",
+        "iban": "MT47FICT3483266437"
+      },
+      "remittance_info": "TX-2026-01022 Forklift hire"
+    },
+    {
+      "bank_ref": "BNK20260019",
+      "value_date": "2026-07-07",
+      "amount": {
+        "value": 569.49,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Greenleaf Cleaning",
+        "iban": "MT71FICT5313544753"
+      },
+      "remittance_info": "TX-2026-01025 Office cleaning"
+    },
+    {
+      "bank_ref": "BNK20260020",
+      "value_date": "2026-07-08",
+      "amount": {
+        "value": 426.47,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "COASTLINE FLEET REPAIRS LTD",
+        "iban": "MT24FICT7734753103"
+      },
+      "remittance_info": "TX-2026-01015 Truck brake repair"
+    },
+    {
+      "bank_ref": "BNK20260021",
+      "value_date": "2026-07-08",
+      "amount": {
+        "value": 152.39,
+        "currency": "USD"
+      },
+      "counterparty": {
+        "name": "VECTOR LOGISTICS SOFTWARE INC",
+        "iban": "MT39FICT2450320918"
+      },
+      "remittance_info": "TX-2026-01017 Software subscription"
+    },
+    {
+      "bank_ref": "BNK20260022",
+      "value_date": "2026-07-08",
+      "amount": {
+        "value": 112.8,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "TIDEWATER INSURANCE BROKERS LTD",
+        "iban": "MT28FICT5164875295"
+      },
+      "remittance_info": "TX-2026-01018 Cargo insurance premium"
+    },
+    {
+      "bank_ref": "BNK20260023",
+      "value_date": "2026-07-08",
+      "amount": {
+        "value": 412.07,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Brightlink Telecom Ltd",
+        "iban": "MT81FICT4701553216"
+      },
+      "remittance_info": "TX-2026-01023 Phone handsets"
+    },
+    {
+      "bank_ref": "BNK20260024",
+      "value_date": "2026-07-08",
+      "amount": {
+        "value": 455.5,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "GREENLEAF CLEANING LTD",
+        "iban": "MT72FICT9005845257"
+      },
+      "remittance_info": "TX-2026-01024 Warehouse deep clean"
+    },
+    {
+      "bank_ref": "BNK20260025",
+      "value_date": "2026-07-08",
+      "amount": {
+        "value": 842.4,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Nova Marketing Studio Limited",
+        "iban": "MT26FICT6785677100"
+      },
+      "remittance_info": "TX-2026-01027 Social media management"
+    },
+    {
+      "bank_ref": "BNK20260026",
+      "value_date": "2026-07-08",
+      "amount": {
+        "value": 236.64,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "HARBOUR IT SERVICES LTD",
+        "iban": "MT73FICT2882116672"
+      },
+      "remittance_info": "TX-2026-01029 Server support"
+    },
+    {
+      "bank_ref": "BNK20260027",
+      "value_date": "2026-07-08",
+      "amount": {
+        "value": 1032.67,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Harbour IT Services Limited",
+        "iban": "MT82FICT5312000711"
+      },
+      "remittance_info": "TX-2026-01030 Server support"
+    },
+    {
+      "bank_ref": "BNK20260028",
+      "value_date": "2026-07-08",
+      "amount": {
+        "value": 26400.0,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Granite Construction Works Limited",
+        "iban": "MT76FICT7421416781"
+      },
+      "remittance_info": "TX-2026-01034 Loading bay works"
+    },
+    {
+      "bank_ref": "BNK20260029",
+      "value_date": "2026-07-09",
+      "amount": {
+        "value": 1202.64,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "KESTREL PRINT SERVICES LTD",
+        "iban": "MT72FICT9361030381"
+      },
+      "remittance_info": "TX-2026-01021 Signage"
+    },
+    {
+      "bank_ref": "BNK20260030",
+      "value_date": "2026-07-09",
+      "amount": {
+        "value": 265.32,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Keystone Legal Advisors",
+        "iban": "MT17FICT7902858949"
+      },
+      "remittance_info": "TX-2026-01026 Legal advice"
+    },
+    {
+      "bank_ref": "BNK20260031",
+      "value_date": "2026-07-09",
+      "amount": {
+        "value": 458.42,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Summit Training Academy",
+        "iban": "MT64FICT4530141222"
+      },
+      "remittance_info": "TX-2026-01028 Forklift licence training"
+    },
+    {
+      "bank_ref": "BNK20260032",
+      "value_date": "2026-07-09",
+      "amount": {
+        "value": 451.59,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Limestone Facilities Management Limited",
+        "iban": "MT36FICT8564455300"
+      },
+      "remittance_info": "TX-2026-01031 Lighting replacement"
+    },
+    {
+      "bank_ref": "BNK20260033",
+      "value_date": "2026-07-09",
+      "amount": {
+        "value": 587.43,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Meridian Software Licensing Limited",
+        "iban": "MT26FICT2289940110"
+      },
+      "remittance_info": "TX-2026-01032 Software subscription"
+    },
+    {
+      "bank_ref": "BNK20260034",
+      "value_date": "2026-07-09",
+      "amount": {
+        "value": 9467.2,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Brightlink Telecom",
+        "iban": "MT89FICT3034210777"
+      },
+      "remittance_info": "TX-2026-01033 Mobile plans"
+    },
+    {
+      "bank_ref": "BNK20260035",
+      "value_date": "2026-07-09",
+      "amount": {
+        "value": 328.52,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Northgate Fuel Distributors Limited",
+        "iban": "MT14FICT1278806940"
+      },
+      "remittance_info": "TX-2026-01036 Fuel cards top-up"
+    },
+    {
+      "bank_ref": "BNK20260036",
+      "value_date": "2026-07-09",
+      "amount": {
+        "value": 252.53,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Sunvale Packaging Limited",
+        "iban": "MT59FICT4179406554"
+      },
+      "remittance_info": "TX-2026-01038 Packing tape"
+    },
+    {
+      "bank_ref": "BNK20260037",
+      "value_date": "2026-07-10",
+      "amount": {
+        "value": 205.7,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Harbour IT Services Ltd",
+        "iban": "MT10FICT3756089759"
+      },
+      "remittance_info": "TX-2026-01035 Laptop repairs"
+    },
+    {
+      "bank_ref": "BNK20260038",
+      "value_date": "2026-07-10",
+      "amount": {
+        "value": 205.81,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Atlas Forklift Hire Ltd",
+        "iban": "MT31FICT6138552285"
+      },
+      "remittance_info": "TX-2026-01037 Generator hire"
+    },
+    {
+      "bank_ref": "BNK20260039",
+      "value_date": "2026-07-10",
+      "amount": {
+        "value": 981.99,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "SILVERLINE COURIERS LTD",
+        "iban": "MT88FICT9429477055"
+      },
+      "remittance_info": "TX-2026-01039 Same-day deliveries"
+    },
+    {
+      "bank_ref": "BNK20260040",
+      "value_date": "2026-07-10",
+      "amount": {
+        "value": 807.35,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "NOVA MARKETING STUDIO LTD",
+        "iban": "MT19FICT5179008453"
+      },
+      "remittance_info": "TX-2026-01040 Social media management"
+    },
+    {
+      "bank_ref": "BNK20260041",
+      "value_date": "2026-07-10",
+      "amount": {
+        "value": 14379.11,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Meridian Software Licensing",
+        "iban": "MT54FICT3728046467"
+      },
+      "remittance_info": "TX-2026-01042 Licence renewal"
+    },
+    {
+      "bank_ref": "BNK20260042",
+      "value_date": "2026-07-10",
+      "amount": {
+        "value": 17540.98,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "SILVERLINE COURIERS LTD",
+        "iban": "MT85FICT9522045405"
+      },
+      "remittance_info": "TX-2026-01046 Courier services"
+    },
+    {
+      "bank_ref": "BNK20260043",
+      "value_date": "2026-07-10",
+      "amount": {
+        "value": 534.49,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Keystone Legal Advisors",
+        "iban": "MT78FICT5867372501"
+      },
+      "remittance_info": "TX-2026-01047 Contract review"
+    },
+    {
+      "bank_ref": "BNK20260044",
+      "value_date": "2026-07-10",
+      "amount": {
+        "value": 577.03,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Nova Marketing Studio Ltd",
+        "iban": "MT34FICT6528141970"
+      },
+      "remittance_info": "TX-2026-01048 Campaign design"
+    },
+    {
+      "bank_ref": "BNK20260045",
+      "value_date": "2026-07-10",
+      "amount": {
+        "value": 1147.29,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Polar Refrigeration Services",
+        "iban": "MT30FICT4575148574"
+      },
+      "remittance_info": "TX-2026-01049 Cold store maintenance"
+    },
+    {
+      "bank_ref": "BNK20260046",
+      "value_date": "2026-07-11",
+      "amount": {
+        "value": 926.26,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Sunvale Packaging",
+        "iban": "MT49FICT7980773908"
+      },
+      "remittance_info": "TX-2026-01043 Cardboard boxes"
+    },
+    {
+      "bank_ref": "BNK20260047",
+      "value_date": "2026-07-12",
+      "amount": {
+        "value": 621.32,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Coastline Fleet Repairs Limited",
+        "iban": "MT56FICT3834089256"
+      },
+      "remittance_info": "TX-2026-01041 Van service"
+    },
+    {
+      "bank_ref": "BNK20260048",
+      "value_date": "2026-07-12",
+      "amount": {
+        "value": 1546.05,
+        "currency": "USD"
+      },
+      "counterparty": {
+        "name": "Vector Logistics Software Inc",
+        "iban": "MT87FICT7341538009"
+      },
+      "remittance_info": "TX-2026-01044 Software subscription"
+    },
+    {
+      "bank_ref": "BNK20260049",
+      "value_date": "2026-07-12",
+      "amount": {
+        "value": 130.91,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Tidewater Insurance Brokers Limited",
+        "iban": "MT45FICT4231162989"
+      },
+      "remittance_info": "TX-2026-01045 Cargo insurance premium"
+    },
+    {
+      "bank_ref": "BNK20260050",
+      "value_date": "2026-07-13",
+      "amount": {
+        "value": 780.13,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Coastline Fleet Repairs",
+        "iban": "MT64FICT4193900420"
+      },
+      "remittance_info": "TX-2026-01051 Fleet inspection"
+    },
+    {
+      "bank_ref": "BNK20260051",
+      "value_date": "2026-07-13",
+      "amount": {
+        "value": 495.77,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Northgate Fuel Distributors Limited",
+        "iban": "MT34FICT1047446756"
+      },
+      "remittance_info": "TX-2026-01052 Fuel cards top-up"
+    },
+    {
+      "bank_ref": "BNK20260052",
+      "value_date": "2026-07-14",
+      "amount": {
+        "value": 802.32,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Harbour IT Services Ltd",
+        "iban": "MT47FICT5137421354"
+      },
+      "remittance_info": "TX-2026-01054 Server support"
+    },
+    {
+      "bank_ref": "BNK20260053",
+      "value_date": "2026-07-14",
+      "amount": {
+        "value": 304.52,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Summit Training Academy Limited",
+        "iban": "MT59FICT3541774456"
+      },
+      "remittance_info": "TX-2026-01061 Manager training"
+    },
+    {
+      "bank_ref": "BNK20260054",
+      "value_date": "2026-07-14",
+      "amount": {
+        "value": 1772.88,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Quayside Tyres Limited",
+        "iban": "MT64FICT3967192567"
+      },
+      "remittance_info": "TX-2026-01062 Tyre rotation"
+    },
+    {
+      "bank_ref": "BNK20260055",
+      "value_date": "2026-07-15",
+      "amount": {
+        "value": 382.26,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "COASTLINE FLEET REPAIRS LTD",
+        "iban": "MT46FICT5291213455"
+      },
+      "remittance_info": "TX-2026-01050 Truck brake repair"
+    },
+    {
+      "bank_ref": "BNK20260056",
+      "value_date": "2026-07-15",
+      "amount": {
+        "value": 252.05,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "SUMMIT TRAINING ACADEMY LTD",
+        "iban": "MT96FICT4924559272"
+      },
+      "remittance_info": "TX-2026-01053 Manager training"
+    },
+    {
+      "bank_ref": "BNK20260057",
+      "value_date": "2026-07-15",
+      "amount": {
+        "value": 243.98,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Coastline Fleet Repairs Ltd",
+        "iban": "MT70FICT5920314391"
+      },
+      "remittance_info": "TX-2026-01055 Van service"
+    },
+    {
+      "bank_ref": "BNK20260058",
+      "value_date": "2026-07-15",
+      "amount": {
+        "value": 371.38,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "LIMESTONE FACILITIES MANAGEMENT LTD",
+        "iban": "MT20FICT6784313639"
+      },
+      "remittance_info": "TX-2026-01056 HVAC maintenance"
+    },
+    {
+      "bank_ref": "BNK20260059",
+      "value_date": "2026-07-15",
+      "amount": {
+        "value": 654.51,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "PINNACLE RECRUITMENT LTD",
+        "iban": "MT37FICT6356263887"
+      },
+      "remittance_info": "TX-2026-01057 Job advert package"
+    },
+    {
+      "bank_ref": "BNK20260060",
+      "value_date": "2026-07-15",
+      "amount": {
+        "value": 987.3,
+        "currency": "USD"
+      },
+      "counterparty": {
+        "name": "VECTOR LOGISTICS SOFTWARE INC",
+        "iban": "MT54FICT1247973310"
+      },
+      "remittance_info": "TX-2026-01067 Additional user seats"
+    },
+    {
+      "bank_ref": "BNK20260061",
+      "value_date": "2026-07-16",
+      "amount": {
+        "value": 822.58,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Brightlink Telecom Ltd",
+        "iban": "MT10FICT5792018346"
+      },
+      "remittance_info": "TX-2026-01058 Phone handsets"
+    },
+    {
+      "bank_ref": "BNK20260062",
+      "value_date": "2026-07-16",
+      "amount": {
+        "value": 21308.05,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Sunvale Packaging Limited",
+        "iban": "MT57FICT9026379015"
+      },
+      "remittance_info": "TX-2026-01059 Pallet wrap"
+    },
+    {
+      "bank_ref": "BNK20260063",
+      "value_date": "2026-07-16",
+      "amount": {
+        "value": 6000.0,
+        "currency": "USD"
+      },
+      "counterparty": {
+        "name": "VECTOR LOGISTICS SOFTWARE INC",
+        "iban": "MT80FICT7627625335"
+      },
+      "remittance_info": "TX-2026-01060 Software subscription"
+    },
+    {
+      "bank_ref": "BNK20260064",
+      "value_date": "2026-07-16",
+      "amount": {
+        "value": 511.29,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Atlas Forklift Hire Ltd",
+        "iban": "MT60FICT4445638115"
+      },
+      "remittance_info": "TX-2026-01072 Forklift hire"
+    },
+    {
+      "bank_ref": "BNK20260065",
+      "value_date": "2026-07-17",
+      "amount": {
+        "value": 522.57,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Kestrel Print Services Ltd",
+        "iban": "MT19FICT9693328461"
+      },
+      "remittance_info": "TX-2026-01063 Brochure print run"
+    },
+    {
+      "bank_ref": "BNK20260066",
+      "value_date": "2026-07-17",
+      "amount": {
+        "value": 713.64,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Kestrel Print Services Limited",
+        "iban": "MT79FICT9738500138"
+      },
+      "remittance_info": "TX-2026-01064 Leaflets"
+    },
+    {
+      "bank_ref": "BNK20260067",
+      "value_date": "2026-07-17",
+      "amount": {
+        "value": 348.62,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Limestone Facilities Management Limited",
+        "iban": "MT27FICT8466282263"
+      },
+      "remittance_info": "TX-2026-01065 Lighting replacement"
+    },
+    {
+      "bank_ref": "BNK20260068",
+      "value_date": "2026-07-17",
+      "amount": {
+        "value": 567.57,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Meridian Software Licensing",
+        "iban": "MT38FICT1211211934"
+      },
+      "remittance_info": "TX-2026-01066 Additional user seats"
+    },
+    {
+      "bank_ref": "BNK20260069",
+      "value_date": "2026-07-17",
+      "amount": {
+        "value": 1944.93,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "GRANITE CONSTRUCTION WORKS LTD",
+        "iban": "MT90FICT8678052036"
+      },
+      "remittance_info": "TX-2026-01068 Yard resurfacing"
+    },
+    {
+      "bank_ref": "BNK20260070",
+      "value_date": "2026-07-17",
+      "amount": {
+        "value": 1329.23,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Kestrel Print Services Ltd",
+        "iban": "MT44FICT8977795786"
+      },
+      "remittance_info": "TX-2026-01070 Brochure print run"
+    },
+    {
+      "bank_ref": "BNK20260071",
+      "value_date": "2026-07-17",
+      "amount": {
+        "value": 109.9,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Seabreeze Catering Ltd",
+        "iban": "MT37FICT8156750614"
+      },
+      "remittance_info": "TX-2026-01079 Training day lunch"
+    },
+    {
+      "bank_ref": "BNK20260072",
+      "value_date": "2026-07-18",
+      "amount": {
+        "value": 663.62,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Kestrel Print Services Limited",
+        "iban": "MT28FICT7976206328"
+      },
+      "remittance_info": "TX-2026-01069 Signage"
+    },
+    {
+      "bank_ref": "BNK20260073",
+      "value_date": "2026-07-18",
+      "amount": {
+        "value": 190.7,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Limestone Facilities Management Limited",
+        "iban": "MT68FICT2503828321"
+      },
+      "remittance_info": "TX-2026-01071 HVAC maintenance"
+    },
+    {
+      "bank_ref": "BNK20260074",
+      "value_date": "2026-07-18",
+      "amount": {
+        "value": 329.5,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Brightlink Telecom Ltd",
+        "iban": "MT26FICT9017132835"
+      },
+      "remittance_info": "TX-2026-01073 Leased line"
+    },
+    {
+      "bank_ref": "BNK20260075",
+      "value_date": "2026-07-18",
+      "amount": {
+        "value": 1060.04,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "POLAR REFRIGERATION SERVICES LTD",
+        "iban": "MT31FICT9960385388"
+      },
+      "remittance_info": "TX-2026-01074 Cold store maintenance"
+    },
+    {
+      "bank_ref": "BNK20260076",
+      "value_date": "2026-07-18",
+      "amount": {
+        "value": 557.0,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Bluefin Office Supplies",
+        "iban": "MT76FICT8195400944"
+      },
+      "remittance_info": "TX-2026-01076 Printer toner"
+    },
+    {
+      "bank_ref": "BNK20260077",
+      "value_date": "2026-07-18",
+      "amount": {
+        "value": 820.41,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "NORTHGATE FUEL DISTRIBUTORS LTD",
+        "iban": "MT52FICT9773181550"
+      },
+      "remittance_info": "TX-2026-01078 Diesel delivery"
+    },
+    {
+      "bank_ref": "BNK20260078",
+      "value_date": "2026-07-18",
+      "amount": {
+        "value": 341.32,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Granite Construction Works Limited",
+        "iban": "MT66FICT5537024829"
+      },
+      "remittance_info": "TX-2026-01080 Yard resurfacing"
+    },
+    {
+      "bank_ref": "BNK20260079",
+      "value_date": "2026-07-19",
+      "amount": {
+        "value": 339.12,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Kestrel Print Services",
+        "iban": "MT83FICT8291635890"
+      },
+      "remittance_info": "TX-2026-01075 Business cards"
+    },
+    {
+      "bank_ref": "BNK20260080",
+      "value_date": "2026-07-19",
+      "amount": {
+        "value": 183.98,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Coastline Fleet Repairs",
+        "iban": "MT46FICT3464827864"
+      },
+      "remittance_info": "TX-2026-01077 Van service"
+    },
+    {
+      "bank_ref": "BNK20260081",
+      "value_date": "2026-07-20",
+      "amount": {
+        "value": 307.1,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Harbour IT Services Limited",
+        "iban": "MT30FICT5778942245"
+      },
+      "remittance_info": "TX-2026-01081 Laptop repairs"
+    },
+    {
+      "bank_ref": "BNK20260082",
+      "value_date": "2026-07-20",
+      "amount": {
+        "value": 1147.15,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Summit Training Academy",
+        "iban": "MT65FICT9908751974"
+      },
+      "remittance_info": "TX-2026-01086 First aid course"
+    },
+    {
+      "bank_ref": "BNK20260083",
+      "value_date": "2026-07-21",
+      "amount": {
+        "value": 549.14,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Pinnacle Recruitment",
+        "iban": "MT12FICT1390652226"
+      },
+      "remittance_info": "TX-2026-01083 Recruitment fee"
+    },
+    {
+      "bank_ref": "BNK20260084",
+      "value_date": "2026-07-21",
+      "amount": {
+        "value": 938.78,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "BRIGHTLINK TELECOM LTD",
+        "iban": "MT95FICT3325283565"
+      },
+      "remittance_info": "TX-2026-01090 Mobile plans"
+    },
+    {
+      "bank_ref": "BNK20260085",
+      "value_date": "2026-07-21",
+      "amount": {
+        "value": 521.53,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Greenleaf Cleaning",
+        "iban": "MT54FICT6057813118"
+      },
+      "remittance_info": "TX-2026-01091 Office cleaning"
+    },
+    {
+      "bank_ref": "BNK20260086",
+      "value_date": "2026-07-21",
+      "amount": {
+        "value": 738.21,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Keystone Legal Advisors",
+        "iban": "MT44FICT6864584535"
+      },
+      "remittance_info": "TX-2026-01095 Legal advice"
+    },
+    {
+      "bank_ref": "BNK20260087",
+      "value_date": "2026-07-22",
+      "amount": {
+        "value": 334.84,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "COASTLINE FLEET REPAIRS LTD",
+        "iban": "MT87FICT7409987454"
+      },
+      "remittance_info": "TX-2026-01082 Van service"
+    },
+    {
+      "bank_ref": "BNK20260088",
+      "value_date": "2026-07-22",
+      "amount": {
+        "value": 216.24,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "GREENLEAF CLEANING LTD",
+        "iban": "MT13FICT4865396681"
+      },
+      "remittance_info": "TX-2026-01084 Warehouse deep clean"
+    },
+    {
+      "bank_ref": "BNK20260089",
+      "value_date": "2026-07-22",
+      "amount": {
+        "value": 850.58,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Keystone Legal Advisors",
+        "iban": "MT27FICT8090683730"
+      },
+      "remittance_info": "TX-2026-01085 Legal advice"
+    },
+    {
+      "bank_ref": "BNK20260090",
+      "value_date": "2026-07-22",
+      "amount": {
+        "value": 372.32,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "HARBOUR IT SERVICES LTD",
+        "iban": "MT89FICT5767789998"
+      },
+      "remittance_info": "TX-2026-01087 Server support"
+    },
+    {
+      "bank_ref": "BNK20260091",
+      "value_date": "2026-07-22",
+      "amount": {
+        "value": 443.92,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Pinnacle Recruitment Ltd",
+        "iban": "MT30FICT3322527672"
+      },
+      "remittance_info": "TX-2026-01088 Recruitment fee"
+    },
+    {
+      "bank_ref": "BNK20260092",
+      "value_date": "2026-07-22",
+      "amount": {
+        "value": 933.2,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Brightlink Telecom Limited",
+        "iban": "MT94FICT9767654311"
+      },
+      "remittance_info": "TX-2026-01089 Phone handsets"
+    },
+    {
+      "bank_ref": "BNK20260093",
+      "value_date": "2026-07-22",
+      "amount": {
+        "value": 255.65,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Tidewater Insurance Brokers",
+        "iban": "MT29FICT6947876816"
+      },
+      "remittance_info": "TX-2026-01094 Cargo insurance premium"
+    },
+    {
+      "bank_ref": "BNK20260094",
+      "value_date": "2026-07-22",
+      "amount": {
+        "value": 647.5,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Bluefin Office Supplies Limited",
+        "iban": "MT52FICT2641949072"
+      },
+      "remittance_info": "TX-2026-01096 Stationery"
+    },
+    {
+      "bank_ref": "BNK20260095",
+      "value_date": "2026-07-22",
+      "amount": {
+        "value": 271.56,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Seabreeze Catering Limited",
+        "iban": "MT91FICT1778047881"
+      },
+      "remittance_info": "TX-2026-01098 Training day lunch"
+    },
+    {
+      "bank_ref": "BNK20260096",
+      "value_date": "2026-07-23",
+      "amount": {
+        "value": 592.44,
+        "currency": "USD"
+      },
+      "counterparty": {
+        "name": "Vector Logistics Software Inc",
+        "iban": "MT21FICT2486695257"
+      },
+      "remittance_info": "TX-2026-01092 Additional user seats"
+    },
+    {
+      "bank_ref": "BNK20260097",
+      "value_date": "2026-07-23",
+      "amount": {
+        "value": 923.91,
+        "currency": "USD"
+      },
+      "counterparty": {
+        "name": "Vector Logistics Software Inc",
+        "iban": "MT57FICT6914117801"
+      },
+      "remittance_info": "TX-2026-01093 Licence renewal"
+    },
+    {
+      "bank_ref": "BNK20260098",
+      "value_date": "2026-07-23",
+      "amount": {
+        "value": 479.45,
+        "currency": "USD"
+      },
+      "counterparty": {
+        "name": "VECTOR LOGISTICS SOFTWARE INC",
+        "iban": "MT63FICT9991411215"
+      },
+      "remittance_info": "TX-2026-01099 Additional user seats"
+    },
+    {
+      "bank_ref": "BNK20260099",
+      "value_date": "2026-07-23",
+      "amount": {
+        "value": 388.33,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Limestone Facilities Management",
+        "iban": "MT82FICT4836993395"
+      },
+      "remittance_info": "TX-2026-01101 HVAC maintenance"
+    },
+    {
+      "bank_ref": "BNK20260100",
+      "value_date": "2026-07-23",
+      "amount": {
+        "value": 246.84,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Pinnacle Recruitment Ltd",
+        "iban": "MT49FICT3217626958"
+      },
+      "remittance_info": "TX-2026-01102 Recruitment fee"
+    },
+    {
+      "bank_ref": "BNK20260101",
+      "value_date": "2026-07-23",
+      "amount": {
+        "value": 406.55,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Pinnacle Recruitment Ltd",
+        "iban": "MT84FICT8038592639"
+      },
+      "remittance_info": "TX-2026-01103 Job advert package"
+    },
+    {
+      "bank_ref": "BNK20260102",
+      "value_date": "2026-07-23",
+      "amount": {
+        "value": 2400.0,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Polar Refrigeration Services Limited",
+        "iban": "MT82FICT9118851706"
+      },
+      "remittance_info": "TX-2026-01105 Compressor repair"
+    },
+    {
+      "bank_ref": "BNK20260103",
+      "value_date": "2026-07-24",
+      "amount": {
+        "value": 603.13,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Meridian Software Licensing Limited",
+        "iban": "MT14FICT2066837389"
+      },
+      "remittance_info": "TX-2026-01097 Licence renewal"
+    },
+    {
+      "bank_ref": "BNK20260104",
+      "value_date": "2026-07-24",
+      "amount": {
+        "value": 748.38,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Tidewater Insurance Brokers",
+        "iban": "MT12FICT3741759588"
+      },
+      "remittance_info": "TX-2026-01100 Cargo insurance premium"
+    },
+    {
+      "bank_ref": "BNK20260105",
+      "value_date": "2026-07-24",
+      "amount": {
+        "value": 21901.6,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Summit Training Academy Ltd",
+        "iban": "MT66FICT6335866969"
+      },
+      "remittance_info": "TX-2026-01106 First aid course"
+    },
+    {
+      "bank_ref": "BNK20260106",
+      "value_date": "2026-07-24",
+      "amount": {
+        "value": 862.04,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "PINNACLE RECRUITMENT LTD",
+        "iban": "MT96FICT1672302337"
+      },
+      "remittance_info": "TX-2026-01108 Recruitment fee"
+    },
+    {
+      "bank_ref": "BNK20260107",
+      "value_date": "2026-07-24",
+      "amount": {
+        "value": 557.53,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Quayside Tyres",
+        "iban": "MT15FICT1487997265"
+      },
+      "remittance_info": "TX-2026-01112 Tyre rotation"
+    },
+    {
+      "bank_ref": "BNK20260108",
+      "value_date": "2026-07-25",
+      "amount": {
+        "value": 950.52,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "NOVA MARKETING STUDIO LTD",
+        "iban": "MT95FICT6522789953"
+      },
+      "remittance_info": "TX-2026-01104 Campaign design"
+    },
+    {
+      "bank_ref": "BNK20260109",
+      "value_date": "2026-07-25",
+      "amount": {
+        "value": 342.44,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "GREENLEAF CLEANING LTD",
+        "iban": "MT50FICT8478108850"
+      },
+      "remittance_info": "TX-2026-01110 Warehouse deep clean"
+    },
+    {
+      "bank_ref": "BNK20260110",
+      "value_date": "2026-07-26",
+      "amount": {
+        "value": 1166.96,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Harbour IT Services Ltd",
+        "iban": "MT87FICT2941192156"
+      },
+      "remittance_info": "TX-2026-01107 Network maintenance"
+    },
+    {
+      "bank_ref": "BNK20260111",
+      "value_date": "2026-07-26",
+      "amount": {
+        "value": 551.36,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Sunvale Packaging Ltd",
+        "iban": "MT49FICT1146214161"
+      },
+      "remittance_info": "TX-2026-01109 Pallet wrap"
+    },
+    {
+      "bank_ref": "BNK20260112",
+      "value_date": "2026-07-26",
+      "amount": {
+        "value": 1155.02,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Keystone Legal Advisors",
+        "iban": "MT85FICT2609279487"
+      },
+      "remittance_info": "TX-2026-01111 Contract review"
+    },
+    {
+      "bank_ref": "BNK20260113",
+      "value_date": "2026-07-27",
+      "amount": {
+        "value": 203.7,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Kestrel Print Services",
+        "iban": "MT32FICT3774408028"
+      },
+      "remittance_info": "TX-2026-01113 Brochure print run"
+    },
+    {
+      "bank_ref": "BNK20260114",
+      "value_date": "2026-07-27",
+      "amount": {
+        "value": 337.48,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Quayside Tyres Ltd",
+        "iban": "MT28FICT1070304438"
+      },
+      "remittance_info": "TX-2026-01119 Tyre rotation"
+    },
+    {
+      "bank_ref": "BNK20260115",
+      "value_date": "2026-07-28",
+      "amount": {
+        "value": 421.36,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "BLUEFIN OFFICE SUPPLIES LTD",
+        "iban": "MT67FICT8459348980"
+      },
+      "remittance_info": "TX-2026-01114 Printer toner"
+    },
+    {
+      "bank_ref": "BNK20260116",
+      "value_date": "2026-07-28",
+      "amount": {
+        "value": 35.0,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "GRANITE CONSTRUCTION WORKS LTD",
+        "iban": "MT16FICT4366203904"
+      },
+      "remittance_info": "TX-2026-01118 Loading bay works"
+    },
+    {
+      "bank_ref": "BNK20260117",
+      "value_date": "2026-07-28",
+      "amount": {
+        "value": 304.34,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Sunvale Packaging Ltd",
+        "iban": "MT63FICT9309182939"
+      },
+      "remittance_info": "TX-2026-01120 Packing tape"
+    },
+    {
+      "bank_ref": "BNK20260118",
+      "value_date": "2026-07-29",
+      "amount": {
+        "value": 720.68,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Seabreeze Catering Ltd",
+        "iban": "MT88FICT8211787178"
+      },
+      "remittance_info": "TX-2026-01115 Staff event catering"
+    },
+    {
+      "bank_ref": "BNK20260119",
+      "value_date": "2026-07-29",
+      "amount": {
+        "value": 701.14,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Orion Security Services",
+        "iban": "MT93FICT1650891703"
+      },
+      "remittance_info": "TX-2026-01116 CCTV maintenance"
+    },
+    {
+      "bank_ref": "BNK20260120",
+      "value_date": "2026-07-29",
+      "amount": {
+        "value": 1188.72,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Silverline Couriers Ltd",
+        "iban": "MT11FICT4384323309"
+      },
+      "remittance_info": "TX-2026-01117 Same-day deliveries"
+    },
+    {
+      "bank_ref": "BNK20260121",
+      "value_date": "2026-07-29",
+      "amount": {
+        "value": 714.14,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "SUNVALE PACKAGING LTD",
+        "iban": "MT70FICT2225605838"
+      },
+      "remittance_info": "TX-2026-01125 Pallet wrap"
+    },
+    {
+      "bank_ref": "BNK20260122",
+      "value_date": "2026-07-29",
+      "amount": {
+        "value": 300.19,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "SILVERLINE COURIERS LTD",
+        "iban": "MT89FICT6266700145"
+      },
+      "remittance_info": "TX-2026-01127 Same-day deliveries"
+    },
+    {
+      "bank_ref": "BNK20260123",
+      "value_date": "2026-07-30",
+      "amount": {
+        "value": 381.7,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Kestrel Print Services Limited",
+        "iban": "MT48FICT9059420001"
+      },
+      "remittance_info": "TX-2026-01121 Signage"
+    },
+    {
+      "bank_ref": "BNK20260124",
+      "value_date": "2026-07-30",
+      "amount": {
+        "value": 637.49,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Kestrel Print Services Limited",
+        "iban": "MT68FICT1065122466"
+      },
+      "remittance_info": "TX-2026-01122 Brochure print run"
+    },
+    {
+      "bank_ref": "BNK20260125",
+      "value_date": "2026-07-30",
+      "amount": {
+        "value": 1833.18,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Kestrel Print Services Ltd",
+        "iban": "MT48FICT3559929688"
+      },
+      "remittance_info": "TX-2026-01123 Leaflets"
+    },
+    {
+      "bank_ref": "BNK20260126",
+      "value_date": "2026-07-30",
+      "amount": {
+        "value": 900.2,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Limestone Facilities Management Limited",
+        "iban": "MT27FICT7945311331"
+      },
+      "remittance_info": "TX-2026-01128 Lighting replacement"
+    },
+    {
+      "bank_ref": "BNK20260127",
+      "value_date": "2026-07-31",
+      "amount": {
+        "value": 792.3,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Seabreeze Catering",
+        "iban": "MT88FICT1815975616"
+      },
+      "remittance_info": "TX-2026-01124 Training day lunch"
+    },
+    {
+      "bank_ref": "BNK20260128",
+      "value_date": "2026-07-31",
+      "amount": {
+        "value": 5000.0,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Redwood Furniture Ltd",
+        "iban": "MT43FICT1263783073"
+      },
+      "remittance_info": "TX-2026-01126 Office chairs"
+    },
+    {
+      "bank_ref": "BNK20260129",
+      "value_date": "2026-07-31",
+      "amount": {
+        "value": 629.1,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "PINNACLE RECRUITMENT LTD",
+        "iban": "MT52FICT2543115568"
+      },
+      "remittance_info": "TX-2026-01129 Job advert package"
+    },
+    {
+      "bank_ref": "BNK20260130",
+      "value_date": "2026-07-31",
+      "amount": {
+        "value": 5300.0,
+        "currency": "USD"
+      },
+      "counterparty": {
+        "name": "Vector Logistics Software Inc",
+        "iban": "MT37FICT2889900953"
+      },
+      "remittance_info": "TX-2026-01130 Additional user seats"
+    },
+    {
+      "bank_ref": "BNK20260131",
+      "value_date": "2026-07-31",
+      "amount": {
+        "value": 850.45,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Granite Construction Works",
+        "iban": "MT96FICT9504044041"
+      },
+      "remittance_info": "TX-2026-01132 Loading bay works"
+    },
+    {
+      "bank_ref": "BNK20260132",
+      "value_date": "2026-07-31",
+      "amount": {
+        "value": 767.93,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Quayside Tyres Limited",
+        "iban": "MT37FICT3272187267"
+      },
+      "remittance_info": "TX-2026-01134 Tyre rotation"
+    },
+    {
+      "bank_ref": "BNK20260133",
+      "value_date": "2026-07-31",
+      "amount": {
+        "value": 5744.82,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Meridian Software Licensing Ltd",
+        "iban": "MT67FICT1873842465"
+      },
+      "remittance_info": "TX-2026-01139 Software subscription"
+    },
+    {
+      "bank_ref": "BNK20260134",
+      "value_date": "2026-07-31",
+      "amount": {
+        "value": 8873.36,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Meridian Software Licensing Ltd",
+        "iban": "MT89FICT1453805763"
+      },
+      "remittance_info": "TX-2026-01140 Software subscription"
+    },
+    {
+      "bank_ref": "BNK20260135",
+      "value_date": "2026-08-01",
+      "amount": {
+        "value": 568.75,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Tidewater Insurance Brokers Limited",
+        "iban": "MT91FICT3852974919"
+      },
+      "remittance_info": "TX-2026-01131 Fleet insurance premium"
+    },
+    {
+      "bank_ref": "BNK20260136",
+      "value_date": "2026-08-01",
+      "amount": {
+        "value": 1091.07,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Summit Training Academy Ltd",
+        "iban": "MT25FICT4083785436"
+      },
+      "remittance_info": "TX-2026-01133 Forklift licence training"
+    },
+    {
+      "bank_ref": "BNK20260137",
+      "value_date": "2026-08-01",
+      "amount": {
+        "value": 1084.76,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Bluefin Office Supplies Limited",
+        "iban": "MT22FICT4900808188"
+      },
+      "remittance_info": "TX-2026-01135 Stationery"
+    },
+    {
+      "bank_ref": "BNK20260138",
+      "value_date": "2026-08-01",
+      "amount": {
+        "value": 2400.0,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Coastline Fleet Repairs Limited",
+        "iban": "MT97FICT4649388265"
+      },
+      "remittance_info": "TX-2026-01136 Fleet inspection"
+    },
+    {
+      "bank_ref": "BNK20260139",
+      "value_date": "2026-08-01",
+      "amount": {
+        "value": 1233.04,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "LIMESTONE FACILITIES MANAGEMENT LTD",
+        "iban": "MT48FICT3207463252"
+      },
+      "remittance_info": "TX-2026-01137 HVAC maintenance"
+    },
+    {
+      "bank_ref": "BNK20260140",
+      "value_date": "2026-08-01",
+      "amount": {
+        "value": 31850.0,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Tidewater Insurance Brokers Limited",
+        "iban": "MT85FICT2842585571"
+      },
+      "remittance_info": "TX-2026-01144 Fleet insurance premium"
+    },
+    {
+      "bank_ref": "BNK20260141",
+      "value_date": "2026-08-02",
+      "amount": {
+        "value": 304.48,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "MERIDIAN SOFTWARE LICENSING LTD",
+        "iban": "MT95FICT5085256799"
+      },
+      "remittance_info": "TX-2026-01138 Additional user seats"
+    },
+    {
+      "bank_ref": "BNK20260142",
+      "value_date": "2026-08-02",
+      "amount": {
+        "value": 540.38,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "ATLAS FORKLIFT HIRE LTD",
+        "iban": "MT88FICT8823029010"
+      },
+      "remittance_info": "TX-2026-01141 Forklift hire"
+    },
+    {
+      "bank_ref": "BNK20260143",
+      "value_date": "2026-08-02",
+      "amount": {
+        "value": 168.21,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Pinnacle Recruitment Ltd",
+        "iban": "MT63FICT2885268888"
+      },
+      "remittance_info": "TX-2026-01142 Job advert package"
+    },
+    {
+      "bank_ref": "BNK20260144",
+      "value_date": "2026-08-02",
+      "amount": {
+        "value": 291.04,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Sunvale Packaging Limited",
+        "iban": "MT84FICT4308671512"
+      },
+      "remittance_info": "TX-2026-01143 Cardboard boxes"
+    },
+    {
+      "bank_ref": "BNK20260145",
+      "value_date": "2026-08-03",
+      "amount": {
+        "value": 331.22,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Kestrel Print Services Limited",
+        "iban": "MT16FICT1941999646"
+      },
+      "remittance_info": "TX-2026-01145 Signage"
+    },
+    {
+      "bank_ref": "BNK20260146",
+      "value_date": "2026-08-03",
+      "amount": {
+        "value": 775.61,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Seabreeze Catering Ltd",
+        "iban": "MT25FICT1216450937"
+      },
+      "remittance_info": "TX-2026-01147 Staff event catering"
+    },
+    {
+      "bank_ref": "BNK20260147",
+      "value_date": "2026-08-03",
+      "amount": {
+        "value": 420.72,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "SUNVALE PACKAGING LTD",
+        "iban": "MT53FICT6213992526"
+      },
+      "remittance_info": "TX-2026-01150 Cardboard boxes"
+    },
+    {
+      "bank_ref": "BNK20260148",
+      "value_date": "2026-08-04",
+      "amount": {
+        "value": 19521.07,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "ATLAS FORKLIFT HIRE LTD",
+        "iban": "MT51FICT1766500364"
+      },
+      "remittance_info": "TX-2026-01148 Forklift hire"
+    },
+    {
+      "bank_ref": "BNK20260149",
+      "value_date": "2026-08-04",
+      "amount": {
+        "value": 1384.04,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Greenleaf Cleaning Limited",
+        "iban": "MT86FICT4747382632"
+      },
+      "remittance_info": "TX-2026-01154 Warehouse deep clean"
+    },
+    {
+      "bank_ref": "BNK20260150",
+      "value_date": "2026-08-05",
+      "amount": {
+        "value": 320.04,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "MERIDIAN SOFTWARE LICENSING LTD",
+        "iban": "MT41FICT6455135998"
+      },
+      "remittance_info": "TX-2026-01146 Software subscription"
+    },
+    {
+      "bank_ref": "BNK20260151",
+      "value_date": "2026-08-05",
+      "amount": {
+        "value": 307.76,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Pinnacle Recruitment Limited",
+        "iban": "MT43FICT4998626420"
+      },
+      "remittance_info": "TX-2026-01149 Job advert package"
+    },
+    {
+      "bank_ref": "BNK20260152",
+      "value_date": "2026-08-05",
+      "amount": {
+        "value": 878.86,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Tidewater Insurance Brokers",
+        "iban": "MT37FICT3039216172"
+      },
+      "remittance_info": "TX-2026-01151 Cargo insurance premium"
+    },
+    {
+      "bank_ref": "BNK20260153",
+      "value_date": "2026-08-05",
+      "amount": {
+        "value": 14197.79,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "SEABREEZE CATERING LTD",
+        "iban": "MT31FICT5840633452"
+      },
+      "remittance_info": "TX-2026-01152 Staff event catering"
+    },
+    {
+      "bank_ref": "BNK20260154",
+      "value_date": "2026-08-05",
+      "amount": {
+        "value": 202.43,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Sunvale Packaging Ltd",
+        "iban": "MT34FICT4099832676"
+      },
+      "remittance_info": "TX-2026-01153 Pallet wrap"
+    },
+    {
+      "bank_ref": "BNK20260155",
+      "value_date": "2026-08-05",
+      "amount": {
+        "value": 891.76,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Atlas Forklift Hire Ltd",
+        "iban": "MT95FICT8992160288"
+      },
+      "remittance_info": "TX-2026-01157 Forklift hire"
+    },
+    {
+      "bank_ref": "BNK20260156",
+      "value_date": "2026-08-05",
+      "amount": {
+        "value": 1975.39,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Summit Training Academy",
+        "iban": "MT39FICT6103112642"
+      },
+      "remittance_info": "TX-2026-01160 Forklift licence training"
+    },
+    {
+      "bank_ref": "BNK20260157",
+      "value_date": "2026-08-06",
+      "amount": {
+        "value": 589.3,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Keystone Legal Advisors",
+        "iban": "MT22FICT2230517907"
+      },
+      "remittance_info": "TX-2026-01155 Legal advice"
+    },
+    {
+      "bank_ref": "BNK20260158",
+      "value_date": "2026-08-06",
+      "amount": {
+        "value": 475.84,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Nova Marketing Studio",
+        "iban": "MT36FICT8187530685"
+      },
+      "remittance_info": "TX-2026-01156 Campaign design"
+    },
+    {
+      "bank_ref": "BNK20260159",
+      "value_date": "2026-08-06",
+      "amount": {
+        "value": 449.97,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Silverline Couriers Limited",
+        "iban": "MT70FICT3935308157"
+      },
+      "remittance_info": "TX-2026-01159 Same-day deliveries"
+    },
+    {
+      "bank_ref": "BNK20260160",
+      "value_date": "2026-08-06",
+      "amount": {
+        "value": 358.23,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Quayside Tyres Limited",
+        "iban": "MT48FICT3749908185"
+      },
+      "remittance_info": "TX-2026-01161 Tyre rotation"
+    },
+    {
+      "bank_ref": "BNK20260161",
+      "value_date": "2026-08-06",
+      "amount": {
+        "value": 459.0,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Harbour IT Services",
+        "iban": "MT72FICT9390753536"
+      },
+      "remittance_info": "TX-2026-01162 Laptop repairs"
+    },
+    {
+      "bank_ref": "BNK20260162",
+      "value_date": "2026-08-07",
+      "amount": {
+        "value": 453.99,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Tidewater Insurance Brokers Ltd",
+        "iban": "MT12FICT4253438893"
+      },
+      "remittance_info": "TX-2026-01158 Cargo insurance premium"
+    },
+    {
+      "bank_ref": "BNK20260163",
+      "value_date": "2026-08-07",
+      "amount": {
+        "value": 452.33,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Coastline Fleet Repairs Limited",
+        "iban": "MT76FICT8214081971"
+      },
+      "remittance_info": "TX-2026-01163 Van service"
+    },
+    {
+      "bank_ref": "BNK20260164",
+      "value_date": "2026-08-07",
+      "amount": {
+        "value": 638.33,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "BRIGHTLINK TELECOM LTD",
+        "iban": "MT42FICT2072767833"
+      },
+      "remittance_info": "TX-2026-01164 Phone handsets"
+    },
+    {
+      "bank_ref": "BNK20260165",
+      "value_date": "2026-08-07",
+      "amount": {
+        "value": 581.11,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Quayside Tyres Limited",
+        "iban": "MT61FICT7506085233"
+      },
+      "remittance_info": "TX-2026-01166 Tyre replacement"
+    },
+    {
+      "bank_ref": "BNK20260166",
+      "value_date": "2026-08-07",
+      "amount": {
+        "value": 1175.88,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Limestone Facilities Management Ltd",
+        "iban": "MT96FICT5943645930"
+      },
+      "remittance_info": "TX-2026-01168 HVAC maintenance"
+    },
+    {
+      "bank_ref": "BNK20260167",
+      "value_date": "2026-08-07",
+      "amount": {
+        "value": 236.83,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Meridian Software Licensing Limited",
+        "iban": "MT56FICT7261400527"
+      },
+      "remittance_info": "TX-2026-01169 Software subscription"
+    },
+    {
+      "bank_ref": "BNK20260168",
+      "value_date": "2026-08-07",
+      "amount": {
+        "value": 243.6,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Meridian Software Licensing",
+        "iban": "MT81FICT4572971463"
+      },
+      "remittance_info": "TX-2026-01170 Software subscription"
+    },
+    {
+      "bank_ref": "BNK20260169",
+      "value_date": "2026-08-07",
+      "amount": {
+        "value": 641.88,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Atlas Forklift Hire Ltd",
+        "iban": "MT52FICT4618374871"
+      },
+      "remittance_info": "TX-2026-01171 Generator hire"
+    },
+    {
+      "bank_ref": "BNK20260170",
+      "value_date": "2026-08-07",
+      "amount": {
+        "value": 460.88,
+        "currency": "USD"
+      },
+      "counterparty": {
+        "name": "Vector Logistics Software Inc",
+        "iban": "MT27FICT7738739889"
+      },
+      "remittance_info": "TX-2026-01174 Additional user seats"
+    },
+    {
+      "bank_ref": "BNK20260171",
+      "value_date": "2026-08-07",
+      "amount": {
+        "value": 281.14,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Keystone Legal Advisors",
+        "iban": "MT58FICT8413746974"
+      },
+      "remittance_info": "TX-2026-01175 Contract review"
+    },
+    {
+      "bank_ref": "BNK20260172",
+      "value_date": "2026-08-08",
+      "amount": {
+        "value": 527.49,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "GRANITE CONSTRUCTION WORKS LTD",
+        "iban": "MT24FICT6225393879"
+      },
+      "remittance_info": "TX-2026-01165 Yard resurfacing"
+    },
+    {
+      "bank_ref": "BNK20260173",
+      "value_date": "2026-08-08",
+      "amount": {
+        "value": 184.31,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Limestone Facilities Management",
+        "iban": "MT83FICT9301833609"
+      },
+      "remittance_info": "TX-2026-01167 Plumbing works"
+    },
+    {
+      "bank_ref": "BNK20260174",
+      "value_date": "2026-08-09",
+      "amount": {
+        "value": 15158.94,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Pinnacle Recruitment Ltd",
+        "iban": "MT25FICT6797152211"
+      },
+      "remittance_info": "TX-2026-01172 Job advert package"
+    },
+    {
+      "bank_ref": "BNK20260175",
+      "value_date": "2026-08-09",
+      "amount": {
+        "value": 17912.97,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Brightlink Telecom",
+        "iban": "MT56FICT1275270057"
+      },
+      "remittance_info": "TX-2026-01173 Phone handsets"
+    },
+    {
+      "bank_ref": "BNK20260176",
+      "value_date": "2026-08-10",
+      "amount": {
+        "value": 265.29,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "POLAR REFRIGERATION SERVICES LTD",
+        "iban": "MT86FICT8622001339"
+      },
+      "remittance_info": "TX-2026-01178 Cold store maintenance"
+    },
+    {
+      "bank_ref": "BNK20260177",
+      "value_date": "2026-08-11",
+      "amount": {
+        "value": 777.36,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Granite Construction Works",
+        "iban": "MT46FICT1018047792"
+      },
+      "remittance_info": "TX-2026-01176 Yard resurfacing"
+    },
+    {
+      "bank_ref": "BNK20260178",
+      "value_date": "2026-08-11",
+      "amount": {
+        "value": 104.1,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Nova Marketing Studio Ltd",
+        "iban": "MT81FICT8286804066"
+      },
+      "remittance_info": "TX-2026-01177 Social media management"
+    },
+    {
+      "bank_ref": "BNK20260179",
+      "value_date": "2026-08-12",
+      "amount": {
+        "value": 4800.0,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "KESTREL PRINT SERVICES LTD",
+        "iban": "MT87FICT7796969003"
+      },
+      "remittance_info": "TX-2026-01179 Brochure print run - batch 1"
+    },
+    {
+      "bank_ref": "BNK20260180",
+      "value_date": "2026-08-12",
+      "amount": {
+        "value": 888.35,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "BRIGHTLINK TELECOM LTD",
+        "iban": "MT70FICT2030364628"
+      },
+      "remittance_info": "TX-2026-01180 Phone handsets"
+    },
+    {
+      "bank_ref": "BNK20260181",
+      "value_date": "2026-08-12",
+      "amount": {
+        "value": 841.77,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "HARBOUR IT SERVICES LTD",
+        "iban": "MT45FICT6162141626"
+      },
+      "remittance_info": "TX-2026-01181 Network maintenance"
+    },
+    {
+      "bank_ref": "BNK20260182",
+      "value_date": "2026-08-12",
+      "amount": {
+        "value": 163.13,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Redwood Furniture Limited",
+        "iban": "MT29FICT4917810163"
+      },
+      "remittance_info": "TX-2026-01183 Office chairs"
+    },
+    {
+      "bank_ref": "BNK20260183",
+      "value_date": "2026-08-13",
+      "amount": {
+        "value": 425.97,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Sunvale Packaging Limited",
+        "iban": "MT30FICT6235085704"
+      },
+      "remittance_info": "TX-2026-01188 Packing tape"
+    },
+    {
+      "bank_ref": "BNK20260184",
+      "value_date": "2026-08-14",
+      "amount": {
+        "value": 555.5,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Meridian Software Licensing Ltd",
+        "iban": "MT98FICT5642281576"
+      },
+      "remittance_info": "TX-2026-01182 Licence renewal"
+    },
+    {
+      "bank_ref": "BNK20260185",
+      "value_date": "2026-08-14",
+      "amount": {
+        "value": 223.97,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "HARBOUR IT SERVICES LTD",
+        "iban": "MT13FICT5467310706"
+      },
+      "remittance_info": "TX-2026-01185 Server support"
+    },
+    {
+      "bank_ref": "BNK20260186",
+      "value_date": "2026-08-14",
+      "amount": {
+        "value": 454.92,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "REDWOOD FURNITURE LTD",
+        "iban": "MT61FICT1077347680"
+      },
+      "remittance_info": "TX-2026-01189 Desks"
+    },
+    {
+      "bank_ref": "BNK20260187",
+      "value_date": "2026-08-14",
+      "amount": {
+        "value": 214.28,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Tidewater Insurance Brokers Limited",
+        "iban": "MT24FICT3471063097"
+      },
+      "remittance_info": "TX-2026-01190 Fleet insurance premium"
+    },
+    {
+      "bank_ref": "BNK20260188",
+      "value_date": "2026-08-14",
+      "amount": {
+        "value": 125.68,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "GRANITE CONSTRUCTION WORKS LTD",
+        "iban": "MT18FICT7464066658"
+      },
+      "remittance_info": "TX-2026-01194 Yard resurfacing"
+    },
+    {
+      "bank_ref": "BNK20260189",
+      "value_date": "2026-08-15",
+      "amount": {
+        "value": 4750.0,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Kestrel Print Services",
+        "iban": "MT86FICT7808816623"
+      },
+      "remittance_info": "TX-2026-01184 Brochure print run - batch 2"
+    },
+    {
+      "bank_ref": "BNK20260190",
+      "value_date": "2026-08-15",
+      "amount": {
+        "value": 6297.24,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "LIMESTONE FACILITIES MANAGEMENT LTD",
+        "iban": "MT12FICT4944861985"
+      },
+      "remittance_info": "TX-2026-01186 Plumbing works"
+    },
+    {
+      "bank_ref": "BNK20260191",
+      "value_date": "2026-08-15",
+      "amount": {
+        "value": 939.09,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Seabreeze Catering",
+        "iban": "MT61FICT1994956150"
+      },
+      "remittance_info": "TX-2026-01187 Training day lunch"
+    },
+    {
+      "bank_ref": "BNK20260192",
+      "value_date": "2026-08-15",
+      "amount": {
+        "value": 2282.2,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Northgate Fuel Distributors Ltd",
+        "iban": "MT86FICT7433094796"
+      },
+      "remittance_info": "TX-2026-01191 Fuel cards top-up"
+    },
+    {
+      "bank_ref": "BNK20260193",
+      "value_date": "2026-08-15",
+      "amount": {
+        "value": 204.39,
+        "currency": "USD"
+      },
+      "counterparty": {
+        "name": "Vector Logistics Software Inc",
+        "iban": "MT37FICT2022000416"
+      },
+      "remittance_info": "TX-2026-01192 Software subscription"
+    },
+    {
+      "bank_ref": "BNK20260194",
+      "value_date": "2026-08-15",
+      "amount": {
+        "value": 336.22,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Redwood Furniture Ltd",
+        "iban": "MT56FICT3524752291"
+      },
+      "remittance_info": "TX-2026-01193 Office chairs"
+    },
+    {
+      "bank_ref": "BNK20260195",
+      "value_date": "2026-08-16",
+      "amount": {
+        "value": 216.31,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "NOVA MARKETING STUDIO LTD",
+        "iban": "MT66FICT9629225707"
+      },
+      "remittance_info": "TX-2026-01195 Social media management"
+    },
+    {
+      "bank_ref": "BNK20260196",
+      "value_date": "2026-08-17",
+      "amount": {
+        "value": 4900.0,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Kestrel Print Services Ltd",
+        "iban": "MT80FICT3190686815"
+      },
+      "remittance_info": "TX-2026-01196 Brochure print run - batch 3"
+    },
+    {
+      "bank_ref": "BNK20260197",
+      "value_date": "2026-08-17",
+      "amount": {
+        "value": 123.35,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "BLUEFIN OFFICE SUPPLIES LTD",
+        "iban": "MT23FICT8334213840"
+      },
+      "remittance_info": "TX-2026-01197 Office consumables"
+    },
+    {
+      "bank_ref": "BNK20260198",
+      "value_date": "2026-08-17",
+      "amount": {
+        "value": 2014.38,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Greenleaf Cleaning Ltd",
+        "iban": "MT20FICT6330539602"
+      },
+      "remittance_info": "TX-2026-01200 Warehouse deep clean"
+    },
+    {
+      "bank_ref": "BNK20260199",
+      "value_date": "2026-08-18",
+      "amount": {
+        "value": 421.81,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Meridian Software Licensing Ltd",
+        "iban": "MT11FICT5610632572"
+      },
+      "remittance_info": "TX-2026-01199 Software subscription"
+    },
+    {
+      "bank_ref": "BNK20260200",
+      "value_date": "2026-08-18",
+      "amount": {
+        "value": 279.22,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Bluefin Office Supplies Limited",
+        "iban": "MT37FICT9640803006"
+      },
+      "remittance_info": "TX-2026-01202 Stationery"
+    },
+    {
+      "bank_ref": "BNK20260201",
+      "value_date": "2026-08-18",
+      "amount": {
+        "value": 732.36,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Limestone Facilities Management",
+        "iban": "MT18FICT5438206373"
+      },
+      "remittance_info": "TX-2026-01204 Lighting replacement"
+    },
+    {
+      "bank_ref": "BNK20260202",
+      "value_date": "2026-08-18",
+      "amount": {
+        "value": 258.43,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "GRANITE CONSTRUCTION WORKS LTD",
+        "iban": "MT25FICT8430232970"
+      },
+      "remittance_info": "TX-2026-01207 Loading bay works"
+    },
+    {
+      "bank_ref": "BNK20260203",
+      "value_date": "2026-08-18",
+      "amount": {
+        "value": 1029.56,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Nova Marketing Studio",
+        "iban": "MT26FICT1489169307"
+      },
+      "remittance_info": "TX-2026-01208 Campaign design"
+    },
+    {
+      "bank_ref": "BNK20260204",
+      "value_date": "2026-08-18",
+      "amount": {
+        "value": 1223.73,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "NOVA MARKETING STUDIO LTD",
+        "iban": "MT97FICT4240830001"
+      },
+      "remittance_info": "TX-2026-01209 Campaign design"
+    },
+    {
+      "bank_ref": "BNK20260205",
+      "value_date": "2026-08-19",
+      "amount": {
+        "value": 272.48,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Meridian Software Licensing Ltd",
+        "iban": "MT91FICT2630562132"
+      },
+      "remittance_info": "TX-2026-01198 Licence renewal"
+    },
+    {
+      "bank_ref": "BNK20260206",
+      "value_date": "2026-08-19",
+      "amount": {
+        "value": 331.81,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Quayside Tyres Ltd",
+        "iban": "MT78FICT1158562512"
+      },
+      "remittance_info": "TX-2026-01201 Tyre replacement"
+    },
+    {
+      "bank_ref": "BNK20260207",
+      "value_date": "2026-08-19",
+      "amount": {
+        "value": 231.95,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Limestone Facilities Management",
+        "iban": "MT73FICT7261172381"
+      },
+      "remittance_info": "TX-2026-01203 HVAC maintenance"
+    },
+    {
+      "bank_ref": "BNK20260208",
+      "value_date": "2026-08-19",
+      "amount": {
+        "value": 360.74,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Tidewater Insurance Brokers Limited",
+        "iban": "MT45FICT8185347763"
+      },
+      "remittance_info": "TX-2026-01205 Cargo insurance premium"
+    },
+    {
+      "bank_ref": "BNK20260209",
+      "value_date": "2026-08-19",
+      "amount": {
+        "value": 289.34,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Silverline Couriers",
+        "iban": "MT42FICT9070632762"
+      },
+      "remittance_info": "TX-2026-01206 Same-day deliveries"
+    },
+    {
+      "bank_ref": "BNK20260210",
+      "value_date": "2026-08-19",
+      "amount": {
+        "value": 277.82,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Redwood Furniture Limited",
+        "iban": "MT63FICT4130025621"
+      },
+      "remittance_info": "TX-2026-01214 Office chairs"
+    },
+    {
+      "bank_ref": "BNK20260211",
+      "value_date": "2026-08-20",
+      "amount": {
+        "value": 677.41,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Bluefin Office Supplies Limited",
+        "iban": "MT26FICT8712586796"
+      },
+      "remittance_info": "TX-2026-01210 Stationery"
+    },
+    {
+      "bank_ref": "BNK20260212",
+      "value_date": "2026-08-20",
+      "amount": {
+        "value": 249.06,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Seabreeze Catering Limited",
+        "iban": "MT91FICT6895149777"
+      },
+      "remittance_info": "TX-2026-01211 Staff event catering"
+    },
+    {
+      "bank_ref": "BNK20260213",
+      "value_date": "2026-08-20",
+      "amount": {
+        "value": 260.95,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Orion Security Services",
+        "iban": "MT61FICT1370685538"
+      },
+      "remittance_info": "TX-2026-01213 CCTV maintenance"
+    },
+    {
+      "bank_ref": "BNK20260214",
+      "value_date": "2026-08-20",
+      "amount": {
+        "value": 515.43,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Nova Marketing Studio Limited",
+        "iban": "MT61FICT5552975902"
+      },
+      "remittance_info": "TX-2026-01215 Campaign design"
+    },
+    {
+      "bank_ref": "BNK20260215",
+      "value_date": "2026-08-20",
+      "amount": {
+        "value": 6400.0,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Rapid Hire Solutions Limited",
+        "iban": "MT21FICT1147984566"
+      },
+      "remittance_info": "TX-2026-01216 Generator hire"
+    },
+    {
+      "bank_ref": "BNK20260216",
+      "value_date": "2026-08-21",
+      "amount": {
+        "value": 222.75,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Pinnacle Recruitment Limited",
+        "iban": "MT62FICT5455484521"
+      },
+      "remittance_info": "TX-2026-01212 Job advert package"
+    },
+    {
+      "bank_ref": "BNK20260217",
+      "value_date": "2026-08-21",
+      "amount": {
+        "value": 658.92,
+        "currency": "USD"
+      },
+      "counterparty": {
+        "name": "Vector Logistics Software Inc",
+        "iban": "MT34FICT6671129359"
+      },
+      "remittance_info": "TX-2026-01218 Licence renewal"
+    },
+    {
+      "bank_ref": "BNK20260218",
+      "value_date": "2026-08-21",
+      "amount": {
+        "value": 18046.46,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Silverline Couriers Ltd",
+        "iban": "MT77FICT7044158046"
+      },
+      "remittance_info": "TX-2026-01220 Same-day deliveries"
+    },
+    {
+      "bank_ref": "BNK20260219",
+      "value_date": "2026-08-21",
+      "amount": {
+        "value": 602.95,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Granite Construction Works",
+        "iban": "MT93FICT9080681949"
+      },
+      "remittance_info": "TX-2026-01221 Loading bay works"
+    },
+    {
+      "bank_ref": "BNK20260220",
+      "value_date": "2026-08-21",
+      "amount": {
+        "value": 1209.95,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Brightlink Telecom Limited",
+        "iban": "MT32FICT5371332613"
+      },
+      "remittance_info": "TX-2026-01222 Mobile plans"
+    },
+    {
+      "bank_ref": "BNK20260221",
+      "value_date": "2026-08-22",
+      "amount": {
+        "value": 618.46,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Northgate Fuel Distributors Ltd",
+        "iban": "MT61FICT4397022469"
+      },
+      "remittance_info": "TX-2026-01217 Fuel cards top-up"
+    },
+    {
+      "bank_ref": "BNK20260222",
+      "value_date": "2026-08-22",
+      "amount": {
+        "value": 288.7,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "SILVERLINE COURIERS LTD",
+        "iban": "MT91FICT8422129808"
+      },
+      "remittance_info": "TX-2026-01219 Courier services"
+    },
+    {
+      "bank_ref": "BNK20260223",
+      "value_date": "2026-08-22",
+      "amount": {
+        "value": 1510.49,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Keystone Legal Advisors",
+        "iban": "MT67FICT2349038069"
+      },
+      "remittance_info": "TX-2026-01224 Contract review"
+    },
+    {
+      "bank_ref": "BNK20260224",
+      "value_date": "2026-08-23",
+      "amount": {
+        "value": 1091.67,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Orion Security Services Ltd",
+        "iban": "MT90FICT9507272337"
+      },
+      "remittance_info": "TX-2026-01223 CCTV maintenance"
+    },
+    {
+      "bank_ref": "BNK20260225",
+      "value_date": "2026-08-24",
+      "amount": {
+        "value": 258.43,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Northgate Fuel Distributors",
+        "iban": "MT54FICT6870086943"
+      },
+      "remittance_info": "TX-2026-01225 Diesel delivery"
+    },
+    {
+      "bank_ref": "BNK20260226",
+      "value_date": "2026-08-24",
+      "amount": {
+        "value": 961.98,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Redwood Furniture Limited",
+        "iban": "MT17FICT9227333821"
+      },
+      "remittance_info": "TX-2026-01227 Meeting room table"
+    },
+    {
+      "bank_ref": "BNK20260227",
+      "value_date": "2026-08-25",
+      "amount": {
+        "value": 382.12,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Keystone Legal Advisors",
+        "iban": "MT36FICT3555451777"
+      },
+      "remittance_info": "TX-2026-01228 Contract review"
+    },
+    {
+      "bank_ref": "BNK20260228",
+      "value_date": "2026-08-25",
+      "amount": {
+        "value": 1190.14,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "POLAR REFRIGERATION SERVICES LTD",
+        "iban": "MT62FICT3871347923"
+      },
+      "remittance_info": "TX-2026-01230 Compressor repair"
+    },
+    {
+      "bank_ref": "BNK20260229",
+      "value_date": "2026-08-25",
+      "amount": {
+        "value": 7850.0,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Polar Refrigeration Services Ltd",
+        "iban": "MT93FICT7181818238"
+      },
+      "remittance_info": "TX-2026-01231 Compressor repair"
+    },
+    {
+      "bank_ref": "BNK20260230",
+      "value_date": "2026-08-25",
+      "amount": {
+        "value": 1847.42,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "ATLAS FORKLIFT HIRE LTD",
+        "iban": "MT63FICT7853726176"
+      },
+      "remittance_info": "TX-2026-01233 Forklift hire"
+    },
+    {
+      "bank_ref": "BNK20260231",
+      "value_date": "2026-08-25",
+      "amount": {
+        "value": 380.23,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "SILVERLINE COURIERS LTD",
+        "iban": "MT53FICT6574922669"
+      },
+      "remittance_info": "TX-2026-01236 Same-day deliveries"
+    },
+    {
+      "bank_ref": "BNK20260232",
+      "value_date": "2026-08-26",
+      "amount": {
+        "value": 95.03,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Sunvale Packaging",
+        "iban": "MT80FICT3976115815"
+      },
+      "remittance_info": "TX-2026-01226 Cardboard boxes"
+    },
+    {
+      "bank_ref": "BNK20260233",
+      "value_date": "2026-08-26",
+      "amount": {
+        "value": 417.98,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Nova Marketing Studio",
+        "iban": "MT62FICT5683865790"
+      },
+      "remittance_info": "TX-2026-01229 Campaign design"
+    },
+    {
+      "bank_ref": "BNK20260234",
+      "value_date": "2026-08-26",
+      "amount": {
+        "value": 2400.0,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Limestone Facilities Management Limited",
+        "iban": "MT53FICT7082113414"
+      },
+      "remittance_info": "TX-2026-01232 Plumbing works"
+    },
+    {
+      "bank_ref": "BNK20260235",
+      "value_date": "2026-08-26",
+      "amount": {
+        "value": 9775.98,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Brightlink Telecom Ltd",
+        "iban": "MT76FICT2252803994"
+      },
+      "remittance_info": "TX-2026-01234 Phone handsets"
+    },
+    {
+      "bank_ref": "BNK20260236",
+      "value_date": "2026-08-26",
+      "amount": {
+        "value": 304.03,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Redwood Furniture Limited",
+        "iban": "MT74FICT3766547408"
+      },
+      "remittance_info": "TX-2026-01235 Desks"
+    },
+    {
+      "bank_ref": "BNK20260237",
+      "value_date": "2026-08-26",
+      "amount": {
+        "value": 829.29,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "MERIDIAN SOFTWARE LICENSING LTD",
+        "iban": "MT22FICT3815431273"
+      },
+      "remittance_info": "TX-2026-01239 Licence renewal"
+    },
+    {
+      "bank_ref": "BNK20260238",
+      "value_date": "2026-08-27",
+      "amount": {
+        "value": 795.57,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "QUAYSIDE TYRES LTD",
+        "iban": "MT28FICT3859600089"
+      },
+      "remittance_info": "TX-2026-01237 Tyre replacement"
+    },
+    {
+      "bank_ref": "BNK20260239",
+      "value_date": "2026-08-27",
+      "amount": {
+        "value": 281.54,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Northgate Fuel Distributors Limited",
+        "iban": "MT26FICT8626406657"
+      },
+      "remittance_info": "TX-2026-01238 Fuel cards top-up"
+    },
+    {
+      "bank_ref": "BNK20260240",
+      "value_date": "2026-08-27",
+      "amount": {
+        "value": 11756.1,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Meridian Software Licensing Ltd",
+        "iban": "MT69FICT7177137460"
+      },
+      "remittance_info": "TX-2026-01244 Software subscription"
+    },
+    {
+      "bank_ref": "BNK20260241",
+      "value_date": "2026-08-27",
+      "amount": {
+        "value": 267.99,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Atlas Forklift Hire",
+        "iban": "MT48FICT3188441287"
+      },
+      "remittance_info": "TX-2026-01245 Generator hire"
+    },
+    {
+      "bank_ref": "BNK20260242",
+      "value_date": "2026-08-27",
+      "amount": {
+        "value": 465.9,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Keystone Legal Advisors",
+        "iban": "MT85FICT1833899172"
+      },
+      "remittance_info": "TX-2026-01250 Legal advice"
+    },
+    {
+      "bank_ref": "BNK20260243",
+      "value_date": "2026-08-27",
+      "amount": {
+        "value": 654.89,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Summit Training Academy Limited",
+        "iban": "MT85FICT9363613690"
+      },
+      "remittance_info": "TX-2026-01252 Forklift licence training"
+    },
+    {
+      "bank_ref": "BNK20260244",
+      "value_date": "2026-08-27",
+      "amount": {
+        "value": 257.84,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Quayside Tyres",
+        "iban": "MT13FICT2643188453"
+      },
+      "remittance_info": "TX-2026-01253 Tyre rotation"
+    },
+    {
+      "bank_ref": "BNK20260245",
+      "value_date": "2026-08-28",
+      "amount": {
+        "value": 442.19,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Brightlink Telecom Ltd",
+        "iban": "MT98FICT5133793793"
+      },
+      "remittance_info": "TX-2026-01240 Mobile plans"
+    },
+    {
+      "bank_ref": "BNK20260246",
+      "value_date": "2026-08-28",
+      "amount": {
+        "value": 611.95,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "BRIGHTLINK TELECOM LTD",
+        "iban": "MT55FICT9617032362"
+      },
+      "remittance_info": "TX-2026-01241 Leased line"
+    },
+    {
+      "bank_ref": "BNK20260247",
+      "value_date": "2026-08-28",
+      "amount": {
+        "value": 892.07,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Northgate Fuel Distributors",
+        "iban": "MT86FICT5706136325"
+      },
+      "remittance_info": "TX-2026-01243 Fuel cards top-up"
+    },
+    {
+      "bank_ref": "BNK20260248",
+      "value_date": "2026-08-28",
+      "amount": {
+        "value": 155.02,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Brightlink Telecom",
+        "iban": "MT64FICT5449227594"
+      },
+      "remittance_info": "TX-2026-01246 Phone handsets"
+    },
+    {
+      "bank_ref": "BNK20260249",
+      "value_date": "2026-08-28",
+      "amount": {
+        "value": 649.12,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Greenleaf Cleaning Ltd",
+        "iban": "MT50FICT1217426662"
+      },
+      "remittance_info": "TX-2026-01247 Warehouse deep clean"
+    },
+    {
+      "bank_ref": "BNK20260250",
+      "value_date": "2026-08-28",
+      "amount": {
+        "value": 750.55,
+        "currency": "USD"
+      },
+      "counterparty": {
+        "name": "Vector Logistics Software Inc",
+        "iban": "MT12FICT7177739773"
+      },
+      "remittance_info": "TX-2026-01248 Software subscription"
+    },
+    {
+      "bank_ref": "BNK20260251",
+      "value_date": "2026-08-28",
+      "amount": {
+        "value": 1317.71,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Quayside Tyres Ltd",
+        "iban": "MT79FICT6971289796"
+      },
+      "remittance_info": "TX-2026-01254 Tyre replacement"
+    },
+    {
+      "bank_ref": "BNK20260252",
+      "value_date": "2026-08-28",
+      "amount": {
+        "value": 1314.02,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Kestrel Print Services Ltd",
+        "iban": "MT84FICT9753569945"
+      },
+      "remittance_info": "TX-2026-01255 Business cards"
+    },
+    {
+      "bank_ref": "BNK20260253",
+      "value_date": "2026-08-28",
+      "amount": {
+        "value": 272.99,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Meridian Software Licensing Limited",
+        "iban": "MT20FICT7041459823"
+      },
+      "remittance_info": "TX-2026-01256 Additional user seats"
+    },
+    {
+      "bank_ref": "BNK20260254",
+      "value_date": "2026-08-29",
+      "amount": {
+        "value": 22414.86,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "COASTLINE FLEET REPAIRS LTD",
+        "iban": "MT65FICT5154480099"
+      },
+      "remittance_info": "TX-2026-01242 Truck brake repair"
+    },
+    {
+      "bank_ref": "BNK20260255",
+      "value_date": "2026-08-29",
+      "amount": {
+        "value": 709.74,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Tidewater Insurance Brokers",
+        "iban": "MT19FICT9586259965"
+      },
+      "remittance_info": "TX-2026-01249 Cargo insurance premium"
+    },
+    {
+      "bank_ref": "BNK20260256",
+      "value_date": "2026-08-29",
+      "amount": {
+        "value": 219.08,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "SUMMIT TRAINING ACADEMY LTD",
+        "iban": "MT86FICT1532688956"
+      },
+      "remittance_info": "TX-2026-01251 Manager training"
+    },
+    {
+      "bank_ref": "BNK20260257",
+      "value_date": "2026-08-29",
+      "amount": {
+        "value": 6169.67,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Brightlink Telecom Ltd",
+        "iban": "MT13FICT7544052472"
+      },
+      "remittance_info": "TX-2026-01258 Mobile plans"
+    },
+    {
+      "bank_ref": "BNK20260258",
+      "value_date": "2026-08-29",
+      "amount": {
+        "value": 311.21,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Nova Marketing Studio",
+        "iban": "MT37FICT4776817877"
+      },
+      "remittance_info": "TX-2026-01259 Social media management"
+    },
+    {
+      "bank_ref": "BNK20260259",
+      "value_date": "2026-08-30",
+      "amount": {
+        "value": 184.07,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Atlas Forklift Hire",
+        "iban": "MT90FICT8801720732"
+      },
+      "remittance_info": "TX-2026-01257 Forklift hire"
+    },
+    {
+      "bank_ref": "BNK20260260",
+      "value_date": "2026-08-31",
+      "amount": {
+        "value": 137.61,
+        "currency": "USD"
+      },
+      "counterparty": {
+        "name": "Vector Logistics Software Inc",
+        "iban": "MT29FICT1201147529"
+      },
+      "remittance_info": "TX-2026-01265 Software subscription"
+    },
+    {
+      "bank_ref": "BNK20260261",
+      "value_date": "2026-09-01",
+      "amount": {
+        "value": 500.88,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Kestrel Print Services Limited",
+        "iban": "MT19FICT1847306741"
+      },
+      "remittance_info": "TX-2026-01260 Signage"
+    },
+    {
+      "bank_ref": "BNK20260262",
+      "value_date": "2026-09-01",
+      "amount": {
+        "value": 1322.47,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Meridian Software Licensing Limited",
+        "iban": "MT75FICT4533177887"
+      },
+      "remittance_info": "TX-2026-01262 Software subscription"
+    },
+    {
+      "bank_ref": "BNK20260263",
+      "value_date": "2026-09-01",
+      "amount": {
+        "value": 265.45,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Tidewater Insurance Brokers",
+        "iban": "MT11FICT2915744276"
+      },
+      "remittance_info": "TX-2026-01266 Fleet insurance premium"
+    },
+    {
+      "bank_ref": "BNK20260264",
+      "value_date": "2026-09-01",
+      "amount": {
+        "value": 17336.3,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Pinnacle Recruitment Ltd",
+        "iban": "MT98FICT8351970730"
+      },
+      "remittance_info": "TX-2026-01270 Job advert package"
+    },
+    {
+      "bank_ref": "BNK20260265",
+      "value_date": "2026-09-01",
+      "amount": {
+        "value": 726.37,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Sunvale Packaging Ltd",
+        "iban": "MT35FICT1824063648"
+      },
+      "remittance_info": "TX-2026-01271 Cardboard boxes"
+    },
+    {
+      "bank_ref": "BNK20260266",
+      "value_date": "2026-09-01",
+      "amount": {
+        "value": 798.23,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Redwood Furniture",
+        "iban": "MT21FICT4040770764"
+      },
+      "remittance_info": "TX-2026-01272 Office chairs"
+    },
+    {
+      "bank_ref": "BNK20260267",
+      "value_date": "2026-09-02",
+      "amount": {
+        "value": 187.5,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Bluefin Office Supplies Ltd",
+        "iban": "MT38FICT9196280073"
+      },
+      "remittance_info": "TX-2026-01261 Office consumables"
+    },
+    {
+      "bank_ref": "BNK20260268",
+      "value_date": "2026-09-02",
+      "amount": {
+        "value": 223.7,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Seabreeze Catering Ltd",
+        "iban": "MT19FICT4533453439"
+      },
+      "remittance_info": "TX-2026-01263 Staff event catering"
+    },
+    {
+      "bank_ref": "BNK20260269",
+      "value_date": "2026-09-02",
+      "amount": {
+        "value": 1805.06,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Pinnacle Recruitment Limited",
+        "iban": "MT20FICT5867373159"
+      },
+      "remittance_info": "TX-2026-01264 Recruitment fee"
+    },
+    {
+      "bank_ref": "BNK20260270",
+      "value_date": "2026-09-02",
+      "amount": {
+        "value": 644.76,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "GRANITE CONSTRUCTION WORKS LTD",
+        "iban": "MT14FICT6574514576"
+      },
+      "remittance_info": "TX-2026-01267 Yard resurfacing"
+    },
+    {
+      "bank_ref": "BNK20260271",
+      "value_date": "2026-09-02",
+      "amount": {
+        "value": 4950.0,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Harbour IT Services Limited",
+        "iban": "MT84FICT6042801425"
+      },
+      "remittance_info": "TX-2026-01268 Server support - project phase 1"
+    },
+    {
+      "bank_ref": "BNK20260272",
+      "value_date": "2026-09-02",
+      "amount": {
+        "value": 980.49,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Polar Refrigeration Services",
+        "iban": "MT77FICT5039399664"
+      },
+      "remittance_info": "TX-2026-01273 Cold store maintenance"
+    },
+    {
+      "bank_ref": "BNK20260273",
+      "value_date": "2026-09-02",
+      "amount": {
+        "value": 400.59,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Quayside Tyres Limited",
+        "iban": "MT82FICT1341698606"
+      },
+      "remittance_info": "TX-2026-01274 Tyre replacement"
+    },
+    {
+      "bank_ref": "BNK20260274",
+      "value_date": "2026-09-02",
+      "amount": {
+        "value": 199.61,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Limestone Facilities Management",
+        "iban": "MT92FICT5304945259"
+      },
+      "remittance_info": "TX-2026-01276 HVAC maintenance"
+    },
+    {
+      "bank_ref": "BNK20260275",
+      "value_date": "2026-09-02",
+      "amount": {
+        "value": 686.23,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Brightlink Telecom Limited",
+        "iban": "MT26FICT2227645446"
+      },
+      "remittance_info": "TX-2026-01277 Phone handsets"
+    },
+    {
+      "bank_ref": "BNK20260276",
+      "value_date": "2026-09-02",
+      "amount": {
+        "value": 108.66,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Keystone Legal Advisors",
+        "iban": "MT23FICT9024031399"
+      },
+      "remittance_info": "TX-2026-01280 Legal advice"
+    },
+    {
+      "bank_ref": "BNK20260277",
+      "value_date": "2026-09-03",
+      "amount": {
+        "value": 423.12,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "ATLAS FORKLIFT HIRE LTD",
+        "iban": "MT29FICT6251012241"
+      },
+      "remittance_info": "TX-2026-01269 Pallet jack hire"
+    },
+    {
+      "bank_ref": "BNK20260278",
+      "value_date": "2026-09-03",
+      "amount": {
+        "value": 109.0,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Atlas Forklift Hire Ltd",
+        "iban": "MT57FICT5001385695"
+      },
+      "remittance_info": "TX-2026-01283 Forklift hire"
+    },
+    {
+      "bank_ref": "BNK20260279",
+      "value_date": "2026-09-03",
+      "amount": {
+        "value": 755.01,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Sunvale Packaging",
+        "iban": "MT73FICT6508137789"
+      },
+      "remittance_info": "TX-2026-01284 Cardboard boxes"
+    },
+    {
+      "bank_ref": "BNK20260280",
+      "value_date": "2026-09-03",
+      "amount": {
+        "value": 326.45,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "POLAR REFRIGERATION SERVICES LTD",
+        "iban": "MT79FICT1949752807"
+      },
+      "remittance_info": "TX-2026-01285 Compressor repair"
+    },
+    {
+      "bank_ref": "BNK20260281",
+      "value_date": "2026-09-03",
+      "amount": {
+        "value": 376.19,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Summit Training Academy",
+        "iban": "MT15FICT8314257609"
+      },
+      "remittance_info": "TX-2026-01286 Forklift licence training"
+    },
+    {
+      "bank_ref": "BNK20260282",
+      "value_date": "2026-09-04",
+      "amount": {
+        "value": 2305.74,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Northgate Fuel Distributors Ltd",
+        "iban": "MT91FICT5283089767"
+      },
+      "remittance_info": "TX-2026-01275 Fuel cards top-up"
+    },
+    {
+      "bank_ref": "BNK20260283",
+      "value_date": "2026-09-04",
+      "amount": {
+        "value": 229.46,
+        "currency": "USD"
+      },
+      "counterparty": {
+        "name": "VECTOR LOGISTICS SOFTWARE INC",
+        "iban": "MT14FICT6214352198"
+      },
+      "remittance_info": "TX-2026-01278 Software subscription"
+    },
+    {
+      "bank_ref": "BNK20260284",
+      "value_date": "2026-09-04",
+      "amount": {
+        "value": 338.43,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Silverline Couriers Ltd",
+        "iban": "MT49FICT1019010443"
+      },
+      "remittance_info": "TX-2026-01279 Courier services"
+    },
+    {
+      "bank_ref": "BNK20260285",
+      "value_date": "2026-09-04",
+      "amount": {
+        "value": 2400.0,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Limestone Facilities Management",
+        "iban": "MT47FICT1877419592"
+      },
+      "remittance_info": "TX-2026-01282 Lighting replacement"
+    },
+    {
+      "bank_ref": "BNK20260286",
+      "value_date": "2026-09-04",
+      "amount": {
+        "value": 934.75,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "SUMMIT TRAINING ACADEMY LTD",
+        "iban": "MT35FICT8982039472"
+      },
+      "remittance_info": "TX-2026-01293 Forklift licence training"
+    },
+    {
+      "bank_ref": "BNK20260287",
+      "value_date": "2026-09-05",
+      "amount": {
+        "value": 3200.0,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "HARBOUR IT SERVICES LTD",
+        "iban": "MT84FICT1916277334"
+      },
+      "remittance_info": "TX-2026-01281 Server support - project phase 2"
+    },
+    {
+      "bank_ref": "BNK20260288",
+      "value_date": "2026-09-05",
+      "amount": {
+        "value": 648.6,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Quayside Tyres Ltd",
+        "iban": "MT37FICT8817133613"
+      },
+      "remittance_info": "TX-2026-01287 Tyre replacement"
+    },
+    {
+      "bank_ref": "BNK20260289",
+      "value_date": "2026-09-05",
+      "amount": {
+        "value": 537.54,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "ATLAS FORKLIFT HIRE LTD",
+        "iban": "MT81FICT3326180429"
+      },
+      "remittance_info": "TX-2026-01290 Forklift hire"
+    },
+    {
+      "bank_ref": "BNK20260290",
+      "value_date": "2026-09-05",
+      "amount": {
+        "value": 192.99,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Redwood Furniture",
+        "iban": "MT65FICT8590771770"
+      },
+      "remittance_info": "TX-2026-01291 Meeting room table"
+    },
+    {
+      "bank_ref": "BNK20260291",
+      "value_date": "2026-09-06",
+      "amount": {
+        "value": 173.98,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Northgate Fuel Distributors",
+        "iban": "MT29FICT2061757527"
+      },
+      "remittance_info": "TX-2026-01288 Fuel cards top-up"
+    },
+    {
+      "bank_ref": "BNK20260292",
+      "value_date": "2026-09-06",
+      "amount": {
+        "value": 576.52,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Seabreeze Catering Limited",
+        "iban": "MT76FICT9797797298"
+      },
+      "remittance_info": "TX-2026-01289 Training day lunch"
+    },
+    {
+      "bank_ref": "BNK20260293",
+      "value_date": "2026-09-06",
+      "amount": {
+        "value": 644.82,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Redwood Furniture Ltd",
+        "iban": "MT29FICT7188099612"
+      },
+      "remittance_info": "TX-2026-01292 Desks"
+    },
+    {
+      "bank_ref": "BNK20260294",
+      "value_date": "2026-09-07",
+      "amount": {
+        "value": 438.89,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Sunvale Packaging Ltd",
+        "iban": "MT54FICT7532957877"
+      },
+      "remittance_info": "TX-2026-01297 Cardboard boxes"
+    },
+    {
+      "bank_ref": "BNK20260295",
+      "value_date": "2026-09-07",
+      "amount": {
+        "value": 368.74,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Nova Marketing Studio Limited",
+        "iban": "MT88FICT5411996255"
+      },
+      "remittance_info": "TX-2026-01299 Social media management"
+    },
+    {
+      "bank_ref": "BNK20260296",
+      "value_date": "2026-09-08",
+      "amount": {
+        "value": 378.46,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Kestrel Print Services Ltd",
+        "iban": "MT90FICT8700506292"
+      },
+      "remittance_info": "TX-2026-01294 Signage"
+    },
+    {
+      "bank_ref": "BNK20260297",
+      "value_date": "2026-09-08",
+      "amount": {
+        "value": 577.58,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Seabreeze Catering",
+        "iban": "MT79FICT3719658500"
+      },
+      "remittance_info": "TX-2026-01295 Staff event catering"
+    },
+    {
+      "bank_ref": "BNK20260298",
+      "value_date": "2026-09-08",
+      "amount": {
+        "value": 445.71,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Pinnacle Recruitment",
+        "iban": "MT12FICT5932458010"
+      },
+      "remittance_info": "TX-2026-01296 Job advert package"
+    },
+    {
+      "bank_ref": "BNK20260299",
+      "value_date": "2026-09-08",
+      "amount": {
+        "value": 806.51,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Granite Construction Works",
+        "iban": "MT51FICT8170723906"
+      },
+      "remittance_info": "TX-2026-01298 Yard resurfacing"
+    },
+    {
+      "bank_ref": "BNK20260300",
+      "value_date": "2026-09-09",
+      "amount": {
+        "value": 16493.35,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "GREENLEAF CLEANING LTD",
+        "iban": "MT95FICT6446199759"
+      },
+      "remittance_info": "TX-2026-01300 Warehouse deep clean"
+    },
+    {
+      "bank_ref": "BNK20260301",
+      "value_date": "2026-09-09",
+      "amount": {
+        "value": 1792.09,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Keystone Legal Advisors",
+        "iban": "MT44FICT8282994057"
+      },
+      "remittance_info": "TX-2026-01302 Contract review"
+    },
+    {
+      "bank_ref": "BNK20260302",
+      "value_date": "2026-09-09",
+      "amount": {
+        "value": 877.61,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "NORTHGATE FUEL DISTRIBUTORS LTD",
+        "iban": "MT65FICT9405842416"
+      },
+      "remittance_info": "TX-2026-01303 Diesel delivery"
+    },
+    {
+      "bank_ref": "BNK20260303",
+      "value_date": "2026-09-09",
+      "amount": {
+        "value": 15006.8,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Keystone Legal Advisors",
+        "iban": "MT95FICT7504155671"
+      },
+      "remittance_info": "TX-2026-01308 Contract review"
+    },
+    {
+      "bank_ref": "BNK20260304",
+      "value_date": "2026-09-10",
+      "amount": {
+        "value": 16493.35,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "GREENLEAF CLEANING LTD",
+        "iban": "MT95FICT6446199759"
+      },
+      "remittance_info": "TX-2026-01300 Warehouse deep clean"
+    },
+    {
+      "bank_ref": "BNK20260305",
+      "value_date": "2026-09-10",
+      "amount": {
+        "value": 326.67,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Keystone Legal Advisors",
+        "iban": "MT97FICT5337706317"
+      },
+      "remittance_info": "TX-2026-01301 Legal advice"
+    },
+    {
+      "bank_ref": "BNK20260306",
+      "value_date": "2026-09-10",
+      "amount": {
+        "value": 504.76,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Seabreeze Catering Ltd",
+        "iban": "MT40FICT9057004490"
+      },
+      "remittance_info": "TX-2026-01304 Training day lunch"
+    },
+    {
+      "bank_ref": "BNK20260307",
+      "value_date": "2026-09-10",
+      "amount": {
+        "value": 920.37,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Atlas Forklift Hire Limited",
+        "iban": "MT69FICT1532822279"
+      },
+      "remittance_info": "TX-2026-01305 Forklift hire"
+    },
+    {
+      "bank_ref": "BNK20260308",
+      "value_date": "2026-09-10",
+      "amount": {
+        "value": 65.14,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Orion Security Services Limited",
+        "iban": "MT32FICT6555718321"
+      },
+      "remittance_info": "TX-2026-01306 Night security"
+    },
+    {
+      "bank_ref": "BNK20260309",
+      "value_date": "2026-09-10",
+      "amount": {
+        "value": 613.25,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Redwood Furniture",
+        "iban": "MT23FICT6643442355"
+      },
+      "remittance_info": "TX-2026-01307 Desks"
+    },
+    {
+      "bank_ref": "BNK20260310",
+      "value_date": "2026-09-10",
+      "amount": {
+        "value": 21589.39,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Nova Marketing Studio Limited",
+        "iban": "MT50FICT5013704984"
+      },
+      "remittance_info": "TX-2026-01309 Campaign design"
+    },
+    {
+      "bank_ref": "BNK20260311",
+      "value_date": "2026-09-10",
+      "amount": {
+        "value": 48200.0,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "LIMESTONE FACILITIES MANAGEMENT LTD",
+        "iban": "MT97FICT7802157448"
+      },
+      "remittance_info": "TX-2026-01311 HVAC maintenance"
+    },
+    {
+      "bank_ref": "BNK20260312",
+      "value_date": "2026-09-11",
+      "amount": {
+        "value": 307.29,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Greenleaf Cleaning Limited",
+        "iban": "MT98FICT9798396676"
+      },
+      "remittance_info": "TX-2026-01315 Warehouse deep clean"
+    },
+    {
+      "bank_ref": "BNK20260313",
+      "value_date": "2026-09-11",
+      "amount": {
+        "value": 13606.93,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Summit Training Academy Limited",
+        "iban": "MT33FICT9156802575"
+      },
+      "remittance_info": "TX-2026-01317 First aid course"
+    },
+    {
+      "bank_ref": "BNK20260314",
+      "value_date": "2026-09-11",
+      "amount": {
+        "value": 225.63,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Kestrel Print Services Limited",
+        "iban": "MT55FICT6069894658"
+      },
+      "remittance_info": "TX-2026-01318 Business cards"
+    },
+    {
+      "bank_ref": "BNK20260315",
+      "value_date": "2026-09-11",
+      "amount": {
+        "value": 1465.24,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Keystone Legal Advisors",
+        "iban": "MT23FICT2997703565"
+      },
+      "remittance_info": "TX-2026-01323 Contract review"
+    },
+    {
+      "bank_ref": "BNK20260316",
+      "value_date": "2026-09-11",
+      "amount": {
+        "value": 542.23,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Granite Construction Works Limited",
+        "iban": "MT97FICT1002166947"
+      },
+      "remittance_info": "TX-2026-01324 Loading bay works"
+    },
+    {
+      "bank_ref": "BNK20260317",
+      "value_date": "2026-09-12",
+      "amount": {
+        "value": 11044.75,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Limestone Facilities Management",
+        "iban": "MT59FICT1501880786"
+      },
+      "remittance_info": "TX-2026-01310 Lighting replacement"
+    },
+    {
+      "bank_ref": "BNK20260318",
+      "value_date": "2026-09-12",
+      "amount": {
+        "value": 510.02,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "SEABREEZE CATERING LTD",
+        "iban": "MT55FICT4824408347"
+      },
+      "remittance_info": "TX-2026-01312 Training day lunch"
+    },
+    {
+      "bank_ref": "BNK20260319",
+      "value_date": "2026-09-12",
+      "amount": {
+        "value": 251.76,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Atlas Forklift Hire",
+        "iban": "MT10FICT6296336692"
+      },
+      "remittance_info": "TX-2026-01313 Forklift hire"
+    },
+    {
+      "bank_ref": "BNK20260320",
+      "value_date": "2026-09-12",
+      "amount": {
+        "value": 1387.68,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Brightlink Telecom Limited",
+        "iban": "MT39FICT9306183052"
+      },
+      "remittance_info": "TX-2026-01314 Leased line"
+    },
+    {
+      "bank_ref": "BNK20260321",
+      "value_date": "2026-09-12",
+      "amount": {
+        "value": 373.11,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Polar Refrigeration Services",
+        "iban": "MT13FICT3029164000"
+      },
+      "remittance_info": "TX-2026-01316 Compressor repair"
+    },
+    {
+      "bank_ref": "BNK20260322",
+      "value_date": "2026-09-12",
+      "amount": {
+        "value": 412.46,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Keystone Legal Advisors",
+        "iban": "MT87FICT6177713055"
+      },
+      "remittance_info": "TX-2026-01321 Legal advice"
+    },
+    {
+      "bank_ref": "BNK20260323",
+      "value_date": "2026-09-12",
+      "amount": {
+        "value": 796.44,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "KEYSTONE LEGAL ADVISORS",
+        "iban": "MT15FICT8153711216"
+      },
+      "remittance_info": "TX-2026-01322 Contract review"
+    },
+    {
+      "bank_ref": "BNK20260324",
+      "value_date": "2026-09-12",
+      "amount": {
+        "value": 776.24,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "GRANITE CONSTRUCTION WORKS LTD",
+        "iban": "MT17FICT6019939168"
+      },
+      "remittance_info": "TX-2026-01325 Yard resurfacing"
+    },
+    {
+      "bank_ref": "BNK20260325",
+      "value_date": "2026-09-13",
+      "amount": {
+        "value": 701.81,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Limestone Facilities Management Ltd",
+        "iban": "MT19FICT4514409659"
+      },
+      "remittance_info": "TX-2026-01319 Lighting replacement"
+    },
+    {
+      "bank_ref": "BNK20260326",
+      "value_date": "2026-09-13",
+      "amount": {
+        "value": 182.06,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Redwood Furniture Ltd",
+        "iban": "MT64FICT8404544775"
+      },
+      "remittance_info": "TX-2026-01320 Office chairs"
+    },
+    {
+      "bank_ref": "BNK20260327",
+      "value_date": "2026-09-13",
+      "amount": {
+        "value": 2380.4,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Summit Training Academy",
+        "iban": "MT85FICT3299110343"
+      },
+      "remittance_info": "TX-2026-01326 Manager training"
+    },
+    {
+      "bank_ref": "BNK20260328",
+      "value_date": "2026-09-15",
+      "amount": {
+        "value": 375.18,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Limestone Facilities Management Ltd",
+        "iban": "MT56FICT4925102527"
+      },
+      "remittance_info": "TX-2026-01328 HVAC maintenance"
+    },
+    {
+      "bank_ref": "BNK20260329",
+      "value_date": "2026-09-15",
+      "amount": {
+        "value": 1091.11,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Limestone Facilities Management Limited",
+        "iban": "MT96FICT8322064281"
+      },
+      "remittance_info": "TX-2026-01329 HVAC maintenance"
+    },
+    {
+      "bank_ref": "BNK20260330",
+      "value_date": "2026-09-15",
+      "amount": {
+        "value": 431.38,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "SEABREEZE CATERING LTD",
+        "iban": "MT82FICT3649004531"
+      },
+      "remittance_info": "TX-2026-01330 Training day lunch"
+    },
+    {
+      "bank_ref": "BNK20260331",
+      "value_date": "2026-09-15",
+      "amount": {
+        "value": 1021.58,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Tidewater Insurance Brokers Ltd",
+        "iban": "MT47FICT1331824199"
+      },
+      "remittance_info": "TX-2026-01331 Fleet insurance premium"
+    },
+    {
+      "bank_ref": "BNK20260332",
+      "value_date": "2026-09-15",
+      "amount": {
+        "value": 292.99,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Northgate Fuel Distributors Limited",
+        "iban": "MT52FICT6432715541"
+      },
+      "remittance_info": "TX-2026-01335 Fuel cards top-up"
+    },
+    {
+      "bank_ref": "BNK20260333",
+      "value_date": "2026-09-16",
+      "amount": {
+        "value": 353.81,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Bluefin Office Supplies Ltd",
+        "iban": "MT13FICT2048437842"
+      },
+      "remittance_info": "TX-2026-01327 Printer toner"
+    },
+    {
+      "bank_ref": "BNK20260334",
+      "value_date": "2026-09-16",
+      "amount": {
+        "value": 647.24,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Atlas Forklift Hire Ltd",
+        "iban": "MT40FICT5704347563"
+      },
+      "remittance_info": "TX-2026-01337 Forklift hire"
+    },
+    {
+      "bank_ref": "BNK20260335",
+      "value_date": "2026-09-16",
+      "amount": {
+        "value": 660.23,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Harbour IT Services Limited",
+        "iban": "MT31FICT6630440753"
+      },
+      "remittance_info": "TX-2026-01340 Helpdesk retainer"
+    },
+    {
+      "bank_ref": "BNK20260336",
+      "value_date": "2026-09-16",
+      "amount": {
+        "value": 296.15,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Pinnacle Recruitment Ltd",
+        "iban": "MT53FICT3879999868"
+      },
+      "remittance_info": "TX-2026-01345 Recruitment fee"
+    },
+    {
+      "bank_ref": "BNK20260337",
+      "value_date": "2026-09-16",
+      "amount": {
+        "value": 185.56,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Redwood Furniture Ltd",
+        "iban": "MT37FICT6649762392"
+      },
+      "remittance_info": "TX-2026-01348 Office chairs"
+    },
+    {
+      "bank_ref": "BNK20260338",
+      "value_date": "2026-09-17",
+      "amount": {
+        "value": 126.21,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Kestrel Print Services",
+        "iban": "MT93FICT4051081282"
+      },
+      "remittance_info": "TX-2026-01332 Signage"
+    },
+    {
+      "bank_ref": "BNK20260339",
+      "value_date": "2026-09-17",
+      "amount": {
+        "value": 804.79,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "KESTREL PRINT SERVICES LTD",
+        "iban": "MT70FICT5926686925"
+      },
+      "remittance_info": "TX-2026-01333 Brochure print run"
+    },
+    {
+      "bank_ref": "BNK20260340",
+      "value_date": "2026-09-17",
+      "amount": {
+        "value": 647.21,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Harbour IT Services Ltd",
+        "iban": "MT60FICT8404982509"
+      },
+      "remittance_info": "TX-2026-01334 Laptop repairs"
+    },
+    {
+      "bank_ref": "BNK20260341",
+      "value_date": "2026-09-17",
+      "amount": {
+        "value": 157.11,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "SEABREEZE CATERING LTD",
+        "iban": "MT18FICT6176955644"
+      },
+      "remittance_info": "TX-2026-01336 Staff event catering"
+    },
+    {
+      "bank_ref": "BNK20260342",
+      "value_date": "2026-09-17",
+      "amount": {
+        "value": 30000.0,
+        "currency": "USD"
+      },
+      "counterparty": {
+        "name": "Vector Logistics Software Inc",
+        "iban": "MT63FICT3844239906"
+      },
+      "remittance_info": "TX-2026-01338 Licence renewal"
+    },
+    {
+      "bank_ref": "BNK20260343",
+      "value_date": "2026-09-17",
+      "amount": {
+        "value": 148.91,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Granite Construction Works Limited",
+        "iban": "MT67FICT5712097510"
+      },
+      "remittance_info": "TX-2026-01339 Yard resurfacing"
+    },
+    {
+      "bank_ref": "BNK20260344",
+      "value_date": "2026-09-17",
+      "amount": {
+        "value": 738.0,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Harbour IT Services Limited",
+        "iban": "MT44FICT4471978219"
+      },
+      "remittance_info": "TX-2026-01341 Network maintenance"
+    },
+    {
+      "bank_ref": "BNK20260345",
+      "value_date": "2026-09-17",
+      "amount": {
+        "value": 202.44,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Bluefin Office Supplies Ltd",
+        "iban": "MT57FICT3133003587"
+      },
+      "remittance_info": "TX-2026-01343 Office consumables"
+    },
+    {
+      "bank_ref": "BNK20260346",
+      "value_date": "2026-09-17",
+      "amount": {
+        "value": 1046.25,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Greenleaf Cleaning Ltd",
+        "iban": "MT40FICT1947780055"
+      },
+      "remittance_info": "TX-2026-01346 Warehouse deep clean"
+    },
+    {
+      "bank_ref": "BNK20260347",
+      "value_date": "2026-09-17",
+      "amount": {
+        "value": 458.2,
+        "currency": "USD"
+      },
+      "counterparty": {
+        "name": "Vector Logistics Software Inc",
+        "iban": "MT46FICT3833966200"
+      },
+      "remittance_info": "TX-2026-01347 Software subscription"
+    },
+    {
+      "bank_ref": "BNK20260348",
+      "value_date": "2026-09-17",
+      "amount": {
+        "value": 1744.45,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Limestone Facilities Management",
+        "iban": "MT55FICT1146635057"
+      },
+      "remittance_info": "TX-2026-01351 HVAC maintenance"
+    },
+    {
+      "bank_ref": "BNK20260349",
+      "value_date": "2026-09-18",
+      "amount": {
+        "value": 904.55,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Harbour IT Services Ltd",
+        "iban": "MT38FICT3126718479"
+      },
+      "remittance_info": "TX-2026-01342 Server support"
+    },
+    {
+      "bank_ref": "BNK20260350",
+      "value_date": "2026-09-18",
+      "amount": {
+        "value": 347.81,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Coastline Fleet Repairs Ltd",
+        "iban": "MT60FICT7136709814"
+      },
+      "remittance_info": "TX-2026-01344 Fleet inspection"
+    },
+    {
+      "bank_ref": "BNK20260351",
+      "value_date": "2026-09-18",
+      "amount": {
+        "value": 1275.27,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Granite Construction Works Ltd",
+        "iban": "MT38FICT3226143021"
+      },
+      "remittance_info": "TX-2026-01353 Loading bay works"
+    },
+    {
+      "bank_ref": "BNK20260352",
+      "value_date": "2026-09-18",
+      "amount": {
+        "value": 142.97,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Nova Marketing Studio Ltd",
+        "iban": "MT14FICT7979447080"
+      },
+      "remittance_info": "TX-2026-01354 Social media management"
+    },
+    {
+      "bank_ref": "BNK20260353",
+      "value_date": "2026-09-18",
+      "amount": {
+        "value": 180.67,
+        "currency": "USD"
+      },
+      "counterparty": {
+        "name": "Vector Logistics Software Inc",
+        "iban": "MT52FICT2140903083"
+      },
+      "remittance_info": "TX-2026-01359 Licence renewal"
+    },
+    {
+      "bank_ref": "BNK20260354",
+      "value_date": "2026-09-19",
+      "amount": {
+        "value": 101.41,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "BLUEFIN OFFICE SUPPLIES LTD",
+        "iban": "MT25FICT3936049417"
+      },
+      "remittance_info": "TX-2026-01349 Printer toner"
+    },
+    {
+      "bank_ref": "BNK20260355",
+      "value_date": "2026-09-19",
+      "amount": {
+        "value": 1150.15,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Northgate Fuel Distributors",
+        "iban": "MT96FICT1004806624"
+      },
+      "remittance_info": "TX-2026-01350 Diesel delivery"
+    },
+    {
+      "bank_ref": "BNK20260356",
+      "value_date": "2026-09-19",
+      "amount": {
+        "value": 1333.45,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Seabreeze Catering Ltd",
+        "iban": "MT67FICT5570784666"
+      },
+      "remittance_info": "TX-2026-01352 Staff event catering"
+    },
+    {
+      "bank_ref": "BNK20260357",
+      "value_date": "2026-09-19",
+      "amount": {
+        "value": 305.15,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "HARBOUR IT SERVICES LTD",
+        "iban": "MT52FICT5433452756"
+      },
+      "remittance_info": "TX-2026-01355 Helpdesk retainer"
+    },
+    {
+      "bank_ref": "BNK20260358",
+      "value_date": "2026-09-19",
+      "amount": {
+        "value": 659.76,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Seabreeze Catering",
+        "iban": "MT31FICT5152624195"
+      },
+      "remittance_info": "TX-2026-01356 Training day lunch"
+    },
+    {
+      "bank_ref": "BNK20260359",
+      "value_date": "2026-09-19",
+      "amount": {
+        "value": 768.52,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Sunvale Packaging Ltd",
+        "iban": "MT26FICT9848526911"
+      },
+      "remittance_info": "TX-2026-01357 Cardboard boxes"
+    },
+    {
+      "bank_ref": "BNK20260360",
+      "value_date": "2026-09-19",
+      "amount": {
+        "value": 582.18,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Greenleaf Cleaning Limited",
+        "iban": "MT12FICT8316074090"
+      },
+      "remittance_info": "TX-2026-01358 Office cleaning"
+    },
+    {
+      "bank_ref": "BNK20260361",
+      "value_date": "2026-09-19",
+      "amount": {
+        "value": 1115.19,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Redwood Furniture",
+        "iban": "MT52FICT2086895966"
+      },
+      "remittance_info": "TX-2026-01360 Office chairs"
+    },
+    {
+      "bank_ref": "BNK20260362",
+      "value_date": "2026-09-20",
+      "amount": {
+        "value": 5962.72,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "TIDEWATER INSURANCE BROKERS LTD",
+        "iban": "MT60FICT1427841033"
+      },
+      "remittance_info": "TX-2026-01361 Cargo insurance premium"
+    },
+    {
+      "bank_ref": "BNK20260363",
+      "value_date": "2026-09-20",
+      "amount": {
+        "value": 17731.1,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Silverline Couriers Ltd",
+        "iban": "MT16FICT6795152378"
+      },
+      "remittance_info": "TX-2026-01362 Courier services"
+    },
+    {
+      "bank_ref": "BNK20260364",
+      "value_date": "2026-09-21",
+      "amount": {
+        "value": 17731.1,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Silverline Couriers Ltd",
+        "iban": "MT16FICT6795152378"
+      },
+      "remittance_info": "TX-2026-01362 Courier services"
+    },
+    {
+      "bank_ref": "BNK20260365",
+      "value_date": "2026-09-21",
+      "amount": {
+        "value": 849.82,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Bluefin Office Supplies Limited",
+        "iban": "MT44FICT5609782073"
+      },
+      "remittance_info": "TX-2026-01364 Printer toner"
+    },
+    {
+      "bank_ref": "BNK20260366",
+      "value_date": "2026-09-21",
+      "amount": {
+        "value": 6498.66,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "MERIDIAN SOFTWARE LICENSING LTD",
+        "iban": "MT23FICT3685667481"
+      },
+      "remittance_info": "TX-2026-01365 Software subscription"
+    },
+    {
+      "bank_ref": "BNK20260367",
+      "value_date": "2026-09-21",
+      "amount": {
+        "value": 349.72,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Greenleaf Cleaning Ltd",
+        "iban": "MT32FICT5179781473"
+      },
+      "remittance_info": "TX-2026-01367 Office cleaning"
+    },
+    {
+      "bank_ref": "BNK20260368",
+      "value_date": "2026-09-22",
+      "amount": {
+        "value": 7065.4,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Polar Refrigeration Services",
+        "iban": "MT44FICT7582150502"
+      },
+      "remittance_info": "TX-2026-01369 Compressor repair"
+    },
+    {
+      "bank_ref": "BNK20260369",
+      "value_date": "2026-09-22",
+      "amount": {
+        "value": 2400.0,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Kestrel Print Services Ltd",
+        "iban": "MT69FICT2799906440"
+      },
+      "remittance_info": "TX-2026-01370 Business cards"
+    },
+    {
+      "bank_ref": "BNK20260370",
+      "value_date": "2026-09-22",
+      "amount": {
+        "value": 588.21,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Limestone Facilities Management Limited",
+        "iban": "MT67FICT9685955654"
+      },
+      "remittance_info": "TX-2026-01372 Lighting replacement"
+    },
+    {
+      "bank_ref": "BNK20260371",
+      "value_date": "2026-09-22",
+      "amount": {
+        "value": 2400.0,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Orion Security Services Ltd",
+        "iban": "MT51FICT3698222746"
+      },
+      "remittance_info": "TX-2026-01374 CCTV maintenance"
+    },
+    {
+      "bank_ref": "BNK20260372",
+      "value_date": "2026-09-22",
+      "amount": {
+        "value": 213.33,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Nova Marketing Studio",
+        "iban": "MT86FICT8930212156"
+      },
+      "remittance_info": "TX-2026-01377 Campaign design"
+    },
+    {
+      "bank_ref": "BNK20260373",
+      "value_date": "2026-09-23",
+      "amount": {
+        "value": 377.16,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Harbour IT Services",
+        "iban": "MT40FICT3166256658"
+      },
+      "remittance_info": "TX-2026-01363 Laptop repairs"
+    },
+    {
+      "bank_ref": "BNK20260374",
+      "value_date": "2026-09-23",
+      "amount": {
+        "value": 1029.51,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Sunvale Packaging",
+        "iban": "MT31FICT2125929682"
+      },
+      "remittance_info": "TX-2026-01366 Cardboard boxes"
+    },
+    {
+      "bank_ref": "BNK20260375",
+      "value_date": "2026-09-23",
+      "amount": {
+        "value": 328.44,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Silverline Couriers",
+        "iban": "MT56FICT7634394939"
+      },
+      "remittance_info": "TX-2026-01368 Courier services"
+    },
+    {
+      "bank_ref": "BNK20260376",
+      "value_date": "2026-09-23",
+      "amount": {
+        "value": 696.07,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Greenleaf Cleaning Limited",
+        "iban": "MT51FICT5840658224"
+      },
+      "remittance_info": "TX-2026-01375 Office cleaning"
+    },
+    {
+      "bank_ref": "BNK20260377",
+      "value_date": "2026-09-23",
+      "amount": {
+        "value": 616.48,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Redwood Furniture Ltd",
+        "iban": "MT25FICT1004634240"
+      },
+      "remittance_info": "TX-2026-01376 Office chairs"
+    },
+    {
+      "bank_ref": "BNK20260378",
+      "value_date": "2026-09-23",
+      "amount": {
+        "value": 9100.0,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "NOVA MARKETING STUDIO LTD",
+        "iban": "MT49FICT4119021726"
+      },
+      "remittance_info": "TX-2026-01378 Campaign design"
+    },
+    {
+      "bank_ref": "BNK20260379",
+      "value_date": "2026-09-23",
+      "amount": {
+        "value": 739.94,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "HARBOUR IT SERVICES LTD",
+        "iban": "MT36FICT2341592013"
+      },
+      "remittance_info": "TX-2026-01379 Server support"
+    },
+    {
+      "bank_ref": "BNK20260380",
+      "value_date": "2026-09-24",
+      "amount": {
+        "value": 336.82,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Northgate Fuel Distributors Limited",
+        "iban": "MT61FICT9973124016"
+      },
+      "remittance_info": "TX-2026-01371 Fuel cards top-up"
+    },
+    {
+      "bank_ref": "BNK20260381",
+      "value_date": "2026-09-24",
+      "amount": {
+        "value": 222.41,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Atlas Forklift Hire Limited",
+        "iban": "MT43FICT4922807077"
+      },
+      "remittance_info": "TX-2026-01373 Generator hire"
+    },
+    {
+      "bank_ref": "BNK20260382",
+      "value_date": "2026-09-24",
+      "amount": {
+        "value": 414.76,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Keystone Legal Advisors",
+        "iban": "MT20FICT8384511733"
+      },
+      "remittance_info": "TX-2026-01383 Contract review"
+    },
+    {
+      "bank_ref": "BNK20260383",
+      "value_date": "2026-09-24",
+      "amount": {
+        "value": 329.53,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Bluefin Office Supplies Limited",
+        "iban": "MT70FICT7550080725"
+      },
+      "remittance_info": "TX-2026-01387 Office consumables"
+    },
+    {
+      "bank_ref": "BNK20260384",
+      "value_date": "2026-09-24",
+      "amount": {
+        "value": 1152.12,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "BRIGHTLINK TELECOM LTD",
+        "iban": "MT33FICT8342607871"
+      },
+      "remittance_info": "TX-2026-01388 Mobile plans"
+    },
+    {
+      "bank_ref": "BNK20260385",
+      "value_date": "2026-09-24",
+      "amount": {
+        "value": 1581.48,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Tidewater Insurance Brokers",
+        "iban": "MT19FICT5338098715"
+      },
+      "remittance_info": "TX-2026-01391 Cargo insurance premium"
+    },
+    {
+      "bank_ref": "BNK20260386",
+      "value_date": "2026-09-25",
+      "amount": {
+        "value": 6200.0,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "ATLAS FORKLIFT HIRE LTD",
+        "iban": "MT55FICT4400918273"
+      },
+      "remittance_info": "Invoice AFH-2026-118 forklift hire September"
+    },
+    {
+      "bank_ref": "BNK20260387",
+      "value_date": "2026-09-25",
+      "amount": {
+        "value": 789.38,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Sunvale Packaging Limited",
+        "iban": "MT14FICT8827533374"
+      },
+      "remittance_info": "TX-2026-01380 Pallet wrap"
+    },
+    {
+      "bank_ref": "BNK20260388",
+      "value_date": "2026-09-25",
+      "amount": {
+        "value": 285.94,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "REDWOOD FURNITURE LTD",
+        "iban": "MT51FICT2665657646"
+      },
+      "remittance_info": "TX-2026-01381 Desks"
+    },
+    {
+      "bank_ref": "BNK20260389",
+      "value_date": "2026-09-25",
+      "amount": {
+        "value": 268.4,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Tidewater Insurance Brokers",
+        "iban": "MT73FICT2460780437"
+      },
+      "remittance_info": "TX-2026-01382 Fleet insurance premium"
+    },
+    {
+      "bank_ref": "BNK20260390",
+      "value_date": "2026-09-25",
+      "amount": {
+        "value": 694.14,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Quayside Tyres Ltd",
+        "iban": "MT41FICT5077524394"
+      },
+      "remittance_info": "TX-2026-01384 Tyre rotation"
+    },
+    {
+      "bank_ref": "BNK20260391",
+      "value_date": "2026-09-25",
+      "amount": {
+        "value": 222.11,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Harbour IT Services Ltd",
+        "iban": "MT97FICT9320634878"
+      },
+      "remittance_info": "TX-2026-01386 Server support"
+    },
+    {
+      "bank_ref": "BNK20260392",
+      "value_date": "2026-09-25",
+      "amount": {
+        "value": 229.14,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Redwood Furniture Limited",
+        "iban": "MT15FICT3674393685"
+      },
+      "remittance_info": "TX-2026-01390 Office chairs"
+    },
+    {
+      "bank_ref": "BNK20260393",
+      "value_date": "2026-09-25",
+      "amount": {
+        "value": 905.33,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Summit Training Academy",
+        "iban": "MT67FICT3791095345"
+      },
+      "remittance_info": "TX-2026-01393 Manager training"
+    },
+    {
+      "bank_ref": "BNK20260394",
+      "value_date": "2026-09-25",
+      "amount": {
+        "value": 1260.86,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Summit Training Academy",
+        "iban": "MT95FICT3828414654"
+      },
+      "remittance_info": "TX-2026-01394 First aid course"
+    },
+    {
+      "bank_ref": "BNK20260395",
+      "value_date": "2026-09-25",
+      "amount": {
+        "value": 876.99,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Limestone Facilities Management Limited",
+        "iban": "MT31FICT6346330598"
+      },
+      "remittance_info": "TX-2026-01397 Lighting replacement"
+    },
+    {
+      "bank_ref": "BNK20260396",
+      "value_date": "2026-09-25",
+      "amount": {
+        "value": 22514.37,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Sunvale Packaging Ltd",
+        "iban": "MT34FICT8834382874"
+      },
+      "remittance_info": "TX-2026-01400 Pallet wrap"
+    },
+    {
+      "bank_ref": "BNK20260397",
+      "value_date": "2026-09-25",
+      "amount": {
+        "value": 176.1,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "REDWOOD FURNITURE LTD",
+        "iban": "MT76FICT9993014778"
+      },
+      "remittance_info": "TX-2026-01402 Meeting room table"
+    },
+    {
+      "bank_ref": "BNK20260398",
+      "value_date": "2026-09-26",
+      "amount": {
+        "value": 492.58,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Kestrel Print Services",
+        "iban": "MT55FICT7686131934"
+      },
+      "remittance_info": "TX-2026-01385 Signage"
+    },
+    {
+      "bank_ref": "BNK20260399",
+      "value_date": "2026-09-26",
+      "amount": {
+        "value": 1159.11,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "ORION SECURITY SERVICES LTD",
+        "iban": "MT14FICT4088701180"
+      },
+      "remittance_info": "TX-2026-01389 CCTV maintenance"
+    },
+    {
+      "bank_ref": "BNK20260400",
+      "value_date": "2026-09-26",
+      "amount": {
+        "value": 334.45,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Granite Construction Works",
+        "iban": "MT29FICT5736497421"
+      },
+      "remittance_info": "TX-2026-01392 Yard resurfacing"
+    },
+    {
+      "bank_ref": "BNK20260401",
+      "value_date": "2026-09-26",
+      "amount": {
+        "value": 915.29,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Brightlink Telecom",
+        "iban": "MT63FICT7066407282"
+      },
+      "remittance_info": "TX-2026-01398 Phone handsets"
+    },
+    {
+      "bank_ref": "BNK20260402",
+      "value_date": "2026-09-26",
+      "amount": {
+        "value": 427.93,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "ORION SECURITY SERVICES LTD",
+        "iban": "MT27FICT9484664794"
+      },
+      "remittance_info": "TX-2026-01401 Night security"
+    },
+    {
+      "bank_ref": "BNK20260403",
+      "value_date": "2026-09-27",
+      "amount": {
+        "value": 189.85,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Bluefin Office Supplies Limited",
+        "iban": "MT67FICT4592986880"
+      },
+      "remittance_info": "TX-2026-01395 Office consumables"
+    },
+    {
+      "bank_ref": "BNK20260404",
+      "value_date": "2026-09-27",
+      "amount": {
+        "value": 1563.95,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "NORTHGATE FUEL DISTRIBUTORS LTD",
+        "iban": "MT44FICT1661002919"
+      },
+      "remittance_info": "TX-2026-01396 Fuel cards top-up"
+    },
+    {
+      "bank_ref": "BNK20260405",
+      "value_date": "2026-09-27",
+      "amount": {
+        "value": 566.14,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Sunvale Packaging Limited",
+        "iban": "MT37FICT4793482521"
+      },
+      "remittance_info": "TX-2026-01399 Cardboard boxes"
+    },
+    {
+      "bank_ref": "BNK20260406",
+      "value_date": "2026-09-28",
+      "amount": {
+        "value": 221.3,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Redwood Furniture Limited",
+        "iban": "MT92FICT2102890207"
+      },
+      "remittance_info": "TX-2026-01409 Office chairs"
+    },
+    {
+      "bank_ref": "BNK20260407",
+      "value_date": "2026-09-29",
+      "amount": {
+        "value": 418.78,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Bluefin Office Supplies",
+        "iban": "MT77FICT2999696983"
+      },
+      "remittance_info": "TX-2026-01404 Printer toner"
+    },
+    {
+      "bank_ref": "BNK20260408",
+      "value_date": "2026-09-29",
+      "amount": {
+        "value": 250.15,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Coastline Fleet Repairs Limited",
+        "iban": "MT41FICT8784687178"
+      },
+      "remittance_info": "TX-2026-01405 Van service"
+    },
+    {
+      "bank_ref": "BNK20260409",
+      "value_date": "2026-09-29",
+      "amount": {
+        "value": 332.05,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Meridian Software Licensing",
+        "iban": "MT59FICT8476813967"
+      },
+      "remittance_info": "TX-2026-01407 Additional user seats"
+    },
+    {
+      "bank_ref": "BNK20260410",
+      "value_date": "2026-09-29",
+      "amount": {
+        "value": 349.61,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Atlas Forklift Hire",
+        "iban": "MT22FICT5508952179"
+      },
+      "remittance_info": "TX-2026-01408 Generator hire"
+    },
+    {
+      "bank_ref": "BNK20260411",
+      "value_date": "2026-09-29",
+      "amount": {
+        "value": 21392.0,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Bluefin Office Supplies",
+        "iban": "MT28FICT2986837876"
+      },
+      "remittance_info": "TX-2026-01410 Printer toner"
+    },
+    {
+      "bank_ref": "BNK20260412",
+      "value_date": "2026-09-29",
+      "amount": {
+        "value": 902.72,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Keystone Legal Advisors",
+        "iban": "MT48FICT6498194145"
+      },
+      "remittance_info": "TX-2026-01414 Contract review"
+    },
+    {
+      "bank_ref": "BNK20260413",
+      "value_date": "2026-09-29",
+      "amount": {
+        "value": 618.91,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Polar Refrigeration Services",
+        "iban": "MT59FICT1403858250"
+      },
+      "remittance_info": "TX-2026-01415 Cold store maintenance"
+    },
+    {
+      "bank_ref": "BNK20260414",
+      "value_date": "2026-09-30",
+      "amount": {
+        "value": 704.61,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Kestrel Print Services Limited",
+        "iban": "MT45FICT9293015021"
+      },
+      "remittance_info": "TX-2026-01403 Brochure print run"
+    },
+    {
+      "bank_ref": "BNK20260415",
+      "value_date": "2026-09-30",
+      "amount": {
+        "value": 889.35,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Northgate Fuel Distributors",
+        "iban": "MT52FICT3080403275"
+      },
+      "remittance_info": "TX-2026-01406 Fuel cards top-up"
+    },
+    {
+      "bank_ref": "BNK20260416",
+      "value_date": "2026-09-30",
+      "amount": {
+        "value": 18324.39,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Atlas Forklift Hire",
+        "iban": "MT90FICT4716531203"
+      },
+      "remittance_info": "TX-2026-01419 Pallet jack hire"
+    },
+    {
+      "bank_ref": "BNK20260417",
+      "value_date": "2026-10-01",
+      "amount": {
+        "value": 480.59,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "NORTHGATE FUEL DISTRIBUTORS LTD",
+        "iban": "MT53FICT9266750832"
+      },
+      "remittance_info": "TX-2026-01411 Diesel delivery"
+    },
+    {
+      "bank_ref": "BNK20260418",
+      "value_date": "2026-10-01",
+      "amount": {
+        "value": 956.49,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Greenleaf Cleaning Limited",
+        "iban": "MT13FICT4051462861"
+      },
+      "remittance_info": "TX-2026-01412 Warehouse deep clean"
+    },
+    {
+      "bank_ref": "BNK20260419",
+      "value_date": "2026-10-01",
+      "amount": {
+        "value": 656.11,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Keystone Legal Advisors",
+        "iban": "MT55FICT2858560374"
+      },
+      "remittance_info": "TX-2026-01413 Contract review"
+    },
+    {
+      "bank_ref": "BNK20260420",
+      "value_date": "2026-10-01",
+      "amount": {
+        "value": 1386.42,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Nova Marketing Studio Ltd",
+        "iban": "MT70FICT6350896357"
+      },
+      "remittance_info": "TX-2026-01423 Social media management"
+    },
+    {
+      "bank_ref": "BNK20260421",
+      "value_date": "2026-10-01",
+      "amount": {
+        "value": 202.88,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Polar Refrigeration Services",
+        "iban": "MT96FICT6389380829"
+      },
+      "remittance_info": "TX-2026-01424 Cold store maintenance"
+    },
+    {
+      "bank_ref": "BNK20260422",
+      "value_date": "2026-10-01",
+      "amount": {
+        "value": 1095.57,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "QUAYSIDE TYRES LTD",
+        "iban": "MT45FICT6087892142"
+      },
+      "remittance_info": "TX-2026-01426 Tyre rotation"
+    },
+    {
+      "bank_ref": "BNK20260423",
+      "value_date": "2026-10-02",
+      "amount": {
+        "value": 741.46,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Limestone Facilities Management Limited",
+        "iban": "MT82FICT1158516346"
+      },
+      "remittance_info": "TX-2026-01416 Lighting replacement"
+    },
+    {
+      "bank_ref": "BNK20260424",
+      "value_date": "2026-10-02",
+      "amount": {
+        "value": 1838.26,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Seabreeze Catering",
+        "iban": "MT20FICT7975305908"
+      },
+      "remittance_info": "TX-2026-01417 Training day lunch"
+    },
+    {
+      "bank_ref": "BNK20260425",
+      "value_date": "2026-10-02",
+      "amount": {
+        "value": 585.01,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Atlas Forklift Hire",
+        "iban": "MT63FICT3427838993"
+      },
+      "remittance_info": "TX-2026-01418 Forklift hire"
+    },
+    {
+      "bank_ref": "BNK20260426",
+      "value_date": "2026-10-02",
+      "amount": {
+        "value": 705.66,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "BRIGHTLINK TELECOM LTD",
+        "iban": "MT79FICT8386602747"
+      },
+      "remittance_info": "TX-2026-01420 Leased line"
+    },
+    {
+      "bank_ref": "BNK20260427",
+      "value_date": "2026-10-02",
+      "amount": {
+        "value": 770.96,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Silverline Couriers",
+        "iban": "MT17FICT4436632495"
+      },
+      "remittance_info": "TX-2026-01421 Courier services"
+    },
+    {
+      "bank_ref": "BNK20260428",
+      "value_date": "2026-10-02",
+      "amount": {
+        "value": 252.63,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Granite Construction Works",
+        "iban": "MT42FICT2948167193"
+      },
+      "remittance_info": "TX-2026-01422 Loading bay works"
+    },
+    {
+      "bank_ref": "BNK20260429",
+      "value_date": "2026-10-02",
+      "amount": {
+        "value": 1290.49,
+        "currency": "EUR"
+      },
+      "counterparty": {
+        "name": "Polar Refrigeration Services Ltd",
+        "iban": "MT71FICT3768614224"
+      },
+      "remittance_info": "TX-2026-01425 Compressor repair"
+    }
+  ]
+}
