@@ -11,14 +11,14 @@ All companies, people, accounts and documents in the case are fictional.
 ## Use in Google Colab
 
 ```python
-!pip install -q "git+https://github.com/charlieabela/ari1101kit@v0.2.0"
+%pip install -q "git+https://github.com/charlieabela/ari1101kit@v0.2.1"
 import ari1101kit as kit
 
 kit.start("S02", student="Your Name")
 kit.workspace()          # copies the case files into ./brightwater_q3
 ```
 
-Always install a tagged version (`@v0.2.0`), so that a notebook keeps working when later sessions are added.
+Always install a tagged version (`@v0.2.1`), so that a notebook keeps working when later sessions are added.
 
 ## The case files
 

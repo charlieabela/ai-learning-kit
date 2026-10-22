@@ -26,6 +26,7 @@ from .core import extract, pipeline, reference, report
 from .core.case import path, peek, sources, workspace
 from .core.help import explain, source
 from .core.answers import AnswerBook
+from .core.feedback import Feedback, as_feedback
 from . import sessions
 
 __all__ = ["start", "task", "answer", "check", "progress", "submit", "sources", "workspace",
@@ -62,28 +63,39 @@ def task(task_id: str) -> None:
     print(f"{task_id} · {t['title']}\n{t['question']}\nRecord: {' and '.join(needs)}.")
 
 
-def check(task_id: str, value) -> None:
-    """Give formative feedback on a value without saving it."""
+def _feedback(task_id: str, value, attempt=None):
     mod, _ = _require()
+    if task_id not in mod.TASKS:
+        raise KeyError(f"{task_id} is not a task in {mod.SESSION}. Tasks: {', '.join(mod.TASKS)}")
     fn = mod.TASKS[task_id].get("check")
     if fn is None:
         print("No automatic feedback for this task.")
-        return
-    ok, msg = fn(value)
-    mark = {True: "✓", False: "✗", None: "•"}[ok]
-    print(f"{mark} {task_id}: {msg}")
+        return None
+    fb = as_feedback(fn(value))
+    print(fb.render(task_id, attempt))
+    return fb
+
+
+def check(task_id: str, value) -> None:
+    """Give formative feedback on a value without saving it or counting an attempt."""
+    _feedback(task_id, value)
 
 
 def answer(task_id: str, value=None, reasoning: str | None = None, feedback: bool = True) -> None:
     """Save your answer to a task (a value, your reasoning, or both) and show feedback.
 
     The answer book is saved after every call, in the folder ari1101_answers/.
-    Calling answer() again for the same task replaces the earlier answer.
+    Calling answer() again for the same task replaces the earlier answer and counts
+    as a new attempt. Feedback says what is right, what is not and the evidence;
+    after three attempts that are not yet right, a suggested answer is shown.
+    Answers are formative: the number of attempts does not affect any mark.
     """
-    mod, book = _require()
-    book.record(task_id, value, reasoning)
+    _, book = _require()
+    attempt = book.record(task_id, value, reasoning)
     if feedback and value is not None:
-        check(task_id, value)
+        fb = _feedback(task_id, value, attempt)
+        if fb is not None:
+            book.note_result(task_id, fb.ok)
 
 
 def progress() -> pd.DataFrame:
