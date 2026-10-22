@@ -70,12 +70,19 @@ class AnswerBook:
         if task_id not in self.tasks:
             raise KeyError(f"{task_id} is not a task in {self.session}. Tasks: {', '.join(self.tasks)}")
         task = self.tasks[task_id]
+        previous = self.data["answers"].get(task_id, {})
+        attempts = previous.get("attempts", 1 if previous else 0) + (1 if value is not None else 0)
         entry = {"value": _serialise(value), "reasoning": (reasoning or "").strip(),
-                 "saved_at": datetime.now().isoformat(timespec="seconds")}
+                 "saved_at": datetime.now().isoformat(timespec="seconds"), "attempts": attempts}
+        if value is None and "value" in previous:      # reasoning added later: keep the value
+            entry["value"] = previous["value"]
+        for key in ("result", "first_correct_attempt"):
+            if key in previous:
+                entry[key] = previous[key]
         self.data["answers"][task_id] = entry
         self._save()
         missing = []
-        if task.get("needs_value") and value is None:
+        if task.get("needs_value") and entry["value"] is None:
             missing.append("a value")
         if task.get("needs_reasoning") and not entry["reasoning"]:
             missing.append("your reasoning")
@@ -83,6 +90,17 @@ class AnswerBook:
         if missing:
             msg += f" Still to add: {' and '.join(missing)}."
         print(msg)
+        return attempts
+
+    def note_result(self, task_id: str, ok) -> None:
+        """Store the outcome of the automatic check with the answer."""
+        entry = self.data["answers"].get(task_id)
+        if entry is None:
+            return
+        entry["result"] = {True: "correct", False: "not yet", None: "not checked"}[ok]
+        if ok is True and "first_correct_attempt" not in entry:
+            entry["first_correct_attempt"] = entry.get("attempts")
+        self._save()
 
     def progress(self) -> pd.DataFrame:
         rows = []
