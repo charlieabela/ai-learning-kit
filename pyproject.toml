@@ -1,0 +1,32 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ari1101kit"
+dynamic = ["version"]
+description = "Teaching sandbox for ARI1101 Foundations of Data Science (University of Malta)"
+readme = "README.md"
+requires-python = ">=3.9"
+authors = [{ name = "Charlie Abela" }]
+license = { text = "GPL-3.0-or-later" }
+dependencies = [
+    "pandas>=1.5",
+    "numpy",
+    "matplotlib",
+    "openpyxl",
+    "python-docx>=1.0",
+    "pypdf>=3.0",
+]
+
+[project.optional-dependencies]
+xml = ["lxml"]
+
+[tool.setuptools]
+packages = ["ari1101kit", "ari1101kit.core", "ari1101kit.sessions"]
+
+[tool.setuptools.package-data]
+ari1101kit = ["data/brightwater_q3/*"]
+
+[tool.setuptools.dynamic]
+version = { attr = "ari1101kit._version.__version__" }
