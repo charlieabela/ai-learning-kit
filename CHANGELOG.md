@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.2.2 · Task guidance, feedback on written answers, work folder
+
+- Every S02 task has plain-language guidance: what to do, why it matters, a typical example on a small library case, and what to record. `kit.task("T1.2")` shows it, and the notebook's task cells are generated from the same text.
+- Written answers get checklist feedback: the points a good answer covers, marked as found (✓) or not found (○), with a hint for each missing point and a model answer after three attempts. The checks look for key words and never mark a written answer wrong; the lecturer reads every written answer.
+- Numeric checks add evidence from the data that helps without giving the number away, and recognise more common slips (for example `len(bank_doc)`, a failed `findall`, the count of compliant instead of non-compliant payments).
+- `kit.start` chooses a work folder: Google Drive (`My Drive/ARI1101/<session>`) in Colab, the notebook's folder elsewhere, or a folder given with `folder=`. The answer book, the case files and files saved with plain names go there, and every save prints the full path.
+- Every save counts as an attempt, including reasoning added later; a later call with only a value keeps the saved reasoning.
+
 ## 0.2.1 · Richer formative feedback
 
 - Feedback now says which parts of an answer are right and which are not, what the student recorded, the evidence in the case files that shows why (file name, first bytes, structure), and a line of code to check it.

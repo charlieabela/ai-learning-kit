@@ -11,14 +11,17 @@ All companies, people, accounts and documents in the case are fictional.
 ## Use in Google Colab
 
 ```python
-%pip install -q "git+https://github.com/charlieabela/ari1101kit@v0.2.1"
+%pip install -q "git+https://github.com/charlieabela/ari1101kit@v0.2.2"
 import ari1101kit as kit
 
-kit.start("S02", student="Your Name")
-kit.workspace()          # copies the case files into ./brightwater_q3
+kit.start("S02", student="Your Name")   # in Colab, connects Google Drive for the work folder
+kit.workspace()                          # copies the case files into <work folder>/brightwater_q3
+kit.task("T1.1")                         # explains a task: what to do, why, an example, what to record
 ```
 
-Always install a tagged version (`@v0.2.1`), so that a notebook keeps working when later sessions are added.
+**Where work is kept.** `kit.start` chooses a work folder and makes it the current folder. In Colab it connects the student's Google Drive and uses `My Drive/ARI1101/<session>`, so the answer book and every file saved with a plain name survive a disconnect. On a student's own computer it uses the folder the notebook runs in. `kit.start(..., folder="...")` chooses another folder; `drive=False` skips Drive in Colab.
+
+Always install a tagged version (`@v0.2.2`), so that a notebook keeps working when later sessions are added.
 
 ## The case files
 

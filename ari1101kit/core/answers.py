@@ -1,5 +1,7 @@
 """The answer book: records your answers and reasoning in a JSON file you can submit.
 
+The file is kept in ari1101_answers/ inside your work folder (see kit.start):
+your Google Drive in Colab, or the notebook's folder on your own computer.
 Answers are formative. Each call to answer() saves immediately, so nothing is lost
 if the notebook stops; submit() checks what is missing and prepares the file.
 """
@@ -15,7 +17,7 @@ import pandas as pd
 
 from .._version import __version__
 
-ANSWER_DIR = Path("ari1101_answers")
+ANSWER_DIR = "ari1101_answers"
 
 
 def _serialise(value):
@@ -48,11 +50,12 @@ def _serialise(value):
 
 
 class AnswerBook:
-    def __init__(self, session: str, student: str, tasks: dict):
+    def __init__(self, session: str, student: str, tasks: dict, folder: Path | None = None):
         self.session, self.student, self.tasks = session, student, tasks
-        ANSWER_DIR.mkdir(exist_ok=True)
+        answer_dir = Path(folder or Path.cwd()).resolve() / ANSWER_DIR
+        answer_dir.mkdir(parents=True, exist_ok=True)
         safe = "".join(ch if ch.isalnum() else "_" for ch in student).strip("_") or "student"
-        self.path = ANSWER_DIR / f"{session}_{safe}.json"
+        self.path = answer_dir / f"{session}_{safe}.json"
         if self.path.exists():
             self.data = json.loads(self.path.read_text(encoding="utf-8"))
             print(f"Continuing your answer book: {self.path} ({len(self.data['answers'])} answers so far)")
@@ -71,12 +74,14 @@ class AnswerBook:
             raise KeyError(f"{task_id} is not a task in {self.session}. Tasks: {', '.join(self.tasks)}")
         task = self.tasks[task_id]
         previous = self.data["answers"].get(task_id, {})
-        attempts = previous.get("attempts", 1 if previous else 0) + (1 if value is not None else 0)
+        attempts = previous.get("attempts", 1 if previous else 0) + 1
         entry = {"value": _serialise(value), "reasoning": (reasoning or "").strip(),
                  "saved_at": datetime.now().isoformat(timespec="seconds"), "attempts": attempts}
         if value is None and "value" in previous:      # reasoning added later: keep the value
             entry["value"] = previous["value"]
-        for key in ("result", "first_correct_attempt"):
+        if not entry["reasoning"] and previous.get("reasoning"):   # value corrected later: keep the reasoning
+            entry["reasoning"] = previous["reasoning"]
+        for key in ("result", "first_correct_attempt", "reasoning_points"):
             if key in previous:
                 entry[key] = previous[key]
         self.data["answers"][task_id] = entry
@@ -86,20 +91,23 @@ class AnswerBook:
             missing.append("a value")
         if task.get("needs_reasoning") and not entry["reasoning"]:
             missing.append("your reasoning")
-        msg = f"Saved {task_id}."
+        msg = f"Saved {task_id} in {self.path}"
         if missing:
             msg += f" Still to add: {' and '.join(missing)}."
         print(msg)
         return attempts
 
-    def note_result(self, task_id: str, ok) -> None:
-        """Store the outcome of the automatic check with the answer."""
+    def note_result(self, task_id: str, ok=None, written_complete=None) -> None:
+        """Store the outcome of the automatic checks with the answer."""
         entry = self.data["answers"].get(task_id)
         if entry is None:
             return
-        entry["result"] = {True: "correct", False: "not yet", None: "not checked"}[ok]
+        if ok is not None or "result" not in entry:
+            entry["result"] = {True: "correct", False: "not yet", None: "not checked"}[ok]
         if ok is True and "first_correct_attempt" not in entry:
             entry["first_correct_attempt"] = entry.get("attempts")
+        if written_complete is not None:
+            entry["reasoning_points"] = "all found" if written_complete else "some not found"
         self._save()
 
     def progress(self) -> pd.DataFrame:

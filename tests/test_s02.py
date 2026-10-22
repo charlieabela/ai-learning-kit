@@ -84,5 +84,62 @@ def test_answer_book_counts_attempts(tmp_path, monkeypatch):
     kit.answer("T3.3", value=39)
     kit.answer("T3.3", reasoning="added later")
     entry = kit._state["book"].data["answers"]["T3.3"]
-    assert entry["attempts"] == 2 and entry["value"] == 39
+    assert entry["attempts"] == 3 and entry["value"] == 39     # every save counts, including reasoning added later
     assert entry["result"] == "correct" and entry["first_correct_attempt"] == 2
+
+
+# --------------------------------------------------------------------------- guidance and written answers (0.2.2)
+def test_every_task_has_guidance():
+    from ari1101kit.sessions.s02_guide import GUIDE
+    for tid, t in s02.TASKS.items():
+        g = GUIDE[tid]
+        assert all(g[k].strip() for k in ("what", "why", "example", "record")), tid
+        assert s02.render_markdown(tid, t["title"]).startswith(f"### Task {tid}")
+        if t["needs_reasoning"]:
+            assert t["written"] is not None, tid
+
+
+def test_written_feedback_lists_found_and_missing_points():
+    weak = "The csv and json files can be read by pandas."
+    fb = s02.TASKS["T1.2"]["written"](weak)
+    assert fb.ok is None and fb.open_points
+    text = "\n".join(fb.details)
+    assert "✓ It names the sources that can be read directly" in text
+    assert "○ Not found: it explains that the question needs several sources combined" in text
+    model = s02.TASKS["T1.2"]["written"](fb.suggestion)
+    assert not model.open_points            # the model answer passes its own checklist
+
+
+def test_model_answers_pass_their_checklists():
+    for key, check in s02.WRITTEN.items():
+        model = check("x").suggestion
+        assert not check(model).open_points, key
+
+
+def test_placeholder_reasoning_is_flagged():
+    fb = s02.TASKS["T3.4"]["written"]("\nWrite your answer here.\n")
+    assert fb.open_points and "No reasoning yet" in fb.summary
+
+
+def test_local_work_folder_is_the_current_folder(tmp_path, monkeypatch):
+    monkeypatch.chdir(tmp_path)
+    kit.start("S02", student="Local Student")
+    assert kit._state["folder"] == tmp_path.resolve()
+    assert kit._state["book"].path.parent == tmp_path.resolve() / "ari1101_answers"
+
+
+def test_colab_work_folder_is_on_drive(tmp_path, monkeypatch):
+    import sys, types
+    from ari1101kit.core import workfolder
+    mounted = []
+    drive = types.SimpleNamespace(mount=lambda p: (mounted.append(p), (tmp_path / "drive" / "MyDrive").mkdir(parents=True)))
+    colab = types.ModuleType("google.colab"); colab.drive = drive
+    google = types.ModuleType("google"); google.colab = colab
+    monkeypatch.setitem(sys.modules, "google", google)
+    monkeypatch.setitem(sys.modules, "google.colab", colab)
+    monkeypatch.setattr(workfolder, "COLAB_DRIVE", tmp_path / "drive")
+    monkeypatch.chdir(tmp_path)
+    kit.start("S02", student="Colab Student")
+    expected = (tmp_path / "drive" / "MyDrive" / "ARI1101" / "S02").resolve()
+    assert mounted and kit._state["folder"] == expected
+    assert kit._state["book"].path == expected / "ari1101_answers" / "S02_Colab_Student.json"

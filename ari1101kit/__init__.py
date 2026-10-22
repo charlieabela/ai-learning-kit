@@ -26,27 +26,42 @@ from .core import extract, pipeline, reference, report
 from .core.case import path, peek, sources, workspace
 from .core.help import explain, source
 from .core.answers import AnswerBook
-from .core.feedback import Feedback, as_feedback
+from .core.feedback import Feedback, as_feedback, combine
+from .core import workfolder
 from . import sessions
 
 __all__ = ["start", "task", "answer", "check", "progress", "submit", "sources", "workspace",
            "peek", "path", "extract", "pipeline", "reference", "report", "explain", "source",
            "__version__"]
 
-_state = {"session": None, "book": None}
+_state = {"session": None, "book": None, "folder": None}
 
 
-def start(session: str, student: str) -> None:
-    """Start (or continue) a session's answer book.
+def start(session: str, student: str, folder=None, drive: bool = True) -> None:
+    """Start (or continue) a session's answer book and choose where your work is kept.
 
     session : the session code, for example "S02"
     student : your name, used to name the answer file
+    folder  : optional; a folder of your choice for your work. If you leave it out,
+              in Colab your Google Drive is connected and the work is kept in
+              My Drive/ARI1101/<session>; on your own computer it is kept in the
+              folder this notebook runs in.
+    drive   : in Colab, set drive=False to skip connecting Google Drive (your files
+              are then deleted when Colab disconnects).
+
+    The work folder becomes the current folder, so files you save with a plain
+    name, such as "policy_rules.json", are kept there too.
     """
     mod = sessions.get(session)
+    base, where = workfolder.choose(mod.SESSION, folder=folder, drive=drive)
     _state["session"] = mod
-    _state["book"] = AnswerBook(mod.SESSION, student, mod.TASKS)
+    _state["folder"] = base
     print(f"ari1101kit {__version__} · {mod.SESSION}: {mod.TITLE}")
-    print(f"{len(mod.TASKS)} tasks. Use kit.task('T1.1') to read a question and kit.progress() to see what is left.")
+    print(f"Your work folder: {base}")
+    print(f"  This is {where}.")
+    print("  Your answer book, the case files and every file you save with a plain file name are kept here.")
+    _state["book"] = AnswerBook(mod.SESSION, student, mod.TASKS, folder=base)
+    print(f"{len(mod.TASKS)} tasks. kit.task('T1.1') explains a task; kit.progress() shows what is left.")
 
 
 def _require():
@@ -56,46 +71,60 @@ def _require():
 
 
 def task(task_id: str) -> None:
-    """Print the question for a task."""
+    """Explain a task: what to do, why it matters, a typical example and what to record."""
     mod, _ = _require()
     t = mod.TASKS[task_id]
-    needs = [w for w, k in (("a value", "needs_value"), ("your reasoning", "needs_reasoning")) if t.get(k)]
-    print(f"{task_id} · {t['title']}\n{t['question']}\nRecord: {' and '.join(needs)}.")
+    guide = t.get("guide")
+    if guide is None:
+        needs = [w for w, k in (("a value", "needs_value"), ("your reasoning", "needs_reasoning")) if t.get(k)]
+        print(f"{task_id} · {t['title']}\n{t['question']}\nRecord: {' and '.join(needs)}.")
+        return
+    text = mod.render_markdown(task_id, t["title"])
+    try:
+        from IPython import get_ipython
+        from IPython.display import Markdown, display
+        if get_ipython() is not None:
+            display(Markdown(text))
+            return
+    except ImportError:
+        pass
+    print(text)
 
 
-def _feedback(task_id: str, value, attempt=None):
+def _feedback(task_id: str, value=None, reasoning=None, attempt=None):
     mod, _ = _require()
     if task_id not in mod.TASKS:
         raise KeyError(f"{task_id} is not a task in {mod.SESSION}. Tasks: {', '.join(mod.TASKS)}")
-    fn = mod.TASKS[task_id].get("check")
-    if fn is None:
-        print("No automatic feedback for this task.")
-        return None
-    fb = as_feedback(fn(value))
-    print(fb.render(task_id, attempt))
-    return fb
+    t = mod.TASKS[task_id]
+    value_fb = as_feedback(t["check"](value)) if value is not None and t.get("check") else None
+    written_fb = t["written"](reasoning) if reasoning and t.get("written") else None
+    fb = combine(value_fb, written_fb)
+    if fb is not None:
+        print(fb.render(task_id, attempt))
+    return value_fb, written_fb
 
 
-def check(task_id: str, value) -> None:
-    """Give formative feedback on a value without saving it or counting an attempt."""
-    _feedback(task_id, value)
+def check(task_id: str, value=None, reasoning: str | None = None) -> None:
+    """Give formative feedback on a value and/or reasoning without saving it or counting an attempt."""
+    _feedback(task_id, value, reasoning)
 
 
 def answer(task_id: str, value=None, reasoning: str | None = None, feedback: bool = True) -> None:
     """Save your answer to a task (a value, your reasoning, or both) and show feedback.
 
-    The answer book is saved after every call, in the folder ari1101_answers/.
-    Calling answer() again for the same task replaces the earlier answer and counts
-    as a new attempt. Feedback says what is right, what is not and the evidence;
-    after three attempts that are not yet right, a suggested answer is shown.
-    Answers are formative: the number of attempts does not affect any mark.
+    The answer book is saved after every call, in ari1101_answers/ inside your work
+    folder. Calling answer() again for the same task replaces the earlier answer and
+    counts as a new attempt. Feedback says what is right, what is not and the
+    evidence; for written answers it lists the points a good answer covers. After
+    three attempts that still need work, a suggested answer is shown. Answers are
+    formative: the number of attempts does not affect any mark.
     """
     _, book = _require()
     attempt = book.record(task_id, value, reasoning)
-    if feedback and value is not None:
-        fb = _feedback(task_id, value, attempt)
-        if fb is not None:
-            book.note_result(task_id, fb.ok)
+    if feedback:
+        value_fb, written_fb = _feedback(task_id, value, reasoning, attempt)
+        book.note_result(task_id, value_fb.ok if value_fb else None,
+                         None if written_fb is None else not written_fb.open_points)
 
 
 def progress() -> pd.DataFrame:
