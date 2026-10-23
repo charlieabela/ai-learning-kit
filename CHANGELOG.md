@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.2.3 · Work saved next to the notebook
+
+- `kit.start` keeps the answer book, the case files and files saved with plain names in the notebook's own folder, in Colab as well as in Jupyter and VS Code.
+- In Colab the kit connects Google Drive, asks the runtime which notebook is open, and finds it in Drive: by name (Colab Notebooks first), and through the Drive API when the name is not unique.
+- A notebook that is not in the student's own Drive (opened from GitHub or a shared link) falls back to `My Drive/ARI1101/<session>`, with the reason and the advice to use File › Save a copy in Drive.
+- In Jupyter and VS Code the notebook's path is read from `JPY_SESSION_NAME` or `__vsc_ipynb_file__` when available, otherwise the kernel's starting folder.
+
 ## 0.2.2 · Task guidance, feedback on written answers, work folder
 
 - Every S02 task has plain-language guidance: what to do, why it matters, a typical example on a small library case, and what to record. `kit.task("T1.2")` shows it, and the notebook's task cells are generated from the same text.

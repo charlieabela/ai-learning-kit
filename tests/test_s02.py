@@ -128,18 +128,105 @@ def test_local_work_folder_is_the_current_folder(tmp_path, monkeypatch):
     assert kit._state["book"].path.parent == tmp_path.resolve() / "ari1101_answers"
 
 
-def test_colab_work_folder_is_on_drive(tmp_path, monkeypatch):
-    import sys, types
+# --------------------------------------------------------------------------- work folder = notebook folder (0.2.3)
+import sys
+import types
+
+import pytest
+
+
+@pytest.fixture
+def fake_colab(tmp_path, monkeypatch):
+    """A pretend Colab: google.colab importable, Drive 'mounted' under tmp_path/drive."""
     from ari1101kit.core import workfolder
+    drive_root = tmp_path / "drive"
     mounted = []
-    drive = types.SimpleNamespace(mount=lambda p: (mounted.append(p), (tmp_path / "drive" / "MyDrive").mkdir(parents=True)))
-    colab = types.ModuleType("google.colab"); colab.drive = drive
-    google = types.ModuleType("google"); google.colab = colab
+
+    def mount(p):
+        mounted.append(p)
+        (drive_root / "MyDrive").mkdir(parents=True, exist_ok=True)
+
+    colab = types.ModuleType("google.colab")
+    colab.drive = types.SimpleNamespace(mount=mount)
+    google = types.ModuleType("google")
+    google.colab = colab
     monkeypatch.setitem(sys.modules, "google", google)
     monkeypatch.setitem(sys.modules, "google.colab", colab)
-    monkeypatch.setattr(workfolder, "COLAB_DRIVE", tmp_path / "drive")
+    monkeypatch.setattr(workfolder, "COLAB_DRIVE", drive_root)
     monkeypatch.chdir(tmp_path)
+    return types.SimpleNamespace(root=drive_root, my=drive_root / "MyDrive", mounted=mounted, wf=workfolder,
+                                 mp=monkeypatch)
+
+
+def _notebook(path):
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text("{}")
+    return path
+
+
+def test_colab_saves_next_to_a_copy_in_colab_notebooks(fake_colab):
+    fake_colab.mp.setattr(fake_colab.wf, "colab_session", lambda: {"name": "S02.ipynb", "path": "fileId=abc123"})
+    (fake_colab.root / "MyDrive").mkdir(parents=True)
+    _notebook(fake_colab.my / "Colab Notebooks" / "S02.ipynb")
     kit.start("S02", student="Colab Student")
-    expected = (tmp_path / "drive" / "MyDrive" / "ARI1101" / "S02").resolve()
-    assert mounted and kit._state["folder"] == expected
+    expected = (fake_colab.my / "Colab Notebooks").resolve()
+    assert kit._state["folder"] == expected
     assert kit._state["book"].path == expected / "ari1101_answers" / "S02_Colab_Student.json"
+
+
+def test_colab_finds_a_notebook_in_a_subfolder(fake_colab):
+    fake_colab.mp.setattr(fake_colab.wf, "colab_session", lambda: {"name": "S02.ipynb", "path": "fileId=abc123"})
+    _notebook(fake_colab.my / "Uni" / "ARI1101" / "S02.ipynb")
+    kit.start("S02", student="Colab Student")
+    assert kit._state["folder"] == (fake_colab.my / "Uni" / "ARI1101").resolve()
+
+
+def test_colab_uses_the_drive_api_when_the_name_is_not_unique(fake_colab):
+    fake_colab.mp.setattr(fake_colab.wf, "colab_session", lambda: {"name": "S02.ipynb", "path": "fileId=abc123"})
+    _notebook(fake_colab.my / "A" / "S02.ipynb")
+    _notebook(fake_colab.my / "B" / "S02.ipynb")
+    fake_colab.mp.setattr(fake_colab.wf, "path_from_drive_api", lambda fid: fake_colab.my / "B")
+    kit.start("S02", student="Colab Student")
+    assert kit._state["folder"] == (fake_colab.my / "B").resolve()
+
+
+def test_colab_notebook_from_github_falls_back_with_advice(fake_colab, capsys):
+    fake_colab.mp.setattr(fake_colab.wf, "colab_session",
+                          lambda: {"name": "S02.ipynb", "path": "/v2/external/notebooks/github/x.ipynb"})
+    kit.start("S02", student="Colab Student")
+    assert fake_colab.mounted                      # Drive was not mounted yet, so kit.start mounted it
+    assert kit._state["folder"] == (fake_colab.my / "ARI1101" / "S02").resolve()
+    out = capsys.readouterr().out
+    assert "not stored in Google Drive" in out and "Save a copy in Drive" in out
+
+
+def test_colab_shared_notebook_falls_back_with_advice(fake_colab, capsys):
+    fake_colab.mp.setattr(fake_colab.wf, "colab_session", lambda: {"name": "S02.ipynb", "path": "fileId=shared1"})
+
+    def refuse(fid):
+        raise PermissionError("not yours")
+    fake_colab.mp.setattr(fake_colab.wf, "path_from_drive_api", refuse)
+    kit.start("S02", student="Colab Student")
+    assert kit._state["folder"] == (fake_colab.my / "ARI1101" / "S02").resolve()
+    assert "shared with you" in capsys.readouterr().out
+
+
+def test_drive_api_path_walks_up_the_parent_folders(fake_colab):
+    tree = {"nb": {"name": "S02.ipynb", "parents": ["f2"]}, "f2": {"name": "ARI1101", "parents": ["f1"]},
+            "f1": {"name": "Uni", "parents": ["root"]}, "root": {"name": "My Drive"}}
+    files = types.SimpleNamespace(get=lambda fileId, **kw: types.SimpleNamespace(execute=lambda: tree[fileId]))
+    auth = types.SimpleNamespace(authenticate_user=lambda: None)
+    sys.modules["google.colab"].auth = auth
+    discovery = types.ModuleType("googleapiclient.discovery")
+    discovery.build = lambda *a, **k: types.SimpleNamespace(files=lambda: files)
+    fake_colab.mp.setitem(sys.modules, "googleapiclient", types.ModuleType("googleapiclient"))
+    fake_colab.mp.setitem(sys.modules, "googleapiclient.discovery", discovery)
+    assert fake_colab.wf.path_from_drive_api("nb") == fake_colab.my / "Uni" / "ARI1101"
+
+
+def test_jupyter_session_name_gives_the_notebook_folder(tmp_path, monkeypatch):
+    nb = _notebook(tmp_path / "notebooks" / "S02.ipynb")
+    monkeypatch.chdir(tmp_path)
+    monkeypatch.setenv("JPY_SESSION_NAME", str(nb))
+    kit.start("S02", student="Lab Student")
+    assert kit._state["folder"] == nb.parent.resolve()
