@@ -38,19 +38,19 @@ _state = {"session": None, "book": None, "folder": None}
 
 
 def start(session: str, student: str, folder=None, drive: bool = True) -> None:
-    """Start (or continue) a session's answer book and choose where your work is kept.
+    """Start (or continue) a session's answer book, kept in the same folder as this notebook.
 
     session : the session code, for example "S02"
     student : your name, used to name the answer file
-    folder  : optional; a folder of your choice for your work. If you leave it out,
-              in Colab your Google Drive is connected and the work is kept in
-              My Drive/ARI1101/<session>; on your own computer it is kept in the
-              folder this notebook runs in.
+    folder  : optional; a different folder for your work.
     drive   : in Colab, set drive=False to skip connecting Google Drive (your files
               are then deleted when Colab disconnects).
 
-    The work folder becomes the current folder, so files you save with a plain
-    name, such as "policy_rules.json", are kept there too.
+    The kit finds the folder that holds this notebook: on your computer (Jupyter,
+    VS Code) that is where the notebook file is; in Colab it connects your Google
+    Drive and finds the notebook there. That folder becomes the current folder, so
+    your answer book, the case files and every file you save with a plain name,
+    such as "policy_rules.json", are kept next to the notebook.
     """
     mod = sessions.get(session)
     base, where = workfolder.choose(mod.SESSION, folder=folder, drive=drive)

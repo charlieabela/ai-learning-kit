@@ -1,7 +1,7 @@
 """The answer book: records your answers and reasoning in a JSON file you can submit.
 
-The file is kept in ari1101_answers/ inside your work folder (see kit.start):
-your Google Drive in Colab, or the notebook's folder on your own computer.
+The file is kept in ari1101_answers/ inside your work folder (see kit.start),
+which is the folder of the notebook itself, in Colab as on your own computer.
 Answers are formative. Each call to answer() saves immediately, so nothing is lost
 if the notebook stops; submit() checks what is missing and prepares the file.
 """
