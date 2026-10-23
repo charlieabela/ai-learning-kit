@@ -3,9 +3,9 @@ requires = ["setuptools>=61"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "ari1101kit"
+name = "ai-learning-kit"
 dynamic = ["version"]
-description = "Teaching sandbox for ARI1101 Foundations of Data Science (University of Malta)"
+description = "A sandbox library of problems, sessions and formative feedback for the AI study units at the University of Malta"
 readme = "README.md"
 requires-python = ">=3.9"
 authors = [{ name = "Charlie Abela" }]
@@ -21,12 +21,13 @@ dependencies = [
 
 [project.optional-dependencies]
 xml = ["lxml"]
+dev = ["pytest", "nbformat", "nbclient", "ipykernel"]
 
-[tool.setuptools]
-packages = ["ari1101kit", "ari1101kit.core", "ari1101kit.sessions"]
+[tool.setuptools.packages.find]
+include = ["ai_learning_kit*", "ari1101kit*"]
 
 [tool.setuptools.package-data]
-ari1101kit = ["data/brightwater_q3/*"]
+ai_learning_kit = ["problems/*/data/*"]
 
 [tool.setuptools.dynamic]
-version = { attr = "ari1101kit._version.__version__" }
+version = { attr = "ai_learning_kit._version.__version__" }

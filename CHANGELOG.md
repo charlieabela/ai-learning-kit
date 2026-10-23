@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.3.0 · ari1101kit becomes ai-learning-kit
+
+A restructuring, not a rewrite: all of the Session 02 work, the Brightwater problem, the feedback, the answer book and the work-folder logic are kept and moved into a layered package that serves several study units.
+
+- **Package**: `ai_learning_kit` (distribution `ai-learning-kit`). `import ari1101kit as kit` still works through a shim.
+- **Layers**: `core` (engine: Problem and session contracts, check builders, Feedback, AnswerBook, work folder, registry), `problems` (the unit-independent problem library; `brightwater_q3` moved here with its data and helpers), `units` (`ari1101` with S02; `ics2205` and `ics5111` registered with no sessions yet), `llm` (optional), `dev` (validator).
+- **Student API**: `kit.start("ARI1101", "S02", student=...)`; `kit.extract`, `kit.pipeline`, `kit.report`, `kit.reference` are proxies to the current session's problem, so notebook cells are the same for every problem; `kit.catalog()` lists units, sessions, tasks and problems as plain data; `kit.problem()` and `kit.session()`.
+- **Answer book**: `answers/<UNIT>_<SESSION>_<student>.json`, with unit, session, problem and kit version recorded.
+- **Language models (optional)**: `ai_learning_kit.llm` with one provider for every OpenAI-compatible server (OpenAI, Ollama, vLLM, LM Studio, ...), an Anthropic provider, autodetection from environment variables and Colab secrets, and `kit.hint()` / `kit.ask()` that never give the answer. Nothing requires a model; the model never grades.
+- **Authoring**: `templates/problem`, `templates/session`, `docs/AUTHORING_A_PROBLEM.md`, `docs/AUTHORING_A_SESSION.md`, `docs/prompts/new_problem.md`, `docs/prompts/new_session.md`, and `python -m ai_learning_kit.dev.validate`.
+- **Notebooks**: moved to `notebooks/<UNIT>/`; each carries `metadata["ai_learning_kit"]` (unit, session, problem, version, install line, task ids) so a notebook tutor can recognise it.
+
 ## 0.2.4 · Fix: work saved to Colab's temporary disk instead of Drive
 
 - Fixed: `kit.start(..., folder="/content/drive/...")` did not connect Google Drive, so it created a look-alike folder on Colab's temporary disk and answers never reached Drive. Drive is now always connected before a Drive folder is used, and "is Drive connected" is decided by the mount point, not by a folder of that name existing.

@@ -18,7 +18,7 @@ folder in My Drive ("ARI1101/S02"); elsewhere it is relative to the notebook.
 
 When there is no such folder (a notebook opened from GitHub or from someone
 else's shared link is not in the student's own Drive), the kit says why, keeps
-the work in My Drive/ARI1101/<session>, and explains how to save a copy.
+the work in My Drive/ai-learning-kit/<unit>/<session>, and explains how to save a copy.
 """
 from __future__ import annotations
 
@@ -33,7 +33,7 @@ from pathlib import Path
 
 COLAB_DRIVE = Path("/content/drive")      # where Colab mounts Google Drive
 COLAB_LOCAL = Path("/content")            # Colab's temporary disk
-UNIT = "ARI1101"
+KIT_FOLDER = "ai-learning-kit"            # fallback folder in My Drive: ai-learning-kit/<unit>/<session>
 START_DIR = Path.cwd()                    # where the kernel started: the notebook's folder in Jupyter
 SAVE_A_COPY = ("To keep your work next to the notebook, open it in Colab, choose File › Save a copy in Drive, "
                "open that copy, and run kit.start again.")
@@ -51,7 +51,7 @@ def in_colab() -> bool:
 def _writable(folder: Path) -> bool:
     try:
         folder.mkdir(parents=True, exist_ok=True)
-        probe = folder / ".ari1101kit_write_test"
+        probe = folder / ".ai_learning_kit_write_test"
         probe.write_text("ok")
         probe.unlink()
         return True
@@ -262,7 +262,7 @@ def colab_notebook_folder(mount=True) -> tuple[Path | None, str]:
 
 
 # --------------------------------------------------------------------------- choice
-def choose(session: str, folder=None, drive: bool = True) -> tuple[Path, str]:
+def choose(unit: str, session: str, folder=None, drive: bool = True) -> tuple[Path, str]:
     """Return (work folder, a plain description of where it is); the folder becomes the current folder."""
     if folder is not None:
         base, where = resolve_folder(folder), "the folder you chose"
@@ -281,16 +281,16 @@ def choose(session: str, folder=None, drive: bool = True) -> tuple[Path, str]:
         if base is not None:
             where = reason
         elif drive_mounted():
-            base = COLAB_DRIVE / "MyDrive" / UNIT / session
-            where = (f"a folder in your Google Drive (My Drive › {UNIT} › {session}), because {reason}. "
+            base = COLAB_DRIVE / "MyDrive" / KIT_FOLDER / unit / session
+            where = (f"a folder in your Google Drive (My Drive › {KIT_FOLDER} › {unit} › {session}), because {reason}. "
                      f"{SAVE_A_COPY}")
         else:
-            base = COLAB_LOCAL / UNIT / session
+            base = COLAB_LOCAL / KIT_FOLDER / unit / session
             where = (f"Colab's temporary storage, because {reason}. WARNING: these files are deleted when Colab "
                      "disconnects. Run kit.start again and allow Drive access, or download your answer book with "
                      "kit.submit() before you close the notebook")
     elif in_colab():
-        base = COLAB_LOCAL / UNIT / session
+        base = COLAB_LOCAL / KIT_FOLDER / unit / session
         where = "Colab's temporary storage (deleted when Colab disconnects), because you chose drive=False"
     else:
         base, where = local_notebook_folder()

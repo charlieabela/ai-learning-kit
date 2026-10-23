@@ -1,62 +1,96 @@
-# ari1101kit
+# ai-learning-kit
 
-A teaching sandbox for **ARI1101 Foundations of Data Science** at the University of Malta.
+A sandbox library for the AI study units at the University of Malta
+(ARI1101 Foundations of Data Science, ICS2205 Web Intelligence, ICS5111 Mining
+Large Scale Data, and others to come).
 
-The unit follows one running case through the OSEMN lifecycle: the **Q3 2026 expenditure compliance review** at Brightwater Logistics Ltd, a fictional company. The question is how many payments above €5,000 were made in the quarter, and whether they followed the company's Expenditure Approval Policy.
+The kit holds a **library of problems**, each a frozen set of data sources in
+several formats with helper code that does the heavy lifting, and, for each
+**unit**, **sessions** that bind a problem to a sequence of **tasks**. A session
+hides the steps that are not its topic, so that students concentrate on the
+step that is: given the text of a policy, the kit extracts the rules and the
+students choose a format to store them; given tables of transactions, the kit
+checks compliance and the students decide what to count. Each task poses a
+question; answers are saved in an answer book next to the notebook; formative
+feedback says what is right, what is not, and the evidence.
 
-Answering that question involves extraction, conversion, cleaning, de-duplication, exploration and reporting, which is too much for the first weeks of the unit. The kit hides the steps that are not the topic of the current session, so that students can concentrate on the step that is. Each session hands a different step back to the students.
+All companies, people and documents in the problems are fictional.
 
-All companies, people, accounts and documents in the case are fictional.
-
-## Use in Google Colab
+## Use in a notebook (Colab, Jupyter or VS Code)
 
 ```python
-%pip install -q "git+https://github.com/charlieabela/ari1101kit@v0.2.4"
-import ari1101kit as kit
+%pip install -q "git+https://github.com/charlieabela/ai-learning-kit@v0.3.0"
+import ai_learning_kit as kit
 
-kit.start("S02", student="Your Name")   # in Colab, connects Google Drive for the work folder
-kit.workspace()                          # copies the case files into <work folder>/brightwater_q3
-kit.task("T1.1")                         # explains a task: what to do, why, an example, what to record
+kit.start("ARI1101", "S02", student="Your Name")   # work is kept next to this notebook
+kit.workspace()                                     # copy the problem's case files there
+kit.task("T1.1")                                    # what to do, why, a typical example, what to record
+kit.peek("erp")                                     # look at a raw file
+rules = kit.extract.policy_rules()                  # the problem's helpers: extract, pipeline, report, reference
+kit.answer("T2.1", value=len(rules), reasoning="rules is a list of dictionaries")
+kit.progress(); kit.submit()
 ```
 
-**Where work is kept: next to the notebook.** `kit.start` finds the folder that holds the running notebook and makes it the current folder, so the answer book, the case files and every file saved with a plain name sit next to the notebook. In Jupyter and VS Code that is the notebook's folder. In Colab the kit connects Google Drive, asks the runtime which notebook is open, and finds that file in Drive (by name, or through the Drive API if the name is not unique). A notebook that is not in the student's own Drive (opened from GitHub or from someone else's shared link) cannot have files saved next to it; the kit then uses `My Drive/ARI1101/<session>` and tells the student to use File › Save a copy in Drive. `kit.start(..., folder="...")` chooses another folder: in Colab a relative path is a folder in My Drive (`folder="ARI1101/S02"`), and Drive is connected first; elsewhere it is relative to the notebook. `drive=False` skips Drive in Colab. Colab copies files to Drive in the background; `kit.sync()` sends them immediately, and `kit.submit()` calls it.
+Always install a tagged version, so that a notebook keeps working when later
+sessions are added. `kit.catalog()` lists every unit, session and problem in
+the installed version; `kit.explain(fn)` and `kit.source(fn)` show what any kit
+function does and how.
 
-Always install a tagged version (`@v0.2.4`), so that a notebook keeps working when later sessions are added.
+**Where work is kept.** `kit.start` finds the folder of the running notebook and
+makes it the current folder: the answer book (`answers/`), the case files and
+every file saved with a plain name sit next to the notebook. In Colab the kit
+connects Google Drive and finds the notebook there; `kit.sync()` pushes pending
+writes, and `kit.submit()` calls it. `folder=` chooses another folder (in Colab,
+relative to My Drive).
 
-## The case files
+**Language models are optional.** With a model configured (an API key, or an
+open-weight model behind Ollama, vLLM or any OpenAI-compatible server),
+`kit.hint(task)` gives one next step and `kit.ask(task, question)` explains a
+concept. Without one, everything else works unchanged. See `docs/LLM.md`.
 
-| Source | File | Format |
+## Contents of this version
+
+| Unit | Sessions | Problem |
 |---|---|---|
-| Expenditure Approval Policy v3.1 | `expenditure_policy_v3_1.docx` | Word |
-| ERP payments, Q3 | `erp_payments_q3.csv` | CSV |
-| Bank statement feed, Q3 | `bank_feed_q3.json` | JSON |
-| Approval workflow (PWS) export | `approvals_pws_q3.xml` | XML |
-| Approved Vendor List | `approved_vendors.xlsx` | Excel |
-| Finance emails | `finance_emails_q3.txt` | plain text |
-| Q3 Finance Summary for the Board | `q3_finance_summary.pdf` | PDF |
+| ARI1101 Foundations of Data Science | S02 Data formats: CSV, JSON, XML and documents | `brightwater_q3` |
+| ICS2205 Web Intelligence | none yet | |
+| ICS5111 Mining Large Scale Data | none yet | |
 
-The files are frozen: every version of the kit ships the same data, so results discussed in one session remain valid in the next.
+**brightwater_q3**: the Q3 2026 expenditure compliance review at Brightwater
+Logistics Ltd. Seven sources in seven formats (DOCX policy, CSV payments, JSON
+bank feed, XML approvals, XLSX vendor list, TXT emails, PDF board report), eleven
+planted breaches, two split purchases, duplicated bank lines and an over-counting
+Board report.
 
-## What the kit provides
+## Structure
 
-| Module | Purpose |
-|---|---|
-| `kit.sources()`, `kit.workspace()`, `kit.peek()`, `kit.path()` | list, copy and preview the case files |
-| `kit.extract` | text, rules and tables from Word, Excel, PDF and email files |
-| `kit.reference` | the kit's own clean versions of the ERP, bank and approval data |
-| `kit.pipeline` | the compliance check and the split-purchase search |
-| `kit.report` | assemble findings into an HTML and Word report |
-| `kit.start()`, `kit.answer()`, `kit.check()`, `kit.progress()`, `kit.submit()` | the answer book (formative) |
-| `kit.explain()`, `kit.source()` | describe any kit function, or show its code |
+```
+ai_learning_kit/core       the engine: problems, sessions, checks, feedback, answer book, work folder
+ai_learning_kit/problems   the problem library (unit-independent)
+ai_learning_kit/units      one package per unit; sessions bind a problem to tasks
+ai_learning_kit/llm        optional language-model providers and the tutor helpers
+ai_learning_kit/dev        validator for problems and sessions
+templates/                 skeletons for a new problem and a new session
+docs/                      ARCHITECTURE, AUTHORING_A_PROBLEM, AUTHORING_A_SESSION, LLM, prompts/
+notebooks/<UNIT>/          student notebooks
+```
 
-## Sessions and versions
+`docs/ARCHITECTURE.md` explains the layers and contracts. To add a problem or a
+session, follow the authoring guides; `docs/prompts/` holds prompts that draft
+either from a topic and guidelines with a language model, for the lecturer to
+review. `python -m ai_learning_kit.dev.validate` checks every contract.
 
-| Version | Session | Students do | The kit does |
-|---|---|---|---|
-| 0.2.0 | S02 Data formats | read CSV, JSON and XML; store extracted rules and tables as JSON or CSV; combine sources; choose and compare formats | document extraction, cleaning inside its checks, compliance check, report layout |
+## Compatibility
 
-Each new session adds a module in `ari1101kit/sessions/` and a new tagged release; earlier modules and the data are not changed. See `CHANGELOG.md`.
+Notebooks written for `ari1101kit` 0.2.x still work: `import ari1101kit as kit`
+is a shim onto this package, and the old tags remain installable.
 
-## Notebooks
+## Development
 
-`notebooks/S02_Sandbox_Q3_Compliance_Review.ipynb` is the student notebook for Session 02.
+```
+pip install -e ".[dev]"
+pytest -q
+python -m ai_learning_kit.dev.validate
+```
+
+Licence: GPL-3.0-or-later.
