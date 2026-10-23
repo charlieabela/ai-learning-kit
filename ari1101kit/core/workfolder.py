@@ -13,6 +13,9 @@ How the notebook's folder is found
   file id), and finds that file in the mounted Drive: first by name, and if the
   name is not unique, through the Drive API (which asks for permission once).
 
+kit.start(..., folder=...) chooses another folder. In Colab a relative path is a
+folder in My Drive ("ARI1101/S02"); elsewhere it is relative to the notebook.
+
 When there is no such folder (a notebook opened from GitHub or from someone
 else's shared link is not in the student's own Drive), the kit says why, keeps
 the work in My Drive/ARI1101/<session>, and explains how to save a copy.
@@ -22,13 +25,16 @@ from __future__ import annotations
 import json
 import os
 import re
+import shutil
 import socket
+import time
 import urllib.request
 from pathlib import Path
 
 COLAB_DRIVE = Path("/content/drive")      # where Colab mounts Google Drive
 COLAB_LOCAL = Path("/content")            # Colab's temporary disk
 UNIT = "ARI1101"
+START_DIR = Path.cwd()                    # where the kernel started: the notebook's folder in Jupyter
 SAVE_A_COPY = ("To keep your work next to the notebook, open it in Colab, choose File › Save a copy in Drive, "
                "open that copy, and run kit.start again.")
 
@@ -66,7 +72,7 @@ def local_notebook_folder() -> tuple[Path, str]:
     jpy = os.environ.get("JPY_SESSION_NAME")
     if jpy and Path(jpy).is_absolute() and Path(jpy).exists():
         return Path(jpy).parent, "the folder of this notebook"
-    return Path.cwd(), "the folder of this notebook (the folder Jupyter started it in)"
+    return START_DIR, "the folder of this notebook (the folder Jupyter started it in)"
 
 
 # --------------------------------------------------------------------------- Colab
@@ -155,14 +161,86 @@ def path_from_drive_api(file_id: str) -> Path:
     return root.joinpath(*names[:-1])
 
 
+def drive_mounted() -> bool:
+    """True only when Google Drive is really connected (a mount point), not when a folder of that name exists."""
+    return os.path.ismount(COLAB_DRIVE)
+
+
+def _rescue(backup: Path) -> list[Path]:
+    """Copy files that were written to a look-alike /content/drive folder into the real Drive.
+
+    A file is copied only when it is missing in Drive or older there, so newer work is never overwritten.
+    """
+    copied = []
+    for src in backup.rglob("*"):
+        if not src.is_file():
+            continue
+        dst = COLAB_DRIVE / src.relative_to(backup)
+        try:
+            if not dst.exists() or dst.stat().st_mtime < src.stat().st_mtime:
+                dst.parent.mkdir(parents=True, exist_ok=True)
+                shutil.copy2(src, dst)
+                copied.append(dst)
+        except OSError:
+            continue
+    return copied
+
+
+def ensure_drive() -> None:
+    """Connect Google Drive in Colab, unless it is already connected.
+
+    If an earlier call created a plain folder at /content/drive (so files were written to the temporary
+    disk instead of Drive), that folder is moved aside, Drive is connected, and its files are copied in.
+    """
+    if drive_mounted():
+        return
+    from google.colab import drive as gdrive  # type: ignore
+    backup = None
+    if COLAB_DRIVE.exists() and any(COLAB_DRIVE.iterdir()):
+        backup = COLAB_LOCAL / f"drive_not_synced_{time.strftime('%Y%m%d_%H%M%S')}"
+        shutil.move(str(COLAB_DRIVE), str(backup))
+    print("Connecting your Google Drive, so that your work is kept after Colab disconnects.")
+    print("A window will ask you to choose your account and allow access.")
+    gdrive.mount(str(COLAB_DRIVE))
+    if backup is not None:
+        copied = _rescue(backup)
+        print(f"Files saved earlier while Drive was not connected were found in {backup}.")
+        if copied:
+            print(f"{len(copied)} of them were copied into your Drive, for example {copied[0]}.")
+
+
+def resolve_folder(folder) -> Path:
+    """Turn the folder= argument into a path.
+
+    In Colab, a relative path is a folder in My Drive: "ARI1101/S02" means My Drive › ARI1101 › S02, and a
+    leading "My Drive/" or "MyDrive/" is accepted too. Elsewhere, a relative path is taken from the
+    notebook's folder.
+    """
+    p = Path(str(folder).strip()).expanduser()
+    if in_colab():
+        parts = p.parts
+        if p.is_absolute():
+            if parts[:4] == ("/", "content", "drive", "My Drive"):
+                p = COLAB_DRIVE / "MyDrive" / Path(*parts[4:])
+            return p
+        if parts and parts[0] in ("My Drive", "MyDrive"):
+            parts = parts[1:]
+        return COLAB_DRIVE / "MyDrive" / Path(*parts) if parts else COLAB_DRIVE / "MyDrive"
+    return p if p.is_absolute() else local_notebook_folder()[0] / p
+
+
+def _under(path: Path, root: Path) -> bool:
+    try:
+        path.relative_to(root)
+        return True
+    except ValueError:
+        return False
+
+
 def colab_notebook_folder(mount=True) -> tuple[Path | None, str]:
     """Return (folder, reason). folder is None when the notebook is not in the student's Drive."""
     if mount:
-        from google.colab import drive as gdrive  # type: ignore
-        if not (COLAB_DRIVE / "MyDrive").exists():
-            print("Connecting your Google Drive, so that your work is saved next to this notebook.")
-            print("A window will ask you to choose your account and allow access.")
-            gdrive.mount(str(COLAB_DRIVE))
+        ensure_drive()
     session = colab_session()
     if session is None:
         return None, "Colab did not say which notebook is open"
@@ -187,7 +265,12 @@ def colab_notebook_folder(mount=True) -> tuple[Path | None, str]:
 def choose(session: str, folder=None, drive: bool = True) -> tuple[Path, str]:
     """Return (work folder, a plain description of where it is); the folder becomes the current folder."""
     if folder is not None:
-        base, where = Path(folder).expanduser(), "the folder you chose"
+        base, where = resolve_folder(folder), "the folder you chose"
+        if in_colab() and _under(base, COLAB_DRIVE):
+            if not drive:
+                raise ValueError("That folder is in Google Drive, so Drive must be connected: leave out drive=False.")
+            ensure_drive()                       # never write a look-alike Drive folder on the temporary disk
+            where = "the folder you chose in your Google Drive"
     elif in_colab() and drive:
         try:
             base, reason = colab_notebook_folder()
@@ -197,7 +280,7 @@ def choose(session: str, folder=None, drive: bool = True) -> tuple[Path, str]:
             base, reason = None, "you do not have permission to save files in the notebook's folder"
         if base is not None:
             where = reason
-        elif (COLAB_DRIVE / "MyDrive").exists():
+        elif drive_mounted():
             base = COLAB_DRIVE / "MyDrive" / UNIT / session
             where = (f"a folder in your Google Drive (My Drive › {UNIT} › {session}), because {reason}. "
                      f"{SAVE_A_COPY}")

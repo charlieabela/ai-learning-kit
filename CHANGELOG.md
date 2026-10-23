@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.2.4 · Fix: work saved to Colab's temporary disk instead of Drive
+
+- Fixed: `kit.start(..., folder="/content/drive/...")` did not connect Google Drive, so it created a look-alike folder on Colab's temporary disk and answers never reached Drive. Drive is now always connected before a Drive folder is used, and "is Drive connected" is decided by the mount point, not by a folder of that name existing.
+- If such a look-alike folder exists (from v0.2.3), `kit.start` moves it aside, connects Drive, and copies its files in (only where Drive has no newer copy).
+- `folder=` in Colab is relative to My Drive: `folder="ARI1101/S02"`, `"My Drive/ARI1101/S02"` and `"/content/drive/My Drive/ARI1101/S02"` all mean My Drive › ARI1101 › S02. Elsewhere a relative folder is taken from the notebook's folder, and calling `kit.start` twice no longer nests folders.
+- Every save is forced out of the file cache; `kit.sync()` sends everything to Drive immediately, and `kit.submit()` calls it before downloading.
+
 ## 0.2.3 · Work saved next to the notebook
 
 - `kit.start` keeps the answer book, the case files and files saved with plain names in the notebook's own folder, in Colab as well as in Jupyter and VS Code.

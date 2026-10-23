@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import json
 import math
+import os
 from datetime import datetime
 from pathlib import Path
 
@@ -67,7 +68,11 @@ class AnswerBook:
 
     def _save(self):
         self.data["updated"] = datetime.now().isoformat(timespec="seconds")
-        self.path.write_text(json.dumps(self.data, indent=2, ensure_ascii=False), encoding="utf-8")
+        text = json.dumps(self.data, indent=2, ensure_ascii=False)
+        with open(self.path, "w", encoding="utf-8") as f:   # write, then force it out of the cache
+            f.write(text)
+            f.flush()
+            os.fsync(f.fileno())
 
     def record(self, task_id: str, value=None, reasoning: str | None = None):
         if task_id not in self.tasks:
@@ -132,10 +137,13 @@ class AnswerBook:
         if no_reason:
             print("Answered without the reasoning asked for:", ", ".join(no_reason))
         if download:
-            try:
-                from google.colab import files  # type: ignore
-                files.download(str(self.path))
-                print("The file is being downloaded by your browser. Upload it to the VLE.")
-            except ImportError:
-                print("Upload this file to the VLE.")
+            self.download()
         return self.path
+
+    def download(self) -> None:
+        try:
+            from google.colab import files  # type: ignore
+            files.download(str(self.path))
+            print("The file is being downloaded by your browser. Upload it to the VLE.")
+        except ImportError:
+            print("Upload this file to the VLE.")
