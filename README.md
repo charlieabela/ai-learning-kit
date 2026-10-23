@@ -11,7 +11,7 @@ All companies, people, accounts and documents in the case are fictional.
 ## Use in Google Colab
 
 ```python
-%pip install -q "git+https://github.com/charlieabela/ari1101kit@v0.2.3"
+%pip install -q "git+https://github.com/charlieabela/ari1101kit@v0.2.4"
 import ari1101kit as kit
 
 kit.start("S02", student="Your Name")   # in Colab, connects Google Drive for the work folder
@@ -19,9 +19,9 @@ kit.workspace()                          # copies the case files into <work fold
 kit.task("T1.1")                         # explains a task: what to do, why, an example, what to record
 ```
 
-**Where work is kept: next to the notebook.** `kit.start` finds the folder that holds the running notebook and makes it the current folder, so the answer book, the case files and every file saved with a plain name sit next to the notebook. In Jupyter and VS Code that is the notebook's folder. In Colab the kit connects Google Drive, asks the runtime which notebook is open, and finds that file in Drive (by name, or through the Drive API if the name is not unique). A notebook that is not in the student's own Drive (opened from GitHub or from someone else's shared link) cannot have files saved next to it; the kit then uses `My Drive/ARI1101/<session>` and tells the student to use File › Save a copy in Drive. `kit.start(..., folder="...")` chooses another folder; `drive=False` skips Drive in Colab.
+**Where work is kept: next to the notebook.** `kit.start` finds the folder that holds the running notebook and makes it the current folder, so the answer book, the case files and every file saved with a plain name sit next to the notebook. In Jupyter and VS Code that is the notebook's folder. In Colab the kit connects Google Drive, asks the runtime which notebook is open, and finds that file in Drive (by name, or through the Drive API if the name is not unique). A notebook that is not in the student's own Drive (opened from GitHub or from someone else's shared link) cannot have files saved next to it; the kit then uses `My Drive/ARI1101/<session>` and tells the student to use File › Save a copy in Drive. `kit.start(..., folder="...")` chooses another folder: in Colab a relative path is a folder in My Drive (`folder="ARI1101/S02"`), and Drive is connected first; elsewhere it is relative to the notebook. `drive=False` skips Drive in Colab. Colab copies files to Drive in the background; `kit.sync()` sends them immediately, and `kit.submit()` calls it.
 
-Always install a tagged version (`@v0.2.3`), so that a notebook keeps working when later sessions are added.
+Always install a tagged version (`@v0.2.4`), so that a notebook keeps working when later sessions are added.
 
 ## The case files
 

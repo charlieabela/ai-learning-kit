@@ -30,7 +30,7 @@ from .core.feedback import Feedback, as_feedback, combine
 from .core import workfolder
 from . import sessions
 
-__all__ = ["start", "task", "answer", "check", "progress", "submit", "sources", "workspace",
+__all__ = ["start", "task", "answer", "check", "progress", "submit", "sync", "sources", "workspace",
            "peek", "path", "extract", "pipeline", "reference", "report", "explain", "source",
            "__version__"]
 
@@ -42,7 +42,10 @@ def start(session: str, student: str, folder=None, drive: bool = True) -> None:
 
     session : the session code, for example "S02"
     student : your name, used to name the answer file
-    folder  : optional; a different folder for your work.
+    folder  : optional; a different folder for your work. In Colab a relative path
+              is a folder in your Google Drive, for example "ARI1101/S02" for
+              My Drive › ARI1101 › S02; on your computer it is relative to the
+              notebook's folder.
     drive   : in Colab, set drive=False to skip connecting Google Drive (your files
               are then deleted when Colab disconnects).
 
@@ -133,7 +136,33 @@ def progress() -> pd.DataFrame:
     return book.progress()
 
 
+def sync() -> None:
+    """Make sure everything saved so far has reached Google Drive (Colab only).
+
+    Colab copies files to Google Drive in the background, so a file can take a while
+    to appear there. sync() sends everything now. kit.submit() calls it for you.
+    """
+    import os
+    from pathlib import Path
+    if not workfolder.in_colab() or not workfolder.drive_mounted():
+        print("Nothing to send: Google Drive is not connected in this session (files are saved directly).")
+        return
+    from google.colab import drive as gdrive  # type: ignore
+    print("Sending your saved files to Google Drive...")
+    os.chdir(workfolder.COLAB_LOCAL)            # Drive cannot be disconnected while we are inside it
+    gdrive.flush_and_unmount()
+    workfolder.ensure_drive()
+    if _state.get("folder") is not None and Path(_state["folder"]).exists():
+        os.chdir(_state["folder"])
+    print("Done: everything saved so far is in your Google Drive.")
+
+
 def submit(download: bool = True):
     """Finalise the answer book, list anything missing, and download it in Colab."""
     _, book = _require()
-    return book.submit(download=download)
+    path = book.submit(download=False)
+    if workfolder.in_colab() and workfolder.drive_mounted():
+        sync()                                   # make sure the final answer book is in Drive first
+    if download:
+        book.download()
+    return path

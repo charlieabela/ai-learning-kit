@@ -1,6 +1,15 @@
 """Regression tests: the frozen case must keep producing the same reference values."""
 import ari1101kit as kit
 from ari1101kit.sessions import s02
+import pytest as _pytest
+
+
+@_pytest.fixture(autouse=True)
+def _isolated_folder(tmp_path, monkeypatch):
+    """Every test starts in its own folder, which also counts as the notebook's folder."""
+    from ari1101kit.core import workfolder
+    monkeypatch.setattr(workfolder, "START_DIR", tmp_path)
+    monkeypatch.chdir(tmp_path)
 
 
 def test_sources_present():
@@ -122,6 +131,8 @@ def test_placeholder_reasoning_is_flagged():
 
 
 def test_local_work_folder_is_the_current_folder(tmp_path, monkeypatch):
+    from ari1101kit.core import workfolder
+    monkeypatch.setattr(workfolder, "START_DIR", tmp_path)
     monkeypatch.chdir(tmp_path)
     kit.start("S02", student="Local Student")
     assert kit._state["folder"] == tmp_path.resolve()
@@ -137,25 +148,38 @@ import pytest
 
 @pytest.fixture
 def fake_colab(tmp_path, monkeypatch):
-    """A pretend Colab: google.colab importable, Drive 'mounted' under tmp_path/drive."""
+    """A pretend Colab: google.colab importable, Drive mounted (on request) under tmp_path/drive."""
     from ari1101kit.core import workfolder
     drive_root = tmp_path / "drive"
-    mounted = []
+    state = {"mounted": False, "mounts": 0, "flushes": 0}
 
     def mount(p):
-        mounted.append(p)
+        if drive_root.exists() and any(drive_root.iterdir()):
+            raise ValueError("Mountpoint must not already contain files")
+        state["mounted"] = True
+        state["mounts"] += 1
         (drive_root / "MyDrive").mkdir(parents=True, exist_ok=True)
 
+    def flush_and_unmount():
+        state["flushes"] += 1
+        state["mounted"] = False            # files stay on disk in this simulation
+
     colab = types.ModuleType("google.colab")
-    colab.drive = types.SimpleNamespace(mount=mount)
+    colab.drive = types.SimpleNamespace(mount=mount, flush_and_unmount=flush_and_unmount)
     google = types.ModuleType("google")
     google.colab = colab
     monkeypatch.setitem(sys.modules, "google", google)
     monkeypatch.setitem(sys.modules, "google.colab", colab)
     monkeypatch.setattr(workfolder, "COLAB_DRIVE", drive_root)
+    monkeypatch.setattr(workfolder, "COLAB_LOCAL", tmp_path / "content")
+    (tmp_path / "content").mkdir()
+    monkeypatch.setattr(workfolder, "drive_mounted", lambda: state["mounted"])
     monkeypatch.chdir(tmp_path)
-    return types.SimpleNamespace(root=drive_root, my=drive_root / "MyDrive", mounted=mounted, wf=workfolder,
-                                 mp=monkeypatch)
+
+    def mount_now():
+        mount(str(drive_root))
+    return types.SimpleNamespace(root=drive_root, my=drive_root / "MyDrive", state=state, wf=workfolder,
+                                 mp=monkeypatch, mount_now=mount_now, tmp=tmp_path)
 
 
 def _notebook(path):
@@ -166,7 +190,7 @@ def _notebook(path):
 
 def test_colab_saves_next_to_a_copy_in_colab_notebooks(fake_colab):
     fake_colab.mp.setattr(fake_colab.wf, "colab_session", lambda: {"name": "S02.ipynb", "path": "fileId=abc123"})
-    (fake_colab.root / "MyDrive").mkdir(parents=True)
+    fake_colab.mount_now()
     _notebook(fake_colab.my / "Colab Notebooks" / "S02.ipynb")
     kit.start("S02", student="Colab Student")
     expected = (fake_colab.my / "Colab Notebooks").resolve()
@@ -176,6 +200,7 @@ def test_colab_saves_next_to_a_copy_in_colab_notebooks(fake_colab):
 
 def test_colab_finds_a_notebook_in_a_subfolder(fake_colab):
     fake_colab.mp.setattr(fake_colab.wf, "colab_session", lambda: {"name": "S02.ipynb", "path": "fileId=abc123"})
+    fake_colab.mount_now()
     _notebook(fake_colab.my / "Uni" / "ARI1101" / "S02.ipynb")
     kit.start("S02", student="Colab Student")
     assert kit._state["folder"] == (fake_colab.my / "Uni" / "ARI1101").resolve()
@@ -183,6 +208,7 @@ def test_colab_finds_a_notebook_in_a_subfolder(fake_colab):
 
 def test_colab_uses_the_drive_api_when_the_name_is_not_unique(fake_colab):
     fake_colab.mp.setattr(fake_colab.wf, "colab_session", lambda: {"name": "S02.ipynb", "path": "fileId=abc123"})
+    fake_colab.mount_now()
     _notebook(fake_colab.my / "A" / "S02.ipynb")
     _notebook(fake_colab.my / "B" / "S02.ipynb")
     fake_colab.mp.setattr(fake_colab.wf, "path_from_drive_api", lambda fid: fake_colab.my / "B")
@@ -194,7 +220,7 @@ def test_colab_notebook_from_github_falls_back_with_advice(fake_colab, capsys):
     fake_colab.mp.setattr(fake_colab.wf, "colab_session",
                           lambda: {"name": "S02.ipynb", "path": "/v2/external/notebooks/github/x.ipynb"})
     kit.start("S02", student="Colab Student")
-    assert fake_colab.mounted                      # Drive was not mounted yet, so kit.start mounted it
+    assert fake_colab.state["mounts"] == 1          # Drive was not mounted yet, so kit.start mounted it
     assert kit._state["folder"] == (fake_colab.my / "ARI1101" / "S02").resolve()
     out = capsys.readouterr().out
     assert "not stored in Google Drive" in out and "Save a copy in Drive" in out
@@ -222,6 +248,56 @@ def test_drive_api_path_walks_up_the_parent_folders(fake_colab):
     fake_colab.mp.setitem(sys.modules, "googleapiclient", types.ModuleType("googleapiclient"))
     fake_colab.mp.setitem(sys.modules, "googleapiclient.discovery", discovery)
     assert fake_colab.wf.path_from_drive_api("nb") == fake_colab.my / "Uni" / "ARI1101"
+
+
+def test_colab_folder_argument_is_relative_to_my_drive_and_mounts_drive(fake_colab):
+    kit.start("S02", student="Charlie", folder="AI-Lectures/ari1101-Foundations of Data Science/tools")
+    expected = (fake_colab.my / "AI-Lectures" / "ari1101-Foundations of Data Science" / "tools").resolve()
+    assert fake_colab.state["mounts"] == 1 and kit._state["folder"] == expected
+
+
+@pytest.mark.parametrize("given", ["My Drive/ARI1101/S02", "MyDrive/ARI1101/S02", "ARI1101/S02",
+                                   "/content/drive/My Drive/ARI1101/S02"])
+def test_colab_folder_spellings(fake_colab, given):
+    fake_colab.mp.setattr(fake_colab.wf, "COLAB_DRIVE", __import__("pathlib").Path("/content/drive"))
+    assert fake_colab.wf.resolve_folder(given) == __import__("pathlib").Path("/content/drive/MyDrive/ARI1101/S02")
+
+
+def test_colab_rescues_files_written_while_drive_was_not_connected(fake_colab, capsys):
+    # what v0.2.3 did with folder=...: a look-alike Drive folder on the temporary disk
+    ghost = fake_colab.my / "X" / "ari1101_answers" / "S02_Charlie.json"
+    ghost.parent.mkdir(parents=True)
+    ghost.write_text('{"answers": {"T1.1": {}}}')
+    real_drive_copy = {}
+
+    def mount(p):                            # the real Drive does not yet have the file
+        fake_colab.state["mounted"] = True
+        (fake_colab.my).mkdir(parents=True, exist_ok=True)
+        real_drive_copy["existed"] = ghost.exists()
+    sys.modules["google.colab"].drive.mount = mount
+    kit.start("S02", student="Charlie", folder="X")
+    assert real_drive_copy["existed"] is False          # the ghost folder was moved aside before mounting
+    assert '"T1.1"' in ghost.read_text()                # ...and its answer book copied into Drive
+    assert kit._state["book"].data["answers"].get("T1.1") is not None
+    assert "while Drive was not connected" in capsys.readouterr().out
+
+
+def test_sync_flushes_and_reconnects_drive(fake_colab):
+    fake_colab.mount_now()
+    kit.start("S02", student="Charlie", folder="ARI1101/S02")
+    kit.sync()
+    assert fake_colab.state["flushes"] == 1 and fake_colab.state["mounted"]
+    import os
+    assert os.getcwd() == str(kit._state["folder"])
+
+
+def test_local_relative_folder_is_taken_from_the_notebook_folder(tmp_path, monkeypatch):
+    from ari1101kit.core import workfolder
+    monkeypatch.setattr(workfolder, "START_DIR", tmp_path)
+    monkeypatch.chdir(tmp_path)
+    kit.start("S02", student="Local Student", folder="work")
+    kit.start("S02", student="Local Student", folder="work")      # a second call must not nest folders
+    assert kit._state["folder"] == (tmp_path / "work").resolve()
 
 
 def test_jupyter_session_name_gives_the_notebook_folder(tmp_path, monkeypatch):
