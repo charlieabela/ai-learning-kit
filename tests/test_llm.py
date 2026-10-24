@@ -244,3 +244,71 @@ def test_openai_reasoning_models_get_the_parameters_they_accept(picky_server):
     p = llm.build("openai-compatible", model="o9", api_key="k", base_url=url)
     assert p.complete("hi") == "openai ok"
     assert "max_completion_tokens" in seen[-1] and "max_tokens" not in seen[-1] and "temperature" not in seen[-1]
+
+
+# --------------------------------------------------------------------------- thinking models
+@pytest.fixture
+def thinking_server():
+    """Claude-style server: new models think (using output tokens); old models reject output_config."""
+    import json as _json
+    import threading
+    from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
+    seen = []
+
+    class H(BaseHTTPRequestHandler):
+        def log_message(self, *a):
+            pass
+
+        def _send(self, status, obj):
+            body = _json.dumps(obj).encode()
+            self.send_response(status)
+            self.send_header("Content-Type", "application/json")
+            self.send_header("Content-Length", str(len(body)))
+            self.end_headers()
+            self.wfile.write(body)
+
+        def do_POST(self):
+            p = _json.loads(self.rfile.read(int(self.headers["Content-Length"])))
+            seen.append(dict(p))
+            if p["model"] == "claude-old" and "output_config" in p:
+                return self._send(400, {"error": {"message": "output_config: Extra inputs are not permitted"}})
+            if p["model"] == "claude-greedy":            # thinks so much that nothing is left for the answer
+                return self._send(200, {"content": [{"type": "thinking", "thinking": "..."}],
+                                        "stop_reason": "max_tokens"})
+            thinking = 3000 if (p.get("output_config") or {}).get("effort") != "low" else 200
+            if p["max_tokens"] < thinking + 100:
+                return self._send(200, {"content": [{"type": "thinking", "thinking": "..."},
+                                                    {"type": "text", "text": "cut"}], "stop_reason": "max_tokens"})
+            return self._send(200, {"content": [{"type": "thinking", "thinking": "..."},
+                                                {"type": "text", "text": "full answer"}], "stop_reason": "end_turn"})
+
+    httpd = ThreadingHTTPServer(("127.0.0.1", 0), H)
+    threading.Thread(target=httpd.serve_forever, daemon=True).start()
+    yield f"http://127.0.0.1:{httpd.server_address[1]}", seen
+    httpd.shutdown()
+
+
+def test_thinking_models_get_room_for_the_answer(thinking_server):
+    url, seen = thinking_server
+    p = llm.build("anthropic", model="claude-sonnet-5-5", api_key="k", base_url=url)
+    assert p.complete("hi", max_tokens=300) == "full answer"           # a small request still gets room
+    assert seen[-1]["max_tokens"] >= 4096 and seen[-1]["output_config"] == {"effort": "low"}
+    assert not p.truncated
+
+
+def test_models_without_effort_retry_without_it(thinking_server):
+    url, seen = thinking_server
+    p = llm.build("anthropic", model="claude-old", api_key="k", base_url=url)
+    assert p.complete("hi") == "full answer"
+    assert "output_config" not in seen[-1]
+    n = len(seen)
+    p.complete("again")
+    assert len(seen) == n + 1                                          # remembered
+
+
+def test_an_answer_lost_to_thinking_is_reported(thinking_server):
+    url, _ = thinking_server
+    p = llm.build("anthropic", model="claude-greedy", api_key="k", base_url=url)
+    with pytest.raises(llm.LLMError) as e:
+        p.complete("hi")
+    assert e.value.code == "truncated" and p.truncated

@@ -37,6 +37,13 @@ documentation; the defaults (`DEFAULT_MODELS`) are only a starting point.
 allowed to create Gemini API keys; the API then answers 403 and the kit raises
 `LLMError` with code `forbidden`. A personal Google account works.
 
+## Models that think
+
+Current models (Claude 5.5, Gemini 2.5 and later, OpenAI's reasoning models) think before they answer, and the
+thinking counts against the output limit. The providers therefore ask for at least `MIN_OUTPUT_TOKENS` (4,096)
+output tokens, ask Claude for low thinking effort, and report a reply that reached the limit through
+`provider.truncated`, or with `LLMError` code `truncated` when no answer was left.
+
 ## Front ends
 
 A tutor or other front end that holds its own connection uses
