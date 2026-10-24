@@ -67,6 +67,13 @@ def _request(url: str, payload: dict | None, headers: dict, timeout: float = 120
 _post_json = _request  # kept for older imports
 
 
+# Current models "think" before answering (Claude 5.5, Gemini 2.5 and later, OpenAI's reasoning models), and the
+# thinking counts against the output limit. A small limit then leaves no room for the answer: the reply is cut off,
+# or is empty. Every request asks for at least this many output tokens; only the tokens used are billed.
+MIN_OUTPUT_TOKENS = 4096
+TRUNCATED = {"max_tokens", "length", "MAX_TOKENS"}
+
+
 def _send_adaptive(provider, url: str, payload: dict, headers: dict) -> dict:
     """POST, dropping or renaming a parameter the model rejects, and remembering that for later calls.
 
@@ -79,6 +86,8 @@ def _send_adaptive(provider, url: str, payload: dict, headers: dict) -> dict:
     for key in memo.get(model, ()):
         if key == "temperature":
             payload.pop("temperature", None)
+        elif key == "output_config":
+            payload.pop("output_config", None)
         elif key == "max_tokens" and "max_tokens" in payload:
             payload["max_completion_tokens"] = payload.pop("max_tokens")
     for _ in range(3):
@@ -91,6 +100,9 @@ def _send_adaptive(provider, url: str, payload: dict, headers: dict) -> dict:
             if "temperature" in msg and "temperature" in payload:
                 payload.pop("temperature")
                 memo.setdefault(model, set()).add("temperature")
+            elif ("output_config" in msg or "effort" in msg) and "output_config" in payload:
+                payload.pop("output_config")                       # older models have no effort setting
+                memo.setdefault(model, set()).add("output_config")
             elif "max_completion_tokens" in msg and "max_tokens" in payload:
                 payload["max_completion_tokens"] = payload.pop("max_tokens")
                 memo.setdefault(model, set()).add("max_tokens")
@@ -104,6 +116,19 @@ class Provider:
 
     def __init__(self, model: str | None = None, **_):
         self.model = model
+        self.last_stop = None      # why the last reply ended, as the provider reported it
+
+    @property
+    def truncated(self) -> bool:
+        """True when the last reply stopped because it reached the output limit."""
+        return self.last_stop in TRUNCATED
+
+    def _finish(self, text: str, stop) -> str:
+        self.last_stop = stop
+        if not text.strip() and stop in TRUNCATED:
+            raise LLMError("The model used its whole output allowance (probably on thinking) and wrote no "
+                           "answer. Ask again, or choose a faster model.", "truncated")
+        return text.strip()
 
     def complete(self, prompt: str, system: str | None = None, max_tokens: int = 600,
                  temperature: float = 0.2, model: str | None = None) -> str:
@@ -162,12 +187,15 @@ class OpenAICompatible(Provider):
     def complete(self, prompt, system=None, max_tokens=600, temperature=0.2, model=None):
         messages = ([{"role": "system", "content": system}] if system else []) + [{"role": "user", "content": prompt}]
         out = _send_adaptive(self, f"{self.base_url}/chat/completions",
-                             {"model": model or self.model, "messages": messages, "max_tokens": max_tokens,
-                              "temperature": temperature}, self._headers())
+                             {"model": model or self.model, "messages": messages,
+                              "max_tokens": max(max_tokens, MIN_OUTPUT_TOKENS), "temperature": temperature},
+                             self._headers())
         try:
-            return out["choices"][0]["message"]["content"].strip()
+            choice = out["choices"][0]
+            text = choice["message"]["content"] or ""
         except (KeyError, IndexError, TypeError, AttributeError):
             raise LLMError(f"Unexpected reply from {self.base_url}: {str(out)[:300]}") from None
+        return self._finish(text, choice.get("finish_reason"))
 
     def list_models(self):
         out = _request(f"{self.base_url}/models", None, self._headers(), timeout=20)
@@ -184,16 +212,23 @@ class Anthropic(Provider):
     def _headers(self):
         return {"x-api-key": self.api_key, "anthropic-version": "2023-06-01"}
 
+    # Claude 5.5 models think by default at high effort. For tutoring, low effort answers faster and costs less;
+    # models without an effort setting reject it, and the request is then retried without it.
+    effort = "low"
+
     def complete(self, prompt, system=None, max_tokens=600, temperature=0.2, model=None):
-        payload = {"model": model or self.model, "max_tokens": max_tokens, "temperature": temperature,
-                   "messages": [{"role": "user", "content": prompt}]}
+        payload = {"model": model or self.model, "max_tokens": max(max_tokens, MIN_OUTPUT_TOKENS),
+                   "temperature": temperature, "messages": [{"role": "user", "content": prompt}]}
+        if self.effort:
+            payload["output_config"] = {"effort": self.effort}
         if system:
             payload["system"] = system
         out = _send_adaptive(self, f"{self.base_url}/v1/messages", payload, self._headers())
         try:
-            return "".join(part.get("text", "") for part in out["content"]).strip()
-        except (KeyError, TypeError):
+            text = "".join(part.get("text", "") for part in out["content"] if part.get("type", "text") == "text")
+        except (KeyError, TypeError, AttributeError):
             raise LLMError(f"Unexpected reply from Anthropic: {str(out)[:300]}") from None
+        return self._finish(text, out.get("stop_reason"))
 
     def list_models(self):
         out = _request(f"{self.base_url}/v1/models?limit=100", None, self._headers(), timeout=20)
@@ -216,7 +251,8 @@ class Gemini(Provider):
         name = model or self.model
         name = name if name.startswith("models/") else f"models/{name}"
         payload = {"contents": [{"role": "user", "parts": [{"text": prompt}]}],
-                   "generationConfig": {"maxOutputTokens": max_tokens, "temperature": temperature}}
+                   "generationConfig": {"maxOutputTokens": max(max_tokens, MIN_OUTPUT_TOKENS),
+                                        "temperature": temperature}}
         if system:
             payload["systemInstruction"] = {"parts": [{"text": system}]}
         out = _request(f"{self.base_url}/{name}:generateContent", payload, self._headers())
@@ -229,7 +265,7 @@ class Gemini(Provider):
                            "refused" if block else "error") from None
         if not text and cand.get("finishReason") not in (None, "STOP", "MAX_TOKENS"):
             raise LLMError(f"Gemini stopped without text ({cand.get('finishReason')}).", "refused")
-        return text.strip()
+        return self._finish(text, cand.get("finishReason"))
 
     def list_models(self):
         out = _request(f"{self.base_url}/models?pageSize=200", None, self._headers(), timeout=20)

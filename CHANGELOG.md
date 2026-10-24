@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.3.2 · Models that think before answering
+
+- Claude 5.5, Gemini 2.5 and later, and OpenAI's reasoning models think before they answer, and the thinking counts against the output limit. With the kit's small limits the answer was cut off, or JSON arrived incomplete. Every request now allows at least 4,096 output tokens (only tokens used are billed).
+- Claude: requests ask for low thinking effort (`Anthropic.effort = "low"`), which is faster and cheaper for tutoring; models without an effort setting get the request again without it.
+- `provider.truncated` and `provider.last_stop` say whether the last reply reached the limit; an answer lost entirely to thinking raises `LLMError` with code `truncated`.
+
 ## 0.3.1 · Language models that refuse some settings
 
 - Claude 5.5 models refuse the `temperature` setting (400: "'temperature' is deprecated for this model"), and OpenAI's reasoning models refuse `temperature` and want `max_completion_tokens` instead of `max_tokens`. The Anthropic and OpenAI-compatible providers now retry without the refused setting and remember that for the model, so `kit.hint()`, `kit.ask()` and Notebook Tutor work with these models.
