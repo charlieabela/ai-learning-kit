@@ -17,7 +17,7 @@ import pandas as pd
 
 from ...core.checks import all_of, any_of, as_int, at_least, numeric_check, saved_only, written
 from ...core.feedback import Feedback
-from ...core.session import attach_guides, task
+from ...core.session import BLACK_BOX, FOCUS, OUT_OF_SCOPE, attach_guides, stage, task
 from ...problems.brightwater_q3 import extract, pipeline, reference
 from ...problems.brightwater_q3.case import SOURCES
 from .s02_guide import EXAMPLE_CASE, GUIDE
@@ -26,6 +26,25 @@ UNIT = "ARI1101"
 SESSION = "S02"
 TITLE = "Data formats: gathering the evidence for the Q3 compliance review"
 PROBLEM = "brightwater_q3"
+
+STAGES = {
+    "survey": stage("Identifying file formats and data shapes", FOCUS),
+    "doc_extract": stage("Extracting rules, tables and text from Word, Excel, PDF and emails", BLACK_BOX,
+                         how="kit.extract", taught_in="ICS2205 Part A (text and information retrieval)",
+                         note="say only that the kit reads the document and returns Python data"),
+    "parse": stage("Reading CSV, JSON and XML with pandas, json and ElementTree", FOCUS),
+    "store": stage("Storing extracted data as JSON or CSV and reading it back; comparing formats", FOCUS),
+    "convert": stage("Currency conversion and boolean filters to select payments", FOCUS),
+    "combine": stage("Linking sources by key and merging tables", FOCUS),
+    "compliance": stage("Checking each payment against the policy rules", BLACK_BOX,
+                        how="kit.pipeline.compliance_check", taught_in="the Explore and Interpret sessions"),
+    "splits": stage("Finding split purchases across payments", BLACK_BOX, how="kit.pipeline.split_purchases"),
+    "report": stage("Laying out the Board report", BLACK_BOX, how="kit.report.compliance_report"),
+    "cleaning": stage("Cleaning and de-duplicating records", OUT_OF_SCOPE, taught_in="the ARI1101 Scrub session",
+                      note="students only notice the duplicates here"),
+    "modelling": stage("Statistics, machine learning and prediction", OUT_OF_SCOPE,
+                       taught_in="the ARI1101 Explore and Model sessions"),
+}
 
 
 # --------------------------------------------------------------------------- reference values

@@ -43,8 +43,16 @@ connects Google Drive and finds the notebook there; `kit.sync()` pushes pending
 writes, and `kit.submit()` calls it. `folder=` chooses another folder (in Colab,
 relative to My Drive).
 
-**Language models are optional.** With a model configured (an API key, or an
-open-weight model behind Ollama, vLLM or any OpenAI-compatible server),
+**What to install.** The line above covers ARI1101. Sessions on graphs add
+`[graphs]` (networkx, scikit-learn), and sessions on embeddings and graph neural
+networks add `[advanced]` (PyTorch, PyTorch Geometric):
+`%pip install -q "ai-learning-kit[advanced] @ git+https://github.com/charlieabela/ai-learning-kit@v0.3.0"`.
+[Notebook Tutor](https://github.com/charlieabela/notebook-tutor) installs the kit
+for students who work on their own computers.
+
+**Language models are optional.** With a model configured (a Gemini, Anthropic
+or OpenAI API key, or an open-weight model behind Ollama, vLLM or any
+OpenAI-compatible server),
 `kit.hint(task)` gives one next step and `kit.ask(task, question)` explains a
 concept. Without one, everything else works unchanged. See `docs/LLM.md`.
 

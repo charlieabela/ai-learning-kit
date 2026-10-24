@@ -9,13 +9,17 @@ kit's own checks.
 Configuration, in order of precedence:
 1. configure(provider=..., model=..., base_url=..., api_key=...) in the notebook;
 2. environment variables (also read from Colab's Secrets panel):
-      AILK_LLM_PROVIDER   "openai-compatible" | "anthropic" | "ollama" | "none"
+      AILK_LLM_PROVIDER   "gemini" | "openai-compatible" | "openai" | "anthropic" | "ollama" | "none"
       AILK_LLM_MODEL      model name
       AILK_LLM_BASE_URL   for OpenAI-compatible servers (default https://api.openai.com/v1)
       AILK_LLM_API_KEY    key for that server, if it needs one
-3. autodetection: ANTHROPIC_API_KEY → Anthropic; OPENAI_API_KEY → OpenAI; an Ollama
-   server at OLLAMA_HOST or http://localhost:11434 with at least one model → Ollama;
+3. autodetection: GEMINI_API_KEY or GOOGLE_API_KEY → Gemini; ANTHROPIC_API_KEY →
+   Anthropic; OPENAI_API_KEY with AILK_LLM_MODEL → OpenAI; an Ollama server at
+   OLLAMA_HOST or http://localhost:11434 with at least one model → Ollama;
    otherwise none.
+
+Inside Notebook Tutor, the tutor sets these variables so that the kit's requests go
+through the tutor's own connection: the student's key never enters the notebook.
 
 Open-weight models therefore need no code: run them behind an OpenAI-compatible
 endpoint (Ollama, vLLM, LM Studio, a department server) and point AILK_LLM_BASE_URL
@@ -25,14 +29,15 @@ from __future__ import annotations
 
 import os
 
-from .providers import Anthropic, LLMError, Null, OpenAICompatible, Provider, ollama_models
+from .providers import Anthropic, Gemini, LLMError, Null, OpenAICompatible, Provider, ollama_models
 
+# Defaults only; model names change, so front ends should offer list_models() instead.
 DEFAULT_MODELS = {
-    "anthropic": "claude-sonnet-4-5",
-    "openai": "gpt-4o-mini",
+    "gemini": "gemini-3.5-flash-lite",
+    "anthropic": "claude-haiku-5-5",
 }
-PROVIDERS = {"openai-compatible": OpenAICompatible, "openai": OpenAICompatible, "ollama": OpenAICompatible,
-             "anthropic": Anthropic, "none": Null}
+PROVIDERS = {"gemini": Gemini, "openai-compatible": OpenAICompatible, "openai": OpenAICompatible,
+             "ollama": OpenAICompatible, "anthropic": Anthropic, "none": Null}
 
 _provider: Provider | None = None
 
@@ -55,6 +60,7 @@ def configure(provider: str | None = None, model: str | None = None, base_url: s
     """Choose the language model for this session, or pass provider="none" to use none.
 
     Examples
+        llm.configure("gemini", api_key="...")                          # a key from Google AI Studio
         llm.configure("ollama", model="llama3.1")                       # local Ollama
         llm.configure("openai-compatible", model="Qwen2.5-7B-Instruct",
                       base_url="http://gpu.server.local:8000/v1")       # vLLM on a department server
@@ -66,6 +72,12 @@ def configure(provider: str | None = None, model: str | None = None, base_url: s
         raise ValueError(f"Unknown provider {provider!r}. Choose one of: {', '.join(PROVIDERS)}")
     if key == "none":
         _provider = Null("language-model help was switched off with configure('none')")
+    elif key == "gemini":
+        api_key = api_key or _secret("GEMINI_API_KEY") or _secret("GOOGLE_API_KEY") or _secret("AILK_LLM_API_KEY")
+        if not api_key:
+            raise ValueError("Gemini needs an API key: create one at https://aistudio.google.com/apikey, then pass "
+                             "api_key=... or set GEMINI_API_KEY.")
+        _provider = Gemini(model or DEFAULT_MODELS["gemini"], api_key, **({"base_url": base_url} if base_url else {}))
     elif key == "anthropic":
         api_key = api_key or _secret("ANTHROPIC_API_KEY") or _secret("AILK_LLM_API_KEY")
         if not api_key:
@@ -83,7 +95,10 @@ def configure(provider: str | None = None, model: str | None = None, base_url: s
     else:  # openai-compatible, openai
         api_key = api_key or _secret("AILK_LLM_API_KEY") or _secret("OPENAI_API_KEY")
         base_url = base_url or _secret("AILK_LLM_BASE_URL") or "https://api.openai.com/v1"
-        model = model or _secret("AILK_LLM_MODEL") or DEFAULT_MODELS["openai"]
+        model = model or _secret("AILK_LLM_MODEL")
+        if not model:
+            raise ValueError("Give a model name: configure(..., model='...') or set AILK_LLM_MODEL. "
+                             "list_models() shows what the server offers.")
         _provider = OpenAICompatible(model, base_url=base_url, api_key=api_key,
                                      label="openai" if "api.openai.com" in base_url else "openai-compatible")
     return _provider
@@ -95,9 +110,11 @@ def autodetect() -> Provider:
     if choice:
         return configure(choice, model=_secret("AILK_LLM_MODEL"), base_url=_secret("AILK_LLM_BASE_URL"),
                          api_key=_secret("AILK_LLM_API_KEY"))
+    if _secret("GEMINI_API_KEY") or _secret("GOOGLE_API_KEY"):
+        return configure("gemini", model=_secret("AILK_LLM_MODEL"))
     if _secret("ANTHROPIC_API_KEY"):
         return configure("anthropic", model=_secret("AILK_LLM_MODEL"))
-    if _secret("OPENAI_API_KEY"):
+    if _secret("OPENAI_API_KEY") and _secret("AILK_LLM_MODEL"):
         return configure("openai", model=_secret("AILK_LLM_MODEL"))
     host = _secret("OLLAMA_HOST") or "http://localhost:11434"
     models = ollama_models(host)
@@ -127,9 +144,28 @@ def describe() -> str:
     return get().describe()
 
 
-def complete(prompt: str, system: str | None = None, max_tokens: int = 600, temperature: float = 0.2) -> str:
+def complete(prompt: str, system: str | None = None, max_tokens: int = 600, temperature: float = 0.2,
+             model: str | None = None) -> str:
     """One completion from the configured model. Raises LLMError when there is none."""
-    return get().complete(prompt, system=system, max_tokens=max_tokens, temperature=temperature)
+    return get().complete(prompt, system=system, max_tokens=max_tokens, temperature=temperature, model=model)
+
+
+def list_models() -> list:
+    """The models the configured provider offers (empty when none is configured)."""
+    return get().list_models()
+
+
+def build(provider: str, model: str | None = None, base_url: str | None = None, api_key: str | None = None) -> Provider:
+    """A provider object built from explicit settings, without changing the kit's current choice.
+
+    Front ends such as Notebook Tutor use this to hold their own connection.
+    """
+    global _provider
+    saved = _provider
+    try:
+        return configure(provider, model=model, base_url=base_url, api_key=api_key)
+    finally:
+        _provider = saved
 
 
 # --------------------------------------------------------------------------- student-facing helpers
@@ -149,11 +185,14 @@ TUTOR_SYSTEM = (
 
 
 def _task_context(mod, task_id: str) -> str:
+    from ..core.session import scope_text
     t = mod.TASKS[task_id]
     g = t.get("guide") or {}
+    scope = scope_text(mod)
     return (f"Unit {mod.UNIT}, session {mod.SESSION}: {mod.TITLE}\nTask {task_id}: {t['title']}\n"
             f"Question: {t['question']}\nWhat to do: {g.get('what', '').strip()}\n"
-            f"Why it matters: {g.get('why', '').strip()}\nWhat to record: {g.get('record', '').strip()}")
+            f"Why it matters: {g.get('why', '').strip()}\nWhat to record: {g.get('record', '').strip()}"
+            + (f"\n{scope}" if scope else ""))
 
 
 def hint(mod, book, task_id: str) -> None:

@@ -80,3 +80,23 @@ def test_ari1101kit_shim_still_works(capsys):
     assert old.extract.policy_rules()[0]["rule_id"] == "R1"
     old.answer("T2.1", value=9, reasoning="rules is a list of dicts")
     assert kit._state["book"].data["answers"]["T2.1"]["result"] == "correct"
+
+
+def test_session_stages_give_the_tutor_its_scope():
+    from ai_learning_kit.core.session import scope_text, stage, FOCUS
+    mod = registry.session("ARI1101", "S02")
+    assert {st["visibility"] for st in mod.STAGES.values()} == {"focus", "black_box", "out_of_scope"}
+    text = scope_text(mod)
+    assert "In focus" in text and "kit.extract" in text and "Scrub session" in text
+    ctx = registry.tutor_context("ARI1101", "S02")
+    json.dumps(ctx)
+    assert ctx["cohort"].startswith("ARI1101 Foundations of Data Science") and ctx["scope"] == text
+    assert ctx["tasks"]["T3.3"]["guide"].startswith("### Task T3.3")
+    with pytest.raises(ValueError):
+        stage("x", "somewhat visible")
+
+
+def test_validator_passes_on_everything_registered(capsys):
+    from ai_learning_kit.dev import validate
+    assert validate.main([]) == 0
+    assert "stages, each with a label and a valid visibility" in capsys.readouterr().out

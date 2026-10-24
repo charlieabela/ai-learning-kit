@@ -36,7 +36,26 @@ def task_summary(task_id: str, task: dict) -> dict:
 
 def session_summary(mod) -> dict:
     return {"unit": mod.UNIT, "session": mod.SESSION, "title": mod.TITLE, "problem": mod.PROBLEM,
+            "stages": dict(getattr(mod, "STAGES", {}) or {}),
             "tasks": [task_summary(tid, t) for tid, t in mod.TASKS.items()]}
+
+
+def tutor_context(unit_code: str, session_code: str) -> dict:
+    """What a tutor needs to pitch its help for a session: cohort, problem, scope and tasks."""
+    from .session import render_guide, scope_text
+    mod = session(unit_code, session_code)
+    pkg = unit(unit_code)
+    prob = problem(mod.PROBLEM)
+    return {
+        "unit": dict(pkg.UNIT), "session": mod.SESSION, "title": mod.TITLE,
+        "cohort": f"{pkg.UNIT['code']} {pkg.UNIT['title']} ({pkg.UNIT['programme']}, {pkg.UNIT['level']}). {pkg.UNIT['notes']}",
+        "problem": {"id": prob.id, "title": prob.title, "question": prob.question, "summary": prob.summary},
+        "scope": scope_text(mod),
+        "stages": dict(getattr(mod, "STAGES", {}) or {}),
+        "tasks": {tid: {"title": t["title"], "question": t["question"],
+                        "guide": render_guide(tid, t["title"], t["guide"]) if t.get("guide") else None}
+                  for tid, t in mod.TASKS.items()},
+    }
 
 
 def catalog(include_tasks: bool = True) -> dict:

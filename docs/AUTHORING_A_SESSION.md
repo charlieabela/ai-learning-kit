@@ -19,6 +19,26 @@ value, written reasoning, or both), how it is checked, and the common wrong
 answers you expect. Aim for 15 to 30 tasks for a two-hour session, mixing
 quick checks with three or four written answers.
 
+## Declare the scope for tutors
+
+Record the split in the session module as `STAGES`, so that `kit.hint()`,
+`kit.ask()` and Notebook Tutor pitch their explanations to it:
+
+```python
+from ..core.session import BLACK_BOX, FOCUS, OUT_OF_SCOPE, stage
+
+STAGES = {
+    "parse": stage("Reading CSV, JSON and XML with pandas, json and ElementTree", FOCUS),
+    "doc_extract": stage("Extracting rules from Word, Excel and PDF", BLACK_BOX, how="kit.extract",
+                         taught_in="ICS2205 Part A", note="say only that the kit reads the document"),
+    "cleaning": stage("Cleaning and de-duplicating records", OUT_OF_SCOPE, taught_in="the ARI1101 Scrub session"),
+}
+```
+
+A step that is a black box in one unit can be in focus in another: ICS2205 can
+make `doc_extract` its topic with the same problem. `scope_text(module)` shows
+the instructions a tutor receives.
+
 ## Pitch
 
 Read the unit's `UNIT["notes"]`. For a first-year unit, every task gets a
@@ -31,7 +51,7 @@ either way; its depth is what changes.
 
 1. Copy `templates/session/sNN.py` and `sNN_guide.py` into
    `ai_learning_kit/units/<unit>/` with the real session code.
-2. Define `UNIT`, `SESSION`, `TITLE`, `PROBLEM`.
+2. Define `UNIT`, `SESSION`, `TITLE`, `PROBLEM`, and `STAGES` from the split.
 3. Build `_ref()` from the problem's `reference` module, including the values that
    common mistakes produce (the unconverted count, the inner-merge count, the
    `>=` count), so feedback can name the likely cause.

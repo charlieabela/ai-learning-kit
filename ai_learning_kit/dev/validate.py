@@ -103,6 +103,13 @@ def validate_session(unit_code: str, session_code: str) -> Report:
     r.check(bool(mod.TITLE.strip()), "TITLE is filled in")
     r.check(mod.PROBLEM in problems.REGISTRY, f"PROBLEM {mod.PROBLEM!r} is in the problem library")
     r.check(len(mod.TASKS) > 0, f"{len(mod.TASKS)} tasks")
+    stages = getattr(mod, "STAGES", None)
+    if stages:
+        from ..core.session import VISIBILITY
+        r.check(all(st.get("visibility") in VISIBILITY and st.get("label") for st in stages.values()),
+                f"{len(stages)} stages, each with a label and a valid visibility")
+    else:
+        r.ok("no STAGES declared (optional; a tutor then cannot tell focus from black boxes)")
     needs_check = 0
     for tid, t in mod.TASKS.items():
         for key in ("title", "question"):

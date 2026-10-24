@@ -111,3 +111,79 @@ def test_unreachable_server_degrades_gracefully(capsys):
 def test_configure_none_switches_help_off():
     llm.configure("none")
     assert not llm.available() and "switched off" in llm.describe()
+
+
+# --------------------------------------------------------------------------- Gemini, model lists, error codes
+class _FakeGemini(BaseHTTPRequestHandler):
+    seen = []
+
+    def _send(self, code, obj):
+        data = json.dumps(obj).encode()
+        self.send_response(code)
+        self.send_header("Content-Type", "application/json")
+        self.send_header("Content-Length", str(len(data)))
+        self.end_headers()
+        self.wfile.write(data)
+
+    def do_GET(self):
+        _FakeGemini.seen.append(("GET", self.path, self.headers.get("x-goog-api-key"), None))
+        self._send(200, {"models": [
+            {"name": "models/gemini-3.8-flash", "supportedGenerationMethods": ["generateContent", "countTokens"]},
+            {"name": "models/text-embedding-9", "supportedGenerationMethods": ["embedContent"]}]})
+
+    def do_POST(self):
+        body = json.loads(self.rfile.read(int(self.headers["Content-Length"])))
+        _FakeGemini.seen.append(("POST", self.path, self.headers.get("x-goog-api-key"), body))
+        if self.headers.get("x-goog-api-key") != "good":
+            self._send(400, {"error": {"code": 400, "message": "API key not valid. Please pass a valid API key."}})
+            return
+        if "missing-model" in self.path:
+            self._send(404, {"error": {"code": 404, "message": "models/missing-model is not found"}})
+            return
+        self._send(200, {"candidates": [{"content": {"parts": [{"text": "gemini says hi"}]}, "finishReason": "STOP"}]})
+
+    def log_message(self, *a):
+        pass
+
+
+@pytest.fixture
+def fake_gemini():
+    srv = HTTPServer(("127.0.0.1", 0), _FakeGemini)
+    threading.Thread(target=srv.serve_forever, daemon=True).start()
+    yield f"http://127.0.0.1:{srv.server_port}/v1beta"
+    srv.shutdown()
+
+
+def test_gemini_provider_completes_lists_models_and_reports_errors(fake_gemini):
+    p = llm.configure("gemini", model="gemini-3.8-flash", api_key="good", base_url=fake_gemini)
+    assert llm.complete("hello", system="be brief") == "gemini says hi"
+    method, path, key, body = _FakeGemini.seen[-1]
+    assert path == "/v1beta/models/gemini-3.8-flash:generateContent" and key == "good"
+    assert body["systemInstruction"]["parts"][0]["text"] == "be brief"
+    assert llm.list_models() == ["gemini-3.8-flash"]                 # only models that can generate text
+    with pytest.raises(LLMError) as e:
+        llm.complete("x", model="missing-model")
+    assert e.value.code == "model_not_found"
+    bad = llm.build("gemini", model="gemini-3.8-flash", api_key="wrong", base_url=fake_gemini)
+    with pytest.raises(LLMError) as e:
+        bad.complete("x")
+    assert e.value.code == "bad_key"
+    assert llm.get() is p                                             # build() leaves the kit's choice alone
+
+
+def test_gemini_key_from_environment_is_autodetected(monkeypatch, fake_gemini):
+    monkeypatch.setenv("GEMINI_API_KEY", "good")
+    p = llm.get()
+    assert p.name == "gemini" and p.model == llm.DEFAULT_MODELS["gemini"]
+
+
+def test_unreachable_server_has_the_offline_code():
+    p = llm.build("openai-compatible", model="m", base_url="http://127.0.0.1:9/v1")
+    with pytest.raises(LLMError) as e:
+        p.complete("x")
+    assert e.value.code == "offline"
+
+
+def test_openai_compatible_needs_a_model_name():
+    with pytest.raises(ValueError, match="model"):
+        llm.configure("openai-compatible", base_url="http://127.0.0.1:9/v1")
