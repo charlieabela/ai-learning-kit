@@ -187,3 +187,60 @@ def test_unreachable_server_has_the_offline_code():
 def test_openai_compatible_needs_a_model_name():
     with pytest.raises(ValueError, match="model"):
         llm.configure("openai-compatible", base_url="http://127.0.0.1:9/v1")
+
+
+# --------------------------------------------------------------------------- models that refuse some settings
+@pytest.fixture
+def picky_server():
+    """An Anthropic- and OpenAI-style server whose models refuse temperature, and max_tokens (OpenAI)."""
+    import json as _json
+    import threading
+    from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
+    seen = []
+
+    class H(BaseHTTPRequestHandler):
+        def log_message(self, *a):
+            pass
+
+        def _send(self, status, obj):
+            body = _json.dumps(obj).encode()
+            self.send_response(status)
+            self.send_header("Content-Type", "application/json")
+            self.send_header("Content-Length", str(len(body)))
+            self.end_headers()
+            self.wfile.write(body)
+
+        def do_POST(self):
+            payload = _json.loads(self.rfile.read(int(self.headers["Content-Length"])))
+            seen.append(dict(payload))
+            if "temperature" in payload:
+                return self._send(400, {"type": "error", "error": {"type": "invalid_request_error",
+                                        "message": "`temperature` is deprecated for this model."}})
+            if self.path.endswith("/chat/completions"):
+                if "max_tokens" in payload:
+                    return self._send(400, {"error": {"message": "Unsupported parameter: 'max_tokens' is not "
+                                            "supported with this model. Use 'max_completion_tokens' instead."}})
+                return self._send(200, {"choices": [{"message": {"content": "openai ok"}}]})
+            return self._send(200, {"content": [{"type": "text", "text": "claude ok"}]})
+
+    httpd = ThreadingHTTPServer(("127.0.0.1", 0), H)
+    threading.Thread(target=httpd.serve_forever, daemon=True).start()
+    yield f"http://127.0.0.1:{httpd.server_address[1]}", seen
+    httpd.shutdown()
+
+
+def test_claude_models_that_refuse_temperature_still_answer(picky_server):
+    url, seen = picky_server
+    p = llm.build("anthropic", model="claude-sonnet-5-5", api_key="k", base_url=url)
+    assert p.complete("hi") == "claude ok"
+    assert "temperature" in seen[0] and "temperature" not in seen[1]
+    n = len(seen)
+    assert p.complete("again") == "claude ok"
+    assert len(seen) == n + 1                      # remembered: no second refusal
+
+
+def test_openai_reasoning_models_get_the_parameters_they_accept(picky_server):
+    url, seen = picky_server
+    p = llm.build("openai-compatible", model="o9", api_key="k", base_url=url)
+    assert p.complete("hi") == "openai ok"
+    assert "max_completion_tokens" in seen[-1] and "max_tokens" not in seen[-1] and "temperature" not in seen[-1]

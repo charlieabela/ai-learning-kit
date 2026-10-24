@@ -67,6 +67,38 @@ def _request(url: str, payload: dict | None, headers: dict, timeout: float = 120
 _post_json = _request  # kept for older imports
 
 
+def _send_adaptive(provider, url: str, payload: dict, headers: dict) -> dict:
+    """POST, dropping or renaming a parameter the model rejects, and remembering that for later calls.
+
+    Newer models refuse some settings: Claude 5.5 models answer 400 "'temperature' is deprecated for this
+    model", and OpenAI's reasoning models refuse temperature and want max_completion_tokens instead of
+    max_tokens. The kit's settings are only preferences, so it retries without them.
+    """
+    memo = provider.__dict__.setdefault("_adapted", {})
+    model = payload.get("model")
+    for key in memo.get(model, ()):
+        if key == "temperature":
+            payload.pop("temperature", None)
+        elif key == "max_tokens" and "max_tokens" in payload:
+            payload["max_completion_tokens"] = payload.pop("max_tokens")
+    for _ in range(3):
+        try:
+            return _request(url, payload, headers)
+        except LLMError as e:
+            msg = str(e)
+            if not msg.startswith("400"):
+                raise
+            if "temperature" in msg and "temperature" in payload:
+                payload.pop("temperature")
+                memo.setdefault(model, set()).add("temperature")
+            elif "max_completion_tokens" in msg and "max_tokens" in payload:
+                payload["max_completion_tokens"] = payload.pop("max_tokens")
+                memo.setdefault(model, set()).add("max_tokens")
+            else:
+                raise
+    return _request(url, payload, headers)
+
+
 class Provider:
     name = "base"
 
@@ -129,9 +161,9 @@ class OpenAICompatible(Provider):
 
     def complete(self, prompt, system=None, max_tokens=600, temperature=0.2, model=None):
         messages = ([{"role": "system", "content": system}] if system else []) + [{"role": "user", "content": prompt}]
-        out = _request(f"{self.base_url}/chat/completions",
-                       {"model": model or self.model, "messages": messages, "max_tokens": max_tokens,
-                        "temperature": temperature}, self._headers())
+        out = _send_adaptive(self, f"{self.base_url}/chat/completions",
+                             {"model": model or self.model, "messages": messages, "max_tokens": max_tokens,
+                              "temperature": temperature}, self._headers())
         try:
             return out["choices"][0]["message"]["content"].strip()
         except (KeyError, IndexError, TypeError, AttributeError):
@@ -157,7 +189,7 @@ class Anthropic(Provider):
                    "messages": [{"role": "user", "content": prompt}]}
         if system:
             payload["system"] = system
-        out = _request(f"{self.base_url}/v1/messages", payload, self._headers())
+        out = _send_adaptive(self, f"{self.base_url}/v1/messages", payload, self._headers())
         try:
             return "".join(part.get("text", "") for part in out["content"]).strip()
         except (KeyError, TypeError):
