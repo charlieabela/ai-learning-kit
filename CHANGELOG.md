@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.3.1 · Language models that refuse some settings
+
+- Claude 5.5 models refuse the `temperature` setting (400: "'temperature' is deprecated for this model"), and OpenAI's reasoning models refuse `temperature` and want `max_completion_tokens` instead of `max_tokens`. The Anthropic and OpenAI-compatible providers now retry without the refused setting and remember that for the model, so `kit.hint()`, `kit.ask()` and Notebook Tutor work with these models.
+- Notebooks are unchanged and keep installing `v0.3.0`; nothing in a session changed.
+
 ## 0.3.0 · ari1101kit becomes ai-learning-kit
 
 A restructuring, not a rewrite: all of the Session 02 work, the Brightwater problem, the feedback, the answer book and the work-folder logic are kept and moved into a layered package that serves several study units.
