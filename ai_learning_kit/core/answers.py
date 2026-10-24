@@ -1,6 +1,6 @@
 """The answer book: records your answers and reasoning in a JSON file you can submit.
 
-The file is kept in ari1101_answers/ inside your work folder (see kit.start),
+The file is kept in answers/ inside your work folder (see kit.start),
 which is the folder of the notebook itself, in Colab as on your own computer.
 Answers are formative. Each call to answer() saves immediately, so nothing is lost
 if the notebook stops; submit() checks what is missing and prepares the file.
@@ -18,7 +18,7 @@ import pandas as pd
 
 from .._version import __version__
 
-ANSWER_DIR = "ari1101_answers"
+ANSWER_DIR = "answers"                    # inside the work folder, next to the notebook
 
 
 def _serialise(value):
@@ -51,17 +51,19 @@ def _serialise(value):
 
 
 class AnswerBook:
-    def __init__(self, session: str, student: str, tasks: dict, folder: Path | None = None):
-        self.session, self.student, self.tasks = session, student, tasks
+    def __init__(self, unit: str, session: str, student: str, tasks: dict, folder: Path | None = None,
+                 problem: str | None = None):
+        self.unit, self.session, self.student, self.tasks = unit, session, student, tasks
         answer_dir = Path(folder or Path.cwd()).resolve() / ANSWER_DIR
         answer_dir.mkdir(parents=True, exist_ok=True)
         safe = "".join(ch if ch.isalnum() else "_" for ch in student).strip("_") or "student"
-        self.path = answer_dir / f"{session}_{safe}.json"
+        self.path = answer_dir / f"{unit}_{session}_{safe}.json"
         if self.path.exists():
             self.data = json.loads(self.path.read_text(encoding="utf-8"))
             print(f"Continuing your answer book: {self.path} ({len(self.data['answers'])} answers so far)")
         else:
-            self.data = {"session": session, "student": student, "kit_version": __version__,
+            self.data = {"kit": "ai-learning-kit", "kit_version": __version__, "unit": unit, "session": session,
+                         "problem": problem, "student": student,
                          "started": datetime.now().isoformat(timespec="seconds"), "answers": {}}
             self._save()
             print(f"New answer book: {self.path}")
@@ -76,7 +78,7 @@ class AnswerBook:
 
     def record(self, task_id: str, value=None, reasoning: str | None = None):
         if task_id not in self.tasks:
-            raise KeyError(f"{task_id} is not a task in {self.session}. Tasks: {', '.join(self.tasks)}")
+            raise KeyError(f"{task_id} is not a task in {self.unit} {self.session}. Tasks: {', '.join(self.tasks)}")
         task = self.tasks[task_id]
         previous = self.data["answers"].get(task_id, {})
         attempts = previous.get("attempts", 1 if previous else 0) + 1

@@ -1,10 +1,12 @@
-"""Session 02: plain-language guidance for every task.
+"""ARI1101 Session 02: plain-language guidance for every task.
 
 Each entry explains what to do, why it matters in the case, a typical example
 on a different, small case (a school library), and what to record. The same text
 is shown by kit.task("T1.1") and in the task cells of the S02 notebook.
 """
 from __future__ import annotations
+
+EXAMPLE_CASE = "a different, smaller case: a school library"
 
 GUIDE = {
 # ----------------------------------------------------------------------------------------- 1
@@ -458,15 +460,3 @@ record="""
 `value`: your findings text (`my_findings`). `reasoning`: the format for the Board, and why.""",
 ),
 }
-
-
-def render_markdown(task_id: str, title: str) -> str:
-    """The guidance for one task as Markdown, as shown in the notebook."""
-    g = GUIDE[task_id]
-    return "\n\n".join([
-        f"### Task {task_id} · {title}",
-        "**What you do**\n\n" + g["what"].strip("\n"),
-        "**Why it matters**\n\n" + g["why"].strip("\n"),
-        "**A typical example** (a different, smaller case: a school library)\n\n" + g["example"].strip("\n"),
-        "**What to record**\n\n" + g["record"].strip("\n"),
-    ])

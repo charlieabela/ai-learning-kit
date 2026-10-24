@@ -1,23 +1,30 @@
 """Regression tests: the frozen case must keep producing the same reference values."""
-import ari1101kit as kit
-from ari1101kit.sessions import s02
+import ai_learning_kit as kit
+from ai_learning_kit.units.ari1101 import s02
 import pytest as _pytest
 
 
 @_pytest.fixture(autouse=True)
 def _isolated_folder(tmp_path, monkeypatch):
     """Every test starts in its own folder, which also counts as the notebook's folder."""
-    from ari1101kit.core import workfolder
+    from ai_learning_kit.core import workfolder
     monkeypatch.setattr(workfolder, "START_DIR", tmp_path)
     monkeypatch.chdir(tmp_path)
 
 
+from ai_learning_kit import problems as _problems
+_brightwater = _problems.get("brightwater_q3")
+_extract = _brightwater.module("extract")
+
+
 def test_sources_present():
+    assert len(_brightwater.sources_table()) == 7
+    kit.start("ARI1101", "S02", student="Sources")
     assert len(kit.sources()) == 7
 
 
 def test_policy_extraction():
-    rules = {r["rule_id"]: r for r in kit.extract.policy_rules()}
+    rules = {r["rule_id"]: r for r in _extract.policy_rules()}
     assert set(rules) == {"R1", "R2", "R3", "R4", "R5", "R6", "R7", "R8", "E1"}
     assert rules["R2"]["approvers"]["roles"] == ["Budget Holder", "Finance Manager"]
     assert rules["R7"]["rate_eur_per_usd"] == 0.92
@@ -88,7 +95,7 @@ def test_suggestion_only_after_three_attempts():
 
 def test_answer_book_counts_attempts(tmp_path, monkeypatch):
     monkeypatch.chdir(tmp_path)
-    kit.start("S02", student="Attempt Test")
+    kit.start("ARI1101", "S02", student="Attempt Test")
     kit.answer("T3.3", value=40)
     kit.answer("T3.3", value=39)
     kit.answer("T3.3", reasoning="added later")
@@ -99,11 +106,12 @@ def test_answer_book_counts_attempts(tmp_path, monkeypatch):
 
 # --------------------------------------------------------------------------- guidance and written answers (0.2.2)
 def test_every_task_has_guidance():
-    from ari1101kit.sessions.s02_guide import GUIDE
+    from ai_learning_kit.units.ari1101.s02_guide import GUIDE
+    from ai_learning_kit.core.session import render_guide
     for tid, t in s02.TASKS.items():
         g = GUIDE[tid]
         assert all(g[k].strip() for k in ("what", "why", "example", "record")), tid
-        assert s02.render_markdown(tid, t["title"]).startswith(f"### Task {tid}")
+        assert render_guide(tid, t["title"], t["guide"]).startswith(f"### Task {tid}")
         if t["needs_reasoning"]:
             assert t["written"] is not None, tid
 
@@ -131,12 +139,12 @@ def test_placeholder_reasoning_is_flagged():
 
 
 def test_local_work_folder_is_the_current_folder(tmp_path, monkeypatch):
-    from ari1101kit.core import workfolder
+    from ai_learning_kit.core import workfolder
     monkeypatch.setattr(workfolder, "START_DIR", tmp_path)
     monkeypatch.chdir(tmp_path)
-    kit.start("S02", student="Local Student")
+    kit.start("ARI1101", "S02", student="Local Student")
     assert kit._state["folder"] == tmp_path.resolve()
-    assert kit._state["book"].path.parent == tmp_path.resolve() / "ari1101_answers"
+    assert kit._state["book"].path.parent == tmp_path.resolve() / "answers"
 
 
 # --------------------------------------------------------------------------- work folder = notebook folder (0.2.3)
@@ -149,7 +157,7 @@ import pytest
 @pytest.fixture
 def fake_colab(tmp_path, monkeypatch):
     """A pretend Colab: google.colab importable, Drive mounted (on request) under tmp_path/drive."""
-    from ari1101kit.core import workfolder
+    from ai_learning_kit.core import workfolder
     drive_root = tmp_path / "drive"
     state = {"mounted": False, "mounts": 0, "flushes": 0}
 
@@ -192,17 +200,17 @@ def test_colab_saves_next_to_a_copy_in_colab_notebooks(fake_colab):
     fake_colab.mp.setattr(fake_colab.wf, "colab_session", lambda: {"name": "S02.ipynb", "path": "fileId=abc123"})
     fake_colab.mount_now()
     _notebook(fake_colab.my / "Colab Notebooks" / "S02.ipynb")
-    kit.start("S02", student="Colab Student")
+    kit.start("ARI1101", "S02", student="Colab Student")
     expected = (fake_colab.my / "Colab Notebooks").resolve()
     assert kit._state["folder"] == expected
-    assert kit._state["book"].path == expected / "ari1101_answers" / "S02_Colab_Student.json"
+    assert kit._state["book"].path == expected / "answers" / "ARI1101_S02_Colab_Student.json"
 
 
 def test_colab_finds_a_notebook_in_a_subfolder(fake_colab):
     fake_colab.mp.setattr(fake_colab.wf, "colab_session", lambda: {"name": "S02.ipynb", "path": "fileId=abc123"})
     fake_colab.mount_now()
     _notebook(fake_colab.my / "Uni" / "ARI1101" / "S02.ipynb")
-    kit.start("S02", student="Colab Student")
+    kit.start("ARI1101", "S02", student="Colab Student")
     assert kit._state["folder"] == (fake_colab.my / "Uni" / "ARI1101").resolve()
 
 
@@ -212,16 +220,16 @@ def test_colab_uses_the_drive_api_when_the_name_is_not_unique(fake_colab):
     _notebook(fake_colab.my / "A" / "S02.ipynb")
     _notebook(fake_colab.my / "B" / "S02.ipynb")
     fake_colab.mp.setattr(fake_colab.wf, "path_from_drive_api", lambda fid: fake_colab.my / "B")
-    kit.start("S02", student="Colab Student")
+    kit.start("ARI1101", "S02", student="Colab Student")
     assert kit._state["folder"] == (fake_colab.my / "B").resolve()
 
 
 def test_colab_notebook_from_github_falls_back_with_advice(fake_colab, capsys):
     fake_colab.mp.setattr(fake_colab.wf, "colab_session",
                           lambda: {"name": "S02.ipynb", "path": "/v2/external/notebooks/github/x.ipynb"})
-    kit.start("S02", student="Colab Student")
+    kit.start("ARI1101", "S02", student="Colab Student")
     assert fake_colab.state["mounts"] == 1          # Drive was not mounted yet, so kit.start mounted it
-    assert kit._state["folder"] == (fake_colab.my / "ARI1101" / "S02").resolve()
+    assert kit._state["folder"] == (fake_colab.my / "ai-learning-kit" / "ARI1101" / "S02").resolve()
     out = capsys.readouterr().out
     assert "not stored in Google Drive" in out and "Save a copy in Drive" in out
 
@@ -232,8 +240,8 @@ def test_colab_shared_notebook_falls_back_with_advice(fake_colab, capsys):
     def refuse(fid):
         raise PermissionError("not yours")
     fake_colab.mp.setattr(fake_colab.wf, "path_from_drive_api", refuse)
-    kit.start("S02", student="Colab Student")
-    assert kit._state["folder"] == (fake_colab.my / "ARI1101" / "S02").resolve()
+    kit.start("ARI1101", "S02", student="Colab Student")
+    assert kit._state["folder"] == (fake_colab.my / "ai-learning-kit" / "ARI1101" / "S02").resolve()
     assert "shared with you" in capsys.readouterr().out
 
 
@@ -251,7 +259,7 @@ def test_drive_api_path_walks_up_the_parent_folders(fake_colab):
 
 
 def test_colab_folder_argument_is_relative_to_my_drive_and_mounts_drive(fake_colab):
-    kit.start("S02", student="Charlie", folder="AI-Lectures/ari1101-Foundations of Data Science/tools")
+    kit.start("ARI1101", "S02", student="Charlie", folder="AI-Lectures/ari1101-Foundations of Data Science/tools")
     expected = (fake_colab.my / "AI-Lectures" / "ari1101-Foundations of Data Science" / "tools").resolve()
     assert fake_colab.state["mounts"] == 1 and kit._state["folder"] == expected
 
@@ -265,7 +273,7 @@ def test_colab_folder_spellings(fake_colab, given):
 
 def test_colab_rescues_files_written_while_drive_was_not_connected(fake_colab, capsys):
     # what v0.2.3 did with folder=...: a look-alike Drive folder on the temporary disk
-    ghost = fake_colab.my / "X" / "ari1101_answers" / "S02_Charlie.json"
+    ghost = fake_colab.my / "X" / "answers" / "ARI1101_S02_Charlie.json"
     ghost.parent.mkdir(parents=True)
     ghost.write_text('{"answers": {"T1.1": {}}}')
     real_drive_copy = {}
@@ -275,7 +283,7 @@ def test_colab_rescues_files_written_while_drive_was_not_connected(fake_colab, c
         (fake_colab.my).mkdir(parents=True, exist_ok=True)
         real_drive_copy["existed"] = ghost.exists()
     sys.modules["google.colab"].drive.mount = mount
-    kit.start("S02", student="Charlie", folder="X")
+    kit.start("ARI1101", "S02", student="Charlie", folder="X")
     assert real_drive_copy["existed"] is False          # the ghost folder was moved aside before mounting
     assert '"T1.1"' in ghost.read_text()                # ...and its answer book copied into Drive
     assert kit._state["book"].data["answers"].get("T1.1") is not None
@@ -284,7 +292,7 @@ def test_colab_rescues_files_written_while_drive_was_not_connected(fake_colab, c
 
 def test_sync_flushes_and_reconnects_drive(fake_colab):
     fake_colab.mount_now()
-    kit.start("S02", student="Charlie", folder="ARI1101/S02")
+    kit.start("ARI1101", "S02", student="Charlie", folder="ARI1101/S02")
     kit.sync()
     assert fake_colab.state["flushes"] == 1 and fake_colab.state["mounted"]
     import os
@@ -292,11 +300,11 @@ def test_sync_flushes_and_reconnects_drive(fake_colab):
 
 
 def test_local_relative_folder_is_taken_from_the_notebook_folder(tmp_path, monkeypatch):
-    from ari1101kit.core import workfolder
+    from ai_learning_kit.core import workfolder
     monkeypatch.setattr(workfolder, "START_DIR", tmp_path)
     monkeypatch.chdir(tmp_path)
-    kit.start("S02", student="Local Student", folder="work")
-    kit.start("S02", student="Local Student", folder="work")      # a second call must not nest folders
+    kit.start("ARI1101", "S02", student="Local Student", folder="work")
+    kit.start("ARI1101", "S02", student="Local Student", folder="work")      # a second call must not nest folders
     assert kit._state["folder"] == (tmp_path / "work").resolve()
 
 
@@ -304,5 +312,5 @@ def test_jupyter_session_name_gives_the_notebook_folder(tmp_path, monkeypatch):
     nb = _notebook(tmp_path / "notebooks" / "S02.ipynb")
     monkeypatch.chdir(tmp_path)
     monkeypatch.setenv("JPY_SESSION_NAME", str(nb))
-    kit.start("S02", student="Lab Student")
+    kit.start("ARI1101", "S02", student="Lab Student")
     assert kit._state["folder"] == nb.parent.resolve()

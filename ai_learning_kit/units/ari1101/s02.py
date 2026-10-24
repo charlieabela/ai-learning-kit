@@ -1,4 +1,4 @@
-"""Session 02: Data formats. Tasks, questions and formative checks for the Q3 compliance case.
+"""ARI1101 Session 02: Data formats. Tasks, questions and formative checks on the Brightwater Q3 case.
 
 In this session students read CSV, JSON and XML themselves, choose formats for
 what they extract, and convert between formats. Document extraction, the
@@ -15,13 +15,36 @@ from functools import lru_cache
 
 import pandas as pd
 
-from ..core import extract, pipeline, reference
-from ..core.case import SOURCES
-from ..core.feedback import Feedback
-from .s02_guide import GUIDE, render_markdown
+from ...core.checks import all_of, any_of, as_int, at_least, numeric_check, saved_only, written
+from ...core.feedback import Feedback
+from ...core.session import BLACK_BOX, FOCUS, OUT_OF_SCOPE, attach_guides, stage, task
+from ...problems.brightwater_q3 import extract, pipeline, reference
+from ...problems.brightwater_q3.case import SOURCES
+from .s02_guide import EXAMPLE_CASE, GUIDE
 
+UNIT = "ARI1101"
 SESSION = "S02"
 TITLE = "Data formats: gathering the evidence for the Q3 compliance review"
+PROBLEM = "brightwater_q3"
+
+STAGES = {
+    "survey": stage("Identifying file formats and data shapes", FOCUS),
+    "doc_extract": stage("Extracting rules, tables and text from Word, Excel, PDF and emails", BLACK_BOX,
+                         how="kit.extract", taught_in="ICS2205 Part A (text and information retrieval)",
+                         note="say only that the kit reads the document and returns Python data"),
+    "parse": stage("Reading CSV, JSON and XML with pandas, json and ElementTree", FOCUS),
+    "store": stage("Storing extracted data as JSON or CSV and reading it back; comparing formats", FOCUS),
+    "convert": stage("Currency conversion and boolean filters to select payments", FOCUS),
+    "combine": stage("Linking sources by key and merging tables", FOCUS),
+    "compliance": stage("Checking each payment against the policy rules", BLACK_BOX,
+                        how="kit.pipeline.compliance_check", taught_in="the Explore and Interpret sessions"),
+    "splits": stage("Finding split purchases across payments", BLACK_BOX, how="kit.pipeline.split_purchases"),
+    "report": stage("Laying out the Board report", BLACK_BOX, how="kit.report.compliance_report"),
+    "cleaning": stage("Cleaning and de-duplicating records", OUT_OF_SCOPE, taught_in="the ARI1101 Scrub session",
+                      note="students only notice the duplicates here"),
+    "modelling": stage("Statistics, machine learning and prediction", OUT_OF_SCOPE,
+                       taught_in="the ARI1101 Explore and Model sessions"),
+}
 
 
 # --------------------------------------------------------------------------- reference values
@@ -57,51 +80,6 @@ def _ref():
         "split_groups": len(splits),
         "stated": extract.board_report()["stated_high_value_count"],
     }
-
-
-def _num(value):
-    try:
-        if isinstance(value, bool):
-            return None
-        return int(value)
-    except (TypeError, ValueError):
-        return None
-
-
-def _numeric_check(key, how_to_check, explanation, wrong=None, evidence=None, right=None):
-    """Feedback for a single count.
-
-    key          : the reference value in _ref()
-    how_to_check : a line of code the student can run to verify
-    explanation  : why the reference value is right (shown with the suggested answer)
-    wrong        : {reference key or int: explanation} for common wrong values
-    evidence     : facts in the data that help, without giving the number away
-    right        : what a correct value means (shown with ✓)
-    """
-    def check(v):
-        expected = _ref()[key]
-        got = _num(v)
-        if got is None:
-            return Feedback(False, f"Record a whole number. You recorded {v!r}, a {type(v).__name__}.",
-                            ["Check that the value you pass is the count itself, for example len(high), "
-                             "not a DataFrame or a piece of text.", f"To check: {how_to_check}"],
-                            suggestion=f"{expected}. {explanation}")
-        if got == expected:
-            return Feedback(True, f"{got} is right." + (f" {right}" if right else ""))
-        details = [f"You recorded {got}."]
-        for wrong_key, why in (wrong or {}).items():
-            value = wrong_key if isinstance(wrong_key, int) else _ref()[wrong_key]
-            if got == value and value != expected:
-                details.append(f"Likely cause: {why}")
-                break
-        else:
-            details.append(f"Your count is {'higher' if got > expected else 'lower'} than the right count, "
-                           "and does not match any of the usual slips. Print the rows you counted and look at them.")
-        if evidence:
-            details.append(f"Evidence in the data: {evidence}")
-        details.append(f"To check: {how_to_check}")
-        return Feedback(False, "Not yet right.", details, suggestion=f"{expected}. {explanation}")
-    return check
 
 
 # --------------------------------------------------------------------------- T1.1
@@ -370,7 +348,7 @@ def _check_t81(v):
     if not isinstance(v, dict):
         return Feedback(False, f"Record a dictionary {{'stated': ..., 'ours': ...}}. You recorded {v!r}.")
     details = []
-    stated, ours = _num(v.get("stated")), _num(v.get("ours"))
+    stated, ours = as_int(v.get("stated")), as_int(v.get("ours"))
     if stated == ref["stated"]:
         details.append(f"✓ stated: {stated}, as in the Board report.")
     else:
@@ -388,62 +366,17 @@ def _check_t81(v):
 
 
 # --------------------------------------------------------------------------- written answers
-def _any(*patterns):
-    """A test that passes when the text matches any of the regular expressions (case-insensitive)."""
-    compiled = [re.compile(p, re.I | re.S) for p in patterns]
-    return lambda text: any(c.search(text) for c in compiled)
-
-
-def _all(*tests):
-    return lambda text: all(t(text) for t in tests)
-
-
-def _count(n, *tests):
-    return lambda text: sum(bool(t(text)) for t in tests) >= n
-
-
-def _written(points, model, what="reasoning"):
-    """Checklist feedback on a written answer.
-
-    points : list of (what a good answer covers, test, hint if it seems to be missing)
-    model  : a model answer, shown after several attempts if points are still missing
-
-    The tests look for key words, so they can miss a point made in other words. The
-    feedback therefore says "not found" rather than "wrong", and the lecturer reads
-    every written answer.
-    """
-    def check(text):
-        text = " ".join(str(text or "").split())
-        if not text or text.lower().startswith(("write your", "which format would you")):
-            return Feedback(None, f"No {what} yet: replace the placeholder text with your own answer.",
-                            [f"A good answer covers: " + "; ".join(p[0][0].lower() + p[0][1:] for p in points) + "."],
-                            suggestion=model, open_points=True)
-        verb = "cover" if what.endswith("s") else "covers"
-        found = [(label, hint) for label, test, hint in points if test(text)]
-        missing = [(label, hint) for label, test, hint in points if not test(text)]
-        details = [f"✓ {label}" for label, _ in found]
-        details += [f"○ Not found: {label[0].lower() + label[1:]} {hint}" for label, hint in missing]
-        if missing:
-            details.append("(The kit looks for key words, so a point you made in other words may show as not found. "
-                           "Your lecturer reads every written answer.)")
-            summary = f"Your {what} {verb} {len(found)} of {len(points)} points that a good answer includes:"
-        else:
-            summary = f"Your {what} {verb} all {len(points)} points that a good answer includes. Your lecturer reads it."
-        return Feedback(None, summary, details, suggestion=model, open_points=bool(missing))
-    return check
-
-
-_SOURCES_DIRECT = _count(2, _any(r"\bcsv\b", r"\berp\b"), _any(r"\bjson\b", r"\bbank"), _any(r"\bxml\b", r"approval", r"\bpws\b"))
-_EXTRACT = _all(_any(r"polic", r"\bword\b", r"docx", r"\bpdf\b", r"board", r"e-?mail"),
-                _any(r"extract", r"document", r"sentence", r"paragraph", r"layout", r"binary", r"unstructured",
+_SOURCES_DIRECT = at_least(2, any_of(r"\bcsv\b", r"\berp\b"), any_of(r"\bjson\b", r"\bbank"), any_of(r"\bxml\b", r"approval", r"\bpws\b"))
+_EXTRACT = all_of(any_of(r"polic", r"\bword\b", r"docx", r"\bpdf\b", r"board", r"e-?mail"),
+                any_of(r"extract", r"document", r"sentence", r"paragraph", r"layout", r"binary", r"unstructured",
                      r"not structured", r"free text", r"written", r"text"))
-_COMBINE = _any(r"combin", r"together", r"more than one", r"several", r"no single", r"not .{0,20}single", r"\blink",
+_COMBINE = any_of(r"combin", r"together", r"more than one", r"several", r"no single", r"not .{0,20}single", r"\blink",
                 r"merg", r"\bjoin", r"each source", r"cross", r"\bboth\b", r"all of them", r"multiple")
-_ROLES = _count(3, _any(r"\berp\b", r"payment", r"paid"), _any(r"approv", r"\bpws\b"),
-                _any(r"polic", r"\brule"), _any(r"vendor", r"supplier"), _any(r"\bbank"))
+_ROLES = at_least(3, any_of(r"\berp\b", r"payment", r"paid"), any_of(r"approv", r"\bpws\b"),
+                any_of(r"polic", r"\brule"), any_of(r"vendor", r"supplier"), any_of(r"\bbank"))
 
 WRITTEN = {
-    "T1.2": _written([
+    "T1.2": written([
         ("It names the sources that can be read directly (ERP as CSV, bank feed as JSON, approvals as XML).",
          _SOURCES_DIRECT, "Name the sources in the first group and the tool that reads each: pd.read_csv, json.load, ET.parse."),
         ("It says which sources need extraction (policy, board report, emails) and why.",
@@ -461,41 +394,41 @@ WRITTEN = {
         "vendor list can be opened with pd.read_excel once you skip its title lines. No single source answers the "
         "question: the ERP says what was paid, the bank confirms it left the account, the approvals say who "
         "authorised it, the policy says who should have, and the vendor list says who may be paid.")),
-    "T2.1": _written([
-        ("It says that rules is a list.", _any(r"\blist"), "type(rules) shows the type of the whole object."),
-        ("It says that each rule is a dictionary.", _any(r"dict"), "type(rules[0]) shows the type of one item."),
+    "T2.1": written([
+        ("It says that rules is a list.", any_of(r"\blist"), "type(rules) shows the type of the whole object."),
+        ("It says that each rule is a dictionary.", any_of(r"dict"), "type(rules[0]) shows the type of one item."),
     ], model="rules is a list of dictionaries, one dictionary per rule or exception."),
-    "T2.3": _written([
-        ("It says the reloaded value is a string (text), not a dictionary.", _any(r"\bstr", r"string", r"\btext"),
+    "T2.3": written([
+        ("It says the reloaded value is a string (text), not a dictionary.", any_of(r"\bstr", r"string", r"\btext"),
          "Look at the type printed next to the value."),
-        ("It says the nested structure was lost.", _any(r"lost", r"lose", r"flat", r"no longer", r"structure", r"nest"),
+        ("It says the nested structure was lost.", any_of(r"lost", r"lose", r"flat", r"no longer", r"structure", r"nest"),
          "What can you no longer do with the value, for example read its 'roles' list?"),
-        ("It chooses JSON for the rules.", _any(r"\bjson"), "Which format gave the rules back unchanged in T2.2?"),
+        ("It chooses JSON for the rules.", any_of(r"\bjson"), "Which format gave the rules back unchanged in T2.2?"),
     ], model=(
         "After the CSV round trip the approvers value is a string that only looks like a dictionary: CSV stores text "
         "only, so the nested structure is lost and the roles cannot be used without re-parsing the text. JSON gave "
         "the rules back identical (T2.2), so JSON is the right format for the rules.")),
-    "T3.4": _written([
+    "T3.4": written([
         ("It excludes the payment of exactly €5,000, because the policy says 'above'.",
-         _all(_any(r"5[,.]?000"), _any(r"above", r"more than", r"greater", r"strictly", r">", r"exceed")),
+         all_of(any_of(r"5[,.]?000"), any_of(r"above", r"more than", r"greater", r"strictly", r">", r"exceed")),
          "Quote the word the policy uses and say what it means for a payment of exactly 5,000.00."),
         ("It converts the USD payment to euro and finds it below the threshold.",
-         _any(r"4[,.]?876", r"convert", r"euro equivalent", r"0\.92", r"\br7\b"),
+         any_of(r"4[,.]?876", r"convert", r"euro equivalent", r"0\.92", r"\br7\b"),
          "Apply rule R7: what is 5,300 dollars in euro?"),
         ("It reaches a decision for each payment.",
-         _any(r"not .{0,25}(includ|review|part)", r"exclud", r"neither", r"should not", r"does not qualify",
+         any_of(r"not .{0,25}(includ|review|part)", r"exclud", r"neither", r"should not", r"does not qualify",
               r"out of scope", r"\bbelow\b", r"not above"),
          "Say clearly whether each payment is in or out of the review."),
     ], model=(
         "Neither payment belongs in the review. Rule R1 applies to expenditure 'above €5,000', so a payment of exactly "
         "€5,000.00 does not qualify. Rule R7 says thresholds apply to the euro equivalent: USD 5,300 × 0.92 = €4,876, "
         "which is below €5,000.")),
-    "T4.4": _written([
+    "T4.4": written([
         ("It suggests that some payments appear twice in the bank feed.",
-         _any(r"duplicat", r"twice", r"two times", r"double", r"repeat", r"more than once"),
+         any_of(r"duplicat", r"twice", r"two times", r"double", r"repeat", r"more than once"),
          "Could the bank have paid the same invoice twice?"),
         ("It suggests that some bank payments were never recorded in the ERP.",
-         _any(r"not recorded", r"missing", r"unrecorded", r"not in the erp", r"no erp", r"never .{0,15}(record|enter)",
+         any_of(r"not recorded", r"missing", r"unrecorded", r"not in the erp", r"no erp", r"never .{0,15}(record|enter)",
               r"not .{0,10}entered", r"outside", r"without"),
          "Could money leave the account without a matching ERP entry?"),
     ], model=(
@@ -503,29 +436,29 @@ WRITTEN = {
         "left the account, so the same invoice can appear twice if it was paid twice, and a payment can appear "
         "that finance never recorded in the ERP. T4.5 finds both: two duplicated references and one payment with "
         "no ERP reference.")),
-    "T5.4": _written([
-        ("It names values read from attributes.", _all(_any(r"attribut"), _any(r"amount", r"erp_ref", r"role", r"currency", r"decision", r"date")),
+    "T5.4": written([
+        ("It names values read from attributes.", all_of(any_of(r"attribut"), any_of(r"amount", r"erp_ref", r"role", r"currency", r"decision", r"date")),
          "Which values sit inside the opening tag, like amount=\"...\"?"),
-        ("It names values that are element text.", _all(_any(r"\btext"), _any(r"name", r"vendor", r"description", r"approver")),
+        ("It names values that are element text.", all_of(any_of(r"\btext"), any_of(r"name", r"vendor", r"description", r"approver")),
          "Which value sits between <Approver ...> and </Approver>?"),
         ("It says that amount had to be converted because XML stores text.",
-         _all(_any(r"to_numeric", r"convert", r"numeric", r"number", r"float"), _any(r"text", r"string", r"\bstr")),
+         all_of(any_of(r"to_numeric", r"convert", r"numeric", r"number", r"float"), any_of(r"text", r"string", r"\bstr")),
          "What type did req.get('amount') return?"),
     ], model=(
         "erp_ref, amount and currency are attributes of <Request>; role, decision and date are attributes of "
         "<Approver>. The approver's name, the vendor name and the description are element text. XML stores "
         "everything as text, so amount had to be converted with pd.to_numeric (and dates would need pd.to_datetime "
         "before comparing them with payment dates).")),
-    "T6.2": _written([
+    "T6.2": written([
         ("It explains why the JSON file is bigger.",
-         _any(r"repeat", r"field names", r"column names", r"\bkeys\b", r"every record", r"each record", r"verbose",
+         any_of(r"repeat", r"field names", r"column names", r"\bkeys\b", r"every record", r"each record", r"verbose",
               r"names .{0,20}(each|every)"),
          "Print the start of the JSON file: what is written again in every record?"),
         ("It chooses a format for the finance team and says why.",
-         _all(_any(r"\bcsv"), _any(r"excel", r"finance", r"spreadsheet", r"smaller", r"simple", r"open")),
+         all_of(any_of(r"\bcsv"), any_of(r"excel", r"finance", r"spreadsheet", r"smaller", r"simple", r"open")),
          "Which format opens directly in Excel?"),
         ("It says what the formats lose or keep when read back.",
-         _any(r"dtype", r"\btype", r"date", r"lost", r"lose", r"keep", r"nest", r"as text"),
+         any_of(r"dtype", r"\btype", r"date", r"lost", r"lose", r"keep", r"nest", r"as text"),
          "Look at the dtypes table: which column types survive, and would a date or a list survive?"),
     ], model=(
         "The table is flat, one row per payment, so CSV represents it fully and is less than half the size of the "
@@ -533,22 +466,22 @@ WRITTEN = {
         "the better choice for them. Both files return the same dtypes here only because posting_date is still "
         "text: neither format has a date type, so dates come back as text. JSON would be the choice for a program "
         "or an API, or if a row needed nested values such as a list of approvers.")),
-    "T6.3": _written([
+    "T6.3": written([
         ("It describes the structure pandas wrote (one <row> per row, one element per column).",
-         _any(r"\brow", r"element per", r"each column", r"one element"), "Look at the first <row> in the printout."),
+         any_of(r"\brow", r"element per", r"each column", r"one element"), "Look at the first <row> in the printout."),
         ("It compares with the PWS export (attributes, nesting).",
-         _any(r"attribut", r"nest", r"flat"), "Where did the PWS export keep erp_ref, and how were approvers stored?"),
+         any_of(r"attribut", r"nest", r"flat"), "Where did the PWS export keep erp_ref, and how were approvers stored?"),
     ], model=(
         "pandas writes one <row> element per row with one child element per column, all as element text. The PWS "
         "export used attributes for key fields and nested <Approver> elements; the table has no nesting, so the "
         "roles survive only as one joined string. XML written from a DataFrame is a flat table dressed as a tree.")),
-    "T7.2": _written([
+    "T7.2": written([
         ("It says the narrow question misses payments below €5,000 that add up to more.",
-         _all(_any(r"below", r"under", r"less than", r"smaller"),
-              _any(r"split", r"separate", r"several", r"combin", r"add up", r"together", r"total")),
+         all_of(any_of(r"below", r"under", r"less than", r"smaller"),
+              any_of(r"split", r"separate", r"several", r"combin", r"add up", r"together", r"total")),
          "What happens to three payments of €4,800 to the same supplier in one week, if you filter amount > 5000?"),
         ("It says what the emails add (intent or context the tables cannot show).",
-         _all(_any(r"e-?mail"), _any(r"intent", r"deliberate", r"on purpose", r"avoid", r"ask", r"request", r"why",
+         all_of(any_of(r"e-?mail"), any_of(r"intent", r"deliberate", r"on purpose", r"avoid", r"ask", r"request", r"why",
                                     r"context", r"evidence", r"explain")),
          "Read the Marketing email: what does it show that the payments table cannot?"),
     ], model=(
@@ -556,31 +489,31 @@ WRITTEN = {
         "within 7 days, so a filter on 'amount > 5000' never sees them. The Marketing email shows that the Kestrel "
         "split was requested deliberately to avoid the approval route: text adds intent and context that the "
         "tables cannot carry.")),
-    "T8.1": _written([
+    "T8.1": written([
         ("It compares the report's wording ('5,000 or more') with the policy's ('above').",
-         _any(r"or more", r">=", r"at least", r"equal", r"exactly", r"inclusive", r"above"),
+         any_of(r"or more", r">=", r"at least", r"equal", r"exactly", r"inclusive", r"above"),
          "Read board['stated_threshold'] and compare it with rule R1."),
         ("It explains the role of currency (the USD payment counted unconverted).",
-         _any(r"usd", r"dollar", r"currenc", r"convert", r"euro equivalent"),
+         any_of(r"usd", r"dollar", r"currenc", r"convert", r"euro equivalent"),
          "Was the USD 5,300 payment counted in dollars or in euro?"),
         ("It accounts for the size of the difference.",
-         _any(r"\btwo\b", r"\b2\b", r"both", r"each"),
+         any_of(r"\btwo\b", r"\b2\b", r"both", r"each"),
          "How many payments does each cause add?"),
     ], model=(
         "The Board report counts 41 payments 'of EUR 5,000 or more', using the amounts as recorded, while the policy "
         "asks for payments above €5,000 in euro. The difference of two is the payment of exactly €5,000.00 "
         "(included by 'or more') and the USD 5,300 payment (counted in dollars, but €4,876 in euro). The report "
         "also states that all such payments complied with the policy, which the review contradicts.")),
-    "T8.2v": _written([
+    "T8.2v": written([
         ("It gives the answer: the number of payments above €5,000 and how many did not comply.",
-         _all(_any(r"\b39\b", r"thirty-nine"), _any(r"\b11\b", r"eleven")),
+         all_of(any_of(r"\b39\b", r"thirty-nine"), any_of(r"\b11\b", r"eleven")),
          "State both numbers from T3.3 and T7.1."),
         ("It names the main kinds of breach.",
-         _count(2, _any(r"approv"), _any(r"supplier", r"vendor", r"suspend"), _any(r"late", r"after payment", r"timing"),
-                _any(r"reject"), _any(r"cfo", r"finance manager"), _any(r"split")),
+         at_least(2, any_of(r"approv"), any_of(r"supplier", r"vendor", r"suspend"), any_of(r"late", r"after payment", r"timing"),
+                any_of(r"reject"), any_of(r"cfo", r"finance manager"), any_of(r"split")),
          "Look at the issues column of findings: missing approvers, late approvals, suspended or unlisted suppliers..."),
         ("It states a limitation of the review.",
-         _any(r"limit", r"\bonly\b", r"could not", r"cannot", r"not includ", r"rel(y|ies|ied) on", r"assum", r"not see",
+         any_of(r"limit", r"\bonly\b", r"could not", r"cannot", r"not includ", r"rel(y|ies|ied) on", r"assum", r"not see",
               r"outside"),
          "What could the review not see, given the sources it used?"),
     ], model=(
@@ -589,11 +522,11 @@ WRITTEN = {
         "some had no approval in PWS or were paid to a suspended or unlisted supplier. Five further payments below "
         "€5,000 form two possible split purchases, one of them requested deliberately. The review relies on the PWS "
         "export and the emails provided; approvals recorded elsewhere would not have been seen."), what="findings"),
-    "T8.2": _written([
+    "T8.2": written([
         ("It chooses a document format for the Board (Word, PDF or the HTML page).",
-         _any(r"word", r"docx", r"\bpdf", r"html", r"report", r"document"), "Which file did the kit create for people to read?"),
+         any_of(r"word", r"docx", r"\bpdf", r"html", r"report", r"document"), "Which file did the kit create for people to read?"),
         ("It says why CSV or JSON would not suit the Board.",
-         _all(_any(r"\bcsv", r"\bjson"), _any(r"raw", r"data", r"chart", r"narrative", r"explan", r"read", r"machine",
+         all_of(any_of(r"\bcsv", r"\bjson"), any_of(r"raw", r"data", r"chart", r"narrative", r"explan", r"read", r"machine",
                                                r"program", r"row", r"context", r"layout")),
          "What does a Board member need that a CSV or JSON file cannot give?"),
     ], model=(
@@ -603,49 +536,39 @@ WRITTEN = {
 }
 
 
-def _saved(v):
-    return Feedback(None, "Saved. Your lecturer reads this answer.")
-
-
-# --------------------------------------------------------------------------- task register
-def _task(title, question, check=None, needs_value=False, needs_reasoning=False, written=None):
-    return dict(title=title, question=question, check=check, needs_value=needs_value,
-                needs_reasoning=needs_reasoning, written=written)
-
-
 TASKS = {
-    "T1.1": _task("Format and shape of each source",
+    "T1.1": task("Format and shape of each source",
                   "For each of the seven sources, record its file format and the shape of its data "
                   "(table, nested, tree or document) in the survey dictionary.",
                   _check_t11, needs_value=True),
-    "T1.2": _task("What can be read directly",
+    "T1.2": task("What can be read directly",
                   "(a) Which sources can Python read directly with pandas, json or ElementTree, and which need their "
                   "information extracted first? (b) Which source gives which part of the answer, and why is no single "
                   "source enough?",
                   needs_reasoning=True, written=WRITTEN["T1.2"]),
-    "T2.1": _task("Number of policy rules",
+    "T2.1": task("Number of policy rules",
                   "How many items does kit.extract.policy_rules() return, and what Python type is the result and each item?",
-                  _numeric_check("rules", "print(len(rules)) and [r['rule_id'] for r in rules]",
+                  numeric_check(_ref, "rules", "print(len(rules)) and [r['rule_id'] for r in rules]",
                                  "Eight rules (R1 to R8) and one exception (E1), one dictionary each.",
                                  wrong={8: "you counted the rules R1 to R8 but not the exception E1, which is also an item "
                                            "in the list. len(rules) counts every item."},
                                  evidence="the list holds one dictionary per rule or exception; each has a 'rule_id' key.",
                                  right="Eight rules and one exception."),
                   needs_value=True, needs_reasoning=True, written=WRITTEN["T2.1"]),
-    "T2.2": _task("Rules round trip through JSON",
+    "T2.2": task("Rules round trip through JSON",
                   "Save the rules to policy_rules.json, read them back, and record whether the reloaded object equals the original.",
                   _check_true, needs_value=True),
-    "T2.3": _task("Rules round trip through CSV",
+    "T2.3": task("Rules round trip through CSV",
                   "Save the rules as CSV and read them back. Record the reloaded 'approvers' value of rule R2. What happened "
                   "to the nested fields, and which format suits the rules?",
                   _check_t23, needs_value=True, needs_reasoning=True, written=WRITTEN["T2.3"]),
-    "T2.4": _task("Thresholds table as a DataFrame",
+    "T2.4": task("Thresholds table as a DataFrame",
                   "Turn the policy's threshold table into a DataFrame with the number of approvers stored as a number.",
                   _check_t24, needs_value=True),
-    "T3.1": _task("ERP shape", "Read the ERP CSV file and record its shape (rows, columns).", _check_shape, needs_value=True),
-    "T3.2": _task("ERP rows with amount > 5000",
+    "T3.1": task("ERP shape", "Read the ERP CSV file and record its shape (rows, columns).", _check_shape, needs_value=True),
+    "T3.2": task("ERP rows with amount > 5000",
                   "How many ERP rows have an amount greater than 5000, ignoring currency?",
-                  _numeric_check("erp_gt5000_any", "(erp['amount'] > 5000).sum()",
+                  numeric_check(_ref, "erp_gt5000_any", "(erp['amount'] > 5000).sum()",
                                  "Every row with an amount above 5000, whatever its currency.",
                                  wrong={"erp_gt5000_eur_only": "that is the number of EUR rows only. This task ignores "
                                                                "currency: include the USD rows too (T3.3 deals with currency).",
@@ -656,9 +579,9 @@ TASKS = {
                                  evidence="the ERP has 426 rows; erp['amount'].describe() shows the range of amounts, "
                                           "and one payment is exactly 5000.00."),
                   needs_value=True),
-    "T3.3": _task("ERP payments above €5,000 in euro",
+    "T3.3": task("ERP payments above €5,000 in euro",
                   "How many ERP payments are above €5,000 once USD amounts are converted at the R7 rate?",
-                  _numeric_check("erp_high", "erp['amount_eur'] = erp['amount'].where(erp['currency'] == 'EUR', "
+                  numeric_check(_ref, "erp_high", "erp['amount_eur'] = erp['amount'].where(erp['currency'] == 'EUR', "
                                              "erp['amount'] * rate), then (erp['amount_eur'] > 5000).sum()",
                                  "USD amounts are converted at 0.92 EUR per USD (rule R7), then payments strictly above "
                                  "5000 are counted. The USD 5,300 payment becomes €4,876 and drops out; the payment of "
@@ -675,14 +598,14 @@ TASKS = {
                                           "and work out which stay above €5,000 after conversion.",
                                  right="USD amounts converted, and only payments strictly above €5,000 counted."),
                   needs_value=True),
-    "T3.4": _task("Boundary and currency cases",
+    "T3.4": task("Boundary and currency cases",
                   "Should the payment of exactly €5,000.00 and the USD 5,300.00 payment be in the review? Justify each "
                   "with the policy's wording.",
                   needs_reasoning=True, written=WRITTEN["T3.4"]),
-    "T4.1": _task("Bank feed top-level keys", "Load the bank feed with json.load and record its top-level keys.",
+    "T4.1": task("Bank feed top-level keys", "Load the bank feed with json.load and record its top-level keys.",
                   _check_keys, needs_value=True),
-    "T4.2": _task("Bank transactions", "How many transactions does the bank feed contain?",
-                  _numeric_check("bank_n", "len(bank_doc['transactions'])",
+    "T4.2": task("Bank transactions", "How many transactions does the bank feed contain?",
+                  numeric_check(_ref, "bank_n", "len(bank_doc['transactions'])",
                                  "The 'transactions' list holds 429 items, three more than the ERP's 426 payments.",
                                  wrong={"erp_n": "that is the number of rows in the ERP file (T3.1). Count the items in "
                                                  "the bank feed's 'transactions' list instead.",
@@ -691,11 +614,11 @@ TASKS = {
                                         "bank_high": "that is the number above €5,000 (T4.4). This task asks for all transactions."},
                                  evidence="bank_doc['transactions'] is a list with one dictionary per transaction."),
                   needs_value=True),
-    "T4.3": _task("Flattened bank columns", "Flatten the transactions with pd.json_normalize and record the column names.",
+    "T4.3": task("Flattened bank columns", "Flatten the transactions with pd.json_normalize and record the column names.",
                   _check_cols, needs_value=True),
-    "T4.4": _task("Bank payments above €5,000",
+    "T4.4": task("Bank payments above €5,000",
                   "How many bank transactions are above €5,000 in euro? Why might this differ from your ERP count?",
-                  _numeric_check("bank_high", "bank['amount_eur'] = bank['amount.value'].where(bank['amount.currency'] "
+                  numeric_check(_ref, "bank_high", "bank['amount_eur'] = bank['amount.value'].where(bank['amount.currency'] "
                                               "== 'EUR', bank['amount.value'] * rate), then (bank['amount_eur'] > 5000).sum()",
                                  "Convert USD at 0.92 and count amount_eur > 5000. The bank shows three more than the ERP: "
                                  "two payments appear twice and one payment has no ERP record (T4.5).",
@@ -707,66 +630,65 @@ TASKS = {
                                  evidence="17 bank transactions are in USD (bank['amount.currency'].value_counts()); the "
                                           "amounts are in the column 'amount.value'."),
                   needs_value=True, needs_reasoning=True, written=WRITTEN["T4.4"]),
-    "T4.5": _task("Duplicated bank entries", "Which ERP references appear more than once in the bank feed?",
+    "T4.5": task("Duplicated bank entries", "Which ERP references appear more than once in the bank feed?",
                   _check_dupes, needs_value=True),
-    "T5.1": _task("Number of approval requests", "How many <Request> elements does the PWS export contain?",
-                  _numeric_check("requests", "len(root.findall('Request'))",
+    "T5.1": task("Number of approval requests", "How many <Request> elements does the PWS export contain?",
+                  numeric_check(_ref, "requests", "len(root.findall('Request'))",
                                  "The export holds 37 <Request> elements: two high-value payments have no request at all.",
                                  wrong={0: "findall found nothing. Tags are case-sensitive: use 'Request' with a capital R, "
                                            "and call findall on root."},
                                  evidence="kit.peek('approvals', lines=14) shows that each request starts with <Request ...> "
                                           "directly inside <ApprovalLog>."),
                   needs_value=True),
-    "T5.2": _task("Requests as a DataFrame",
+    "T5.2": task("Requests as a DataFrame",
                   "Build a DataFrame with one row per request: erp_ref, amount (numeric), currency, n_approvers and roles.",
                   _check_t52, needs_value=True),
-    "T5.3": _task("Requests with fewer than two approvers", "How many requests have fewer than two approvers recorded?",
-                  _numeric_check("req_lt2", "(pws['n_approvers'] < 2).sum()",
+    "T5.3": task("Requests with fewer than two approvers", "How many requests have fewer than two approvers recorded?",
+                  numeric_check(_ref, "req_lt2", "(pws['n_approvers'] < 2).sum()",
                                  "Three requests have only the Budget Holder's approval.",
                                  wrong={"req_le2": "that count uses <= 2. 'Fewer than two' means < 2.",
                                         31: "that is the number of requests with exactly two approvers."},
                                  evidence="pws['n_approvers'].value_counts() shows how many requests have 1, 2 or 3 approvers."),
                   needs_value=True),
-    "T5.4": _task("Attributes and element text",
+    "T5.4": task("Attributes and element text",
                   "Which values did you read from attributes and which from element text? Which needed a type "
                   "conversion, and why?",
                   needs_reasoning=True, written=WRITTEN["T5.4"]),
-    "T6.1": _task("Combined high-value table",
+    "T6.1": task("Combined high-value table",
                   "Combine the ERP payments above €5,000 with the approval requests into one table, one row per payment.",
                   _check_t61, needs_value=True),
-    "T6.2": _task("Choosing a format",
+    "T6.2": task("Choosing a format",
                   "Save the combined table as CSV and as JSON and record both file sizes. Which format would you send to "
                   "the finance team, and what does each format lose when read back?",
                   _check_sizes, needs_value=True, needs_reasoning=True, written=WRITTEN["T6.2"]),
-    "T6.3": _task("Extension: convert back to XML",
+    "T6.3": task("Extension: convert back to XML",
                   "Optional. Write the combined table as XML with df.to_xml(). How does it compare with the PWS export's structure?",
                   needs_reasoning=True, written=WRITTEN["T6.3"]),
-    "T7.1": _task("Transactions not compliant",
+    "T7.1": task("Transactions not compliant",
                   "Run kit.pipeline.compliance_check on your saved table. How many transactions are not compliant?",
-                  _numeric_check("noncompliant", "(~findings['compliant']).sum()",
+                  numeric_check(_ref, "noncompliant", "(~findings['compliant']).sum()",
                                  "11 of the 39 payments break at least one rule.",
                                  wrong={"compliant": "that is the number of compliant payments. Count those where compliant is False.",
                                         "erp_high": "that is the number of payments checked (all rows of findings). "
                                                     "Count only the rows where compliant is False."},
                                  evidence="findings['compliant'].value_counts() shows how many payments are True and False."),
                   needs_value=True),
-    "T7.2": _task("Split purchases and emails",
+    "T7.2": task("Split purchases and emails",
                   "How many payments are involved in possible split purchases? What would a review that only looks at "
                   "payments above €5,000 miss, and what do the emails add?",
-                  _numeric_check("split_payments", "splits['n_payments'].sum()",
+                  numeric_check(_ref, "split_payments", "splits['n_payments'].sum()",
                                  "Two groups: three Kestrel Print payments and two Harbour IT payments.",
                                  wrong={"split_groups": "that is the number of groups (rows of splits). Count the payments in them.",
                                         3: "that is one group only. Add up n_payments over all the groups."},
                                  evidence="display(splits) shows one row per group; n_payments says how many payments each holds."),
                   needs_value=True, needs_reasoning=True, written=WRITTEN["T7.2"]),
-    "T8.1": _task("Board report against your count",
+    "T8.1": task("Board report against your count",
                   "Record the number of large payments stated in the Board report and your own count. Explain the difference.",
                   _check_t81, needs_value=True, needs_reasoning=True, written=WRITTEN["T8.1"]),
-    "T8.2": _task("Your findings and the report",
+    "T8.2": task("Your findings and the report",
                   "Write your findings (3 to 6 sentences) and generate the report. Which format would you send to the "
                   "Board, and why not CSV or JSON?",
                   WRITTEN["T8.2v"], needs_value=True, needs_reasoning=True, written=WRITTEN["T8.2"]),
 }
 
-for _tid, _t in TASKS.items():
-    _t["guide"] = GUIDE[_tid]
+attach_guides(TASKS, GUIDE, example_case=EXAMPLE_CASE)
