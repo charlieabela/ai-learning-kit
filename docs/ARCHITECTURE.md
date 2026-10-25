@@ -106,7 +106,7 @@ grades, and the answer book records only the kit's deterministic checks.
 
 ## Versioning and compatibility
 
-Releases are tagged; notebooks install a tag (`@v0.3.2`). A problem's data and a
+Releases are tagged; notebooks install a tag (`@v0.4.0`). A problem's data and a
 released session's tasks are never changed afterwards: fix a problem by adding a
 new id, extend a session by adding a new session. Earlier tags remain
 installable, so a notebook keeps working against the tag it installs.

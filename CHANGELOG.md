@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased · Notebooks install v0.4.0
+
+- The ARI1101 S02 notebook installs `v0.4.0` (install line and `metadata["ai_learning_kit"]`), and the README and architecture notes name `v0.4.0`. No code changed: 0.4.0 differs from 0.3.2 only by the removed `ari1101kit` package, which S02 does not use. Notebook Tutor 0.1.6 bundles 0.4.0, so the two agree.
+
 ## 0.4.0 · One package name
 
 - The compatibility package kept from before 0.3.0 is removed: the distribution now installs only `ai_learning_kit`. Use `import ai_learning_kit as kit` and `kit.start("ARI1101", "S02", student=...)`.

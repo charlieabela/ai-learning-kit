@@ -19,7 +19,7 @@ All companies, people and documents in the problems are fictional.
 ## Use in a notebook (Colab, Jupyter or VS Code)
 
 ```python
-%pip install -q "git+https://github.com/charlieabela/ai-learning-kit@v0.3.2"
+%pip install -q "git+https://github.com/charlieabela/ai-learning-kit@v0.4.0"
 import ai_learning_kit as kit
 
 kit.start("ARI1101", "S02", student="Your Name")   # work is kept next to this notebook
@@ -46,7 +46,7 @@ relative to My Drive).
 **What to install.** The line above covers ARI1101. Sessions on graphs add
 `[graphs]` (networkx, scikit-learn), and sessions on embeddings and graph neural
 networks add `[advanced]` (PyTorch, PyTorch Geometric):
-`%pip install -q "ai-learning-kit[advanced] @ git+https://github.com/charlieabela/ai-learning-kit@v0.3.2"`.
+`%pip install -q "ai-learning-kit[advanced] @ git+https://github.com/charlieabela/ai-learning-kit@v0.4.0"`.
 [Notebook Tutor](https://github.com/charlieabela/notebook-tutor) installs the kit
 for students who work on their own computers.
 
