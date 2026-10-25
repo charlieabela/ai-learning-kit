@@ -18,9 +18,14 @@ jobs:
             python: "3.10"
     runs-on: ${{ matrix.os }}
     env:
-      AILK_ONLINE: "1"        # download every registered dataset from its owner and check its checksum
+      AILK_ONLINE: "1"        # contact every dataset owner and check the file's checksum (a refused connection is a warning)
       AILK_EXECUTE: "1"       # execute every notebook named by a session
       MPLBACKEND: Agg
+      # Course copies for datasets whose owners refuse cloud machines, as lines "name=<shared link>".
+      # Set them in Settings > Secrets and variables > Actions > AILK_DATA_SOURCES. When the secret is set,
+      # tests that need a dataset fail if it cannot be obtained; without it they are skipped.
+      AILK_DATA_SOURCES: ${{ secrets.AILK_DATA_SOURCES }}
+      AILK_REQUIRE_DATA: ${{ secrets.AILK_DATA_SOURCES != '' }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5

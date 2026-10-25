@@ -117,11 +117,16 @@ grades, and the answer book records only the kit's deterministic checks.
 
 External datasets are downloaded from their owners, never copied into the kit
 (`datasets/`): each is recorded with its owner, address, checksum, licence note and
-citation; `kit.start` fetches a session's datasets, checks them, and caches them
-(`AILK_DATA_DIR`, My Drive › ai-learning-kit › data in Colab with Drive, or the
-user's cache folder). A copy placed next to the notebook is used when the owner's
-site cannot be reached. Small research datasets that libraries ship come from those
-libraries; fictional case files and reference results are packaged with the kit.
+citation. `kit.start` fetches a session's datasets: from the data folder, beside the
+notebook, from added folders (synced Google Drive or OneDrive folders, Drive in
+Colab), from the owner, from lecturer-approved course copies, and from locations
+given with `datasets.use()` (files, folders, or Google Drive, OneDrive/SharePoint and
+Dropbox links). Every copy is checked against the checksum and kept in the data
+folder: `AILK_DATA_DIR` (Notebook Tutor sets it to its clone's `data/`), the kit
+clone's `data/`, My Drive › ai-learning-kit › data in Colab, or the user's cache
+folder. Small research datasets are stored in `datasets/small_data/` with their
+citations; fictional case files and reference results are packaged with their
+problem or session.
 
 ## Notebooks
 

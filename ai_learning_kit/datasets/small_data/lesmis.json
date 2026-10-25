@@ -1,0 +1,2099 @@
+{
+"title": "Les Miserables co-appearance network",
+"citation": "Knuth, D. E. (1993). The Stanford GraphBase: A Platform for Combinatorial Computing. Addison-Wesley.",
+"licence": "Data from the cited publication, as distributed with networkx (BSD-3-Clause); stored here so that it is available offline and does not change with the installed networkx version.",
+"notes": "77 characters; an edge joins two characters who appear in the same chapter; 'weight' counts the chapters.",
+"source": "networkx 3.7, nx.les_miserables_graph()",
+"directed": false,
+"graph": {},
+"nodes": [
+[
+"Napoleon",
+{}
+],
+[
+"Myriel",
+{}
+],
+[
+"MlleBaptistine",
+{}
+],
+[
+"MmeMagloire",
+{}
+],
+[
+"CountessDeLo",
+{}
+],
+[
+"Geborand",
+{}
+],
+[
+"Champtercier",
+{}
+],
+[
+"Cravatte",
+{}
+],
+[
+"Count",
+{}
+],
+[
+"OldMan",
+{}
+],
+[
+"Valjean",
+{}
+],
+[
+"Labarre",
+{}
+],
+[
+"Marguerite",
+{}
+],
+[
+"MmeDeR",
+{}
+],
+[
+"Isabeau",
+{}
+],
+[
+"Gervais",
+{}
+],
+[
+"Listolier",
+{}
+],
+[
+"Tholomyes",
+{}
+],
+[
+"Fameuil",
+{}
+],
+[
+"Blacheville",
+{}
+],
+[
+"Favourite",
+{}
+],
+[
+"Dahlia",
+{}
+],
+[
+"Zephine",
+{}
+],
+[
+"Fantine",
+{}
+],
+[
+"MmeThenardier",
+{}
+],
+[
+"Thenardier",
+{}
+],
+[
+"Cosette",
+{}
+],
+[
+"Javert",
+{}
+],
+[
+"Fauchelevent",
+{}
+],
+[
+"Bamatabois",
+{}
+],
+[
+"Perpetue",
+{}
+],
+[
+"Simplice",
+{}
+],
+[
+"Scaufflaire",
+{}
+],
+[
+"Woman1",
+{}
+],
+[
+"Judge",
+{}
+],
+[
+"Champmathieu",
+{}
+],
+[
+"Brevet",
+{}
+],
+[
+"Chenildieu",
+{}
+],
+[
+"Cochepaille",
+{}
+],
+[
+"Pontmercy",
+{}
+],
+[
+"Boulatruelle",
+{}
+],
+[
+"Eponine",
+{}
+],
+[
+"Anzelma",
+{}
+],
+[
+"Woman2",
+{}
+],
+[
+"MotherInnocent",
+{}
+],
+[
+"Gribier",
+{}
+],
+[
+"MmeBurgon",
+{}
+],
+[
+"Jondrette",
+{}
+],
+[
+"Gavroche",
+{}
+],
+[
+"Gillenormand",
+{}
+],
+[
+"Magnon",
+{}
+],
+[
+"MlleGillenormand",
+{}
+],
+[
+"MmePontmercy",
+{}
+],
+[
+"MlleVaubois",
+{}
+],
+[
+"LtGillenormand",
+{}
+],
+[
+"Marius",
+{}
+],
+[
+"BaronessT",
+{}
+],
+[
+"Mabeuf",
+{}
+],
+[
+"Enjolras",
+{}
+],
+[
+"Combeferre",
+{}
+],
+[
+"Prouvaire",
+{}
+],
+[
+"Feuilly",
+{}
+],
+[
+"Courfeyrac",
+{}
+],
+[
+"Bahorel",
+{}
+],
+[
+"Bossuet",
+{}
+],
+[
+"Joly",
+{}
+],
+[
+"Grantaire",
+{}
+],
+[
+"MotherPlutarch",
+{}
+],
+[
+"Gueulemer",
+{}
+],
+[
+"Babet",
+{}
+],
+[
+"Claquesous",
+{}
+],
+[
+"Montparnasse",
+{}
+],
+[
+"Toussaint",
+{}
+],
+[
+"Child1",
+{}
+],
+[
+"Child2",
+{}
+],
+[
+"Brujon",
+{}
+],
+[
+"MmeHucheloup",
+{}
+]
+],
+"edges": [
+[
+"Napoleon",
+"Myriel",
+{
+"weight": 1
+}
+],
+[
+"Myriel",
+"MlleBaptistine",
+{
+"weight": 8
+}
+],
+[
+"Myriel",
+"MmeMagloire",
+{
+"weight": 10
+}
+],
+[
+"Myriel",
+"CountessDeLo",
+{
+"weight": 1
+}
+],
+[
+"Myriel",
+"Geborand",
+{
+"weight": 1
+}
+],
+[
+"Myriel",
+"Champtercier",
+{
+"weight": 1
+}
+],
+[
+"Myriel",
+"Cravatte",
+{
+"weight": 1
+}
+],
+[
+"Myriel",
+"Count",
+{
+"weight": 2
+}
+],
+[
+"Myriel",
+"OldMan",
+{
+"weight": 1
+}
+],
+[
+"Myriel",
+"Valjean",
+{
+"weight": 5
+}
+],
+[
+"MlleBaptistine",
+"MmeMagloire",
+{
+"weight": 6
+}
+],
+[
+"MlleBaptistine",
+"Valjean",
+{
+"weight": 3
+}
+],
+[
+"MmeMagloire",
+"Valjean",
+{
+"weight": 3
+}
+],
+[
+"Valjean",
+"Labarre",
+{
+"weight": 1
+}
+],
+[
+"Valjean",
+"Marguerite",
+{
+"weight": 1
+}
+],
+[
+"Valjean",
+"MmeDeR",
+{
+"weight": 1
+}
+],
+[
+"Valjean",
+"Isabeau",
+{
+"weight": 1
+}
+],
+[
+"Valjean",
+"Gervais",
+{
+"weight": 1
+}
+],
+[
+"Valjean",
+"Fantine",
+{
+"weight": 9
+}
+],
+[
+"Valjean",
+"MmeThenardier",
+{
+"weight": 7
+}
+],
+[
+"Valjean",
+"Thenardier",
+{
+"weight": 12
+}
+],
+[
+"Valjean",
+"Cosette",
+{
+"weight": 31
+}
+],
+[
+"Valjean",
+"Javert",
+{
+"weight": 17
+}
+],
+[
+"Valjean",
+"Fauchelevent",
+{
+"weight": 8
+}
+],
+[
+"Valjean",
+"Bamatabois",
+{
+"weight": 2
+}
+],
+[
+"Valjean",
+"Simplice",
+{
+"weight": 3
+}
+],
+[
+"Valjean",
+"Scaufflaire",
+{
+"weight": 1
+}
+],
+[
+"Valjean",
+"Woman1",
+{
+"weight": 2
+}
+],
+[
+"Valjean",
+"Judge",
+{
+"weight": 3
+}
+],
+[
+"Valjean",
+"Champmathieu",
+{
+"weight": 3
+}
+],
+[
+"Valjean",
+"Brevet",
+{
+"weight": 2
+}
+],
+[
+"Valjean",
+"Chenildieu",
+{
+"weight": 2
+}
+],
+[
+"Valjean",
+"Cochepaille",
+{
+"weight": 2
+}
+],
+[
+"Valjean",
+"Woman2",
+{
+"weight": 3
+}
+],
+[
+"Valjean",
+"MotherInnocent",
+{
+"weight": 1
+}
+],
+[
+"Valjean",
+"Gavroche",
+{
+"weight": 1
+}
+],
+[
+"Valjean",
+"Gillenormand",
+{
+"weight": 2
+}
+],
+[
+"Valjean",
+"MlleGillenormand",
+{
+"weight": 2
+}
+],
+[
+"Valjean",
+"Marius",
+{
+"weight": 19
+}
+],
+[
+"Valjean",
+"Enjolras",
+{
+"weight": 4
+}
+],
+[
+"Valjean",
+"Bossuet",
+{
+"weight": 1
+}
+],
+[
+"Valjean",
+"Gueulemer",
+{
+"weight": 1
+}
+],
+[
+"Valjean",
+"Babet",
+{
+"weight": 1
+}
+],
+[
+"Valjean",
+"Claquesous",
+{
+"weight": 1
+}
+],
+[
+"Valjean",
+"Montparnasse",
+{
+"weight": 1
+}
+],
+[
+"Valjean",
+"Toussaint",
+{
+"weight": 1
+}
+],
+[
+"Marguerite",
+"Fantine",
+{
+"weight": 2
+}
+],
+[
+"Listolier",
+"Tholomyes",
+{
+"weight": 4
+}
+],
+[
+"Listolier",
+"Fameuil",
+{
+"weight": 4
+}
+],
+[
+"Listolier",
+"Blacheville",
+{
+"weight": 4
+}
+],
+[
+"Listolier",
+"Favourite",
+{
+"weight": 3
+}
+],
+[
+"Listolier",
+"Dahlia",
+{
+"weight": 3
+}
+],
+[
+"Listolier",
+"Zephine",
+{
+"weight": 3
+}
+],
+[
+"Listolier",
+"Fantine",
+{
+"weight": 3
+}
+],
+[
+"Tholomyes",
+"Fameuil",
+{
+"weight": 4
+}
+],
+[
+"Tholomyes",
+"Blacheville",
+{
+"weight": 4
+}
+],
+[
+"Tholomyes",
+"Favourite",
+{
+"weight": 3
+}
+],
+[
+"Tholomyes",
+"Dahlia",
+{
+"weight": 3
+}
+],
+[
+"Tholomyes",
+"Zephine",
+{
+"weight": 3
+}
+],
+[
+"Tholomyes",
+"Fantine",
+{
+"weight": 3
+}
+],
+[
+"Tholomyes",
+"Cosette",
+{
+"weight": 1
+}
+],
+[
+"Tholomyes",
+"Marius",
+{
+"weight": 1
+}
+],
+[
+"Fameuil",
+"Blacheville",
+{
+"weight": 4
+}
+],
+[
+"Fameuil",
+"Favourite",
+{
+"weight": 3
+}
+],
+[
+"Fameuil",
+"Dahlia",
+{
+"weight": 3
+}
+],
+[
+"Fameuil",
+"Zephine",
+{
+"weight": 3
+}
+],
+[
+"Fameuil",
+"Fantine",
+{
+"weight": 3
+}
+],
+[
+"Blacheville",
+"Favourite",
+{
+"weight": 4
+}
+],
+[
+"Blacheville",
+"Dahlia",
+{
+"weight": 3
+}
+],
+[
+"Blacheville",
+"Zephine",
+{
+"weight": 3
+}
+],
+[
+"Blacheville",
+"Fantine",
+{
+"weight": 3
+}
+],
+[
+"Favourite",
+"Dahlia",
+{
+"weight": 5
+}
+],
+[
+"Favourite",
+"Zephine",
+{
+"weight": 4
+}
+],
+[
+"Favourite",
+"Fantine",
+{
+"weight": 4
+}
+],
+[
+"Dahlia",
+"Zephine",
+{
+"weight": 4
+}
+],
+[
+"Dahlia",
+"Fantine",
+{
+"weight": 4
+}
+],
+[
+"Zephine",
+"Fantine",
+{
+"weight": 4
+}
+],
+[
+"Fantine",
+"MmeThenardier",
+{
+"weight": 2
+}
+],
+[
+"Fantine",
+"Thenardier",
+{
+"weight": 1
+}
+],
+[
+"Fantine",
+"Javert",
+{
+"weight": 5
+}
+],
+[
+"Fantine",
+"Bamatabois",
+{
+"weight": 1
+}
+],
+[
+"Fantine",
+"Perpetue",
+{
+"weight": 1
+}
+],
+[
+"Fantine",
+"Simplice",
+{
+"weight": 2
+}
+],
+[
+"MmeThenardier",
+"Thenardier",
+{
+"weight": 13
+}
+],
+[
+"MmeThenardier",
+"Cosette",
+{
+"weight": 4
+}
+],
+[
+"MmeThenardier",
+"Javert",
+{
+"weight": 1
+}
+],
+[
+"MmeThenardier",
+"Eponine",
+{
+"weight": 2
+}
+],
+[
+"MmeThenardier",
+"Anzelma",
+{
+"weight": 1
+}
+],
+[
+"MmeThenardier",
+"Magnon",
+{
+"weight": 1
+}
+],
+[
+"MmeThenardier",
+"Gueulemer",
+{
+"weight": 1
+}
+],
+[
+"MmeThenardier",
+"Babet",
+{
+"weight": 1
+}
+],
+[
+"MmeThenardier",
+"Claquesous",
+{
+"weight": 1
+}
+],
+[
+"Thenardier",
+"Cosette",
+{
+"weight": 1
+}
+],
+[
+"Thenardier",
+"Javert",
+{
+"weight": 5
+}
+],
+[
+"Thenardier",
+"Pontmercy",
+{
+"weight": 1
+}
+],
+[
+"Thenardier",
+"Boulatruelle",
+{
+"weight": 1
+}
+],
+[
+"Thenardier",
+"Eponine",
+{
+"weight": 3
+}
+],
+[
+"Thenardier",
+"Anzelma",
+{
+"weight": 2
+}
+],
+[
+"Thenardier",
+"Gavroche",
+{
+"weight": 1
+}
+],
+[
+"Thenardier",
+"Marius",
+{
+"weight": 2
+}
+],
+[
+"Thenardier",
+"Gueulemer",
+{
+"weight": 5
+}
+],
+[
+"Thenardier",
+"Babet",
+{
+"weight": 6
+}
+],
+[
+"Thenardier",
+"Claquesous",
+{
+"weight": 4
+}
+],
+[
+"Thenardier",
+"Montparnasse",
+{
+"weight": 1
+}
+],
+[
+"Thenardier",
+"Brujon",
+{
+"weight": 3
+}
+],
+[
+"Cosette",
+"Javert",
+{
+"weight": 1
+}
+],
+[
+"Cosette",
+"Woman2",
+{
+"weight": 1
+}
+],
+[
+"Cosette",
+"Gillenormand",
+{
+"weight": 3
+}
+],
+[
+"Cosette",
+"MlleGillenormand",
+{
+"weight": 2
+}
+],
+[
+"Cosette",
+"LtGillenormand",
+{
+"weight": 1
+}
+],
+[
+"Cosette",
+"Marius",
+{
+"weight": 21
+}
+],
+[
+"Cosette",
+"Toussaint",
+{
+"weight": 2
+}
+],
+[
+"Javert",
+"Fauchelevent",
+{
+"weight": 1
+}
+],
+[
+"Javert",
+"Bamatabois",
+{
+"weight": 1
+}
+],
+[
+"Javert",
+"Simplice",
+{
+"weight": 1
+}
+],
+[
+"Javert",
+"Woman1",
+{
+"weight": 1
+}
+],
+[
+"Javert",
+"Woman2",
+{
+"weight": 1
+}
+],
+[
+"Javert",
+"Gavroche",
+{
+"weight": 1
+}
+],
+[
+"Javert",
+"Enjolras",
+{
+"weight": 6
+}
+],
+[
+"Javert",
+"Gueulemer",
+{
+"weight": 1
+}
+],
+[
+"Javert",
+"Babet",
+{
+"weight": 2
+}
+],
+[
+"Javert",
+"Claquesous",
+{
+"weight": 1
+}
+],
+[
+"Javert",
+"Montparnasse",
+{
+"weight": 1
+}
+],
+[
+"Javert",
+"Toussaint",
+{
+"weight": 1
+}
+],
+[
+"Fauchelevent",
+"MotherInnocent",
+{
+"weight": 3
+}
+],
+[
+"Fauchelevent",
+"Gribier",
+{
+"weight": 2
+}
+],
+[
+"Bamatabois",
+"Judge",
+{
+"weight": 2
+}
+],
+[
+"Bamatabois",
+"Champmathieu",
+{
+"weight": 2
+}
+],
+[
+"Bamatabois",
+"Brevet",
+{
+"weight": 1
+}
+],
+[
+"Bamatabois",
+"Chenildieu",
+{
+"weight": 1
+}
+],
+[
+"Bamatabois",
+"Cochepaille",
+{
+"weight": 1
+}
+],
+[
+"Perpetue",
+"Simplice",
+{
+"weight": 2
+}
+],
+[
+"Judge",
+"Champmathieu",
+{
+"weight": 3
+}
+],
+[
+"Judge",
+"Brevet",
+{
+"weight": 2
+}
+],
+[
+"Judge",
+"Chenildieu",
+{
+"weight": 2
+}
+],
+[
+"Judge",
+"Cochepaille",
+{
+"weight": 2
+}
+],
+[
+"Champmathieu",
+"Brevet",
+{
+"weight": 2
+}
+],
+[
+"Champmathieu",
+"Chenildieu",
+{
+"weight": 2
+}
+],
+[
+"Champmathieu",
+"Cochepaille",
+{
+"weight": 2
+}
+],
+[
+"Brevet",
+"Chenildieu",
+{
+"weight": 2
+}
+],
+[
+"Brevet",
+"Cochepaille",
+{
+"weight": 2
+}
+],
+[
+"Chenildieu",
+"Cochepaille",
+{
+"weight": 2
+}
+],
+[
+"Pontmercy",
+"MmePontmercy",
+{
+"weight": 1
+}
+],
+[
+"Pontmercy",
+"Marius",
+{
+"weight": 1
+}
+],
+[
+"Eponine",
+"Anzelma",
+{
+"weight": 2
+}
+],
+[
+"Eponine",
+"Marius",
+{
+"weight": 5
+}
+],
+[
+"Eponine",
+"Mabeuf",
+{
+"weight": 1
+}
+],
+[
+"Eponine",
+"Courfeyrac",
+{
+"weight": 1
+}
+],
+[
+"Eponine",
+"Gueulemer",
+{
+"weight": 1
+}
+],
+[
+"Eponine",
+"Babet",
+{
+"weight": 1
+}
+],
+[
+"Eponine",
+"Claquesous",
+{
+"weight": 1
+}
+],
+[
+"Eponine",
+"Montparnasse",
+{
+"weight": 1
+}
+],
+[
+"Eponine",
+"Brujon",
+{
+"weight": 1
+}
+],
+[
+"MmeBurgon",
+"Jondrette",
+{
+"weight": 1
+}
+],
+[
+"MmeBurgon",
+"Gavroche",
+{
+"weight": 2
+}
+],
+[
+"Gavroche",
+"Marius",
+{
+"weight": 4
+}
+],
+[
+"Gavroche",
+"Mabeuf",
+{
+"weight": 1
+}
+],
+[
+"Gavroche",
+"Enjolras",
+{
+"weight": 7
+}
+],
+[
+"Gavroche",
+"Combeferre",
+{
+"weight": 6
+}
+],
+[
+"Gavroche",
+"Prouvaire",
+{
+"weight": 1
+}
+],
+[
+"Gavroche",
+"Feuilly",
+{
+"weight": 2
+}
+],
+[
+"Gavroche",
+"Courfeyrac",
+{
+"weight": 7
+}
+],
+[
+"Gavroche",
+"Bahorel",
+{
+"weight": 5
+}
+],
+[
+"Gavroche",
+"Bossuet",
+{
+"weight": 5
+}
+],
+[
+"Gavroche",
+"Joly",
+{
+"weight": 3
+}
+],
+[
+"Gavroche",
+"Grantaire",
+{
+"weight": 1
+}
+],
+[
+"Gavroche",
+"Gueulemer",
+{
+"weight": 1
+}
+],
+[
+"Gavroche",
+"Babet",
+{
+"weight": 1
+}
+],
+[
+"Gavroche",
+"Montparnasse",
+{
+"weight": 1
+}
+],
+[
+"Gavroche",
+"Child1",
+{
+"weight": 2
+}
+],
+[
+"Gavroche",
+"Child2",
+{
+"weight": 2
+}
+],
+[
+"Gavroche",
+"Brujon",
+{
+"weight": 1
+}
+],
+[
+"Gavroche",
+"MmeHucheloup",
+{
+"weight": 1
+}
+],
+[
+"Gillenormand",
+"Magnon",
+{
+"weight": 1
+}
+],
+[
+"Gillenormand",
+"MlleGillenormand",
+{
+"weight": 9
+}
+],
+[
+"Gillenormand",
+"LtGillenormand",
+{
+"weight": 1
+}
+],
+[
+"Gillenormand",
+"Marius",
+{
+"weight": 12
+}
+],
+[
+"Gillenormand",
+"BaronessT",
+{
+"weight": 1
+}
+],
+[
+"MlleGillenormand",
+"MmePontmercy",
+{
+"weight": 1
+}
+],
+[
+"MlleGillenormand",
+"MlleVaubois",
+{
+"weight": 1
+}
+],
+[
+"MlleGillenormand",
+"LtGillenormand",
+{
+"weight": 2
+}
+],
+[
+"MlleGillenormand",
+"Marius",
+{
+"weight": 6
+}
+],
+[
+"LtGillenormand",
+"Marius",
+{
+"weight": 1
+}
+],
+[
+"Marius",
+"BaronessT",
+{
+"weight": 1
+}
+],
+[
+"Marius",
+"Mabeuf",
+{
+"weight": 1
+}
+],
+[
+"Marius",
+"Enjolras",
+{
+"weight": 7
+}
+],
+[
+"Marius",
+"Combeferre",
+{
+"weight": 5
+}
+],
+[
+"Marius",
+"Feuilly",
+{
+"weight": 1
+}
+],
+[
+"Marius",
+"Courfeyrac",
+{
+"weight": 9
+}
+],
+[
+"Marius",
+"Bahorel",
+{
+"weight": 1
+}
+],
+[
+"Marius",
+"Bossuet",
+{
+"weight": 5
+}
+],
+[
+"Marius",
+"Joly",
+{
+"weight": 2
+}
+],
+[
+"Mabeuf",
+"Enjolras",
+{
+"weight": 1
+}
+],
+[
+"Mabeuf",
+"Combeferre",
+{
+"weight": 2
+}
+],
+[
+"Mabeuf",
+"Feuilly",
+{
+"weight": 1
+}
+],
+[
+"Mabeuf",
+"Courfeyrac",
+{
+"weight": 2
+}
+],
+[
+"Mabeuf",
+"Bahorel",
+{
+"weight": 2
+}
+],
+[
+"Mabeuf",
+"Bossuet",
+{
+"weight": 1
+}
+],
+[
+"Mabeuf",
+"Joly",
+{
+"weight": 1
+}
+],
+[
+"Mabeuf",
+"MotherPlutarch",
+{
+"weight": 3
+}
+],
+[
+"Enjolras",
+"Combeferre",
+{
+"weight": 15
+}
+],
+[
+"Enjolras",
+"Prouvaire",
+{
+"weight": 4
+}
+],
+[
+"Enjolras",
+"Feuilly",
+{
+"weight": 6
+}
+],
+[
+"Enjolras",
+"Courfeyrac",
+{
+"weight": 17
+}
+],
+[
+"Enjolras",
+"Bahorel",
+{
+"weight": 4
+}
+],
+[
+"Enjolras",
+"Bossuet",
+{
+"weight": 10
+}
+],
+[
+"Enjolras",
+"Joly",
+{
+"weight": 5
+}
+],
+[
+"Enjolras",
+"Grantaire",
+{
+"weight": 3
+}
+],
+[
+"Enjolras",
+"Claquesous",
+{
+"weight": 1
+}
+],
+[
+"Enjolras",
+"MmeHucheloup",
+{
+"weight": 1
+}
+],
+[
+"Combeferre",
+"Prouvaire",
+{
+"weight": 2
+}
+],
+[
+"Combeferre",
+"Feuilly",
+{
+"weight": 5
+}
+],
+[
+"Combeferre",
+"Courfeyrac",
+{
+"weight": 13
+}
+],
+[
+"Combeferre",
+"Bahorel",
+{
+"weight": 5
+}
+],
+[
+"Combeferre",
+"Bossuet",
+{
+"weight": 9
+}
+],
+[
+"Combeferre",
+"Joly",
+{
+"weight": 5
+}
+],
+[
+"Combeferre",
+"Grantaire",
+{
+"weight": 1
+}
+],
+[
+"Prouvaire",
+"Feuilly",
+{
+"weight": 2
+}
+],
+[
+"Prouvaire",
+"Courfeyrac",
+{
+"weight": 3
+}
+],
+[
+"Prouvaire",
+"Bahorel",
+{
+"weight": 2
+}
+],
+[
+"Prouvaire",
+"Bossuet",
+{
+"weight": 2
+}
+],
+[
+"Prouvaire",
+"Joly",
+{
+"weight": 2
+}
+],
+[
+"Prouvaire",
+"Grantaire",
+{
+"weight": 1
+}
+],
+[
+"Feuilly",
+"Courfeyrac",
+{
+"weight": 6
+}
+],
+[
+"Feuilly",
+"Bahorel",
+{
+"weight": 3
+}
+],
+[
+"Feuilly",
+"Bossuet",
+{
+"weight": 6
+}
+],
+[
+"Feuilly",
+"Joly",
+{
+"weight": 5
+}
+],
+[
+"Feuilly",
+"Grantaire",
+{
+"weight": 1
+}
+],
+[
+"Courfeyrac",
+"Bahorel",
+{
+"weight": 6
+}
+],
+[
+"Courfeyrac",
+"Bossuet",
+{
+"weight": 12
+}
+],
+[
+"Courfeyrac",
+"Joly",
+{
+"weight": 5
+}
+],
+[
+"Courfeyrac",
+"Grantaire",
+{
+"weight": 2
+}
+],
+[
+"Courfeyrac",
+"MmeHucheloup",
+{
+"weight": 1
+}
+],
+[
+"Bahorel",
+"Bossuet",
+{
+"weight": 4
+}
+],
+[
+"Bahorel",
+"Joly",
+{
+"weight": 5
+}
+],
+[
+"Bahorel",
+"Grantaire",
+{
+"weight": 1
+}
+],
+[
+"Bahorel",
+"MmeHucheloup",
+{
+"weight": 1
+}
+],
+[
+"Bossuet",
+"Joly",
+{
+"weight": 7
+}
+],
+[
+"Bossuet",
+"Grantaire",
+{
+"weight": 3
+}
+],
+[
+"Bossuet",
+"MmeHucheloup",
+{
+"weight": 1
+}
+],
+[
+"Joly",
+"Grantaire",
+{
+"weight": 2
+}
+],
+[
+"Joly",
+"MmeHucheloup",
+{
+"weight": 1
+}
+],
+[
+"Grantaire",
+"MmeHucheloup",
+{
+"weight": 1
+}
+],
+[
+"Gueulemer",
+"Babet",
+{
+"weight": 6
+}
+],
+[
+"Gueulemer",
+"Claquesous",
+{
+"weight": 4
+}
+],
+[
+"Gueulemer",
+"Montparnasse",
+{
+"weight": 2
+}
+],
+[
+"Gueulemer",
+"Brujon",
+{
+"weight": 3
+}
+],
+[
+"Babet",
+"Claquesous",
+{
+"weight": 4
+}
+],
+[
+"Babet",
+"Montparnasse",
+{
+"weight": 2
+}
+],
+[
+"Babet",
+"Brujon",
+{
+"weight": 3
+}
+],
+[
+"Claquesous",
+"Montparnasse",
+{
+"weight": 2
+}
+],
+[
+"Claquesous",
+"Brujon",
+{
+"weight": 1
+}
+],
+[
+"Montparnasse",
+"Brujon",
+{
+"weight": 1
+}
+],
+[
+"Child1",
+"Child2",
+{
+"weight": 3
+}
+]
+]
+}

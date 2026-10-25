@@ -7,3 +7,5 @@ dist/
 /answers/
 /ari1101_answers/
 /brightwater_q3/
+# datasets downloaded or imported by the kit when it runs from this clone
+/data/

@@ -1,5 +1,6 @@
 """ICS5111 S02: a session without graded tasks, with helpers, Cora from LINQS and reference results."""
 import json
+import os
 import numpy as np
 import pytest
 
@@ -18,11 +19,14 @@ def _isolated(tmp_path, monkeypatch):
 
 @pytest.fixture()
 def cora_available():
-    """Cora from the cache, or from LINQS when online; otherwise these tests are skipped."""
+    """Cora from wherever the kit finds it; skipped when it cannot, unless AILK_REQUIRE_DATA=true (CI with a
+    course copy configured), when the test fails instead."""
     try:
         return datasets.fetch("cora", quiet=True)
     except datasets.DatasetUnavailable as e:
-        pytest.skip(f"Cora is not available offline: {e}")
+        if os.environ.get("AILK_REQUIRE_DATA", "").lower() == "true":
+            raise
+        pytest.skip(f"Cora is not available here: {str(e).splitlines()[0]}")
 
 
 def test_session_contract_without_tasks():

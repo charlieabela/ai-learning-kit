@@ -80,10 +80,22 @@ Each session records its extra, and its notebooks install it.
 **Data.** `ai_learning_kit.datasets` records, for every external dataset, its
 owner, download address, checksum, licence note and citation. The kit downloads
 it from the owner the first time a notebook needs it, checks the checksum, and
-keeps it in a cache (in Colab with Drive connected, My Drive › ai-learning-kit ›
-data). If the owner's site is down, a copy of the same file placed next to the
-notebook is used instead. Small research datasets that a library already ships
-(the karate club in networkx) and synthetic data come from the kit's helpers.
+keeps it in its data folder. When the owner's site cannot be reached, it uses a
+copy from somewhere else, checked the same way:
+
+```python
+kit.datasets.use("cora", "~/Downloads/cora.tgz")                       # a file on this computer
+kit.datasets.add_folder("~/Library/CloudStorage/GoogleDrive-me/My Drive/ICS5111")   # a synced folder
+kit.datasets.use("cora", "https://drive.google.com/file/d/<id>/view")   # a shared copy (Drive, OneDrive, Dropbox)
+kit.datasets.status()                                                   # what is where
+```
+
+A file dropped next to the notebook, or in its `data/` folder, is found too. The
+data folder is the `data/` folder of the clone when the kit or Notebook Tutor runs
+from a git clone (ignored by git), My Drive › ai-learning-kit › data in Colab with
+Drive connected, and the user's cache folder otherwise. Small research datasets
+(the karate club, Les Misérables, the Florentine families, Davis's Southern women)
+are stored in the kit with their citations: `kit.datasets.small("karate")`.
 
 **Language models are optional.** With a model configured (a Gemini, Anthropic
 or OpenAI API key, or an open-weight model behind Ollama, vLLM or any

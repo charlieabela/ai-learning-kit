@@ -31,6 +31,14 @@ def test_notebook_runs(code, scode, role, rel, tmp_path):
     nbformat = pytest.importorskip("nbformat")
     from nbclient import NotebookClient
     path = NOTEBOOK_ROOT / rel
+    from ai_learning_kit import datasets
+    for name in registry.session(code, scode).DATASETS:
+        try:
+            datasets.fetch(name, quiet=True)
+        except datasets.DatasetUnavailable as e:
+            if os.environ.get("AILK_REQUIRE_DATA", "").lower() == "true":
+                raise
+            pytest.skip(f"dataset {name!r} is not available here: {str(e).splitlines()[0]}")
     nb = nbformat.read(path, as_version=4)
     code_cells = [c for c in nb.cells if c.cell_type == "code"]
     code_cells[0].source = "# install cell skipped: the kit under test is installed"
