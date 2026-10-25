@@ -43,7 +43,7 @@ def test_session_contract_without_tasks():
 def test_start_needs_no_name_and_gives_the_helpers(cora_available, capsys):
     kit.start("ICS5111", "S02")
     out = capsys.readouterr().out
-    assert "Graph embeddings" in out and "Cora citation network" in out and "T = kit.tools()" in out
+    assert "Graph embeddings" in out and "Cora citation network (LINQS), checked" in out and "T = kit.tools()" in out
     T = kit.tools()
     assert T.SEED == 5111 and T.VERSION == "2026-10-27"
     with pytest.raises(RuntimeError, match="no graded tasks"):

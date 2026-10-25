@@ -91,7 +91,7 @@ def start(unit: str, session: str | None = None, student: str = "", folder=None,
         print(f"Problem: {prob.title}")
     if mod.DATASETS:
         for name, path in datasets.prefetch(mod.DATASETS, quiet=True).items():
-            print(f"Data: {datasets.source(name).title}, from {datasets.source(name).owner} (checked)")
+            print(f"Data: {datasets.source(name).title}, checked (kit.datasets.status() shows where it is kept)")
     if mod.SAVES_WORK or folder is not None:
         print(f"Your work folder: {base}")
         print(f"  This is {where}.")
