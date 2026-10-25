@@ -26,6 +26,7 @@ UNIT = "ARI1101"
 SESSION = "S02"
 TITLE = "Data formats: gathering the evidence for the Q3 compliance review"
 PROBLEM = "brightwater_q3"
+NOTEBOOKS = {"session": "ARI1101/S02_Sandbox_Q3_Compliance_Review.ipynb"}   # inside notebooks/
 
 STAGES = {
     "survey": stage("Identifying file formats and data shapes", FOCUS),

@@ -7,7 +7,7 @@ students concentrate on the step that is. Questions are posed per task, answers
 are saved in an answer book next to the notebook, and formative feedback is given
 at once.
 
-Typical use in a notebook:
+Typical use in a notebook with graded tasks:
 
     import ai_learning_kit as kit
     kit.start("ARI1101", "S02", student="Your Name")
@@ -17,6 +17,13 @@ Typical use in a notebook:
     rules = kit.extract.policy_rules()
     kit.answer("T2.1", value=len(rules), reasoning="...")
     kit.submit()
+
+A session without graded tasks (its notebooks check themselves) needs no name:
+
+    import ai_learning_kit as kit
+    kit.start("ICS5111", "S02")     # also downloads the session's datasets from their owners
+    T = kit.tools()                 # the session's helper functions
+    G, X, y, paper_ids, classes, split = T.load_cora()
 
 kit.extract, kit.pipeline, kit.report and kit.reference are the helper modules of
 the problem that the current session uses. kit.catalog() lists every unit,
@@ -36,62 +43,92 @@ from .core.answers import AnswerBook
 from .core.feedback import Feedback, as_feedback, combine
 from .core.help import explain, source
 from .core.session import render_guide
-from . import llm
+from . import datasets, llm
 
-__all__ = ["start", "task", "answer", "check", "progress", "submit", "sync", "sources", "workspace",
+__all__ = ["start", "tools", "datasets", "task", "answer", "check", "progress", "submit", "sync", "sources", "workspace",
            "peek", "path", "extract", "pipeline", "reference", "report", "explain", "source",
            "hint", "ask", "catalog", "problem", "session", "llm", "__version__"]
 
-_state = {"session": None, "problem": None, "book": None, "folder": None}
+_state = {"session": None, "problem": None, "book": None, "folder": None, "tools": None}
 
 
 # --------------------------------------------------------------------------- session
-def start(unit: str, session: str | None = None, student: str = "", folder=None, drive: bool = True) -> None:
-    """Start (or continue) a session: choose the work folder and open your answer book.
+def start(unit: str, session: str | None = None, student: str = "", folder=None, drive=None) -> None:
+    """Start (or continue) a session: choose the work folder, fetch the session's data and, for a
+    session with graded tasks, open your answer book.
 
     unit    : the study-unit code, for example "ARI1101" (or "ARI1101/S02" in one string)
     session : the session code, for example "S02"
-    student : your name, used to name the answer file
+    student : your name, used to name the answer file (needed only when the session has tasks)
     folder  : optional; a different folder for your work. In Colab a relative path
               is a folder in your Google Drive, for example "ARI1101/S02" for
               My Drive › ARI1101 › S02; on your computer it is relative to the
               notebook's folder.
-    drive   : in Colab, set drive=False to skip connecting Google Drive (your files
-              are then deleted when Colab disconnects).
+    drive   : in Colab, whether to connect Google Drive. By default it is connected
+              when the session keeps work you need (an answer book) and not otherwise.
 
     The kit finds the folder that holds this notebook: on your computer (Jupyter,
-    VS Code) that is where the notebook file is; in Colab it connects your Google
-    Drive and finds the notebook there. That folder becomes the current folder, so
-    your answer book, the case files and every file you save with a plain name,
-    such as "policy_rules.json", are kept next to the notebook.
+    VS Code, Notebook Tutor) that is where the notebook file is; in Colab it connects
+    your Google Drive and finds the notebook there. That folder becomes the current
+    folder, so your answer book, the case files and every file you save with a plain
+    name, such as "policy_rules.json", are kept next to the notebook.
     """
     if session is None and "/" in str(unit):
         unit, session = str(unit).split("/", 1)
     if session is None:
-        raise TypeError('Give the unit and the session, for example kit.start("ARI1101", "S02", student="Your Name").')
-    if not student:
-        raise TypeError('Give your name: kit.start("ARI1101", "S02", student="Your Name").')
+        raise TypeError('Give the unit and the session, for example kit.start("ICS5111", "S02").')
     mod = registry.session(unit, session)
-    prob = registry.problem(mod.PROBLEM)
+    if mod.TASKS and not student:
+        raise TypeError(f'Give your name: kit.start("{mod.UNIT}", "{mod.SESSION}", student="Your Name").')
+    prob = registry.problem(mod.PROBLEM) if mod.PROBLEM else None
+    if drive is None:
+        drive = bool(mod.SAVES_WORK)
     base, where = workfolder.choose(mod.UNIT, mod.SESSION, folder=folder, drive=drive)
-    _state.update(session=mod, problem=prob, folder=base)
+    helpers = registry.tools(mod)
+    _state.update(session=mod, problem=prob, folder=base, book=None, tools=helpers)
     print(f"ai-learning-kit {__version__} · {mod.UNIT} {mod.SESSION}: {mod.TITLE}")
-    print(f"Problem: {prob.title}")
-    print(f"Your work folder: {base}")
-    print(f"  This is {where}.")
-    print("  Your answer book, the case files and every file you save with a plain file name are kept here.")
-    _state["book"] = AnswerBook(mod.UNIT, mod.SESSION, student, mod.TASKS, folder=base, problem=prob.id)
-    first = next(iter(mod.TASKS))
-    print(f"{len(mod.TASKS)} tasks. kit.task('{first}') explains a task; kit.progress() shows what is left.")
+    if prob is not None:
+        print(f"Problem: {prob.title}")
+    if mod.DATASETS:
+        for name, path in datasets.prefetch(mod.DATASETS, quiet=True).items():
+            print(f"Data: {datasets.source(name).title}, from {datasets.source(name).owner} (checked)")
+    if mod.SAVES_WORK or folder is not None:
+        print(f"Your work folder: {base}")
+        print(f"  This is {where}.")
+    if mod.TASKS:
+        print("  Your answer book, the case files and every file you save with a plain file name are kept here.")
+        _state["book"] = AnswerBook(mod.UNIT, mod.SESSION, student, mod.TASKS, folder=base, problem=prob.id if prob else None)
+        first = next(iter(mod.TASKS))
+        print(f"{len(mod.TASKS)} tasks. kit.task('{first}') explains a task; kit.progress() shows what is left.")
+    elif helpers is not None:
+        print("Helpers: T = kit.tools(). This session has no answer book: the notebook checks itself.")
+
+
+def tools():
+    """The current session's helper functions, used as T = kit.tools() (after kit.start)."""
+    mod = _state["session"]
+    if mod is None:
+        raise RuntimeError('Run kit.start("<unit>", "<session>") first, for example kit.start("ICS5111", "S02").')
+    if _state["tools"] is None:
+        raise RuntimeError(f"{mod.UNIT} {mod.SESSION} has no helper module; use the functions the notebook defines.")
+    return _state["tools"]
 
 
 def _require():
     if _state["book"] is None:
+        mod = _state["session"]
+        if mod is not None and not mod.TASKS:
+            raise RuntimeError(f"{mod.UNIT} {mod.SESSION} has no graded tasks or answer book: its notebook checks "
+                               "itself as you go.")
         raise RuntimeError('Run kit.start("ARI1101", "S02", student="Your Name") first.')
     return _state["session"], _state["book"]
 
 
 def _problem():
+    mod = _state["session"]
+    if mod is not None and _state["problem"] is None:
+        raise RuntimeError(f"{mod.UNIT} {mod.SESSION} has no case problem; its data and helpers come from "
+                           "T = kit.tools().")
     if _state["problem"] is None:
         raise RuntimeError('Run kit.start("<unit>", "<session>", student="Your Name") first: '
                            'the case files belong to the session\'s problem.')

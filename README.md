@@ -6,7 +6,10 @@ Large Scale Data, and others to come).
 
 The kit holds a **library of problems**, each a frozen set of data sources in
 several formats with helper code that does the heavy lifting, and, for each
-**unit**, **sessions** that bind a problem to a sequence of **tasks**. A session
+**unit**, **sessions**. A session either binds a problem to a sequence of graded
+**tasks** with an answer book, or supplies **helpers and data** to notebooks that
+check themselves; it also lists its **notebooks** (Prepare, Explore, Practice),
+which live in `notebooks/` and run unchanged in Notebook Tutor and in Colab. A session
 hides the steps that are not its topic, so that students concentrate on the
 step that is: given the text of a policy, the kit extracts the rules and the
 students choose a format to store them; given tables of transactions, the kit
@@ -14,12 +17,25 @@ checks compliance and the students decide what to count. Each task poses a
 question; answers are saved in an answer book next to the notebook; formative
 feedback says what is right, what is not, and the evidence.
 
-All companies, people and documents in the problems are fictional.
+All companies, people and documents in the problems are fictional. Real
+datasets (Cora, for example) are not copied into the kit: it downloads them from
+their owners, as described under *Data* below.
 
-## Use in a notebook (Colab, Jupyter or VS Code)
+## Notebooks for students
+
+[`notebooks/README.md`](notebooks/README.md) lists every notebook of this release
+with its Open-in-Colab link. Students open the same notebooks in
+[Notebook Tutor](https://github.com/charlieabela/notebook-tutor), which ships the
+kit. Every notebook follows one contract (`docs/NOTEBOOK_CONTRACT.md`): it starts
+with the kit's install line and `kit.start(...)`, and nothing in it depends on
+where it runs.
+
+## Use in a notebook (Notebook Tutor, Colab, Jupyter or VS Code)
+
+A session with graded tasks:
 
 ```python
-%pip install -q "git+https://github.com/charlieabela/ai-learning-kit@v0.4.0"
+%pip install -q "ai-learning-kit@https://github.com/charlieabela/ai-learning-kit/archive/refs/tags/v0.5.0.zip"
 import ai_learning_kit as kit
 
 kit.start("ARI1101", "S02", student="Your Name")   # work is kept next to this notebook
@@ -30,6 +46,18 @@ rules = kit.extract.policy_rules()                  # the problem's helpers: ext
 kit.answer("T2.1", value=len(rules), reasoning="rules is a list of dictionaries")
 kit.progress(); kit.submit()
 ```
+
+A session whose notebooks check themselves (no answer book, no name needed):
+
+```python
+%pip install -q "ai-learning-kit[graphs]@https://github.com/charlieabela/ai-learning-kit/archive/refs/tags/v0.5.0.zip"
+import ai_learning_kit as kit
+kit.start("ICS5111", "S02")        # downloads the session's datasets from their owners
+T = kit.tools()                    # the session's helper functions
+G, X, y, paper_ids, classes, split = T.load_cora()
+```
+
+The install line uses GitHub's archive of the release, so it needs only pip, not git.
 
 Always install a tagged version, so that a notebook keeps working when later
 sessions are added. `kit.catalog()` lists every unit, session and problem in
@@ -43,12 +71,19 @@ connects Google Drive and finds the notebook there; `kit.sync()` pushes pending
 writes, and `kit.submit()` calls it. `folder=` chooses another folder (in Colab,
 relative to My Drive).
 
-**What to install.** The line above covers ARI1101. Sessions on graphs add
+**What to install.** The plain line covers ARI1101. Sessions on graphs add
 `[graphs]` (networkx, scikit-learn), and sessions on embeddings and graph neural
 networks add `[advanced]` (PyTorch, PyTorch Geometric):
-`%pip install -q "ai-learning-kit[advanced] @ git+https://github.com/charlieabela/ai-learning-kit@v0.4.0"`.
-[Notebook Tutor](https://github.com/charlieabela/notebook-tutor) installs the kit
-for students who work on their own computers.
+`%pip install -q "ai-learning-kit[advanced]@https://github.com/charlieabela/ai-learning-kit/archive/refs/tags/v0.5.0.zip"`.
+Each session records its extra, and its notebooks install it.
+
+**Data.** `ai_learning_kit.datasets` records, for every external dataset, its
+owner, download address, checksum, licence note and citation. The kit downloads
+it from the owner the first time a notebook needs it, checks the checksum, and
+keeps it in a cache (in Colab with Drive connected, My Drive › ai-learning-kit ›
+data). If the owner's site is down, a copy of the same file placed next to the
+notebook is used instead. Small research datasets that a library already ships
+(the karate club in networkx) and synthetic data come from the kit's helpers.
 
 **Language models are optional.** With a model configured (a Gemini, Anthropic
 or OpenAI API key, or an open-weight model behind Ollama, vLLM or any
@@ -62,7 +97,7 @@ concept. Without one, everything else works unchanged. See `docs/LLM.md`.
 |---|---|---|
 | ARI1101 Foundations of Data Science | S02 Data formats: CSV, JSON, XML and documents | `brightwater_q3` |
 | ICS2205 Web Intelligence | none yet | |
-| ICS5111 Mining Large Scale Data | none yet | |
+| ICS5111 Mining Large Scale Data | S02 Graph embeddings (Prepare, Explore and Practice notebooks; Cora from LINQS) | none (helpers and data) |
 
 **brightwater_q3**: the Q3 2026 expenditure compliance review at Brightwater
 Logistics Ltd. Seven sources in seven formats (DOCX policy, CSV payments, JSON
@@ -77,10 +112,11 @@ ai_learning_kit/core       the engine: problems, sessions, checks, feedback, ans
 ai_learning_kit/problems   the problem library (unit-independent)
 ai_learning_kit/units      one package per unit; sessions bind a problem to tasks
 ai_learning_kit/llm        optional language-model providers and the tutor helpers
-ai_learning_kit/dev        validator for problems and sessions
+ai_learning_kit/datasets   external datasets: owner, address, checksum, licence; download and cache
+ai_learning_kit/dev        validator (problems, sessions, notebooks) and the release step
+notebooks/                 the notebooks of every session, with an index of Open-in-Colab links
 templates/                 skeletons for a new problem and a new session
 docs/                      ARCHITECTURE, AUTHORING_A_PROBLEM, AUTHORING_A_SESSION, LLM, prompts/
-notebooks/<UNIT>/          student notebooks
 ```
 
 `docs/ARCHITECTURE.md` explains the layers and contracts. To add a problem or a
@@ -91,9 +127,14 @@ review. `python -m ai_learning_kit.dev.validate` checks every contract.
 ## Development
 
 ```
-pip install -e ".[dev]"
+pip install -e ".[dev,graphs]"
 pytest -q
-python -m ai_learning_kit.dev.validate
+python -m ai_learning_kit.dev.validate          # problems, sessions and every notebook named by a session
+python -m ai_learning_kit.dev.release 0.6.0     # a release: version, notebook stamps, Colab links, docs
 ```
+
+CI runs the tests and the validator, downloads every registered dataset from its
+owner and checks its checksum, and executes every notebook on Linux, macOS and
+Windows.
 
 Licence: GPL-3.0-or-later.

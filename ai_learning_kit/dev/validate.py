@@ -3,6 +3,7 @@
     python -m ai_learning_kit.dev.validate                    # everything registered
     python -m ai_learning_kit.dev.validate --problem brightwater_q3
     python -m ai_learning_kit.dev.validate --session ARI1101 S02
+    python -m ai_learning_kit.dev.validate --notebook notebooks/ICS5111/S02/S02_3_practice.ipynb
 
 Each check prints OK or a problem description; the exit code is non-zero when
 anything fails. Run it before opening a pull request that adds or changes a
@@ -101,8 +102,43 @@ def validate_session(unit_code: str, session_code: str) -> Report:
     r.check(mod.UNIT == pkg.UNIT["code"], f"UNIT is {pkg.UNIT['code']!r}")
     r.check(mod.SESSION == units.normalise_session(session_code), f"SESSION is {mod.SESSION!r}")
     r.check(bool(mod.TITLE.strip()), "TITLE is filled in")
-    r.check(mod.PROBLEM in problems.REGISTRY, f"PROBLEM {mod.PROBLEM!r} is in the problem library")
-    r.check(len(mod.TASKS) > 0, f"{len(mod.TASKS)} tasks")
+    if mod.PROBLEM is None:
+        r.ok("no case problem (PROBLEM = None)")
+    else:
+        r.check(mod.PROBLEM in problems.REGISTRY, f"PROBLEM {mod.PROBLEM!r} is in the problem library")
+    r.check(len(mod.TASKS) > 0 or bool(mod.TOOLS),
+            f"{len(mod.TASKS)} tasks" + (", helper module " + mod.TOOLS if mod.TOOLS else ""))
+    if mod.TOOLS:
+        try:
+            helpers = registry.tools(mod)
+            r.check(bool((helpers.__doc__ or "").strip()), f"helper module {mod.TOOLS} imports and has a docstring")
+        except Exception as e:
+            r.fail(f"helper module {mod.TOOLS} does not import: {e}")
+    from .. import datasets
+    for name in mod.DATASETS:
+        try:
+            s = datasets.source(name)
+            r.check(bool(s.url and s.sha256 and s.owner and s.licence), f"dataset {name!r}: owner, address, checksum "
+                                                                         f"and licence note recorded")
+        except KeyError as e:
+            r.fail(f"dataset {name!r} is not registered in ai_learning_kit.datasets: {e}")
+    try:
+        import json
+        json.dumps(registry.tutor_context(mod.UNIT, mod.SESSION))
+        r.ok("tutor_context() is JSON-able")
+    except Exception as e:
+        r.fail(f"tutor_context() failed: {e}")
+    for role, rel in mod.NOTEBOOKS.items():
+        from .notebooks import NOTEBOOK_ROOT, check_notebook
+        nb_path = NOTEBOOK_ROOT / rel
+        if not NOTEBOOK_ROOT.is_dir():
+            r.ok(f"notebook {role}: not checked (notebooks/ is not in this installation)")
+            continue
+        if not nb_path.is_file():
+            r.fail(f"notebook {role}: {rel} does not exist")
+            continue
+        for ok, msg in check_notebook(nb_path, mod):
+            r.check(ok, f"notebook {role} ({nb_path.name}): {msg}")
     stages = getattr(mod, "STAGES", None)
     if stages:
         from ..core.session import VISIBILITY
@@ -168,6 +204,13 @@ def main(argv=None) -> int:
         return validate_all()
     if argv[0] == "--problem" and len(argv) == 2:
         rep = validate_problem(argv[1]); print(rep); return 1 if rep.failures else 0
+    if argv[0] == "--notebook" and len(argv) == 2:
+        from .notebooks import check_notebook
+        fails = 0
+        for ok, msg in check_notebook(Path(argv[1])):
+            print(f"  {'OK  ' if ok else 'FAIL'} {msg}")
+            fails += not ok
+        return 1 if fails else 0
     if argv[0] == "--session" and len(argv) == 3:
         rep = validate_session(argv[1], argv[2]); print(rep); return 1 if rep.failures else 0
     print(__doc__)

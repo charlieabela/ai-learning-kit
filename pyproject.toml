@@ -30,7 +30,7 @@ dev = ["pytest", "nbformat", "nbclient", "ipykernel"]
 include = ["ai_learning_kit*"]
 
 [tool.setuptools.package-data]
-ai_learning_kit = ["problems/*/data/*"]
+ai_learning_kit = ["problems/*/data/*", "units/*/*/reference/*"]
 
 [tool.setuptools.dynamic]
 version = { attr = "ai_learning_kit._version.__version__" }

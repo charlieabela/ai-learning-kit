@@ -1,8 +1,14 @@
 # Changelog
 
-## Unreleased · Notebooks install v0.4.0
+## 0.5.0 · Notebooks that run anywhere, datasets from their owners, ICS5111 S02
 
-- The ARI1101 S02 notebook installs `v0.4.0` (install line and `metadata["ai_learning_kit"]`), and the README and architecture notes name `v0.4.0`. No code changed: 0.4.0 differs from 0.3.2 only by the removed `ari1101kit` package, which S02 does not use. Notebook Tutor 0.1.6 bundles 0.4.0, so the two agree.
+- **ICS5111 S02 (graph embeddings)**: the Prepare, Explore and Practice notebooks of the v2 session pack, ported to the kit. The helpers (`s02_tools.py`, version 2026-10-27) are `T = kit.tools()`, unchanged in every computation; the reference results ship with the session. The ZIP and Drive set-up cell is replaced by the kit's two opening cells; the teaching content is unchanged, and every printed result and figure of the pack is reproduced exactly. `adr_graph()` was left out: no Session 02 notebook uses it.
+- **Sessions without graded tasks**: `PROBLEM` and `TASKS` are optional; such a session has helpers (`TOOLS`), and `kit.start(unit, session)` needs no student name and connects Google Drive only when the session keeps work (`SAVES_WORK`, default: when it has tasks). `kit.tools()` returns the helpers. Sessions also declare `DATASETS`, `EXTRAS` and `NOTEBOOKS`.
+- **Datasets from their owners** (`ai_learning_kit.datasets`): each external dataset is recorded with owner, address, checksum, size, licence note and citation; `kit.start` downloads it from the owner the first time, checks it, and caches it (in Colab, in Drive when connected). A copy next to the notebook is used when the owner's site is down. Cora comes from LINQS.
+- **The notebook contract** (`docs/NOTEBOOK_CONTRACT.md`), checked by the validator for every notebook a session names; CI downloads every dataset from its owner and executes every notebook on Linux, macOS and Windows.
+- **One release step**: `python -m ai_learning_kit.dev.release X.Y.Z` sets the version, stamps every notebook's install line and metadata, rebuilds `notebooks/README.md` with the Open-in-Colab links, and updates the docs.
+- **Install without git**: notebooks install GitHub's archive of the release (`ai-learning-kit[extra]@https://.../archive/refs/tags/vX.Y.Z.zip`), which needs only pip; the ARI1101 S02 notebook moves to this form (its content is unchanged).
+- After 0.4.0 and before this release, the ARI1101 S02 notebook and the docs were moved to install `v0.4.0`.
 
 ## 0.4.0 · One package name
 
