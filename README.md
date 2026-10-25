@@ -88,11 +88,6 @@ session, follow the authoring guides; `docs/prompts/` holds prompts that draft
 either from a topic and guidelines with a language model, for the lecturer to
 review. `python -m ai_learning_kit.dev.validate` checks every contract.
 
-## Compatibility
-
-Notebooks written for `ari1101kit` 0.2.x still work: `import ari1101kit as kit`
-is a shim onto this package, and the old tags remain installable.
-
 ## Development
 
 ```

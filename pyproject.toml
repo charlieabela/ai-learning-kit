@@ -27,7 +27,7 @@ xml = ["lxml"]
 dev = ["pytest", "nbformat", "nbclient", "ipykernel"]
 
 [tool.setuptools.packages.find]
-include = ["ai_learning_kit*", "ari1101kit*"]
+include = ["ai_learning_kit*"]
 
 [tool.setuptools.package-data]
 ai_learning_kit = ["problems/*/data/*"]
