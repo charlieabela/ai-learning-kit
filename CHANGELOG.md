@@ -3,7 +3,7 @@
 ## 0.4.0 · One package name
 
 - The compatibility package kept from before 0.3.0 is removed: the distribution now installs only `ai_learning_kit`. Use `import ai_learning_kit as kit` and `kit.start("ARI1101", "S02", student=...)`.
-- Nothing else changed: no code in `ai_learning_kit` depended on the removed package, and the released notebooks already use the new name. Notebooks keep installing `v0.3.0`; a notebook written before 0.3.0 keeps working because it installs its own earlier tag.
+- Nothing else changed: no code in `ai_learning_kit` depended on the removed package, and the released notebooks already use the new name. The ARI1101 S02 notebook now installs `v0.3.2` (visible install line and `metadata["ai_learning_kit"]`), so `kit.hint()` and `kit.ask()` work with thinking models in Colab and Notebook Tutor no longer reports a version mismatch; a notebook written before 0.3.0 keeps working because it installs its own earlier tag.
 
 ## 0.3.2 · Models that think before answering
 
