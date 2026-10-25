@@ -8,8 +8,9 @@ The kit holds a **library of problems**, each a frozen set of data sources in
 several formats with helper code that does the heavy lifting, and, for each
 **unit**, **sessions**. A session either binds a problem to a sequence of graded
 **tasks** with an answer book, or supplies **helpers and data** to notebooks that
-check themselves; it also lists its **notebooks** (Prepare, Explore, Practice),
-which live in `notebooks/` and run unchanged in Notebook Tutor and in Colab. A session
+check themselves. The notebooks themselves are not stored here: they are kept and
+distributed with the rest of a session's material, and run unchanged in Notebook
+Tutor and in Colab because everything they depend on comes from the kit. A session
 hides the steps that are not its topic, so that students concentrate on the
 step that is: given the text of a policy, the kit extracts the rules and the
 students choose a format to store them; given tables of transactions, the kit
@@ -21,14 +22,19 @@ All companies, people and documents in the problems are fictional. Real
 datasets (Cora, for example) are not copied into the kit: it downloads them from
 their owners, as described under *Data* below.
 
-## Notebooks for students
+## Notebooks
 
-[`notebooks/README.md`](notebooks/README.md) lists every notebook of this release
-with its Open-in-Colab link. Students open the same notebooks in
+Students open a session's notebooks in
 [Notebook Tutor](https://github.com/charlieabela/notebook-tutor), which ships the
-kit. Every notebook follows one contract (`docs/NOTEBOOK_CONTRACT.md`): it starts
-with the kit's install line and `kit.start(...)`, and nothing in it depends on
-where it runs.
+kit and keeps each student's copy, with their work, in its own clone; or in Colab,
+from Drive. Every notebook follows one contract (`docs/NOTEBOOK_CONTRACT.md`): it
+starts with the kit's install line and `kit.start(...)`, and nothing in it depends
+on where it runs. Check and stamp a notebook file wherever it is:
+
+```
+python -m ai_learning_kit.dev.notebooks check S02_1_prepare_setup.ipynb
+python -m ai_learning_kit.dev.notebooks stamp 0.5.0 S02_1_prepare_setup.ipynb
+```
 
 ## Use in a notebook (Notebook Tutor, Colab, Jupyter or VS Code)
 
@@ -109,7 +115,7 @@ concept. Without one, everything else works unchanged. See `docs/LLM.md`.
 |---|---|---|
 | ARI1101 Foundations of Data Science | S02 Data formats: CSV, JSON, XML and documents | `brightwater_q3` |
 | ICS2205 Web Intelligence | none yet | |
-| ICS5111 Mining Large Scale Data | S02 Graph embeddings (Prepare, Explore and Practice notebooks; Cora from LINQS) | none (helpers and data) |
+| ICS5111 Mining Large Scale Data | S02 Graph embeddings (helpers, Cora from LINQS, reference results) | none (helpers and data) |
 
 **brightwater_q3**: the Q3 2026 expenditure compliance review at Brightwater
 Logistics Ltd. Seven sources in seven formats (DOCX policy, CSV payments, JSON
@@ -125,8 +131,7 @@ ai_learning_kit/problems   the problem library (unit-independent)
 ai_learning_kit/units      one package per unit; sessions bind a problem to tasks
 ai_learning_kit/llm        optional language-model providers and the tutor helpers
 ai_learning_kit/datasets   external datasets: owner, address, checksum, licence; download and cache
-ai_learning_kit/dev        validator (problems, sessions, notebooks) and the release step
-notebooks/                 the notebooks of every session, with an index of Open-in-Colab links
+ai_learning_kit/dev        validator (problems, sessions), the notebook checker, and the release step
 templates/                 skeletons for a new problem and a new session
 docs/                      ARCHITECTURE, AUTHORING_A_PROBLEM, AUTHORING_A_SESSION, LLM, prompts/
 ```
@@ -142,11 +147,11 @@ review. `python -m ai_learning_kit.dev.validate` checks every contract.
 pip install -e ".[dev,graphs]"
 pytest -q
 python -m ai_learning_kit.dev.validate          # problems, sessions and every notebook named by a session
-python -m ai_learning_kit.dev.release 0.6.0     # a release: version, notebook stamps, Colab links, docs
+python -m ai_learning_kit.dev.release 0.6.0     # a release: version and docs
 ```
 
-CI runs the tests and the validator, downloads every registered dataset from its
-owner and checks its checksum, and executes every notebook on Linux, macOS and
-Windows.
+CI runs the tests and the validator on Linux, macOS and Windows, and checks that
+every registered dataset's owner still serves the exact file (an owner that refuses
+the connection is reported as a warning).
 
 Licence: GPL-3.0-or-later.

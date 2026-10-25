@@ -1,4 +1,12 @@
-"""The notebook contract: what every notebook in notebooks/ must look like, and the check for it.
+"""The notebook contract: what a notebook built on the kit must look like, and the check for it.
+
+Notebooks are not stored in the kit: the lecturer keeps and distributes them (Drive, the VLE), and
+students open them in Notebook Tutor, which keeps their copy in its clone, or in Colab. The kit holds
+what notebooks depend on (helpers, data sources, reference results), and this module checks a
+notebook file wherever it is:
+
+    python -m ai_learning_kit.dev.notebooks check  S02_1_prepare_setup.ipynb ...
+    python -m ai_learning_kit.dev.notebooks stamp 0.5.0 S02_1_prepare_setup.ipynb ...   # install line + metadata
 
 A kit notebook runs unchanged in Notebook Tutor and in Colab, and (best effort) in Jupyter.
 That works because everything that depends on where it runs lives in the kit, not in the
@@ -16,7 +24,7 @@ notebook. The contract (docs/NOTEBOOK_CONTRACT.md explains each rule):
    Data comes from the kit (ai_learning_kit.datasets or the session's helpers).
 5. Every T.<name> the notebook uses exists in the session's helper module.
 6. Saved outputs contain no errors, except in cells tagged "raises-exception".
-7. The notebook belongs to the kit version it says it does (the release step stamps this).
+7. The notebook names the kit version it was checked with (stamp() writes it).
 """
 from __future__ import annotations
 
@@ -27,7 +35,6 @@ from pathlib import Path
 from .. import _version
 
 REPO = "https://github.com/charlieabela/ai-learning-kit"
-NOTEBOOK_ROOT = Path(__file__).resolve().parents[2] / "notebooks"
 ROLES = ("prepare", "explore", "practice", "session", "solutions")   # session: one notebook for a whole session
 
 FORBIDDEN = [
@@ -56,13 +63,6 @@ def install_line(version: str | None = None, extras: str = "") -> str:
     version = version or _current()
     name = f"ai-learning-kit[{extras}]" if extras else "ai-learning-kit"
     return f'%pip install -q "{name}@{REPO}/archive/refs/tags/v{version}.zip"'
-
-
-def colab_url(rel_path: str, version: str | None = None) -> str:
-    """Open-in-Colab link for a notebook in notebooks/, pinned to a release tag."""
-    version = version or _current()
-    rel = str(rel_path).replace("\\", "/")
-    return f"https://colab.research.google.com/github/charlieabela/ai-learning-kit/blob/v{version}/notebooks/{rel}"
 
 
 def _code_cells(nb: dict) -> list:
@@ -150,3 +150,26 @@ def stamp(path, version: str, mod=None) -> bool:
         path.write_text(new, encoding="utf-8")
         return True
     return False
+
+
+def main(argv=None) -> int:
+    import sys
+    argv = list(sys.argv[1:] if argv is None else argv)
+    if len(argv) >= 2 and argv[0] == "check":
+        failures = 0
+        for f in argv[1:]:
+            print(f)
+            for ok, msg in check_notebook(Path(f)):
+                print(f"  {'OK  ' if ok else 'FAIL'} {msg}")
+                failures += not ok
+        return 1 if failures else 0
+    if len(argv) >= 3 and argv[0] == "stamp" and re.fullmatch(r"\d+\.\d+\.\d+", argv[1]):
+        for f in argv[2:]:
+            print(f"{f}: {'stamped' if stamp(Path(f), argv[1]) else 'already stamped'} for {argv[1]}")
+        return 0
+    print(__doc__)
+    return 2
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

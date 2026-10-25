@@ -3,7 +3,7 @@
     python -m ai_learning_kit.dev.validate                    # everything registered
     python -m ai_learning_kit.dev.validate --problem brightwater_q3
     python -m ai_learning_kit.dev.validate --session ARI1101 S02
-    python -m ai_learning_kit.dev.validate --notebook notebooks/ICS5111/S02/S02_3_practice.ipynb
+    python -m ai_learning_kit.dev.validate --notebook path/to/S02_3_practice.ipynb   # any notebook file
 
 Each check prints OK or a problem description; the exit code is non-zero when
 anything fails. Run it before opening a pull request that adds or changes a
@@ -128,17 +128,6 @@ def validate_session(unit_code: str, session_code: str) -> Report:
         r.ok("tutor_context() is JSON-able")
     except Exception as e:
         r.fail(f"tutor_context() failed: {e}")
-    for role, rel in mod.NOTEBOOKS.items():
-        from .notebooks import NOTEBOOK_ROOT, check_notebook
-        nb_path = NOTEBOOK_ROOT / rel
-        if not NOTEBOOK_ROOT.is_dir():
-            r.ok(f"notebook {role}: not checked (notebooks/ is not in this installation)")
-            continue
-        if not nb_path.is_file():
-            r.fail(f"notebook {role}: {rel} does not exist")
-            continue
-        for ok, msg in check_notebook(nb_path, mod):
-            r.check(ok, f"notebook {role} ({nb_path.name}): {msg}")
     stages = getattr(mod, "STAGES", None)
     if stages:
         from ..core.session import VISIBILITY

@@ -16,7 +16,6 @@ SESSION_DEFAULTS = {                                     # optional, with these 
     "TOOLS": None,        # dotted path (relative to the session) of the helper module kit.tools() returns
     "DATASETS": (),       # external datasets (ai_learning_kit.datasets) that kit.start fetches
     "EXTRAS": "",         # the pip extra the session's notebooks install, e.g. "graphs"
-    "NOTEBOOKS": {},      # role ("prepare", "explore", "practice") -> path inside notebooks/
     "SAVES_WORK": None,   # True when students' work must be kept (default: when there are tasks)
 }
 
@@ -65,8 +64,7 @@ def session_summary(mod) -> dict:
     return {"unit": mod.UNIT, "session": mod.SESSION, "title": mod.TITLE, "problem": mod.PROBLEM,
             "stages": dict(getattr(mod, "STAGES", {}) or {}),
             "tasks": [task_summary(tid, t) for tid, t in mod.TASKS.items()],
-            "tools": bool(mod.TOOLS), "datasets": list(mod.DATASETS), "extras": mod.EXTRAS,
-            "notebooks": dict(mod.NOTEBOOKS)}
+            "tools": bool(mod.TOOLS), "datasets": list(mod.DATASETS), "extras": mod.EXTRAS}
 
 
 def tutor_context(unit_code: str, session_code: str) -> dict:
@@ -105,8 +103,7 @@ def catalog(include_tasks: bool = True) -> dict:
         entry["sessions"] = []
         for scode in getattr(pkg, "SESSIONS", {}):
             mod = session(code, scode)
-            s = session_summary(mod) if include_tasks else {"session": scode, "title": mod.TITLE, "problem": mod.PROBLEM,
-                                                            "notebooks": dict(mod.NOTEBOOKS)}
+            s = session_summary(mod) if include_tasks else {"session": scode, "title": mod.TITLE, "problem": mod.PROBLEM}
             entry["sessions"].append(s)
         out["units"].append(entry)
     for pid in _problems.ids():

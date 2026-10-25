@@ -33,7 +33,6 @@ def test_session_contract_without_tasks():
     mod = registry.session("ICS5111", "S02")
     assert mod.PROBLEM is None and mod.TASKS == {} and mod.SAVES_WORK is False
     assert mod.DATASETS == ("cora",) and mod.EXTRAS == "graphs"
-    assert set(mod.NOTEBOOKS) == {"prepare", "explore", "practice"}
     ctx = registry.tutor_context("ICS5111", "S02")
     json.dumps(ctx)
     assert ctx["problem"] is None and ctx["tasks"] == {} and "load_cora" in ctx["tools"]["functions"]
@@ -82,3 +81,23 @@ def test_small_graphs_come_from_networkx():
     g, club = T.karate()
     assert g.number_of_nodes() == 34 and set(club) == {0, 1}
     assert T.lesmis().number_of_nodes() == 77
+
+
+def test_helpers_reproduce_their_results_without_downloading_anything():
+    """A regression guard that runs everywhere (no Cora needed): the Session 02 helpers on the karate club
+    stored in the kit give exactly the values recorded when the session was ported."""
+    nx = pytest.importorskip("networkx")
+    from ai_learning_kit.units.ics5111.s02 import tools as T
+    g = nx.convert_node_labels_to_integers(datasets.small("karate"))
+    walks = T.walks(g, n_walks=2, length=8, seed=T.SEED)
+    assert len(walks) == 68 and list(walks[0][:8]) == [31, 32, 15, 32, 23, 33, 27, 24]
+    pairs = T.context_pairs(walks, window=2)
+    assert len(pairs) == 1768 and [list(map(int, p)) for p in pairs[:3]] == [[31, 32], [31, 15], [32, 31]]
+    nbrs, probs = T.transition(g, 0, 1, p=.5, q=2.)
+    assert list(nbrs) == [0, 2, 3, 7, 13, 17, 19, 21, 30] and np.allclose(probs[:2], [4 / 19, 2 / 19])
+    _, Z, info = T.embed(g, n_walks=3, length=16, window=2, dim=8, negatives=3, epochs=3, lr=.05)
+    assert info["pairs"] == 5916
+    assert np.allclose(info["loss_per_positive_pair"], [2.3207610211, 1.9776888286, 1.9926384749], rtol=1e-6)
+    assert np.isclose(Z.sum(), -28.70077421143727, rtol=1e-6)
+    assert np.allclose(Z[0], [0.6370119094, -1.2392907461, 0.0226423435, 0.0407314578, -0.1279254117,
+                              -0.5041797536, 0.2281344172, -0.0177148583], rtol=1e-6, atol=1e-9)

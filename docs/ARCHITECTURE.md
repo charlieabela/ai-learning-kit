@@ -40,14 +40,13 @@ ai_learning_kit/
     __init__.py    configure(), autodetect(), complete(), hint(), ask()
   dev/           tools for authors
     validate.py    python -m ai_learning_kit.dev.validate [--problem id | --session UNIT SNN | --notebook path]
-    notebooks.py   the notebook contract: install_line(), check_notebook(), stamp(), colab_url()
-    release.py     python -m ai_learning_kit.dev.release X.Y.Z: version, stamps, Colab index, docs
+    notebooks.py   the notebook contract for notebook files anywhere: check_notebook(), stamp(), install_line()
+    release.py     python -m ai_learning_kit.dev.release X.Y.Z: version and docs
   __init__.py    the student API: start, tools, task, answer, check, progress, submit, sync,
                  sources, workspace, peek, path, extract/pipeline/report/reference (proxies),
                  explain, source, hint, ask, catalog
 templates/       problem/ and session/ skeletons to copy
 docs/            this file, the authoring guides, the generation prompts, LLM.md
-notebooks/       student notebooks (notebooks/<UNIT>/<SESSION>/), README.md with Open-in-Colab links
 tests/           pytest suite, including simulated Colab and a fake LLM server
 ```
 
@@ -68,8 +67,7 @@ Helper modules are ordinary Python modules; the kit exposes them to students as
 with `UNIT`, `SESSION` and `TITLE`, and optionally `PROBLEM` (None for a session
 without a case problem), `TASKS` ({} when the notebooks check themselves), `TOOLS`
 (the helper module `kit.tools()` returns), `DATASETS` (external datasets `kit.start`
-fetches), `EXTRAS` (the pip extra its notebooks install), `NOTEBOOKS` (role to path)
-and `STAGES`. Each task has `title`, `question`, `needs_value`,
+fetches), `EXTRAS` (the pip extra its notebooks install) and `STAGES`. Each task has `title`, `question`, `needs_value`,
 `needs_reasoning`, `check` (value to Feedback), `written` (text to Feedback) and a
 four-part `guide` (what, why, example, record). Checks compare with reference
 values computed from the data, never typed by hand.
@@ -130,11 +128,12 @@ problem or session.
 
 ## Notebooks
 
+The kit stores no notebooks: the lecturer keeps and distributes them, Notebook Tutor
+keeps each student's copy in its clone, and Colab opens them from Drive.
 `docs/NOTEBOOK_CONTRACT.md` is the rule book: every notebook opens with the install
 line and `kit.start`, contains nothing that depends on where it runs, and carries
-`metadata["ai_learning_kit"]`. The validator checks it, CI executes every notebook on
-three systems, and the release step stamps the version and rebuilds the index of
-Open-in-Colab links.
+`metadata["ai_learning_kit"]`. `python -m ai_learning_kit.dev.notebooks check|stamp`
+works on notebook files wherever they are.
 
 ## Versioning and compatibility
 

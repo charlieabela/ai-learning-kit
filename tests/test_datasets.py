@@ -153,12 +153,18 @@ def test_use_refuses_a_different_file(store, monkeypatch, tmp_path):
         datasets.use("toy", tmp_path / "missing.bin")
 
 
-def test_owner_offline_and_nothing_found_says_what_to_do(store, monkeypatch):
+@pytest.mark.parametrize("where,expected", [("1", "Data files button"), (None, "same folder as this notebook")])
+def test_owner_offline_and_nothing_found_says_what_to_do(store, monkeypatch, where, expected):
     register(monkeypatch, UNREACHABLE, b"z" * 10)
+    if where:
+        monkeypatch.setenv("NOTEBOOK_TUTOR", where)
+    else:
+        monkeypatch.delenv("NOTEBOOK_TUTOR", raising=False)
     with pytest.raises(DatasetUnavailable) as e:
         datasets.fetch("toy", quiet=True)
     msg = str(e.value)
-    assert 'kit.datasets.use("toy", "path/to/toy.bin")' in msg and "the shared link" in msg and str(store) in msg
+    assert msg.startswith("Toy dataset is missing") and expected in msg and "toy.bin" in msg
+    assert "copy your lecturer provides" in msg and 'kit.datasets.use("toy"' in msg
 
 
 # --------------------------------------------------------------------------- copies in the cloud (shared links)

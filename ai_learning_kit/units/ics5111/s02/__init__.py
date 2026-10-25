@@ -17,13 +17,6 @@ TOOLS = ".tools"                    # T = kit.tools()
 DATASETS = ("cora",)                # downloaded by kit.start, so a failure shows in the first cell
 EXTRAS = "graphs"                   # pip extra the notebooks install: networkx and scikit-learn
 
-# The notebooks of this session, in the order students use them (paths inside notebooks/).
-NOTEBOOKS = {
-    "prepare": "ICS5111/S02/S02_1_prepare_setup.ipynb",
-    "explore": "ICS5111/S02/S02_2_explore_walkthrough.ipynb",
-    "practice": "ICS5111/S02/S02_3_practice.ipynb",
-}
-
 STAGES = {
     "loading": stage("Loading Cora: reading the archive, building the citation graph, word features, labels and "
                      "the fixed 541/541/1626 split", BLACK_BOX, how="T.load_cora()",

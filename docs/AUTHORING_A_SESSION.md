@@ -10,7 +10,8 @@ A session is one of two kinds:
   the data and the reference results (ICS5111 S02). See *Sessions whose notebooks
   check themselves* below.
 
-Either kind lists its notebooks, which follow `docs/NOTEBOOK_CONTRACT.md`.
+Either kind's notebooks follow `docs/NOTEBOOK_CONTRACT.md`; they are kept and
+distributed with the session's material, not in the kit.
 
 A session with tasks binds one problem to a sequence of tasks for a unit's learning
 outcomes. The session decides the split: which steps students do themselves
@@ -96,8 +97,6 @@ Make the session a package, `ai_learning_kit/units/<unit>/sNN/`, holding:
     (register new ones in `ai_learning_kit/datasets/__init__.py` with owner, address,
     checksum, size, licence note and citation);
   - `EXTRAS = "graphs"`: the pip extra the notebooks install;
-  - `NOTEBOOKS = {"prepare": ..., "explore": ..., "practice": ...}`: paths inside
-    `notebooks/`;
   - `STAGES`, as above, so that tutors know what is in focus;
 - `tools.py`: the helpers, with a docstring that says what the module is for. Read
   external data with `datasets.fetch(name)`; small research datasets from the
@@ -107,8 +106,9 @@ Make the session a package, `ai_learning_kit/units/<unit>/sNN/`, holding:
   `ROOT / "reference" / ...`.
 
 Then write the notebooks to the contract, run
-`python -m ai_learning_kit.dev.validate --session <UNIT> <SNN>`, execute each notebook
-end to end (`AILK_EXECUTE=1 pytest tests/test_notebooks.py`), and commit them executed.
+`python -m ai_learning_kit.dev.validate --session <UNIT> <SNN>` and
+`python -m ai_learning_kit.dev.notebooks check <the notebook files>`, execute each
+notebook end to end against the kit, and distribute them executed.
 
 ## Rules that keep old notebooks working
 

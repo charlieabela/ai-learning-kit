@@ -377,7 +377,8 @@ def fetch(name: str, quiet: bool = False) -> Path:
     if _matches(kept, s):
         return kept
     here = Path.cwd()
-    for folder in (here, here / "data", *folders()):
+    extra = [Path("/content")] if _in_colab() else []          # where Colab's Files panel puts uploads
+    for folder in (here, here / "data", *extra, *folders()):
         found = _in_folder(folder, s) if folder.is_dir() else None
         if found is not None:
             if not quiet:
@@ -405,15 +406,28 @@ def fetch(name: str, quiet: bool = False) -> Path:
             return path
         except (urllib.error.URLError, OSError, TimeoutError, ValueError) as e:
             tried.append(f"{location}: {getattr(e, 'reason', e)}")
-    raise DatasetUnavailable(
-        f"{s.title} could not be found or downloaded.\n"
-        + "".join(f"  - {t}\n" for t in tried)
-        + f"Any of these works (the kit checks the file in every case):\n"
-          f"  1. Run the cell again later: the owner's site ({s.landing or s.url}) may be busy.\n"
-          f"  2. If you have {s.filename} on this computer (downloaded in a browser, or in a synced Google Drive or "
-          f"OneDrive folder): kit.datasets.use(\"{s.name}\", \"path/to/{s.filename}\") or the folder that holds it.\n"
-          f"  3. If your lecturer shared a copy: kit.datasets.use(\"{s.name}\", \"<the shared link>\").\n"
-          f"  4. Or put {s.filename} next to this notebook, or in {data_dir()}, and run the cell again.")
+    raise DatasetUnavailable(_missing_message(s, tried))
+
+
+def _where() -> str:
+    if os.environ.get("NOTEBOOK_TUTOR") == "1":
+        return "tutor"
+    return "colab" if _in_colab() else "jupyter"
+
+
+def _missing_message(s: Source, tried: list) -> str:
+    """What to do when a dataset is missing, in the words of the place the notebook runs in."""
+    add = {
+        "tutor": f"Add {s.filename} with the Data files button (Data files > Add data file...), then run this cell again.",
+        "colab": f"Upload {s.filename} with the Files panel (the folder icon on the left), then run this cell again.",
+        "jupyter": f"Put {s.filename} in the same folder as this notebook, then run this cell again.",
+    }[_where()]
+    return (f"{s.title} is missing: it could not be downloaded from {s.owner}.\n"
+            + "".join(f"  - {t}\n" for t in tried)
+            + f"{add}\nIf you do not have {s.filename}, use the copy your lecturer provides (for example on the VLE). "
+              f"The kit checks that it is the right file and keeps it, so you add it only once.\n"
+              f"(A copy elsewhere on this computer or a shared link also works: "
+              f"kit.datasets.use(\"{s.name}\", \"<file, folder or link>\").)")
 
 
 def use(name: str, location: str, remember: bool = True) -> Path:
