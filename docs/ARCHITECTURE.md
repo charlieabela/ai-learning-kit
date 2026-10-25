@@ -40,7 +40,6 @@ ai_learning_kit/
   __init__.py    the student API: start, task, answer, check, progress, submit, sync,
                  sources, workspace, peek, path, extract/pipeline/report/reference (proxies),
                  explain, source, hint, ask, catalog
-ari1101kit/      compatibility shim for notebooks written for ari1101kit 0.2.x
 templates/       problem/ and session/ skeletons to copy
 docs/            this file, the authoring guides, the generation prompts, LLM.md
 notebooks/       student notebooks, one folder per unit (built by the lecturer's builder)
@@ -109,9 +108,8 @@ grades, and the answer book records only the kit's deterministic checks.
 
 Releases are tagged; notebooks install a tag (`@v0.3.0`). A problem's data and a
 released session's tasks are never changed afterwards: fix a problem by adding a
-new id, extend a session by adding a new session. `ari1101kit` remains importable
-as a shim so earlier notebooks keep working against new releases, and the old
-tags remain installable regardless.
+new id, extend a session by adding a new session. Earlier tags remain
+installable, so a notebook keeps working against the tag it installs.
 
 ## Notebook tutors and other front ends
 

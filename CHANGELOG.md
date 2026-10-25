@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.4.0 · One package name
+
+- The compatibility package kept from before 0.3.0 is removed: the distribution now installs only `ai_learning_kit`. Use `import ai_learning_kit as kit` and `kit.start("ARI1101", "S02", student=...)`.
+- Nothing else changed: no code in `ai_learning_kit` depended on the removed package, and the released notebooks already use the new name. Notebooks keep installing `v0.3.0`; a notebook written before 0.3.0 keeps working because it installs its own earlier tag.
+
 ## 0.3.2 · Models that think before answering
 
 - Claude 5.5, Gemini 2.5 and later, and OpenAI's reasoning models think before they answer, and the thinking counts against the output limit. With the kit's small limits the answer was cut off, or JSON arrived incomplete. Every request now allows at least 4,096 output tokens (only tokens used are billed).

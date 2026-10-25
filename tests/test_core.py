@@ -1,4 +1,4 @@
-"""The engine: registry, catalog, proxies, answer book naming, compatibility shim."""
+"""The engine: registry, catalog, proxies, answer book naming."""
 import json
 
 import pytest
@@ -71,15 +71,6 @@ def test_workspace_copies_the_problems_files_next_to_the_notebook(tmp_path):
     folder = kit.workspace()
     assert folder.resolve() == tmp_path.resolve() / "brightwater_q3"
     assert sorted(p.name for p in folder.iterdir()) == sorted(kit.problem().sources.values())
-
-
-def test_ari1101kit_shim_still_works(capsys):
-    import ari1101kit as old
-    old.start("S02", student="Old Notebook")
-    assert "now part of ai-learning-kit" in capsys.readouterr().out
-    assert old.extract.policy_rules()[0]["rule_id"] == "R1"
-    old.answer("T2.1", value=9, reasoning="rules is a list of dicts")
-    assert kit._state["book"].data["answers"]["T2.1"]["result"] == "correct"
 
 
 def test_session_stages_give_the_tutor_its_scope():
