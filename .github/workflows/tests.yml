@@ -28,6 +28,30 @@ jobs:
           python-version: ${{ matrix.python }}
       - name: Install
         run: python -m pip install -e ".[dev,graphs,xml]"
+      - name: Can the dataset owners be reached from here?
+        continue-on-error: true
+        shell: python
+        run: |
+          import socket, time, urllib.request
+          from ai_learning_kit import datasets
+          for s in datasets.SOURCES.values():
+              host = s.url.split("/")[2]
+              try:
+                  addr = socket.getaddrinfo(host, 443)[0][4][0]
+              except Exception as e:
+                  print(f"::warning title={s.name}::DNS failed for {host}: {e}"); continue
+              t = time.time()
+              try:
+                  with socket.create_connection((addr, 443), timeout=20):
+                      tcp = f"TCP to {addr}:443 ok in {time.time() - t:.1f}s"
+              except Exception as e:
+                  print(f"::warning title={s.name}::{host} resolves to {addr}, but TCP to port 443 failed after {time.time() - t:.1f}s: {e}"); continue
+              try:
+                  req = urllib.request.Request(s.url, method="HEAD", headers={"User-Agent": "ai-learning-kit CI"})
+                  with urllib.request.urlopen(req, timeout=30) as r:
+                      print(f"::notice title={s.name}::{tcp}; HTTP {r.status}, {r.headers.get('Content-Length')} bytes")
+              except Exception as e:
+                  print(f"::warning title={s.name}::{tcp}; HTTP request failed: {e}")
       - name: Validate problems, sessions and notebooks
         run: python -m ai_learning_kit.dev.validate
       - name: Tests (datasets from their owners, notebooks executed)
