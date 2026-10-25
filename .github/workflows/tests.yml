@@ -1,0 +1,67 @@
+name: tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    # The kit, every session and every notebook, on the systems students use.
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        python: ["3.12"]
+        include:
+          - os: ubuntu-latest
+            python: "3.10"
+    runs-on: ${{ matrix.os }}
+    env:
+      AILK_ONLINE: "1"        # contact every dataset owner and check the file's checksum (a refused connection is a warning)
+      MPLBACKEND: Agg
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - name: Install
+        run: python -m pip install -e ".[dev,graphs,xml]"
+      - name: Can the dataset owners be reached from here?
+        continue-on-error: true
+        shell: python
+        run: |
+          import socket, time, urllib.request
+          from ai_learning_kit import datasets
+          for s in datasets.SOURCES.values():
+              host = s.url.split("/")[2]
+              try:
+                  addr = socket.getaddrinfo(host, 443)[0][4][0]
+              except Exception as e:
+                  print(f"::warning title={s.name}::DNS failed for {host}: {e}"); continue
+              t = time.time()
+              try:
+                  with socket.create_connection((addr, 443), timeout=20):
+                      tcp = f"TCP to {addr}:443 ok in {time.time() - t:.1f}s"
+              except Exception as e:
+                  print(f"::warning title={s.name}::{host} resolves to {addr}, but TCP to port 443 failed after {time.time() - t:.1f}s: {e}"); continue
+              try:
+                  req = urllib.request.Request(s.url, method="HEAD", headers={"User-Agent": "ai-learning-kit CI"})
+                  with urllib.request.urlopen(req, timeout=30) as r:
+                      print(f"::notice title={s.name}::{tcp}; HTTP {r.status}, {r.headers.get('Content-Length')} bytes")
+              except Exception as e:
+                  print(f"::warning title={s.name}::{tcp}; HTTP request failed: {e}")
+      - name: Validate problems and sessions
+        run: python -m ai_learning_kit.dev.validate
+      - name: Tests
+        run: python -m pytest -q -rs --junitxml=junit.xml
+      - name: Report failures as annotations
+        if: failure()
+        shell: python
+        run: |
+          import xml.etree.ElementTree as ET
+          for case in ET.parse("junit.xml").getroot().iter("testcase"):
+              for bad in list(case.findall("failure")) + list(case.findall("error")):
+                  text = (bad.get("message") or "") + " | " + (bad.text or "")[-900:]
+                  text = text.replace("%", "%25").replace("\r", "").replace("\n", "%0A")
+                  print(f"::error title={case.get('classname')}.{case.get('name')}::{text}")

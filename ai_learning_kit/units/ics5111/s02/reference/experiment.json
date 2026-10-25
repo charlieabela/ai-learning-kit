@@ -1,0 +1,49 @@
+{
+  "config": {
+    "n_walks": 3,
+    "length": 16,
+    "window": 2,
+    "dim": 16,
+    "negatives": 3,
+    "epochs": 2,
+    "lr": 0.03,
+    "p": 1.0,
+    "q": 1.0
+  },
+  "results": {
+    "structural": {
+      "C": 10.0,
+      "validation_accuracy": 0.32532347504621073,
+      "test_accuracy": 0.30565805658056583,
+      "test_macro_f1": 0.13767256570327882
+    },
+    "text": {
+      "C": 0.1,
+      "validation_accuracy": 0.6654343807763401,
+      "test_accuracy": 0.6488314883148831,
+      "test_macro_f1": 0.6176742825069448
+    },
+    "walk_embedding": {
+      "C": 10.0,
+      "validation_accuracy": 0.6617375231053605,
+      "test_accuracy": 0.6309963099630996,
+      "test_macro_f1": 0.6142925041398968
+    },
+    "majority": {
+      "validation_accuracy": 0.3031423290203327,
+      "test_accuracy": 0.3019680196801968
+    }
+  },
+  "training": {
+    "loss_per_positive_pair": [
+      2.342988616223576,
+      0.8352279362998551
+    ],
+    "seconds": 1.6684952969990263,
+    "pairs": 471192,
+    "total_seconds": 3.1013470990001224
+  },
+  "cora_sha256": "0d4ed463d1627bb7f3e8420effe8f5545fd492ae8f88dab44ce86cee7b26d7e8",
+  "split_seed": 5111,
+  "protocol": "20/20/60 stratified; full undirected topology; transductive node classification"
+}

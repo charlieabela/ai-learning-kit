@@ -1,8 +1,16 @@
 # Changelog
 
-## Unreleased · Notebooks install v0.4.0
+## 0.5.0 · Sessions without answer books, datasets from their owners, ICS5111 S02
 
-- The ARI1101 S02 notebook installs `v0.4.0` (install line and `metadata["ai_learning_kit"]`), and the README and architecture notes name `v0.4.0`. No code changed: 0.4.0 differs from 0.3.2 only by the removed `ari1101kit` package, which S02 does not use. Notebook Tutor 0.1.6 bundles 0.4.0, so the two agree.
+- **ICS5111 S02 (graph embeddings)**: the helpers of the v2 session pack (`s02_tools.py`, version 2026-10-27), unchanged in every computation, are `T = kit.tools()`; the reference results ship with the session. The pack's Prepare, Explore and Practice notebooks were rebuilt on the kit (the ZIP and Drive set-up cell replaced by the kit's two opening cells) and reproduce every printed result and figure of the pack; they are distributed with the session's material, not stored in the kit. `adr_graph()` was left out: no Session 02 notebook uses it.
+- **Sessions without graded tasks**: `PROBLEM` and `TASKS` are optional; such a session has helpers (`TOOLS`), and `kit.start(unit, session)` needs no student name and connects Google Drive only when work must be kept (`SAVES_WORK`, default: when there are tasks). `kit.tools()` returns the helpers. Sessions also declare `DATASETS` and `EXTRAS`.
+- **Course datasets from their owners, with fallbacks** (`ai_learning_kit.datasets`): each external dataset is recorded with owner, address, checksum, size, licence note and citation; `kit.start` fetches it. When the owner cannot be reached, the kit takes a checked copy from the notebook's folder or its `data/`, from added folders (`datasets.add_folder`: synced Google Drive or OneDrive folders, Drive in Colab), from lecturer-approved course copies, or from `datasets.use(name, file_folder_or_link)` (Google Drive, OneDrive/SharePoint and Dropbox links become download links). The message for a missing dataset says how to add it where the student is (Notebook Tutor's Data files button, Colab's Files panel, the notebook's folder in Jupyter). Copies are kept in the data folder, which is the clone's `data/` when the kit or Notebook Tutor runs from a git clone, so each clone holds only the datasets its student's sessions used. Cora comes from LINQS, whose server refuses some cloud machines (GitHub's CI runners among them).
+- **Small research datasets stored in the kit** (`datasets.small`): Zachary's karate club, Les Misérables, the Florentine families and Davis's Southern women, identical to the networkx copies, with citations.
+- **The notebook contract** (`docs/NOTEBOOK_CONTRACT.md`) and `python -m ai_learning_kit.dev.notebooks check|stamp` for notebook files wherever they are. **The kit no longer stores notebooks**: the ARI1101 S02 notebook leaves `notebooks/` (it remains in the history and in the tags up to v0.4.0).
+- **Install without git**: notebooks install GitHub's archive of the release (`ai-learning-kit[extra]@https://.../archive/refs/tags/vX.Y.Z.zip`), which needs only pip.
+- **One release step**: `python -m ai_learning_kit.dev.release X.Y.Z` sets the version, updates the docs and runs the validator.
+- **CI** on Linux, macOS and Windows: tests, the validator, a check that each dataset owner still serves the exact file (a refused connection is a warning), and a regression test of the Session 02 helpers on the stored karate club that needs no download.
+- After 0.4.0 and before this release, the ARI1101 S02 notebook and the docs were moved to install `v0.4.0`.
 
 ## 0.4.0 · One package name
 

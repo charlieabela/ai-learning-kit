@@ -31,18 +31,22 @@ ai_learning_kit/
     __init__.py    REGISTRY {code: package}; session lookup
     ari1101/       UNIT dict, SESSIONS {"S02": ".s02"}, s02.py, s02_guide.py
     ics2205/       UNIT dict, SESSIONS {}  (no sessions yet)
-    ics5111/       UNIT dict, SESSIONS {}  (no sessions yet)
+    ics5111/       UNIT dict, SESSIONS {"S02": ".s02"}
+      s02/           session package: __init__.py (contract), tools.py (T = kit.tools()), reference/
+  datasets/      external datasets: owner, address, checksum, licence, citation;
+                 fetch() downloads from the owner, checks and caches; prefetch()
   llm/           optional language-model support (never required)
     providers.py   OpenAICompatible (OpenAI, Ollama, vLLM, LM Studio...), Anthropic, Null
     __init__.py    configure(), autodetect(), complete(), hint(), ask()
   dev/           tools for authors
-    validate.py    python -m ai_learning_kit.dev.validate [--problem id | --session UNIT SNN]
-  __init__.py    the student API: start, task, answer, check, progress, submit, sync,
+    validate.py    python -m ai_learning_kit.dev.validate [--problem id | --session UNIT SNN | --notebook path]
+    notebooks.py   the notebook contract for notebook files anywhere: check_notebook(), stamp(), install_line()
+    release.py     python -m ai_learning_kit.dev.release X.Y.Z: version and docs
+  __init__.py    the student API: start, tools, task, answer, check, progress, submit, sync,
                  sources, workspace, peek, path, extract/pipeline/report/reference (proxies),
                  explain, source, hint, ask, catalog
 templates/       problem/ and session/ skeletons to copy
 docs/            this file, the authoring guides, the generation prompts, LLM.md
-notebooks/       student notebooks, one folder per unit (built by the lecturer's builder)
 tests/           pytest suite, including simulated Colab and a fake LLM server
 ```
 
@@ -59,8 +63,11 @@ the student API and may be used by sessions, but no session requires it.
 Helper modules are ordinary Python modules; the kit exposes them to students as
 `kit.<namespace>` for the problem of the current session.
 
-**Session** (`core/session.py`): a module with `UNIT`, `SESSION`, `TITLE`,
-`PROBLEM` and `TASKS`. Each task has `title`, `question`, `needs_value`,
+**Session** (`core/session.py`, defaults in `core/registry.py`): a module or package
+with `UNIT`, `SESSION` and `TITLE`, and optionally `PROBLEM` (None for a session
+without a case problem), `TASKS` ({} when the notebooks check themselves), `TOOLS`
+(the helper module `kit.tools()` returns), `DATASETS` (external datasets `kit.start`
+fetches), `EXTRAS` (the pip extra its notebooks install) and `STAGES`. Each task has `title`, `question`, `needs_value`,
 `needs_reasoning`, `check` (value to Feedback), `written` (text to Feedback) and a
 four-part `guide` (what, why, example, record). Checks compare with reference
 values computed from the data, never typed by hand.
@@ -104,9 +111,33 @@ Autodetection reads environment variables and Colab secrets. The model is used
 only by `kit.hint()`, `kit.ask()` and whatever a session author chooses; it never
 grades, and the answer book records only the kit's deterministic checks.
 
+## Data
+
+External datasets are downloaded from their owners, never copied into the kit
+(`datasets/`): each is recorded with its owner, address, checksum, licence note and
+citation. `kit.start` fetches a session's datasets: from the data folder, beside the
+notebook, from added folders (synced Google Drive or OneDrive folders, Drive in
+Colab), from the owner, from lecturer-approved course copies, and from locations
+given with `datasets.use()` (files, folders, or Google Drive, OneDrive/SharePoint and
+Dropbox links). Every copy is checked against the checksum and kept in the data
+folder: `AILK_DATA_DIR` (Notebook Tutor sets it to its clone's `data/`), the kit
+clone's `data/`, My Drive › ai-learning-kit › data in Colab, or the user's cache
+folder. Small research datasets are stored in `datasets/small_data/` with their
+citations; fictional case files and reference results are packaged with their
+problem or session.
+
+## Notebooks
+
+The kit stores no notebooks: the lecturer keeps and distributes them, Notebook Tutor
+keeps each student's copy in its clone, and Colab opens them from Drive.
+`docs/NOTEBOOK_CONTRACT.md` is the rule book: every notebook opens with the install
+line and `kit.start`, contains nothing that depends on where it runs, and carries
+`metadata["ai_learning_kit"]`. `python -m ai_learning_kit.dev.notebooks check|stamp`
+works on notebook files wherever they are.
+
 ## Versioning and compatibility
 
-Releases are tagged; notebooks install a tag (`@v0.4.0`). A problem's data and a
+Releases are tagged; notebooks install a tag (`@v0.5.0`). A problem's data and a
 released session's tasks are never changed afterwards: fix a problem by adding a
 new id, extend a session by adding a new session. Earlier tags remain
 installable, so a notebook keeps working against the tag it installs.
@@ -118,8 +149,9 @@ A notebook tutor can treat this kit as its back end:
 - `kit.catalog(include_tasks=True)` returns every unit, session, task and problem
   as JSON-able data;
 - each student notebook carries `metadata["ai_learning_kit"]` with the unit,
-  session, problem, kit version and install line, so a tutor can open a notebook
-  and know which session it belongs to;
+  session, role, kit version and install line, so a tutor can open a notebook
+  and know which session it belongs to; `registry.tutor_context()` gives the
+  cohort, the scope, the tasks, the helpers and the datasets;
 - answer books are plain JSON with attempts, results and timestamps per task;
 - `Feedback` objects (not only their printed form) are returned by `check`
   functions, so a tutor can render them its own way;

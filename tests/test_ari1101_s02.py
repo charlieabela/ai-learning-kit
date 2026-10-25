@@ -265,7 +265,9 @@ def test_colab_folder_argument_is_relative_to_my_drive_and_mounts_drive(fake_col
 
 
 @pytest.mark.parametrize("given", ["My Drive/ARI1101/S02", "MyDrive/ARI1101/S02", "ARI1101/S02",
-                                   "/content/drive/My Drive/ARI1101/S02"])
+                                   pytest.param("/content/drive/My Drive/ARI1101/S02", marks=pytest.mark.skipif(
+                                       __import__("sys").platform == "win32",
+                                       reason="Colab paths are POSIX paths; an absolute one is not absolute on Windows"))])
 def test_colab_folder_spellings(fake_colab, given):
     fake_colab.mp.setattr(fake_colab.wf, "COLAB_DRIVE", __import__("pathlib").Path("/content/drive"))
     assert fake_colab.wf.resolve_folder(given) == __import__("pathlib").Path("/content/drive/MyDrive/ARI1101/S02")

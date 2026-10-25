@@ -1,6 +1,19 @@
 # Authoring a session
 
-A session binds one problem to a sequence of tasks for a unit's learning
+A session is one of two kinds:
+
+- **With graded tasks**: it binds one problem from the problem library to a
+  sequence of tasks, recorded in an answer book with formative feedback (ARI1101
+  S02). Most of this guide is about this kind.
+- **Without graded tasks**: its notebooks check themselves (prediction-then-check
+  cells, comparisons with the helpers), and the session supplies the helpers,
+  the data and the reference results (ICS5111 S02). See *Sessions whose notebooks
+  check themselves* below.
+
+Either kind's notebooks follow `docs/NOTEBOOK_CONTRACT.md`; they are kept and
+distributed with the session's material, not in the kit.
+
+A session with tasks binds one problem to a sequence of tasks for a unit's learning
 outcomes. The session decides the split: which steps students do themselves
 (the topic of the session) and which steps the kit does for them (everything
 else). The same problem can be used by several sessions and units with a
@@ -73,12 +86,37 @@ either way; its depth is what changes.
    cells are generated from the guide, so notebook and `kit.task()` agree) and run
    the worked-answers copy end to end.
 
+## Sessions whose notebooks check themselves
+
+Make the session a package, `ai_learning_kit/units/<unit>/sNN/`, holding:
+
+- `__init__.py` with `UNIT`, `SESSION`, `TITLE`, `PROBLEM = None` (or a problem id),
+  `TASKS = {}`, and
+  - `TOOLS = ".tools"`: the helper module that `kit.tools()` returns;
+  - `DATASETS = ("cora",)`: external datasets `kit.start` downloads from their owners
+    (register new ones in `ai_learning_kit/datasets/__init__.py` with owner, address,
+    checksum, size, licence note and citation);
+  - `EXTRAS = "graphs"`: the pip extra the notebooks install;
+  - `STAGES`, as above, so that tutors know what is in focus;
+- `tools.py`: the helpers, with a docstring that says what the module is for. Read
+  external data with `datasets.fetch(name)`; small research datasets from the
+  library that ships them (networkx, scikit-learn); synthetic data from a seeded
+  generator;
+- `reference/`: frozen results of the run shown on the slides, read as
+  `ROOT / "reference" / ...`.
+
+Then write the notebooks to the contract, run
+`python -m ai_learning_kit.dev.validate --session <UNIT> <SNN>` and
+`python -m ai_learning_kit.dev.notebooks check <the notebook files>`, execute each
+notebook end to end against the kit, and distribute them executed.
+
 ## Rules that keep old notebooks working
 
 - Never change a released session's task ids, questions or checks. Add a new
   session instead.
 - Never change a problem's data. Add a new problem id instead.
-- Tag every release; notebooks install a tag.
+- Never change a released helper's results. Add a function, or a new session.
+- Tag every release with `python -m ai_learning_kit.dev.release`; notebooks install a tag.
 
 To draft a session from a topic and a problem with a language model, use
 `docs/prompts/new_session.md`.
