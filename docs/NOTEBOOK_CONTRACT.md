@@ -31,7 +31,7 @@ in its student form.
 ## 2. The opening: two cells, always the same
 
 ```python
-%pip install -q "ai-learning-kit[graphs]@https://github.com/charlieabela/ai-learning-kit/archive/refs/tags/v0.5.0.zip"
+%pip install -q "ai-learning-kit[graphs]@https://github.com/charlieabela/ai-learning-kit/archive/refs/tags/v0.5.1.zip"
 ```
 
 ```python
@@ -81,13 +81,21 @@ the notebook's folder (or, in Colab, its Drive folder) the current folder.
   citation, and listed in the session's `DATASETS`. `kit.start` fetches them, so a problem shows in
   the opening cell, and helpers open them with `datasets.fetch(name)`.
 - **Where the kit looks**: its data folder; the notebook's folder and its `data/`; added folders
-  (`kit.datasets.add_folder`, `AILK_DATA_PATH`); the owner's address; course copies the lecturer
-  approved (`Source.mirrors`); locations given with `kit.datasets.use(name, file_folder_or_link)`.
-  Every copy is checked against the checksum and kept in the data folder.
-- **When the download fails**, the message says how to add the file where the student is: in
-  Notebook Tutor with **Data files › Add data file…**, in Colab with the Files panel, in Jupyter by
-  putting it next to the notebook, using the copy the lecturer provides (for example on the VLE).
-  The student adds it once; the kit checks it and keeps it.
+  (`kit.datasets.add_folder`, `AILK_DATA_PATH`); the owner's address; the course copies
+  (`Source.mirrors`, then `data-copies.json` in the repository); locations given with
+  `kit.datasets.use(name, file_folder_or_link)`; in Colab, an upload button in the cell. Every copy
+  is checked against the checksum and kept in the data folder.
+- **Course copies.** When an owner's site does not answer (LINQS refuses many cloud machines,
+  Colab's among them), the kit downloads the same file from a course copy: an asset of a `data-*`
+  release of the kit's repository (`data-1` holds `cora.tgz`), so students never notice. A copy is
+  added only with the lecturer's approval, because it redistributes someone else's file. A copy
+  listed in `data-copies.json` on `main` also reaches notebooks that install an earlier kit version.
+  CI checks that every course copy serves the exact file.
+- **When nothing works**, the message (shown without a traceback) says how to add the file where the
+  student is: in Notebook Tutor with **Data files › Add data file…**, in Colab with the upload button
+  the kit shows (or the Files panel), in Jupyter by putting it next to the notebook, using the copy
+  the lecturer provides (for example on the VLE). In Notebook Tutor and Jupyter the student adds it
+  once; the kit checks it and keeps it.
 - **Each clone has its own data.** When the kit or Notebook Tutor runs from a git clone, the data
   folder is that clone's `data/` (ignored by git). It holds only the course datasets of the
   sessions that student opened: an ARI1101 student's clone never fetches Cora.

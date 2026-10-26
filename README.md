@@ -41,7 +41,7 @@ python -m ai_learning_kit.dev.notebooks stamp 0.5.0 S02_1_prepare_setup.ipynb
 A session with graded tasks:
 
 ```python
-%pip install -q "ai-learning-kit@https://github.com/charlieabela/ai-learning-kit/archive/refs/tags/v0.5.0.zip"
+%pip install -q "ai-learning-kit@https://github.com/charlieabela/ai-learning-kit/archive/refs/tags/v0.5.1.zip"
 import ai_learning_kit as kit
 
 kit.start("ARI1101", "S02", student="Your Name")   # work is kept next to this notebook
@@ -56,7 +56,7 @@ kit.progress(); kit.submit()
 A session whose notebooks check themselves (no answer book, no name needed):
 
 ```python
-%pip install -q "ai-learning-kit[graphs]@https://github.com/charlieabela/ai-learning-kit/archive/refs/tags/v0.5.0.zip"
+%pip install -q "ai-learning-kit[graphs]@https://github.com/charlieabela/ai-learning-kit/archive/refs/tags/v0.5.1.zip"
 import ai_learning_kit as kit
 kit.start("ICS5111", "S02")        # downloads the session's datasets from their owners
 T = kit.tools()                    # the session's helper functions
@@ -80,7 +80,7 @@ relative to My Drive).
 **What to install.** The plain line covers ARI1101. Sessions on graphs add
 `[graphs]` (networkx, scikit-learn), and sessions on embeddings and graph neural
 networks add `[advanced]` (PyTorch, PyTorch Geometric):
-`%pip install -q "ai-learning-kit[advanced]@https://github.com/charlieabela/ai-learning-kit/archive/refs/tags/v0.5.0.zip"`.
+`%pip install -q "ai-learning-kit[advanced]@https://github.com/charlieabela/ai-learning-kit/archive/refs/tags/v0.5.1.zip"`.
 Each session records its extra, and its notebooks install it.
 
 **Data.** `ai_learning_kit.datasets` records, for every external dataset, its

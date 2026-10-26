@@ -89,9 +89,12 @@ def start(unit: str, session: str | None = None, student: str = "", folder=None,
     print(f"ai-learning-kit {__version__} · {mod.UNIT} {mod.SESSION}: {mod.TITLE}")
     if prob is not None:
         print(f"Problem: {prob.title}")
-    if mod.DATASETS:
-        for name, path in datasets.prefetch(mod.DATASETS, quiet=True).items():
-            print(f"Data: {datasets.source(name).title}, checked (kit.datasets.status() shows where it is kept)")
+    for name in mod.DATASETS:
+        title = datasets.source(name).title
+        if not datasets.available(name):
+            print(f"Data: fetching {title} (the first time only; this can take a minute) ...", flush=True)
+        datasets.fetch(name, quiet=True)
+        print(f"Data: {title}, checked (kit.datasets.status() shows where it is kept)")
     if mod.SAVES_WORK or folder is not None:
         print(f"Your work folder: {base}")
         print(f"  This is {where}.")

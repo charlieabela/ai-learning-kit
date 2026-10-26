@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.5.1 · Course copies of datasets, no failure in Colab
+
+- **Course copy of Cora.** LINQS does not answer from Colab or GitHub's machines, so the kit now falls back, after 10 seconds, to a course copy of the same file: the `cora.tgz` asset of the repository's `data-1` release, accepted only if its checksum matches LINQS's original. The student sees one extra line, or nothing (inside `kit.start`).
+- **Course copies added later reach older notebooks.** When the owner and the copies built into a version fail, the kit reads `data-copies.json` from the repository's `main` branch; a URL added there serves every kit version from 0.5.1 on. It can only add places to look: the checksum stays the one in the release.
+- **Colab asks for the file instead of failing.** When nothing works in Colab, the cell shows an upload button for the lecturer's copy and checks the chosen file.
+- **The missing-data message is shown without a traceback** in Jupyter, Colab and Notebook Tutor.
+- `kit.start` says when it is fetching a dataset for the first time; `datasets.available(name)`.
+- CI checks that every course copy serves the exact file.
+
 ## 0.5.0 · Sessions without answer books, datasets from their owners, ICS5111 S02
 
 - **ICS5111 S02 (graph embeddings)**: the helpers of the v2 session pack (`s02_tools.py`, version 2026-10-27), unchanged in every computation, are `T = kit.tools()`; the reference results ship with the session. The pack's Prepare, Explore and Practice notebooks were rebuilt on the kit (the ZIP and Drive set-up cell replaced by the kit's two opening cells) and reproduce every printed result and figure of the pack; they are distributed with the session's material, not stored in the kit. `adr_graph()` was left out: no Session 02 notebook uses it.
