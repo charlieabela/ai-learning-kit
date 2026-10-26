@@ -24,10 +24,16 @@ Where an external dataset is looked for, in order (every copy is checked against
 2. next to the notebook, and in a data/ folder beside it;
 3. folders you have added (add_folder(), or the environment variable AILK_DATA_PATH), for
    example a Google Drive or OneDrive folder synced to this computer, or Drive mounted in Colab;
-4. the owner's website, then any copies the lecturer has approved for the course (Source.mirrors);
+4. the owner's website, then the course copies the lecturer has approved (Source.mirrors, and the
+   list data-copies.json in the kit's repository, read when everything above has failed, so that a
+   copy added later also reaches notebooks that install an earlier version of the kit);
 5. locations given for that dataset (use(), or the environment variable AILK_DATA_SOURCES):
    a file or folder on this computer, or a link to a shared copy (Google Drive, OneDrive or
-   SharePoint, Dropbox, or any direct link).
+   SharePoint, Dropbox, or any direct link);
+6. in Colab, an upload button in the notebook, for the copy the lecturer provides.
+
+When none of these works, fetch() raises DatasetUnavailable, whose message (shown without a
+traceback) says how to add the file where the notebook runs.
 
 The data folder is, in order: the folder named by AILK_DATA_DIR (Notebook Tutor sets it to the
 data/ folder of its own clone); the data/ folder of the kit's clone when the kit runs from a git
@@ -90,9 +96,15 @@ SOURCES: dict[str, Source] = {
                   "Collective classification in network data. AI Magazine, 29(3), 93-106."),
         notes="2708 papers, 5429 citation links (5278 after removing self-loops and duplicates), 1433 binary "
               "word features, 7 topics. LINQS's server has been seen to refuse connections from some cloud "
-              "machines (GitHub's CI runners); a copy on your own computer or a shared course copy then works.",
+              "machines (GitHub's CI runners and Colab); the kit then uses the course copy.",
+        mirrors=("https://github.com/charlieabela/ai-learning-kit/releases/download/data-1/cora.tgz",),
     ),
 }
+
+# Course copies added after a release: {"name": ["url", ...]}. Read only when the owner and the copies above
+# fail, and only ever adds places to look: a copy is accepted only if its checksum matches the one above.
+COPIES_URL = "https://raw.githubusercontent.com/charlieabela/ai-learning-kit/main/data-copies.json"
+OWNER_TIMEOUT = 10              # seconds without an answer before the owner's site is taken to be unreachable
 
 CHUNK = 1 << 16
 SETTINGS = "locations.json"     # in the data folder: folders and per-dataset locations given with add_folder()/use()
@@ -100,7 +112,14 @@ _verified: set = set()          # files whose checksum was already checked in th
 
 
 class DatasetUnavailable(RuntimeError):
-    """The dataset could not be found, downloaded or imported."""
+    """The dataset could not be found, downloaded or imported.
+
+    Jupyter, Colab and Notebook Tutor show only the message, not a traceback: the message is the whole story,
+    and a page of library code would hide the one thing the student has to do.
+    """
+
+    def _render_traceback_(self):          # IPython's hook for showing an exception
+        return [f"\x1b[1;31mDatasetUnavailable\x1b[0m: {self}"]
 
 
 # --------------------------------------------------------------------------- the data folder
@@ -385,17 +404,32 @@ def fetch(name: str, quiet: bool = False) -> Path:
                 print(f"{s.title}: using the copy in {folder}.")
             return _keep(found, s)
     tried = []
-    for i, url in enumerate((s.url, *s.mirrors)):
-        who = s.owner if i == 0 else "the course copy approved by your lecturer"
-        if not quiet:
-            print(f"{s.title}: downloading from {who} ...", flush=True)
-        try:
-            _download(direct_url(url), kept, s, quiet)
+    owner_failed = False
+
+    def attempt(urls, who, timeout=30):
+        for url in urls:
             if not quiet:
-                print(f"{s.title}: saved in {kept.parent} and checked.")
-            return kept
-        except (urllib.error.URLError, OSError, TimeoutError, ValueError) as e:
-            tried.append(f"{who}: {getattr(e, 'reason', e)}")
+                print(f"{s.title}: downloading from {who} ...", flush=True)
+            try:
+                _download(direct_url(url), kept, s, quiet, timeout=timeout)
+                if not quiet:
+                    print(f"{s.title}: saved in {kept.parent} and checked.")
+                return kept
+            except (urllib.error.URLError, OSError, TimeoutError, ValueError) as e:
+                tried.append(f"{who}: {getattr(e, 'reason', e)}")
+        return None
+
+    got = attempt([s.url], s.owner, timeout=OWNER_TIMEOUT if s.mirrors else 30)
+    if got is None:
+        owner_failed = True
+        got = attempt(s.mirrors, "the course copy")
+    if got is None:
+        later = [u for u in _remote_copies().get(s.name, []) if u not in s.mirrors and u != s.url]
+        got = attempt(later, "the course copy")
+    if got is not None:
+        if owner_failed and not quiet:
+            print(f"{s.title}: {s.owner} did not answer, so the course copy was used (the same file, checked).")
+        return got
     for location in locations(name):
         if not quiet:
             print(f"{s.title}: trying {location} ...", flush=True)
@@ -406,7 +440,49 @@ def fetch(name: str, quiet: bool = False) -> Path:
             return path
         except (urllib.error.URLError, OSError, TimeoutError, ValueError) as e:
             tried.append(f"{location}: {getattr(e, 'reason', e)}")
+    if _where() == "colab":
+        got = _colab_upload(s)
+        if got is not None:
+            return got
     raise DatasetUnavailable(_missing_message(s, tried))
+
+
+def _remote_copies() -> dict:
+    """Course copies listed in the kit's repository after this version was released ({} when unreachable)."""
+    url = os.environ.get("AILK_COPIES_URL", COPIES_URL)
+    if not url:
+        return {}
+    try:
+        request = urllib.request.Request(url, headers={"User-Agent": f"ai-learning-kit/{__version__} (teaching)"})
+        with urllib.request.urlopen(request, timeout=10) as response:
+            data = json.loads(response.read(200_000).decode("utf-8"))
+        return {str(k).lower(): [str(u) for u in v if re.match(r"^https://", str(u))]
+                for k, v in data.items() if isinstance(v, list)}
+    except Exception:
+        return {}
+
+
+def _colab_upload(s: Source) -> Path | None:
+    """In Colab, ask for the lecturer's copy with an upload button in the cell, instead of failing."""
+    if os.environ.get("AILK_NO_PROMPT"):
+        return None
+    try:
+        from google.colab import files  # type: ignore
+    except ImportError:
+        return None
+    print(f"{s.title} could not be downloaded. Choose {s.filename} (the copy your lecturer provides, for example "
+          f"on the VLE) with the button below; the kit checks that it is the right file.", flush=True)
+    try:
+        uploaded = files.upload()          # saves the chosen files in the current folder (/content)
+    except Exception:
+        return None
+    for fname in uploaded or {}:
+        p = Path.cwd() / fname
+        if _matches(p, s):
+            print(f"{s.title}: {fname} checked; it is the right file.")
+            return _keep(p, s)
+    print(f"The file you chose is not {s.filename} as published by {s.owner} (its checksum differs).")
+    return None
 
 
 def _where() -> str:
@@ -419,10 +495,12 @@ def _missing_message(s: Source, tried: list) -> str:
     """What to do when a dataset is missing, in the words of the place the notebook runs in."""
     add = {
         "tutor": f"Add {s.filename} with the Data files button (Data files > Add data file...), then run this cell again.",
-        "colab": f"Upload {s.filename} with the Files panel (the folder icon on the left), then run this cell again.",
+        "colab": f"Upload {s.filename} with the Files panel (the folder icon on the left), then run this cell again; "
+                 f"Colab forgets it when the runtime ends.",
         "jupyter": f"Put {s.filename} in the same folder as this notebook, then run this cell again.",
     }[_where()]
-    return (f"{s.title} is missing: it could not be downloaded from {s.owner}.\n"
+    whom = f"{s.owner} or the course copy" if s.mirrors else s.owner
+    return (f"{s.title} is missing: it could not be downloaded from {whom}.\n"
             + "".join(f"  - {t}\n" for t in tried)
             + f"{add}\nIf you do not have {s.filename}, use the copy your lecturer provides (for example on the VLE). "
               f"The kit checks that it is the right file and keeps it, so you add it only once.\n"
@@ -446,6 +524,12 @@ def use(name: str, location: str, remember: bool = True) -> Path:
         _save_settings(settings)
     print(f"{s.title}: imported from {location}, checked, and kept in {path.parent}.")
     return path
+
+
+def available(name: str) -> bool:
+    """Whether a checked copy is already in the data folder (nothing needs to be fetched)."""
+    s = source(name)
+    return _matches(data_dir() / s.filename, s)
 
 
 def prefetch(names, quiet: bool = False) -> dict:

@@ -19,8 +19,9 @@ def store(tmp_path, monkeypatch):
     """An empty data folder, a notebook folder as the current folder, and no settings from the machine."""
     folder = tmp_path / "data"
     monkeypatch.setenv("AILK_DATA_DIR", str(folder))
-    for var in ("AILK_DATA_PATH", "AILK_DATA_SOURCES"):
+    for var in ("AILK_DATA_PATH", "AILK_DATA_SOURCES", "NOTEBOOK_TUTOR"):
         monkeypatch.delenv(var, raising=False)
+    monkeypatch.setenv("AILK_COPIES_URL", "")          # the repository's list of course copies is not read
     monkeypatch.setattr(datasets, "checkout_data_dir", lambda: None)
     work = tmp_path / "notebook"
     work.mkdir()
@@ -96,7 +97,64 @@ def test_a_lecturer_approved_course_copy_is_tried_after_the_owner(store, server,
     (root / "course.bin").write_bytes(data)
     register(monkeypatch, UNREACHABLE, data, mirrors=[f"{base}/course.bin"])
     assert datasets.fetch("toy").read_bytes() == data and hits == ["/course.bin"]
-    assert "course copy approved by your lecturer" in capsys.readouterr().out
+    out = capsys.readouterr().out
+    assert "downloading from the course copy" in out and "Toy Lab did not answer, so the course copy was used" in out
+
+
+def test_course_copies_listed_later_in_the_repository_are_used(store, server, monkeypatch):
+    """A notebook pinned to an earlier kit still reaches a course copy added to data-copies.json later."""
+    root, base, hits = server
+    data = b"added later" * 80
+    (root / "later.bin").write_bytes(data)
+    register(monkeypatch, UNREACHABLE, data, mirrors=[f"{base}/missing.bin"])
+    # the list itself only accepts https addresses (tested below); the local test server speaks http
+    monkeypatch.setattr(datasets, "_remote_copies", lambda: {"toy": [f"{base}/later.bin"]})
+    assert datasets.fetch("toy", quiet=True).read_bytes() == data
+    assert hits == ["/missing.bin", "/later.bin"]
+
+
+def test_the_repository_list_is_read_safely(server, monkeypatch):
+    root, base, _ = server
+    (root / "copies.json").write_text('{"_about": "text", "toy": ["https://example.org/toy.bin", "http://insecure", 3]}')
+    monkeypatch.setenv("AILK_COPIES_URL", f"{base}/copies.json")
+    assert datasets._remote_copies() == {"toy": ["https://example.org/toy.bin"]}
+    monkeypatch.setenv("AILK_COPIES_URL", f"{base}/nothing-here.json")
+    assert datasets._remote_copies() == {}
+    monkeypatch.setenv("AILK_COPIES_URL", "")
+    assert datasets._remote_copies() == {}
+
+
+def test_in_colab_the_student_is_asked_for_the_file(store, monkeypatch, tmp_path, capsys):
+    import sys
+    import types
+    data = b"the lecturer's copy" * 30
+    register(monkeypatch, UNREACHABLE, data)
+    chosen = {"bytes": b"something else"}
+
+    def upload():                       # google.colab.files.upload saves the chosen file in the current folder
+        Path("toy.bin").write_bytes(chosen["bytes"])
+        return {"toy.bin": chosen["bytes"]}
+
+    colab = types.ModuleType("google.colab")
+    colab.files = types.SimpleNamespace(upload=upload)
+    monkeypatch.setitem(sys.modules, "google", types.ModuleType("google"))
+    monkeypatch.setitem(sys.modules, "google.colab", colab)
+    with pytest.raises(DatasetUnavailable, match="Files panel"):            # the wrong file: refused, then the advice
+        datasets.fetch("toy", quiet=True)
+    assert "checksum differs" in capsys.readouterr().out
+    chosen["bytes"] = data
+    assert datasets.fetch("toy", quiet=True) == store / "toy.bin"
+    assert "right file" in capsys.readouterr().out
+    monkeypatch.setenv("AILK_NO_PROMPT", "1")
+    assert datasets._colab_upload(datasets.source("toy")) is None
+
+
+def test_the_missing_data_message_is_shown_without_a_traceback(store, monkeypatch):
+    register(monkeypatch, UNREACHABLE, b"q" * 5)
+    with pytest.raises(DatasetUnavailable) as e:
+        datasets.fetch("toy", quiet=True)
+    lines = e.value._render_traceback_()
+    assert len(lines) == 1 and "Toy dataset is missing" in lines[0] and "Traceback" not in lines[0]
 
 
 # --------------------------------------------------------------------------- copies on this computer
@@ -274,4 +332,21 @@ def test_owner_still_serves_the_exact_file(name, store):
         print(f"::warning title={name}::{s.owner} could not be reached from this machine ({getattr(e, 'reason', e)}); "
               f"the kit falls back to course copies and locations given by students.")
         pytest.skip(f"owner unreachable from here: {e}")
+    assert datasets.sha256_of(store / s.filename) == s.sha256
+
+
+def _course_copies():
+    import json
+    listed = json.loads((Path(__file__).parents[1] / "data-copies.json").read_text())
+    pairs = [(n, u) for n, s in datasets.SOURCES.items() for u in s.mirrors]
+    pairs += [(n, u) for n, us in listed.items() if isinstance(us, list) for u in us]
+    return sorted(set(pairs))
+
+
+@pytest.mark.skipif(not os.environ.get("AILK_ONLINE"), reason="set AILK_ONLINE=1 to contact the course copies")
+@pytest.mark.parametrize("name,url", _course_copies())
+def test_every_course_copy_serves_the_exact_file(name, url, store):
+    """CI: the course copies are ours, so unlike an owner's site they must always answer with the exact file."""
+    s = datasets.source(name)
+    datasets._download(url, datasets.data_dir() / s.filename, s, quiet=True)
     assert datasets.sha256_of(store / s.filename) == s.sha256
