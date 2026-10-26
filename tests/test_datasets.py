@@ -346,7 +346,16 @@ def _course_copies():
 @pytest.mark.skipif(not os.environ.get("AILK_ONLINE"), reason="set AILK_ONLINE=1 to contact the course copies")
 @pytest.mark.parametrize("name,url", _course_copies())
 def test_every_course_copy_serves_the_exact_file(name, url, store):
-    """CI: the course copies are ours, so unlike an owner's site they must always answer with the exact file."""
+    """CI: a course copy that answers must be the exact file. One that is not there yet (the data release is
+    published after the code that refers to it is merged) is reported as a warning, not a failure."""
+    import urllib.error
     s = datasets.source(name)
-    datasets._download(url, datasets.data_dir() / s.filename, s, quiet=True)
+    try:
+        datasets._download(url, datasets.data_dir() / s.filename, s, quiet=True)
+    except urllib.error.HTTPError as e:
+        if e.code != 404:
+            raise
+        print(f"::warning title={name}::the course copy {url} does not exist yet: publish the data release that "
+              f"holds {s.filename}.")
+        pytest.skip(f"course copy not published yet: {url}")
     assert datasets.sha256_of(store / s.filename) == s.sha256
