@@ -38,15 +38,25 @@ Record the split in the session module as `STAGES`, so that `kit.hint()`,
 `kit.ask()` and Notebook Tutor pitch their explanations to it:
 
 ```python
-from ..core.session import BLACK_BOX, FOCUS, OUT_OF_SCOPE, stage
+from ..core.session import BLACK_BOX, FOCUS, ON_REQUEST, OUT_OF_SCOPE, stage
 
 STAGES = {
     "parse": stage("Reading CSV, JSON and XML with pandas, json and ElementTree", FOCUS),
+    "crawl": stage("Following 'Next page' links automatically", ON_REQUEST, how="T.scrape_listings()",
+                   note="students loop over known pages themselves; explain the helper only when asked"),
     "doc_extract": stage("Extracting rules from Word, Excel and PDF", BLACK_BOX, how="kit.extract",
                          taught_in="ICS2205 Part A", note="say only that the kit reads the document"),
     "cleaning": stage("Cleaning and de-duplicating records", OUT_OF_SCOPE, taught_in="the ARI1101 Scrub session"),
 }
 ```
+
+The four levels are: `FOCUS` (students do it; explain in depth), `ON_REQUEST` (a
+helper does it and the notebook offers an optional *look inside*: a tutor says what
+goes in and out, and explains how it works only when the student asks, from the
+helper's code), `BLACK_BOX` (a helper does it; never explained inside) and
+`OUT_OF_SCOPE`. Use `ON_REQUEST` for steps that are harder than the cohort needs but
+that a curious student may reasonably want to understand; write those helpers to be
+read, because `kit.source(T.name)` prints them.
 
 A step that is a black box in one unit can be in focus in another: ICS2205 can
 make `doc_extract` its topic with the same problem. `scope_text(module)` shows
@@ -104,6 +114,17 @@ Make the session a package, `ai_learning_kit/units/<unit>/sNN/`, holding:
   generator;
 - `reference/`: frozen results of the run shown on the slides, read as
   `ROOT / "reference" / ...`.
+
+A session whose notebooks **read the web** (ARI1101 S03) keeps a saved copy of every
+page and API response its notebooks request, so that they run offline and give the
+same results every time: the helper `T.get()` sends the request and falls back to the
+copy when the site cannot be reached. List the API requests in the helpers'
+`SAVED_REQUESTS` with their files in `saved/` (`saved.json` records status and content
+type), and keep a course website in `site/` (published with GitHub Pages from
+`docs/sites/<unit>-<session>/`; a test keeps the two identical). CI runs
+`python -m ai_learning_kit.dev.saved_copies check`, which compares every copy with the
+live service and attaches the live response when it differs or is missing;
+`... saved_copies capture` writes them on a machine that can reach the services.
 
 Then write the notebooks to the contract, run
 `python -m ai_learning_kit.dev.validate --session <UNIT> <SNN>` and

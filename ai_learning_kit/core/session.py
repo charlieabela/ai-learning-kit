@@ -17,16 +17,19 @@ problem is in this session, so that a tutor knows how deeply to explain it:
         "formats": stage("Reading CSV, JSON and XML", FOCUS),
         "cleaning": stage("Cleaning and de-duplication", OUT_OF_SCOPE, taught_in="ARI1101 Scrub session"),
     }
-FOCUS: students do it; explain in depth. BLACK_BOX: the kit does it; say what goes
-in, what comes out and why, not how. OUT_OF_SCOPE: do not bring it up; if asked,
-say briefly where it is taught.
+FOCUS: students do it; explain in depth. ON_REQUEST: the kit does it, and students
+may look inside: say what goes in, what comes out and why; explain how it works only
+when the student asks, at the cohort's level and from the helper's code. BLACK_BOX:
+the kit does it; say what goes in, what comes out and why, not how. OUT_OF_SCOPE: do
+not bring it up; if asked, say briefly where it is taught.
 """
 from __future__ import annotations
 
 GUIDE_PARTS = ("what", "why", "example", "record")
 
 FOCUS, BLACK_BOX, OUT_OF_SCOPE = "focus", "black_box", "out_of_scope"
-VISIBILITY = (FOCUS, BLACK_BOX, OUT_OF_SCOPE)
+ON_REQUEST = "on_request"
+VISIBILITY = (FOCUS, ON_REQUEST, BLACK_BOX, OUT_OF_SCOPE)
 
 
 def stage(label: str, visibility: str, how: str | None = None, taught_in: str | None = None,
@@ -49,6 +52,10 @@ def scope_text(mod) -> str:
         return ""
     lines = ["SCOPE OF THIS SESSION (follow it when you explain):"]
     groups = ((FOCUS, "In focus: students do these themselves. Explain them in depth, with the Python mechanics and the idea."),
+              (ON_REQUEST, "Available on request: the kit does these for the students, and the notebook offers an "
+                           "optional look inside. By default say what goes in, what comes out and why the step is "
+                           "needed. When the student asks how it works, explain it step by step at the cohort's level, "
+                           "from the helper's code (kit.source(T.<name>) prints it), and say that this part is optional."),
               (BLACK_BOX, "Black boxes: the kit does these for the students. Say what goes in, what comes out and why the "
                           "step is needed; do not explain how it works inside, even if asked; say where it is taught."),
               (OUT_OF_SCOPE, "Out of scope: do not bring these up. If the student asks, answer in one sentence and say where "

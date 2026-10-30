@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.6.0 · ARI1101 S03, steps explained on request, saved web responses
+
+- **ARI1101 S03 (Obtain and Scrub: web pages, web APIs, data cleaning)**, a session whose notebooks check themselves. `T = kit.tools()` provides `T.get()` (a GET request like `requests.get`, which falls back to the kit's saved copy when the site cannot be reached), the fictional **Campus Lets** course website (36 flat listings and 20 textbooks, deliberately untidy), saved responses of the **Open-Meteo** archive and geocoding APIs (Luqa, October 2025; Victoria, Gozo, November 2025; one rejected request), helpers to look inside (`scrape_listings`, `allowed`, `crawl_delay`, `knn_impute`, `parse_dates`), gaps for imputation exercises (`weather_with_gaps`) and checks for the two practice notebooks (`T.check("S1")` ... `T.check("C6")`). The notebooks are distributed with the session's material.
+- **A fourth stage visibility, `ON_REQUEST`**: a helper does the step and the notebook offers an optional look inside; tutors say what goes in and out, and explain how it works only when the student asks, from the helper's code. `scope_text()` tells tutors so.
+- **The course website is published with GitHub Pages** from `docs/sites/ari1101-s03/` (`docs/.nojekyll` keeps the files as they are); the package holds the same files, and a test keeps them identical.
+- **`python -m ai_learning_kit.dev.saved_copies check | capture`**: compares saved API responses and pages with the live ones (a CI step on Linux, which attaches the live response when it differs) and captures them again.
+- `requests` and `beautifulsoup4` become requirements, so Notebook Tutor and the plain install have them; pandas 2.0 or later is required.
+
 ## 0.5.1 · Course copies of datasets, no failure in Colab
 
 - **Course copy of Cora.** LINQS does not answer from Colab or GitHub's machines, so the kit now falls back, after 10 seconds, to a course copy of the same file: the `cora.tgz` asset of the repository's `data-1` release, accepted only if its checksum matches LINQS's original. The student sees one extra line, or nothing (inside `kit.start`).
