@@ -1,0 +1,20 @@
+{
+ "archive-luqa-2025-10.json": {
+  "captured": "2026-10-30",
+  "content_type": "application/json; charset=utf-8",
+  "status": 200,
+  "url": "https://archive-api.open-meteo.com/v1/archive?latitude=35.857&longitude=14.477&start_date=2025-10-01&end_date=2025-10-31&daily=temperature_2m_max%2Ctemperature_2m_min%2Cprecipitation_sum%2Cwind_speed_10m_max&timezone=Europe%2FMalta&models=era5"
+ },
+ "archive-luqa-dates-reversed.json": {
+  "captured": "2026-10-30",
+  "content_type": "application/json; charset=utf-8",
+  "status": 400,
+  "url": "https://archive-api.open-meteo.com/v1/archive?latitude=35.857&longitude=14.477&start_date=2025-10-31&end_date=2025-10-01&daily=temperature_2m_max%2Ctemperature_2m_min%2Cprecipitation_sum%2Cwind_speed_10m_max&timezone=Europe%2FMalta&models=era5"
+ },
+ "geocoding-victoria.json": {
+  "captured": "2026-10-30",
+  "content_type": "application/json; charset=utf-8",
+  "status": 200,
+  "url": "https://geocoding-api.open-meteo.com/v1/search?name=Victoria&count=10&language=en&format=json"
+ }
+}

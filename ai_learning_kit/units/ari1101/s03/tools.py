@@ -40,6 +40,7 @@ ARCHIVE_API = "https://archive-api.open-meteo.com/v1/archive"
 GEOCODING_API = "https://geocoding-api.open-meteo.com/v1/search"
 WEATHER_VARIABLES = "temperature_2m_max,temperature_2m_min,precipitation_sum,wind_speed_10m_max"
 LUQA = {"latitude": 35.857, "longitude": 14.477}          # Malta International Airport, Luqa
+VICTORIA = {"latitude": 36.04473, "longitude": 14.24118}  # Victoria, Gozo, as the geocoding API gives it
 
 HEADERS = {"User-Agent": f"ai-learning-kit/{__version__} (ARI1101 teaching notebook; "
                          "https://github.com/charlieabela/ai-learning-kit)"}
@@ -56,6 +57,7 @@ SAVED_REQUESTS = {
     "archive-luqa-2025-10.json": (ARCHIVE_API, _weather_params(LUQA, "2025-10-01", "2025-10-31")),
     "archive-luqa-dates-reversed.json": (ARCHIVE_API, _weather_params(LUQA, "2025-10-31", "2025-10-01")),
     "geocoding-victoria.json": (GEOCODING_API, {"name": "Victoria", "count": 10, "language": "en", "format": "json"}),
+    "archive-victoria-2025-11.json": (ARCHIVE_API, _weather_params(VICTORIA, "2025-11-01", "2025-11-30")),
 }
 
 
@@ -284,6 +286,22 @@ def weather_with_gaps(place: str = "luqa") -> pd.DataFrame:
     return df
 
 
+# --------------------------------------------------------------------------- cleaning
+DATE_FORMATS = ("%Y-%m-%d", "%d/%m/%Y", "%d %b %Y")      # 2026-10-01, 01/10/2026, 1 Oct 2026
+
+
+def parse_dates(text: pd.Series, formats=DATE_FORMATS) -> pd.Series:
+    """Turn text dates written in several formats into dates, trying each format in turn.
+
+    Each pass reads only the values written in that format (the others become NaT), and
+    fillna keeps what earlier passes found. A value that matches no format stays NaT.
+    """
+    dates = pd.to_datetime(text, format=formats[0], errors="coerce")
+    for fmt in formats[1:]:
+        dates = dates.fillna(pd.to_datetime(text, format=fmt, errors="coerce"))
+    return dates
+
+
 # --------------------------------------------------------------------------- imputation (look inside)
 def knn_impute(df: pd.DataFrame, column: str, using: list, k: int = 3) -> pd.Series:
     """Fill the missing values of `column` with the average of the k most similar complete rows.
@@ -347,7 +365,7 @@ def _ref_clean_books() -> pd.DataFrame:
     b["price"] = pd.to_numeric(b["price"].str.lower().replace({"free": "0"})
                                .str.replace("€", "").str.replace("eur", "").str.strip(), errors="coerce")
     b["rating"] = pd.to_numeric(b["rating"].str.split("/").str[0], errors="coerce")
-    b["posted"] = pd.to_datetime(b["posted"], format="mixed", dayfirst=True)
+    b["posted"] = parse_dates(b["posted"])
     return b
 
 
