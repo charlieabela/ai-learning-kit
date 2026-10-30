@@ -128,8 +128,9 @@ def _saved(key: str):
     if key.startswith("site:"):
         name = key[5:] or "index.html"
         path = SITE_FILES / name
-        if "/" in name or not path.is_file():
-            return None
+        if "/" in name or not path.is_file():         # the kit holds the whole site, so any other page is missing
+            return _response(b"<!DOCTYPE html><html><body><h1>404 Not Found</h1></body></html>\n", 404,
+                             "text/html; charset=utf-8", SITE + name)
         kind = "text/plain; charset=utf-8" if name.endswith(".txt") else "text/html; charset=utf-8"
         return _response(path.read_bytes(), 200, kind, SITE + name)
     for name, (url, params) in SAVED_REQUESTS.items():
@@ -324,18 +325,22 @@ def knn_impute(df: pd.DataFrame, column: str, using: list, k: int = 3) -> pd.Ser
     return result
 
 
-def plot_filled(true: pd.Series, gappy: pd.Series, filled: dict, dates=None, title: str = ""):
-    """Plot the true values, the gaps and each way of filling them, one line per method."""
+def plot_filled(dates, true, gappy, filled: dict, title: str = ""):
+    """Plot the true values, the recorded values with gaps, and the values each method put in the gaps."""
     import matplotlib.pyplot as plt
-    x = dates if dates is not None else true.index
+    dates, true, gappy = pd.Series(dates).reset_index(drop=True), pd.Series(true).reset_index(drop=True), \
+        pd.Series(gappy).reset_index(drop=True)
+    gap = gappy.isna()
     fig, ax = plt.subplots(figsize=(9, 3.6))
-    ax.plot(x, true, color="#9CA9B6", linewidth=4, label="true values")
-    for (name, series), colour in zip(filled.items(), ["#D37B35", "#4279B7", "#5B8C3A", "#8E5BA8"]):
-        mask = gappy.isna()
-        ax.plot(x[mask] if hasattr(x, "__getitem__") else x, series[mask], "o", color=colour, label=name)
-    ax.plot(x, gappy, color="#1f2d3d", linewidth=1.2, label="recorded (with gaps)")
+    ax.plot(dates, true, color="#C9D1D9", linewidth=5, label="true values")
+    ax.plot(dates, gappy, color="#1f2d3d", linewidth=1.3, label="recorded, with gaps")
+    markers = ["o", "s", "^", "D"]
+    for (name, series), colour, marker in zip(filled.items(), ["#D37B35", "#4279B7", "#5B8C3A", "#8E5BA8"], markers):
+        series = pd.Series(series).reset_index(drop=True)
+        ax.plot(dates[gap], series[gap], marker, color=colour, label=name)
     ax.set_title(title)
-    ax.legend(fontsize=8, ncol=2)
+    ax.set_ylabel("°C")
+    ax.legend(fontsize=8, ncol=3)
     fig.autofmt_xdate()
     plt.show()
 

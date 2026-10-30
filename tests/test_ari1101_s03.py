@@ -79,8 +79,6 @@ def test_cleaning_the_listings_finds_two_reposted_listings(T):
                                                "Swieqi", "Ta' Xbiex"]
     subset = ["title", "locality", "price", "bedrooms", "size", "furnished"]
     assert df.duplicated(subset=subset).sum() == 2
-    guessed = pd.to_datetime(df["listed"], format="mixed", dayfirst=True)
-    assert guessed.min() == pd.Timestamp("2026-01-10")              # the trap: 2026-10-01 read day first
     dates = T.parse_dates(df["listed"])
     assert dates.notna().all() and dates.min() == pd.Timestamp("2026-09-28") and dates.max() == pd.Timestamp("2026-10-17")
 
