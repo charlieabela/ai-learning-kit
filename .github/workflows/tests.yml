@@ -51,6 +51,10 @@ jobs:
                       print(f"::notice title={s.name}::{tcp}; HTTP {r.status}, {r.headers.get('Content-Length')} bytes")
               except Exception as e:
                   print(f"::warning title={s.name}::{tcp}; HTTP request failed: {e}")
+      - name: Do the saved copies of web pages and API responses match the live ones?
+        if: matrix.os == 'ubuntu-latest' && matrix.python == '3.12'
+        continue-on-error: true
+        run: python -m ai_learning_kit.dev.saved_copies check
       - name: Validate problems and sessions
         run: python -m ai_learning_kit.dev.validate
       - name: Tests
