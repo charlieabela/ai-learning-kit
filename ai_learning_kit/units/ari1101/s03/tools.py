@@ -131,7 +131,7 @@ def _saved(key: str):
         if "/" in name or not path.is_file():         # the kit holds the whole site, so any other page is missing
             return _response(b"<!DOCTYPE html><html><body><h1>404 Not Found</h1></body></html>\n", 404,
                              "text/html; charset=utf-8", SITE + name)
-        kind = "text/plain; charset=utf-8" if name.endswith(".txt") else "text/html; charset=utf-8"
+        kind = {".txt": "text/plain", ".css": "text/css"}.get(path.suffix, "text/html") + "; charset=utf-8"
         return _response(path.read_bytes(), 200, kind, SITE + name)
     for name, (url, params) in SAVED_REQUESTS.items():
         if _key(url, params) == key:
@@ -150,8 +150,7 @@ def show_page(page, height: int = 360):
         page = get(page)
     soup = BeautifulSoup(page.text, "html.parser")
     main = soup.find("main") or soup.body or soup
-    style = soup.find("style")
-    css = style.get_text() if style else ""
+    css = get(urljoin(SITE, "style.css")).text
     css = "\n".join(".ailk-page " + line if line.strip() and not line.startswith(" ") else line for line in css.splitlines())
     box = (f'<div class="ailk-page" style="border:1px solid #d0d7de;border-radius:6px;padding:8px 14px;'
            f'max-height:{height}px;overflow:auto;background:#fff;color:#1f2d3d">'
@@ -528,7 +527,8 @@ def _check_c4(books, removed=None):
     if _not_attempted(books, "books"):
         return
     _say(len(books) == 19, "19 books remain after removing the repeated listing." if len(books) == 19 else
-         f"{len(books)} books remain; one book (Python Crash Course) is listed twice once course and condition are cleaned.")
+         f"{len(books)} books remain; one book is listed twice once course and condition are cleaned: look for rows "
+         "that agree on title, course, price and condition.")
     if removed is not None:
         _say(removed == 1, "one duplicate removed." if removed == 1 else f"removed is {removed}; expected 1.")
 

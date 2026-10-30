@@ -31,7 +31,7 @@ in its student form.
 ## 2. The opening: two cells, always the same
 
 ```python
-%pip install -q "ai-learning-kit[graphs]@https://github.com/charlieabela/ai-learning-kit/archive/refs/tags/v0.5.1.zip"
+%pip install -q "ai-learning-kit[graphs]@https://github.com/charlieabela/ai-learning-kit/archive/refs/tags/v0.6.0.zip"
 ```
 
 ```python
@@ -106,6 +106,10 @@ the notebook's folder (or, in Colab, its Drive folder) the current folder.
   Add another by storing it in `ai_learning_kit/datasets/small_data/` the same way.
 - **Reference results** (frozen outputs of the run shown on the slides) are packaged with the
   session, in `units/<unit>/<session>/reference/`, and read through `T.ROOT / "reference"`.
+- **Web pages and API responses** that a notebook requests are sent through the session's
+  helper (`T.get`, which behaves like `requests.get`), and the kit keeps a saved copy of each
+  one: when the site cannot be reached, the copy is used, so the notebook still runs and gives
+  the same results. A request the kit has no copy of is sent as written.
 
 ## 5. Helpers
 
