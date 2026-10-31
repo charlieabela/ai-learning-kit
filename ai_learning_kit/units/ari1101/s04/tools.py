@@ -162,7 +162,7 @@ def scatter_with_trend(df: pd.DataFrame, x: str, y: str, group: str | None = Non
 def corr_heatmap(df: pd.DataFrame, method: str = "pearson", title: str = ""):
     """Draw the correlation matrix of the numeric columns as a grid of coloured squares.
 
-    Each square holds r for one pair of columns: dark orange for strong positive, dark blue
+    Each square holds r for one pair of columns: dark red for strong positive, dark blue
     for strong negative, pale for close to zero. The diagonal is always 1 (a column with itself).
     """
     import matplotlib.pyplot as plt
@@ -180,7 +180,6 @@ def corr_heatmap(df: pd.DataFrame, method: str = "pearson", title: str = ""):
     ax.set_title(title or f"Correlation matrix ({method})")
     plt.tight_layout()
     plt.show()
-    return corr
 
 
 def sample_means(values: pd.Series, n: int, repeats: int = 1000, seed: int = SEED) -> pd.Series:
@@ -214,10 +213,6 @@ def _close(a, b, tol=0.01) -> bool:
         return False
 
 
-TYPES = {"date": "datetime", "tmax": "continuous", "tmin": "continuous", "rain": "continuous",
-         "wind": "continuous", "sunshine": "continuous", "month": "ordinal", "season": "ordinal"}
-
-
 def _check_e1(n_days, missing=None):
     if _not_attempted(n_days, "n_days"):
         return
@@ -240,7 +235,7 @@ def _check_e2(stats):
         got = stats.get(key) if isinstance(stats, dict) else None
         if got is None:
             _say(False, f"stats has no {key!r}.")
-        elif _close(got, value):
+        elif _close(got, value, 0.002 if key.endswith("std") else 0.01):
             _say(True, f"{key} = {value:.2f}.")
         else:
             hint = (" pandas' .std() divides by n - 1 (the sample standard deviation); np.std divides by n."

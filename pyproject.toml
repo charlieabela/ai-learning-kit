@@ -19,6 +19,7 @@ dependencies = [
     "pypdf>=3.0",
     "requests>=2.28",
     "beautifulsoup4>=4.11",
+    "scipy>=1.9",            # pandas needs it for .corr(method="spearman")
 ]
 
 [project.optional-dependencies]
