@@ -1,0 +1,82 @@
+{
+"query": "MATCH (p:Drug)-[:INHIBITS]->(e:Enzyme)<-[:METABOLISED_BY]-(v:Drug)\nRETURN p.name AS perpetrator, v.name AS victim, e.name AS enzyme\nORDER BY enzyme, perpetrator, victim",
+"captured": null,
+"source": "computed from the same Hetionet subset with pandas and NetworkX (not yet captured from Neo4j)",
+"rows": [
+{
+"perpetrator": "fluconazole",
+"victim": "clopidogrel",
+"enzyme": "CYP2C19"
+},
+{
+"perpetrator": "omeprazole",
+"victim": "clopidogrel",
+"enzyme": "CYP2C19"
+},
+{
+"perpetrator": "amiodarone",
+"victim": "warfarin",
+"enzyme": "CYP2C9"
+},
+{
+"perpetrator": "fluconazole",
+"victim": "warfarin",
+"enzyme": "CYP2C9"
+},
+{
+"perpetrator": "fluoxetine",
+"victim": "codeine",
+"enzyme": "CYP2D6"
+},
+{
+"perpetrator": "paroxetine",
+"victim": "codeine",
+"enzyme": "CYP2D6"
+},
+{
+"perpetrator": "clarithromycin",
+"victim": "atorvastatin",
+"enzyme": "CYP3A4"
+},
+{
+"perpetrator": "clarithromycin",
+"victim": "midazolam",
+"enzyme": "CYP3A4"
+},
+{
+"perpetrator": "clarithromycin",
+"victim": "simvastatin",
+"enzyme": "CYP3A4"
+},
+{
+"perpetrator": "fluconazole",
+"victim": "atorvastatin",
+"enzyme": "CYP3A4"
+},
+{
+"perpetrator": "fluconazole",
+"victim": "midazolam",
+"enzyme": "CYP3A4"
+},
+{
+"perpetrator": "fluconazole",
+"victim": "simvastatin",
+"enzyme": "CYP3A4"
+},
+{
+"perpetrator": "itraconazole",
+"victim": "atorvastatin",
+"enzyme": "CYP3A4"
+},
+{
+"perpetrator": "itraconazole",
+"victim": "midazolam",
+"enzyme": "CYP3A4"
+},
+{
+"perpetrator": "itraconazole",
+"victim": "simvastatin",
+"enzyme": "CYP3A4"
+}
+]
+}

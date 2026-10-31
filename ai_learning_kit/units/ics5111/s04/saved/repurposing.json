@@ -1,0 +1,90 @@
+{
+"query": "MATCH (c:Compound)-[:BINDS]->(g:Gene)<-[:ASSOCIATES]-(d:Disease {name: 'multiple sclerosis'}) WHERE NOT EXISTS { (c)-[:TREATS]->(d) } WITH c, g ORDER BY g.name WITH c, collect(DISTINCT g.name) AS genes RETURN c.name AS compound, size(genes) AS genes, genes[..4] AS via ORDER BY genes DESC, compound LIMIT 10",
+"captured": null,
+"source": "computed from the same Hetionet subset with pandas and NetworkX (not yet captured from Neo4j)",
+"rows": [
+{
+"compound": "Calcidiol",
+"genes": 3,
+"via": [
+"CYP24A1",
+"CYP27B1",
+"VDR"
+]
+},
+{
+"compound": "Ergocalciferol",
+"genes": 3,
+"via": [
+"CYP24A1",
+"CYP27B1",
+"VDR"
+]
+},
+{
+"compound": "Glucosamine",
+"genes": 3,
+"via": [
+"IFNG",
+"MMP9",
+"TNF"
+]
+},
+{
+"compound": "Alfacalcidol",
+"genes": 2,
+"via": [
+"CYP27B1",
+"VDR"
+]
+},
+{
+"compound": "Ampicillin",
+"genes": 2,
+"via": [
+"ALB",
+"SLC15A2"
+]
+},
+{
+"compound": "Calcipotriol",
+"genes": 2,
+"via": [
+"CYP24A1",
+"VDR"
+]
+},
+{
+"compound": "Calcitriol",
+"genes": 2,
+"via": [
+"CYP24A1",
+"VDR"
+]
+},
+{
+"compound": "Captopril",
+"genes": 2,
+"via": [
+"ALB",
+"MMP9"
+]
+},
+{
+"compound": "Carvedilol",
+"genes": 2,
+"via": [
+"SELE",
+"VCAM1"
+]
+},
+{
+"compound": "Cefalotin",
+"genes": 2,
+"via": [
+"ALB",
+"SLC15A2"
+]
+}
+]
+}

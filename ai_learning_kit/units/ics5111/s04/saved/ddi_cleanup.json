@@ -1,0 +1,10 @@
+{
+"query": "MATCH (n) WHERE n:Drug OR n:Enzyme DETACH DELETE n RETURN count(*) AS deleted",
+"captured": null,
+"source": "computed from the same Hetionet subset with pandas and NetworkX (not yet captured from Neo4j)",
+"rows": [
+{
+"deleted": 21
+}
+]
+}

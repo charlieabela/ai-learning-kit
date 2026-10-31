@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.9.0 · ICS5111 S04: knowledge graphs
+
+- **ICS5111 S04 (knowledge graphs)**, a session without graded tasks whose notebooks check themselves. `T = kit.tools()` provides: a drug-interaction example (17 drugs, 4 enzymes) as RDF (rdflib, with OWL 2 RL reasoning by owlrl) and as a property graph, so that the two data models answer the same rule; **Hetionet v1.0** (Himmelstein et al., 2017), registered as two datasets downloaded from the hetio GitHub repository (`hetionet_nodes`, `hetionet_edges`, checked by SHA-256) and the subsets used in the session; a **Neo4j connection** (`T.connect()`) that reads a credentials file or `NEO4J_*` variables and runs Cypher on the student's database (Neo4j Desktop, AuraDB, Sandbox), and otherwise returns the kit's saved result of the same named query; loading with constraints, `UNWIND` batches and `MERGE`; GDS projection, PageRank and Louvain (write mode, so the same queries work on self-managed GDS and on AuraDB Graph Analytics) with NetworkX counterparts and comparisons; TransE, DistMult, ComplEx and RotatE with PyTorch Geometric and a readable filtered ranking evaluation (MRR, Hits@k; a fast `torch.cdist` path for TransE); coverage and bias measures.
+- **Saved results** of the named Cypher queries ship in `s04/saved/`. Until they are captured from Neo4j with `T.capture(db)` (a lecturer step), they are computed from the same data with pandas and NetworkX and say so; GDS results have no saved copy before the capture, and the notebooks print a note instead of failing.
+- The `advanced` extra adds the Neo4j driver, rdflib and owlrl.
+
 ## 0.8.0 · ARI1101 S04, exploring data
 
 - **ARI1101 S04 (Explore: descriptive statistics, distributions, correlation and visualisation)**, a session whose notebooks check themselves. `T = kit.tools()` provides the **Palmer penguins** (CC0, stored in the session's `data/` with its citation), **a year of daily weather for Malta** (2025, Open-Meteo archive API, ERA5, stored as the API returned it and compared with the live service in CI), **Anscombe's quartet**, helpers students may look inside (`iqr_outliers`, `pearson_by_hand`, `scatter_with_trend`, `corr_heatmap`, `sample_means`) and checks for the practice notebook (`T.check("E1")` ... `T.check("E5")`). The notebooks are distributed with the session's material.

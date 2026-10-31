@@ -1,0 +1,82 @@
+{
+"query": "MATCH (c:Compound)-[:TREATS]->(d:Disease {name: 'epilepsy syndrome'}) RETURN c.name AS compound ORDER BY compound",
+"captured": null,
+"source": "computed from the same Hetionet subset with pandas and NetworkX (not yet captured from Neo4j)",
+"rows": [
+{
+"compound": "Acetazolamide"
+},
+{
+"compound": "Amobarbital"
+},
+{
+"compound": "Carbamazepine"
+},
+{
+"compound": "Clobazam"
+},
+{
+"compound": "Clonazepam"
+},
+{
+"compound": "Diazepam"
+},
+{
+"compound": "Felbamate"
+},
+{
+"compound": "Fosphenytoin"
+},
+{
+"compound": "Gabapentin"
+},
+{
+"compound": "Lacosamide"
+},
+{
+"compound": "Lamotrigine"
+},
+{
+"compound": "Levetiracetam"
+},
+{
+"compound": "Midazolam"
+},
+{
+"compound": "Oxcarbazepine"
+},
+{
+"compound": "Phenobarbital"
+},
+{
+"compound": "Phenytoin"
+},
+{
+"compound": "Pregabalin"
+},
+{
+"compound": "Primidone"
+},
+{
+"compound": "Propofol"
+},
+{
+"compound": "Rufinamide"
+},
+{
+"compound": "Topiramate"
+},
+{
+"compound": "Trimethadione"
+},
+{
+"compound": "Valproic Acid"
+},
+{
+"compound": "Vigabatrin"
+},
+{
+"compound": "Zonisamide"
+}
+]
+}
