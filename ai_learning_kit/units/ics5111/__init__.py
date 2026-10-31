@@ -19,4 +19,5 @@ UNIT = {
 
 SESSIONS = {
     "S02": ".s02",      # Graph embeddings (no case problem; Cora from LINQS; notebooks check themselves)
+    "S03": ".s03",      # Graph neural networks (no case problem; Cora from LINQS; plain PyTorch helpers)
 }
