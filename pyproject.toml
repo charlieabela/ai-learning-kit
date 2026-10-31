@@ -33,6 +33,7 @@ include = ["ai_learning_kit*"]
 
 [tool.setuptools.package-data]
 ai_learning_kit = ["problems/*/data/*", "units/*/*/reference/*", "units/*/*/site/*", "units/*/*/saved/*",
+                   "units/*/*/data/*",
                    "datasets/small_data/*.json"]
 
 [tool.setuptools.dynamic]
