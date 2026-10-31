@@ -99,6 +99,32 @@ SOURCES: dict[str, Source] = {
               "machines (GitHub's CI runners and Colab); the kit then uses the course copy.",
         mirrors=("https://github.com/charlieabela/ai-learning-kit/releases/download/data-1/cora.tgz",),
     ),
+    "hetionet_nodes": Source(
+        name="hetionet_nodes",
+        title="Hetionet v1.0 nodes (TSV)",
+        owner="Hetionet project (Himmelstein et al.), GitHub hetio/hetionet",
+        url="https://raw.githubusercontent.com/hetio/hetionet/main/hetnet/tsv/hetionet-v1.0-nodes.tsv",
+        filename="hetionet-v1.0-nodes.tsv",
+        sha256="3ad9eb86c031df8bc7d5efefa6edc93562182eb9a6a71e5129d3f18b9d42c50e",
+        size=2509984,
+        landing="https://github.com/hetio/hetionet",
+        licence="Hetionet's original content is CC0; it integrates 29 resources whose own licences vary (the hetionet repository links a per-source table). The kit downloads the files from the hetionet repository rather than copying them.",
+        citation='Himmelstein, D. S., Lizee, A., Hessler, C., Brueggeman, L., Chen, S. L., Hadley, D., Green, A., Khankhanian, P. and Baranzini, S. E. (2017). Systematic integration of biomedical knowledge prioritizes drugs for repurposing. eLife, 6, e26726.',
+        notes='47,031 nodes of 11 kinds (id, name, kind).',
+    ),
+    "hetionet_edges": Source(
+        name="hetionet_edges",
+        title="Hetionet v1.0 edges (gzipped SIF)",
+        owner="Hetionet project (Himmelstein et al.), GitHub hetio/hetionet",
+        url="https://media.githubusercontent.com/media/hetio/hetionet/main/hetnet/tsv/hetionet-v1.0-edges.sif.gz",
+        filename="hetionet-v1.0-edges.sif.gz",
+        sha256="611f0411ac666be4e0270e54bbca67407e14720bfc3099311f0f5eec25c5a947",
+        size=12401407,
+        landing="https://github.com/hetio/hetionet",
+        licence="Hetionet's original content is CC0; it integrates 29 resources whose own licences vary (the hetionet repository links a per-source table). The kit downloads the files from the hetionet repository rather than copying them.",
+        citation='Himmelstein, D. S., Lizee, A., Hessler, C., Brueggeman, L., Chen, S. L., Hadley, D., Green, A., Khankhanian, P. and Baranzini, S. E. (2017). Systematic integration of biomedical knowledge prioritizes drugs for repurposing. eLife, 6, e26726.',
+        notes="2,250,197 edges of 24 kinds (source, metaedge, target); stored with Git LFS, so the address is GitHub's media host, and the checksum equals the LFS object id.",
+    ),
 }
 
 # Course copies added after a release: {"name": ["url", ...]}. Read only when the owner and the copies above

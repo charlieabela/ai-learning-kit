@@ -31,7 +31,7 @@ in its student form.
 ## 2. The opening: two cells, always the same
 
 ```python
-%pip install -q "ai-learning-kit[graphs]@https://github.com/charlieabela/ai-learning-kit/archive/refs/tags/v0.8.0.zip"
+%pip install -q "ai-learning-kit[graphs]@https://github.com/charlieabela/ai-learning-kit/archive/refs/tags/v0.9.0.zip"
 ```
 
 ```python

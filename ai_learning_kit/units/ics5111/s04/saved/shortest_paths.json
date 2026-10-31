@@ -1,0 +1,19 @@
+{
+"query": "MATCH (c:Compound {name: 'Warfarin'}), (d:Disease {name: \"Alzheimer's disease\"}) MATCH p = allShortestPaths((c)-[*..4]-(d)) RETURN length(p) AS hops, [n IN nodes(p) | n.name] AS path, [r IN relationships(p) | type(r)] AS types ORDER BY path",
+"captured": null,
+"source": "computed from the same Hetionet subset with pandas and NetworkX (not yet captured from Neo4j)",
+"rows": [
+{
+"hops": 2,
+"path": [
+"Warfarin",
+"CYP2C8",
+"Alzheimer's disease"
+],
+"types": [
+"BINDS",
+"DOWNREGULATES"
+]
+}
+]
+}

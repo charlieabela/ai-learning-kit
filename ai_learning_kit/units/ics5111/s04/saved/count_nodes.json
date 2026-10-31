@@ -1,0 +1,31 @@
+{
+"query": "MATCH (n) RETURN labels(n)[0] AS label, count(*) AS nodes ORDER BY nodes DESC, label",
+"captured": null,
+"source": "computed from the same Hetionet subset with pandas and NetworkX (not yet captured from Neo4j)",
+"rows": [
+{
+"label": "Gene",
+"nodes": 16929
+},
+{
+"label": "Compound",
+"nodes": 1531
+},
+{
+"label": "Symptom",
+"nodes": 415
+},
+{
+"label": "Anatomy",
+"nodes": 398
+},
+{
+"label": "PharmacologicClass",
+"nodes": 345
+},
+{
+"label": "Disease",
+"nodes": 136
+}
+]
+}

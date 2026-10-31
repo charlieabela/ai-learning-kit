@@ -31,7 +31,7 @@ ai_learning_kit/
     __init__.py    REGISTRY {code: package}; session lookup
     ari1101/       UNIT dict, SESSIONS {"S02": ".s02"}, s02.py, s02_guide.py
     ics2205/       UNIT dict, SESSIONS {}  (no sessions yet)
-    ics5111/       UNIT dict, SESSIONS {"S02": ".s02", "S03": ".s03"}
+    ics5111/       UNIT dict, SESSIONS {"S02": ".s02", "S03": ".s03", "S04": ".s04"}
       s02/           session package: __init__.py (contract), tools.py (T = kit.tools()), reference/
   datasets/      external datasets: owner, address, checksum, licence, citation;
                  fetch() downloads from the owner, checks and caches; prefetch()
@@ -137,7 +137,7 @@ works on notebook files wherever they are.
 
 ## Versioning and compatibility
 
-Releases are tagged; notebooks install a tag (`@v0.8.0`). A problem's data and a
+Releases are tagged; notebooks install a tag (`@v0.9.0`). A problem's data and a
 released session's tasks are never changed afterwards: fix a problem by adding a
 new id, extend a session by adding a new session. Earlier tags remain
 installable, so a notebook keeps working against the tag it installs.
