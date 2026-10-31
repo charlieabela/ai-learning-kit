@@ -19,6 +19,7 @@ dependencies = [
     "pypdf>=3.0",
     "requests>=2.28",
     "beautifulsoup4>=4.11",
+    "scipy>=1.9",            # pandas needs it for .corr(method="spearman")
 ]
 
 [project.optional-dependencies]
@@ -33,6 +34,7 @@ include = ["ai_learning_kit*"]
 
 [tool.setuptools.package-data]
 ai_learning_kit = ["problems/*/data/*", "units/*/*/reference/*", "units/*/*/site/*", "units/*/*/saved/*",
+                   "units/*/*/data/*",
                    "datasets/small_data/*.json"]
 
 [tool.setuptools.dynamic]

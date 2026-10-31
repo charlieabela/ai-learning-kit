@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.8.0 · ARI1101 S04, exploring data
+
+- **ARI1101 S04 (Explore: descriptive statistics, distributions, correlation and visualisation)**, a session whose notebooks check themselves. `T = kit.tools()` provides the **Palmer penguins** (CC0, stored in the session's `data/` with its citation), **a year of daily weather for Malta** (2025, Open-Meteo archive API, ERA5, stored as the API returned it and compared with the live service in CI), **Anscombe's quartet**, helpers students may look inside (`iqr_outliers`, `pearson_by_hand`, `scatter_with_trend`, `corr_heatmap`, `sample_means`) and checks for the practice notebook (`T.check("E1")` ... `T.check("E5")`). The notebooks are distributed with the session's material.
+- `scipy` becomes a requirement: pandas needs it for `.corr(method="spearman")`, which plain installs of the kit lacked.
+- `dev.saved_copies check` reports matching copies as plain lines and keeps GitHub's annotations (ten per step) for differences and captured responses.
+
 ## 0.7.0 · ICS5111 S03: graph neural networks
 
 - **ICS5111 S03 (graph neural networks)**: a session without graded tasks, like S02. `T = kit.tools()` gives readable CPU helpers in plain PyTorch, each layer written out in a few lines so that the code can be read next to the equations: the primer example, the five-paper graph used for calculations by hand, mean aggregation, the GCN's normalised adjacency, `MLP`, `GCN` and `SAGE` (GraphSAGE with the mean aggregator and optional neighbour sampling), full-batch training that keeps the epoch with the best validation accuracy, SGC and over-smoothing measures, edge homophily, receptive fields and computation trees, Weisfeiler–Lehman colour refinement, synthetic graphs of chosen homophily, and a graph auto-encoder for link prediction on the S02 link split. Cora is parsed by the S02 helpers, unchanged; S03 adds a low-label split (20 labelled papers per topic, 500 validation, 1,000 test, seed 5111). The reference results of the runs used on the slides ship with the session.
