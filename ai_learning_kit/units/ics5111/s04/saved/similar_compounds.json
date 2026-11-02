@@ -1,0 +1,15 @@
+{
+"query": "MATCH p = (c:Compound {name: 'Warfarin'})-[:RESEMBLES*1..2]-(o:Compound) WHERE o <> c WITH o, min(length(p)) AS hops RETURN hops, count(o) AS compounds ORDER BY hops",
+"captured": null,
+"source": "computed from the same Hetionet subset with pandas and NetworkX (not yet captured from Neo4j)",
+"rows": [
+{
+"hops": 1,
+"compounds": 17
+},
+{
+"hops": 2,
+"compounds": 139
+}
+]
+}

@@ -1,0 +1,47 @@
+{
+"query": "MATCH (c:Compound)-[:TREATS]->(d:Disease) RETURN d.name AS disease, count(c) AS compounds ORDER BY compounds DESC, disease LIMIT 10",
+"captured": null,
+"source": "computed from the same Hetionet subset with pandas and NetworkX (not yet captured from Neo4j)",
+"rows": [
+{
+"disease": "hypertension",
+"compounds": 68
+},
+{
+"disease": "hematologic cancer",
+"compounds": 51
+},
+{
+"disease": "asthma",
+"compounds": 37
+},
+{
+"disease": "breast cancer",
+"compounds": 29
+},
+{
+"disease": "coronary artery disease",
+"compounds": 28
+},
+{
+"disease": "epilepsy syndrome",
+"compounds": 25
+},
+{
+"disease": "type 2 diabetes mellitus",
+"compounds": 22
+},
+{
+"disease": "glaucoma",
+"compounds": 21
+},
+{
+"disease": "prostate cancer",
+"compounds": 21
+},
+{
+"disease": "psoriasis",
+"compounds": 21
+}
+]
+}

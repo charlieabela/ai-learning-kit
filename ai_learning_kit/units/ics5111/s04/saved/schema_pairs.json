@@ -1,0 +1,91 @@
+{
+"query": "MATCH (a)-[r]->(b) RETURN labels(a)[0] AS source, type(r) AS type, labels(b)[0] AS target, count(*) AS relationships ORDER BY relationships DESC, source, type",
+"captured": null,
+"source": "computed from the same Hetionet subset with pandas and NetworkX (not yet captured from Neo4j)",
+"rows": [
+{
+"source": "Gene",
+"type": "INTERACTS",
+"target": "Gene",
+"relationships": 147164
+},
+{
+"source": "Compound",
+"type": "DOWNREGULATES",
+"target": "Gene",
+"relationships": 21102
+},
+{
+"source": "Compound",
+"type": "UPREGULATES",
+"target": "Gene",
+"relationships": 18756
+},
+{
+"source": "Disease",
+"type": "ASSOCIATES",
+"target": "Gene",
+"relationships": 12623
+},
+{
+"source": "Compound",
+"type": "BINDS",
+"target": "Gene",
+"relationships": 11571
+},
+{
+"source": "Disease",
+"type": "UPREGULATES",
+"target": "Gene",
+"relationships": 7731
+},
+{
+"source": "Disease",
+"type": "DOWNREGULATES",
+"target": "Gene",
+"relationships": 7623
+},
+{
+"source": "Compound",
+"type": "RESEMBLES",
+"target": "Compound",
+"relationships": 6486
+},
+{
+"source": "Disease",
+"type": "LOCALIZES",
+"target": "Anatomy",
+"relationships": 3602
+},
+{
+"source": "Disease",
+"type": "PRESENTS",
+"target": "Symptom",
+"relationships": 3357
+},
+{
+"source": "PharmacologicClass",
+"type": "INCLUDES",
+"target": "Compound",
+"relationships": 1029
+},
+{
+"source": "Compound",
+"type": "TREATS",
+"target": "Disease",
+"relationships": 755
+},
+{
+"source": "Disease",
+"type": "RESEMBLES",
+"target": "Disease",
+"relationships": 543
+},
+{
+"source": "Compound",
+"type": "PALLIATES",
+"target": "Disease",
+"relationships": 390
+}
+]
+}

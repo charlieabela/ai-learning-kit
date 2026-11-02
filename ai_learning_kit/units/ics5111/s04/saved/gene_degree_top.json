@@ -1,0 +1,47 @@
+{
+"query": "MATCH (g:Gene) RETURN g.name AS gene, COUNT { (g)--() } AS degree ORDER BY degree DESC, gene LIMIT 10",
+"captured": null,
+"source": "computed from the same Hetionet subset with pandas and NetworkX (not yet captured from Neo4j)",
+"rows": [
+{
+"gene": "UBC",
+"degree": 8613
+},
+{
+"gene": "APP",
+"degree": 1914
+},
+{
+"gene": "SUMO2",
+"degree": 1124
+},
+{
+"gene": "CUL3",
+"degree": 1066
+},
+{
+"gene": "GRB2",
+"degree": 895
+},
+{
+"gene": "ESR1",
+"degree": 855
+},
+{
+"gene": "KIAA0101",
+"degree": 804
+},
+{
+"gene": "COPS5",
+"degree": 722
+},
+{
+"gene": "HSP90AB1",
+"degree": 679
+},
+{
+"gene": "SIRT7",
+"degree": 642
+}
+]
+}

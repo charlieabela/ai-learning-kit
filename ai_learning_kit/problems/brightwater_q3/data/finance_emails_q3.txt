@@ -1,0 +1,52 @@
+========================================================================
+From: Nadia Farrugia <nadia.farrugia@brightwater.example>
+To: accounts@kestrelprint.example
+Date: Fri, 7 Aug 2026 09:15:33 +0200
+Subject: Brochure print run - invoicing
+
+Hi,
+
+Thanks for the quote of EUR 14,450 for the autumn brochure. To avoid holding up the launch, could you invoice the job in three separate batches, each under EUR 5,000? That way it does not need to go through the full approval route.
+
+Kind regards,
+Nadia Farrugia
+Marketing
+========================================================================
+From: Mark Zammit <mark.zammit@brightwater.example>
+To: Joanna Micallef <joanna.micallef@brightwater.example>
+Date: Fri, 21 Aug 2026 18:42:10 +0200
+Subject: Re: URGENT cold store compressor failure [TX-2026-01231]
+
+Joanna,
+
+Approved. Go ahead with Polar Refrigeration for the compressor replacement (quote EUR 7,850). We cannot risk the stock in the cold store over the weekend.
+
+Please make sure this is logged in PWS as soon as possible.
+
+Mark
+CFO
+========================================================================
+From: Rita Camilleri <rita.camilleri@brightwater.example>
+To: Kevin Vella <kevin.vella@brightwater.example>
+Date: Tue, 8 Sep 2026 11:03:51 +0200
+Subject: Two Harbour IT payments last week
+
+Kevin,
+
+I noticed two Harbour IT payments in the same week (EUR 4,950 and EUR 3,200). Were they for the same server project? If so they should have gone through PWS together.
+
+Rita
+Finance Manager
+========================================================================
+From: Paul Galea <paul.galea@brightwater.example>
+To: All staff <staff@brightwater.example>
+Date: Mon, 14 Sep 2026 08:30:00 +0200
+Subject: First aid course - places available
+
+Dear all,
+
+There are still four places on the first aid course on 30 September. Please reply by Friday if you would like to attend.
+
+Paul
+HR
+========================================================================

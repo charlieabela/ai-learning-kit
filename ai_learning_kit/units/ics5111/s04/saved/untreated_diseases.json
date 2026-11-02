@@ -1,0 +1,10 @@
+{
+"query": "MATCH (d:Disease) WHERE NOT EXISTS { (:Compound)-[:TREATS]->(d) } RETURN count(d) AS diseases_without_a_treatment",
+"captured": null,
+"source": "computed from the same Hetionet subset with pandas and NetworkX (not yet captured from Neo4j)",
+"rows": [
+{
+"diseases_without_a_treatment": 59
+}
+]
+}

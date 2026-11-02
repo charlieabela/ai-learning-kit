@@ -1,0 +1,51 @@
+{
+"query": "MATCH ()-[r]->() RETURN type(r) AS type, count(*) AS relationships ORDER BY relationships DESC, type",
+"captured": null,
+"source": "computed from the same Hetionet subset with pandas and NetworkX (not yet captured from Neo4j)",
+"rows": [
+{
+"type": "INTERACTS",
+"relationships": 147164
+},
+{
+"type": "DOWNREGULATES",
+"relationships": 28725
+},
+{
+"type": "UPREGULATES",
+"relationships": 26487
+},
+{
+"type": "ASSOCIATES",
+"relationships": 12623
+},
+{
+"type": "BINDS",
+"relationships": 11571
+},
+{
+"type": "RESEMBLES",
+"relationships": 7029
+},
+{
+"type": "LOCALIZES",
+"relationships": 3602
+},
+{
+"type": "PRESENTS",
+"relationships": 3357
+},
+{
+"type": "INCLUDES",
+"relationships": 1029
+},
+{
+"type": "TREATS",
+"relationships": 755
+},
+{
+"type": "PALLIATES",
+"relationships": 390
+}
+]
+}

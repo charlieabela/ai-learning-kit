@@ -1,0 +1,5 @@
+# Rules for programs that read the Campus Lets course website.
+# Wait at least one second between requests; do not read the admin pages.
+User-agent: *
+Crawl-delay: 1
+Disallow: /ai-learning-kit/sites/ari1101-s03/admin/

@@ -1,0 +1,299 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ApprovalLog system="PWS" company="Brightwater Logistics Ltd" exported="2026-10-02">
+  <Request id="PWS-0001" erp_ref="TX-2026-01003" amount="21572.59" currency="EUR" submitted="2026-06-27">
+    <Vendor id="V022">Polar Refrigeration Services Ltd</Vendor>
+    <Description>Compressor repair</Description>
+    <Approvers>
+      <Approver role="Budget Holder" decision="approved" date="2026-06-29">Lara Grech</Approver>
+      <Approver role="Finance Manager" decision="approved" date="2026-07-06">Rita Camilleri</Approver>
+    </Approvers>
+  </Request>
+  <Request id="PWS-0002" erp_ref="TX-2026-01033" amount="9467.20" currency="EUR" submitted="2026-07-04">
+    <Vendor id="V011">Brightlink Telecom Ltd</Vendor>
+    <Description>Mobile plans</Description>
+    <Approvers>
+      <Approver role="Budget Holder" decision="approved" date="2026-07-06">Kevin Vella</Approver>
+      <Approver role="Finance Manager" decision="approved" date="2026-07-06">Rita Camilleri</Approver>
+    </Approvers>
+  </Request>
+  <Request id="PWS-0003" erp_ref="TX-2026-01034" amount="26400.00" currency="EUR" submitted="2026-07-05">
+    <Vendor id="V020">Granite Construction Works Ltd</Vendor>
+    <Description>Loading bay works</Description>
+    <Approvers>
+      <Approver role="Budget Holder" decision="approved" date="2026-07-05">Joanna Micallef</Approver>
+      <Approver role="Finance Manager" decision="approved" date="2026-07-08">Rita Camilleri</Approver>
+      <Approver role="CFO" decision="approved" date="2026-07-07">Mark Zammit</Approver>
+    </Approvers>
+  </Request>
+  <Request id="PWS-0004" erp_ref="TX-2026-01042" amount="14379.11" currency="EUR" submitted="2026-07-04">
+    <Vendor id="V007">Meridian Software Licensing Ltd</Vendor>
+    <Description>Licence renewal</Description>
+    <Approvers>
+      <Approver role="Budget Holder" decision="approved" date="2026-07-08">Kevin Vella</Approver>
+      <Approver role="Finance Manager" decision="approved" date="2026-07-10">Rita Camilleri</Approver>
+    </Approvers>
+  </Request>
+  <Request id="PWS-0005" erp_ref="TX-2026-01046" amount="17540.98" currency="EUR" submitted="2026-07-05">
+    <Vendor id="V018">Silverline Couriers Ltd</Vendor>
+    <Description>Courier services</Description>
+    <Approvers>
+      <Approver role="Budget Holder" decision="approved" date="2026-07-08">Daniel Borg</Approver>
+      <Approver role="Finance Manager" decision="approved" date="2026-07-10">Rita Camilleri</Approver>
+    </Approvers>
+  </Request>
+  <Request id="PWS-0006" erp_ref="TX-2026-01059" amount="21308.05" currency="EUR" submitted="2026-07-11">
+    <Vendor id="V012">Sunvale Packaging Ltd</Vendor>
+    <Description>Pallet wrap</Description>
+    <Approvers>
+      <Approver role="Budget Holder" decision="approved" date="2026-07-13">Lara Grech</Approver>
+      <Approver role="Finance Manager" decision="approved" date="2026-07-12">Rita Camilleri</Approver>
+    </Approvers>
+  </Request>
+  <Request id="PWS-0007" erp_ref="TX-2026-01060" amount="6000.00" currency="USD" submitted="2026-07-11">
+    <Vendor id="V015">Vector Logistics Software Inc</Vendor>
+    <Description>Software subscription</Description>
+    <Approvers>
+      <Approver role="Budget Holder" decision="approved" date="2026-07-12">Daniel Borg</Approver>
+      <Approver role="Finance Manager" decision="approved" date="2026-07-13">Rita Camilleri</Approver>
+    </Approvers>
+  </Request>
+  <Request id="PWS-0008" erp_ref="TX-2026-01106" amount="21901.60" currency="EUR" submitted="2026-07-20">
+    <Vendor id="V023">Summit Training Academy Ltd</Vendor>
+    <Description>First aid course</Description>
+    <Approvers>
+      <Approver role="Budget Holder" decision="approved" date="2026-07-22">Paul Galea</Approver>
+      <Approver role="Finance Manager" decision="approved" date="2026-07-21">Rita Camilleri</Approver>
+    </Approvers>
+  </Request>
+  <Request id="PWS-0009" erp_ref="TX-2026-01144" amount="31850.00" currency="EUR" submitted="2026-07-28">
+    <Vendor id="V017">Tidewater Insurance Brokers Ltd</Vendor>
+    <Description>Fleet insurance premium</Description>
+    <Approvers>
+      <Approver role="Budget Holder" decision="approved" date="2026-07-29">Daniel Borg</Approver>
+      <Approver role="Finance Manager" decision="approved" date="2026-07-31">Rita Camilleri</Approver>
+      <Approver role="CFO" decision="approved" date="2026-07-31">Mark Zammit</Approver>
+    </Approvers>
+  </Request>
+  <Request id="PWS-0010" erp_ref="TX-2026-01140" amount="8873.36" currency="EUR" submitted="2026-07-25">
+    <Vendor id="V007">Meridian Software Licensing Ltd</Vendor>
+    <Description>Software subscription</Description>
+    <Approvers>
+      <Approver role="Budget Holder" decision="approved" date="2026-07-28">Kevin Vella</Approver>
+      <Approver role="Finance Manager" decision="approved" date="2026-07-29">Rita Camilleri</Approver>
+    </Approvers>
+  </Request>
+  <Request id="PWS-0011" erp_ref="TX-2026-01139" amount="5744.82" currency="EUR" submitted="2026-07-27">
+    <Vendor id="V007">Meridian Software Licensing Ltd</Vendor>
+    <Description>Software subscription</Description>
+    <Approvers>
+      <Approver role="Budget Holder" decision="approved" date="2026-07-28">Kevin Vella</Approver>
+      <Approver role="Finance Manager" decision="approved" date="2026-07-30">Rita Camilleri</Approver>
+    </Approvers>
+  </Request>
+  <Request id="PWS-0012" erp_ref="TX-2026-01148" amount="19521.07" currency="EUR" submitted="2026-07-31">
+    <Vendor id="V009">Atlas Forklift Hire Ltd</Vendor>
+    <Description>Forklift hire</Description>
+    <Approvers>
+      <Approver role="Budget Holder" decision="approved" date="2026-08-01">Lara Grech</Approver>
+      <Approver role="Finance Manager" decision="approved" date="2026-08-01">Rita Camilleri</Approver>
+    </Approvers>
+  </Request>
+  <Request id="PWS-0013" erp_ref="TX-2026-01152" amount="14197.79" currency="EUR" submitted="2026-07-31">
+    <Vendor id="V008">Seabreeze Catering Ltd</Vendor>
+    <Description>Staff event catering</Description>
+    <Approvers>
+      <Approver role="Budget Holder" decision="approved" date="2026-08-02">Paul Galea</Approver>
+      <Approver role="Finance Manager" decision="approved" date="2026-08-03">Rita Camilleri</Approver>
+    </Approvers>
+  </Request>
+  <Request id="PWS-0014" erp_ref="TX-2026-01172" amount="15158.94" currency="EUR" submitted="2026-08-01">
+    <Vendor id="V010">Pinnacle Recruitment Ltd</Vendor>
+    <Description>Job advert package</Description>
+    <Approvers>
+      <Approver role="Budget Holder" decision="approved" date="2026-08-04">Paul Galea</Approver>
+      <Approver role="Finance Manager" decision="approved" date="2026-08-05">Rita Camilleri</Approver>
+    </Approvers>
+  </Request>
+  <Request id="PWS-0015" erp_ref="TX-2026-01173" amount="17912.97" currency="EUR" submitted="2026-08-01">
+    <Vendor id="V011">Brightlink Telecom Ltd</Vendor>
+    <Description>Phone handsets</Description>
+    <Approvers>
+      <Approver role="Budget Holder" decision="approved" date="2026-08-04">Kevin Vella</Approver>
+      <Approver role="Finance Manager" decision="approved" date="2026-08-06">Rita Camilleri</Approver>
+    </Approvers>
+  </Request>
+  <Request id="PWS-0016" erp_ref="TX-2026-01186" amount="6297.24" currency="EUR" submitted="2026-08-08">
+    <Vendor id="V006">Limestone Facilities Management Ltd</Vendor>
+    <Description>Plumbing works</Description>
+    <Approvers>
+      <Approver role="Budget Holder" decision="approved" date="2026-08-11">Joanna Micallef</Approver>
+      <Approver role="Finance Manager" decision="approved" date="2026-08-11">Rita Camilleri</Approver>
+    </Approvers>
+  </Request>
+  <Request id="PWS-0017" erp_ref="TX-2026-01216" amount="6400.00" currency="EUR" submitted="2026-08-14">
+    <Vendor id="V025">Rapid Hire Solutions Ltd</Vendor>
+    <Description>Generator hire</Description>
+    <Approvers>
+      <Approver role="Budget Holder" decision="approved" date="2026-08-18">Daniel Borg</Approver>
+      <Approver role="Finance Manager" decision="approved" date="2026-08-18">Rita Camilleri</Approver>
+    </Approvers>
+  </Request>
+  <Request id="PWS-0018" erp_ref="TX-2026-01220" amount="18046.46" currency="EUR" submitted="2026-08-16">
+    <Vendor id="V018">Silverline Couriers Ltd</Vendor>
+    <Description>Same-day deliveries</Description>
+    <Approvers>
+      <Approver role="Budget Holder" decision="approved" date="2026-08-17">Daniel Borg</Approver>
+    </Approvers>
+  </Request>
+  <Request id="PWS-0019" erp_ref="TX-2026-01234" amount="9775.98" currency="EUR" submitted="2026-08-19">
+    <Vendor id="V011">Brightlink Telecom Ltd</Vendor>
+    <Description>Phone handsets</Description>
+    <Approvers>
+      <Approver role="Budget Holder" decision="approved" date="2026-08-24">Kevin Vella</Approver>
+      <Approver role="Finance Manager" decision="approved" date="2026-08-23">Rita Camilleri</Approver>
+    </Approvers>
+  </Request>
+  <Request id="PWS-0020" erp_ref="TX-2026-01242" amount="22414.86" currency="EUR" submitted="2026-08-22">
+    <Vendor id="V004">Coastline Fleet Repairs Ltd</Vendor>
+    <Description>Truck brake repair</Description>
+    <Approvers>
+      <Approver role="Budget Holder" decision="approved" date="2026-08-24">Simon Attard</Approver>
+      <Approver role="Finance Manager" decision="approved" date="2026-08-25">Rita Camilleri</Approver>
+    </Approvers>
+  </Request>
+  <Request id="PWS-0021" erp_ref="TX-2026-01244" amount="11756.10" currency="EUR" submitted="2026-08-24">
+    <Vendor id="V007">Meridian Software Licensing Ltd</Vendor>
+    <Description>Software subscription</Description>
+    <Approvers>
+      <Approver role="Budget Holder" decision="approved" date="2026-08-25">Kevin Vella</Approver>
+      <Approver role="Finance Manager" decision="approved" date="2026-08-27">Rita Camilleri</Approver>
+    </Approvers>
+  </Request>
+  <Request id="PWS-0022" erp_ref="TX-2026-01258" amount="6169.67" currency="EUR" submitted="2026-08-23">
+    <Vendor id="V011">Brightlink Telecom Ltd</Vendor>
+    <Description>Mobile plans</Description>
+    <Approvers>
+      <Approver role="Budget Holder" decision="approved" date="2026-08-26">Kevin Vella</Approver>
+      <Approver role="Finance Manager" decision="approved" date="2026-08-26">Rita Camilleri</Approver>
+    </Approvers>
+  </Request>
+  <Request id="PWS-0023" erp_ref="TX-2026-01270" amount="17336.30" currency="EUR" submitted="2026-08-26">
+    <Vendor id="V010">Pinnacle Recruitment Ltd</Vendor>
+    <Description>Job advert package</Description>
+    <Approvers>
+      <Approver role="Budget Holder" decision="approved" date="2026-08-29">Paul Galea</Approver>
+      <Approver role="Finance Manager" decision="approved" date="2026-09-04">Rita Camilleri</Approver>
+    </Approvers>
+  </Request>
+  <Request id="PWS-0024" erp_ref="TX-2026-01300" amount="16493.35" currency="EUR" submitted="2026-09-04">
+    <Vendor id="V014">Greenleaf Cleaning Ltd</Vendor>
+    <Description>Warehouse deep clean</Description>
+    <Approvers>
+      <Approver role="Budget Holder" decision="approved" date="2026-09-05">Joanna Micallef</Approver>
+      <Approver role="Finance Manager" decision="approved" date="2026-09-06">Rita Camilleri</Approver>
+    </Approvers>
+  </Request>
+  <Request id="PWS-0025" erp_ref="TX-2026-01308" amount="15006.80" currency="EUR" submitted="2026-09-04">
+    <Vendor id="V019">Keystone Legal Advisors</Vendor>
+    <Description>Contract review</Description>
+    <Approvers>
+      <Approver role="Budget Holder" decision="approved" date="2026-09-06">Daniel Borg</Approver>
+      <Approver role="Finance Manager" decision="approved" date="2026-09-07">Rita Camilleri</Approver>
+    </Approvers>
+  </Request>
+  <Request id="PWS-0026" erp_ref="TX-2026-01309" amount="21589.39" currency="EUR" submitted="2026-09-05">
+    <Vendor id="V021">Nova Marketing Studio Ltd</Vendor>
+    <Description>Campaign design</Description>
+    <Approvers>
+      <Approver role="Budget Holder" decision="approved" date="2026-09-06">Nadia Farrugia</Approver>
+    </Approvers>
+  </Request>
+  <Request id="PWS-0027" erp_ref="TX-2026-01311" amount="48200.00" currency="EUR" submitted="2026-09-06">
+    <Vendor id="V006">Limestone Facilities Management Ltd</Vendor>
+    <Description>HVAC maintenance</Description>
+    <Approvers>
+      <Approver role="Budget Holder" decision="approved" date="2026-09-09">Joanna Micallef</Approver>
+      <Approver role="Finance Manager" decision="approved" date="2026-09-09">Rita Camilleri</Approver>
+      <Approver role="CFO" decision="approved" date="2026-09-10">Mark Zammit</Approver>
+    </Approvers>
+  </Request>
+  <Request id="PWS-0028" erp_ref="TX-2026-01317" amount="13606.93" currency="EUR" submitted="2026-09-04">
+    <Vendor id="V023">Summit Training Academy Ltd</Vendor>
+    <Description>First aid course</Description>
+    <Approvers>
+      <Approver role="Budget Holder" decision="approved" date="2026-09-08">Paul Galea</Approver>
+      <Approver role="Finance Manager" decision="approved" date="2026-09-08">Rita Camilleri</Approver>
+    </Approvers>
+  </Request>
+  <Request id="PWS-0029" erp_ref="TX-2026-01310" amount="11044.75" currency="EUR" submitted="2026-09-04">
+    <Vendor id="V006">Limestone Facilities Management Ltd</Vendor>
+    <Description>Lighting replacement</Description>
+    <Approvers>
+      <Approver role="Budget Holder" decision="approved" date="2026-09-08">Joanna Micallef</Approver>
+      <Approver role="Finance Manager" decision="approved" date="2026-09-08">Rita Camilleri</Approver>
+    </Approvers>
+  </Request>
+  <Request id="PWS-0030" erp_ref="TX-2026-01338" amount="30000.00" currency="USD" submitted="2026-09-09">
+    <Vendor id="V015">Vector Logistics Software Inc</Vendor>
+    <Description>Licence renewal</Description>
+    <Approvers>
+      <Approver role="Budget Holder" decision="approved" date="2026-09-13">Daniel Borg</Approver>
+      <Approver role="Finance Manager" decision="approved" date="2026-09-14">Rita Camilleri</Approver>
+    </Approvers>
+  </Request>
+  <Request id="PWS-0031" erp_ref="TX-2026-01361" amount="5962.72" currency="EUR" submitted="2026-09-15">
+    <Vendor id="V017">Tidewater Insurance Brokers Ltd</Vendor>
+    <Description>Cargo insurance premium</Description>
+    <Approvers>
+      <Approver role="Budget Holder" decision="approved" date="2026-09-16">Daniel Borg</Approver>
+      <Approver role="Finance Manager" decision="rejected" date="2026-09-16">Rita Camilleri</Approver>
+    </Approvers>
+  </Request>
+  <Request id="PWS-0032" erp_ref="TX-2026-01362" amount="17731.10" currency="EUR" submitted="2026-09-12">
+    <Vendor id="V018">Silverline Couriers Ltd</Vendor>
+    <Description>Courier services</Description>
+    <Approvers>
+      <Approver role="Budget Holder" decision="approved" date="2026-09-17">Daniel Borg</Approver>
+      <Approver role="Finance Manager" decision="approved" date="2026-09-16">Rita Camilleri</Approver>
+    </Approvers>
+  </Request>
+  <Request id="PWS-0033" erp_ref="TX-2026-01365" amount="6498.66" currency="EUR" submitted="2026-09-17">
+    <Vendor id="V007">Meridian Software Licensing Ltd</Vendor>
+    <Description>Software subscription</Description>
+    <Approvers>
+      <Approver role="Budget Holder" decision="approved" date="2026-09-18">Kevin Vella</Approver>
+    </Approvers>
+  </Request>
+  <Request id="PWS-0034" erp_ref="TX-2026-01369" amount="7065.40" currency="EUR" submitted="2026-09-18">
+    <Vendor id="V022">Polar Refrigeration Services Ltd</Vendor>
+    <Description>Compressor repair</Description>
+    <Approvers>
+      <Approver role="Budget Holder" decision="approved" date="2026-09-20">Lara Grech</Approver>
+      <Approver role="Finance Manager" decision="approved" date="2026-09-19">Rita Camilleri</Approver>
+    </Approvers>
+  </Request>
+  <Request id="PWS-0035" erp_ref="TX-2026-01400" amount="22514.37" currency="EUR" submitted="2026-09-22">
+    <Vendor id="V012">Sunvale Packaging Ltd</Vendor>
+    <Description>Pallet wrap</Description>
+    <Approvers>
+      <Approver role="Budget Holder" decision="approved" date="2026-09-23">Lara Grech</Approver>
+      <Approver role="Finance Manager" decision="approved" date="2026-09-24">Rita Camilleri</Approver>
+    </Approvers>
+  </Request>
+  <Request id="PWS-0036" erp_ref="TX-2026-01410" amount="21392.00" currency="EUR" submitted="2026-09-26">
+    <Vendor id="V003">Bluefin Office Supplies Ltd</Vendor>
+    <Description>Printer toner</Description>
+    <Approvers>
+      <Approver role="Budget Holder" decision="approved" date="2026-09-27">Joanna Micallef</Approver>
+      <Approver role="Finance Manager" decision="approved" date="2026-09-27">Rita Camilleri</Approver>
+    </Approvers>
+  </Request>
+  <Request id="PWS-0037" erp_ref="TX-2026-01419" amount="18324.39" currency="EUR" submitted="2026-09-25">
+    <Vendor id="V009">Atlas Forklift Hire Ltd</Vendor>
+    <Description>Pallet jack hire</Description>
+    <Approvers>
+      <Approver role="Budget Holder" decision="approved" date="2026-09-27">Lara Grech</Approver>
+      <Approver role="Finance Manager" decision="approved" date="2026-09-29">Rita Camilleri</Approver>
+    </Approvers>
+  </Request>
+</ApprovalLog>

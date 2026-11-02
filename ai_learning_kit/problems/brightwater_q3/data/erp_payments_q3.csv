@@ -1,0 +1,427 @@
+erp_ref,posting_date,vendor_id,vendor_name,cost_centre,description,amount,currency,payment_method
+TX-2026-01001,2026-07-01,V001,Kestrel Print Services Ltd,Marketing,Business cards,391.95,EUR,Bank transfer
+TX-2026-01002,2026-07-01,V022,Polar Refrigeration Services Ltd,Warehouse,Compressor repair,440.31,EUR,Card
+TX-2026-01003,2026-07-01,V022,Polar Refrigeration Services Ltd,Warehouse,Compressor repair,21572.59,EUR,Bank transfer
+TX-2026-01004,2026-07-02,V005,Northgate Fuel Distributors Ltd,Fleet,Diesel delivery,595.21,EUR,Card
+TX-2026-01005,2026-07-02,V011,Brightlink Telecom Ltd,IT,Phone handsets,511.48,EUR,Bank transfer
+TX-2026-01006,2026-07-02,V017,Tidewater Insurance Brokers Ltd,Operations,Cargo insurance premium,157.17,EUR,Bank transfer
+TX-2026-01007,2026-07-02,V021,Nova Marketing Studio Ltd,Marketing,Social media management,826.05,EUR,Card
+TX-2026-01008,2026-07-02,V022,Polar Refrigeration Services Ltd,Warehouse,Compressor repair,523.50,EUR,Card
+TX-2026-01009,2026-07-03,V006,Limestone Facilities Management Ltd,Facilities,Plumbing works,395.10,EUR,Bank transfer
+TX-2026-01010,2026-07-03,V013,Orion Security Services Ltd,Facilities,CCTV maintenance,1830.45,EUR,Bank transfer
+TX-2026-01011,2026-07-03,V014,Greenleaf Cleaning Ltd,Facilities,Office cleaning,807.22,EUR,Bank transfer
+TX-2026-01012,2026-07-03,V016,Redwood Furniture Ltd,Facilities,Meeting room table,729.47,EUR,Card
+TX-2026-01013,2026-07-03,V021,Nova Marketing Studio Ltd,Marketing,Campaign design,508.00,EUR,Card
+TX-2026-01014,2026-07-06,V002,Harbour IT Services Ltd,IT,Server support,130.41,EUR,Card
+TX-2026-01015,2026-07-06,V004,Coastline Fleet Repairs Ltd,Fleet,Truck brake repair,426.47,EUR,Card
+TX-2026-01016,2026-07-06,V011,Brightlink Telecom Ltd,IT,Mobile plans,1318.86,EUR,Card
+TX-2026-01017,2026-07-06,V015,Vector Logistics Software Inc,Operations,Software subscription,152.39,USD,Bank transfer
+TX-2026-01018,2026-07-06,V017,Tidewater Insurance Brokers Ltd,Operations,Cargo insurance premium,112.80,EUR,Bank transfer
+TX-2026-01019,2026-07-06,V020,Granite Construction Works Ltd,Facilities,Yard resurfacing,882.57,EUR,Card
+TX-2026-01020,2026-07-06,V022,Polar Refrigeration Services Ltd,Warehouse,Cold store maintenance,353.94,EUR,Bank transfer
+TX-2026-01021,2026-07-07,V001,Kestrel Print Services Ltd,Marketing,Signage,1202.64,EUR,Card
+TX-2026-01022,2026-07-07,V009,Atlas Forklift Hire Ltd,Warehouse,Forklift hire,360.42,EUR,Bank transfer
+TX-2026-01023,2026-07-07,V011,Brightlink Telecom Ltd,IT,Phone handsets,412.07,EUR,Bank transfer
+TX-2026-01024,2026-07-07,V014,Greenleaf Cleaning Ltd,Facilities,Warehouse deep clean,455.50,EUR,Card
+TX-2026-01025,2026-07-07,V014,Greenleaf Cleaning Ltd,Facilities,Office cleaning,569.49,EUR,Bank transfer
+TX-2026-01026,2026-07-07,V019,Keystone Legal Advisors,Operations,Legal advice,265.32,EUR,Bank transfer
+TX-2026-01027,2026-07-07,V021,Nova Marketing Studio Ltd,Marketing,Social media management,842.40,EUR,Bank transfer
+TX-2026-01028,2026-07-07,V023,Summit Training Academy Ltd,HR,Forklift licence training,458.42,EUR,Bank transfer
+TX-2026-01029,2026-07-08,V002,Harbour IT Services Ltd,IT,Server support,236.64,EUR,Bank transfer
+TX-2026-01030,2026-07-08,V002,Harbour IT Services Ltd,IT,Server support,1032.67,EUR,Bank transfer
+TX-2026-01031,2026-07-08,V006,Limestone Facilities Management Ltd,Facilities,Lighting replacement,451.59,EUR,Bank transfer
+TX-2026-01032,2026-07-08,V007,Meridian Software Licensing Ltd,IT,Software subscription,587.43,EUR,Card
+TX-2026-01033,2026-07-08,V011,Brightlink Telecom Ltd,IT,Mobile plans,9467.20,EUR,Bank transfer
+TX-2026-01034,2026-07-08,V020,Granite Construction Works Ltd,Facilities,Loading bay works,26400.00,EUR,Bank transfer
+TX-2026-01035,2026-07-09,V002,Harbour IT Services Ltd,IT,Laptop repairs,205.70,EUR,Card
+TX-2026-01036,2026-07-09,V005,Northgate Fuel Distributors Ltd,Fleet,Fuel cards top-up,328.52,EUR,Bank transfer
+TX-2026-01037,2026-07-09,V009,Atlas Forklift Hire Ltd,Warehouse,Generator hire,205.81,EUR,Bank transfer
+TX-2026-01038,2026-07-09,V012,Sunvale Packaging Ltd,Warehouse,Packing tape,252.53,EUR,Bank transfer
+TX-2026-01039,2026-07-09,V018,Silverline Couriers Ltd,Operations,Same-day deliveries,981.99,EUR,Bank transfer
+TX-2026-01040,2026-07-09,V021,Nova Marketing Studio Ltd,Marketing,Social media management,807.35,EUR,Bank transfer
+TX-2026-01041,2026-07-10,V004,Coastline Fleet Repairs Ltd,Fleet,Van service,621.32,EUR,Card
+TX-2026-01042,2026-07-10,V007,Meridian Software Licensing Ltd,IT,Licence renewal,14379.11,EUR,Bank transfer
+TX-2026-01043,2026-07-10,V012,Sunvale Packaging Ltd,Warehouse,Cardboard boxes,926.26,EUR,Card
+TX-2026-01044,2026-07-10,V015,Vector Logistics Software Inc,Operations,Software subscription,1546.05,USD,Bank transfer
+TX-2026-01045,2026-07-10,V017,Tidewater Insurance Brokers Ltd,Operations,Cargo insurance premium,130.91,EUR,Card
+TX-2026-01046,2026-07-10,V018,Silverline Couriers Ltd,Operations,Courier services,17540.98,EUR,Bank transfer
+TX-2026-01047,2026-07-10,V019,Keystone Legal Advisors,Operations,Contract review,534.49,EUR,Card
+TX-2026-01048,2026-07-10,V021,Nova Marketing Studio Ltd,Marketing,Campaign design,577.03,EUR,Card
+TX-2026-01049,2026-07-10,V022,Polar Refrigeration Services Ltd,Warehouse,Cold store maintenance,1147.29,EUR,Bank transfer
+TX-2026-01050,2026-07-13,V004,Coastline Fleet Repairs Ltd,Fleet,Truck brake repair,382.26,EUR,Card
+TX-2026-01051,2026-07-13,V004,Coastline Fleet Repairs Ltd,Fleet,Fleet inspection,780.13,EUR,Bank transfer
+TX-2026-01052,2026-07-13,V005,Northgate Fuel Distributors Ltd,Fleet,Fuel cards top-up,495.77,EUR,Card
+TX-2026-01053,2026-07-13,V023,Summit Training Academy Ltd,HR,Manager training,252.05,EUR,Card
+TX-2026-01054,2026-07-14,V002,Harbour IT Services Ltd,IT,Server support,802.32,EUR,Card
+TX-2026-01055,2026-07-14,V004,Coastline Fleet Repairs Ltd,Fleet,Van service,243.98,EUR,Card
+TX-2026-01056,2026-07-14,V006,Limestone Facilities Management Ltd,Facilities,HVAC maintenance,371.38,EUR,Bank transfer
+TX-2026-01057,2026-07-14,V010,Pinnacle Recruitment Ltd,HR,Job advert package,654.51,EUR,Card
+TX-2026-01058,2026-07-14,V011,Brightlink Telecom Ltd,IT,Phone handsets,822.58,EUR,Card
+TX-2026-01059,2026-07-14,V012,Sunvale Packaging Ltd,Warehouse,Pallet wrap,21308.05,EUR,Bank transfer
+TX-2026-01060,2026-07-14,V015,Vector Logistics Software Inc,Operations,Software subscription,6000.00,USD,Bank transfer
+TX-2026-01061,2026-07-14,V023,Summit Training Academy Ltd,HR,Manager training,304.52,EUR,Bank transfer
+TX-2026-01062,2026-07-14,V024,Quayside Tyres Ltd,Fleet,Tyre rotation,1772.88,EUR,Bank transfer
+TX-2026-01063,2026-07-15,V001,Kestrel Print Services Ltd,Marketing,Brochure print run,522.57,EUR,Card
+TX-2026-01064,2026-07-15,V001,Kestrel Print Services Ltd,Marketing,Leaflets,713.64,EUR,Bank transfer
+TX-2026-01065,2026-07-15,V006,Limestone Facilities Management Ltd,Facilities,Lighting replacement,348.62,EUR,Card
+TX-2026-01066,2026-07-15,V007,Meridian Software Licensing Ltd,IT,Additional user seats,567.57,EUR,Card
+TX-2026-01067,2026-07-15,V015,Vector Logistics Software Inc,Operations,Additional user seats,987.30,USD,Card
+TX-2026-01068,2026-07-15,V020,Granite Construction Works Ltd,Facilities,Yard resurfacing,1944.93,EUR,Bank transfer
+TX-2026-01069,2026-07-16,V001,Kestrel Print Services Ltd,Marketing,Signage,663.62,EUR,Card
+TX-2026-01070,2026-07-16,V001,Kestrel Print Services Ltd,Marketing,Brochure print run,1329.23,EUR,Card
+TX-2026-01071,2026-07-16,V006,Limestone Facilities Management Ltd,Facilities,HVAC maintenance,190.70,EUR,Bank transfer
+TX-2026-01072,2026-07-16,V009,Atlas Forklift Hire Ltd,Warehouse,Forklift hire,511.29,EUR,Card
+TX-2026-01073,2026-07-16,V011,Brightlink Telecom Ltd,IT,Leased line,329.50,EUR,Bank transfer
+TX-2026-01074,2026-07-16,V022,Polar Refrigeration Services Ltd,Warehouse,Cold store maintenance,1060.04,EUR,Card
+TX-2026-01075,2026-07-17,V001,Kestrel Print Services Ltd,Marketing,Business cards,339.12,EUR,Card
+TX-2026-01076,2026-07-17,V003,Bluefin Office Supplies Ltd,Facilities,Printer toner,557.00,EUR,Bank transfer
+TX-2026-01077,2026-07-17,V004,Coastline Fleet Repairs Ltd,Fleet,Van service,183.98,EUR,Bank transfer
+TX-2026-01078,2026-07-17,V005,Northgate Fuel Distributors Ltd,Fleet,Diesel delivery,820.41,EUR,Bank transfer
+TX-2026-01079,2026-07-17,V008,Seabreeze Catering Ltd,HR,Training day lunch,109.90,EUR,Bank transfer
+TX-2026-01080,2026-07-17,V020,Granite Construction Works Ltd,Facilities,Yard resurfacing,341.32,EUR,Card
+TX-2026-01081,2026-07-20,V002,Harbour IT Services Ltd,IT,Laptop repairs,307.10,EUR,Bank transfer
+TX-2026-01082,2026-07-20,V004,Coastline Fleet Repairs Ltd,Fleet,Van service,334.84,EUR,Card
+TX-2026-01083,2026-07-20,V010,Pinnacle Recruitment Ltd,HR,Recruitment fee,549.14,EUR,Card
+TX-2026-01084,2026-07-20,V014,Greenleaf Cleaning Ltd,Facilities,Warehouse deep clean,216.24,EUR,Bank transfer
+TX-2026-01085,2026-07-20,V019,Keystone Legal Advisors,Operations,Legal advice,850.58,EUR,Bank transfer
+TX-2026-01086,2026-07-20,V023,Summit Training Academy Ltd,HR,First aid course,1147.15,EUR,Card
+TX-2026-01087,2026-07-21,V002,Harbour IT Services Ltd,IT,Server support,372.32,EUR,Card
+TX-2026-01088,2026-07-21,V010,Pinnacle Recruitment Ltd,HR,Recruitment fee,443.92,EUR,Bank transfer
+TX-2026-01089,2026-07-21,V011,Brightlink Telecom Ltd,IT,Phone handsets,933.20,EUR,Card
+TX-2026-01090,2026-07-21,V011,Brightlink Telecom Ltd,IT,Mobile plans,938.78,EUR,Card
+TX-2026-01091,2026-07-21,V014,Greenleaf Cleaning Ltd,Facilities,Office cleaning,521.53,EUR,Card
+TX-2026-01092,2026-07-21,V015,Vector Logistics Software Inc,Operations,Additional user seats,592.44,USD,Bank transfer
+TX-2026-01093,2026-07-21,V015,Vector Logistics Software Inc,Operations,Licence renewal,923.91,USD,Bank transfer
+TX-2026-01094,2026-07-21,V017,Tidewater Insurance Brokers Ltd,Operations,Cargo insurance premium,255.65,EUR,Bank transfer
+TX-2026-01095,2026-07-21,V019,Keystone Legal Advisors,Operations,Legal advice,738.21,EUR,Card
+TX-2026-01096,2026-07-22,V003,Bluefin Office Supplies Ltd,Facilities,Stationery,647.50,EUR,Bank transfer
+TX-2026-01097,2026-07-22,V007,Meridian Software Licensing Ltd,IT,Licence renewal,603.13,EUR,Bank transfer
+TX-2026-01098,2026-07-22,V008,Seabreeze Catering Ltd,HR,Training day lunch,271.56,EUR,Bank transfer
+TX-2026-01099,2026-07-22,V015,Vector Logistics Software Inc,Operations,Additional user seats,479.45,USD,Bank transfer
+TX-2026-01100,2026-07-22,V017,Tidewater Insurance Brokers Ltd,Operations,Cargo insurance premium,748.38,EUR,Bank transfer
+TX-2026-01101,2026-07-23,V006,Limestone Facilities Management Ltd,Facilities,HVAC maintenance,388.33,EUR,Card
+TX-2026-01102,2026-07-23,V010,Pinnacle Recruitment Ltd,HR,Recruitment fee,246.84,EUR,Bank transfer
+TX-2026-01103,2026-07-23,V010,Pinnacle Recruitment Ltd,HR,Job advert package,406.55,EUR,Card
+TX-2026-01104,2026-07-23,V021,Nova Marketing Studio Ltd,Marketing,Campaign design,950.52,EUR,Bank transfer
+TX-2026-01105,2026-07-23,V022,Polar Refrigeration Services Ltd,Warehouse,Compressor repair,2400.00,EUR,Bank transfer
+TX-2026-01106,2026-07-23,V023,Summit Training Academy Ltd,HR,First aid course,21901.60,EUR,Bank transfer
+TX-2026-01107,2026-07-24,V002,Harbour IT Services Ltd,IT,Network maintenance,1166.96,EUR,Bank transfer
+TX-2026-01108,2026-07-24,V010,Pinnacle Recruitment Ltd,HR,Recruitment fee,862.04,EUR,Card
+TX-2026-01109,2026-07-24,V012,Sunvale Packaging Ltd,Warehouse,Pallet wrap,551.36,EUR,Card
+TX-2026-01110,2026-07-24,V014,Greenleaf Cleaning Ltd,Facilities,Warehouse deep clean,342.44,EUR,Card
+TX-2026-01111,2026-07-24,V019,Keystone Legal Advisors,Operations,Contract review,1155.02,EUR,Card
+TX-2026-01112,2026-07-24,V024,Quayside Tyres Ltd,Fleet,Tyre rotation,557.53,EUR,Bank transfer
+TX-2026-01113,2026-07-27,V001,Kestrel Print Services Ltd,Marketing,Brochure print run,203.70,EUR,Card
+TX-2026-01114,2026-07-27,V003,Bluefin Office Supplies Ltd,Facilities,Printer toner,421.36,EUR,Bank transfer
+TX-2026-01115,2026-07-27,V008,Seabreeze Catering Ltd,HR,Staff event catering,720.68,EUR,Bank transfer
+TX-2026-01116,2026-07-27,V013,Orion Security Services Ltd,Facilities,CCTV maintenance,701.14,EUR,Bank transfer
+TX-2026-01117,2026-07-27,V018,Silverline Couriers Ltd,Operations,Same-day deliveries,1188.72,EUR,Card
+TX-2026-01118,2026-07-27,V020,Granite Construction Works Ltd,Facilities,Loading bay works,35.00,EUR,Bank transfer
+TX-2026-01119,2026-07-27,V024,Quayside Tyres Ltd,Fleet,Tyre rotation,337.48,EUR,Bank transfer
+TX-2026-01120,2026-07-28,V012,Sunvale Packaging Ltd,Warehouse,Packing tape,304.34,EUR,Card
+TX-2026-01121,2026-07-29,V001,Kestrel Print Services Ltd,Marketing,Signage,381.70,EUR,Card
+TX-2026-01122,2026-07-29,V001,Kestrel Print Services Ltd,Marketing,Brochure print run,637.49,EUR,Bank transfer
+TX-2026-01123,2026-07-29,V001,Kestrel Print Services Ltd,Marketing,Leaflets,1833.18,EUR,Bank transfer
+TX-2026-01124,2026-07-29,V008,Seabreeze Catering Ltd,HR,Training day lunch,792.30,EUR,Bank transfer
+TX-2026-01125,2026-07-29,V012,Sunvale Packaging Ltd,Warehouse,Pallet wrap,714.14,EUR,Bank transfer
+TX-2026-01126,2026-07-29,V016,Redwood Furniture Ltd,Facilities,Office chairs,5000.00,EUR,Bank transfer
+TX-2026-01127,2026-07-29,V018,Silverline Couriers Ltd,Operations,Same-day deliveries,300.19,EUR,Bank transfer
+TX-2026-01128,2026-07-30,V006,Limestone Facilities Management Ltd,Facilities,Lighting replacement,900.20,EUR,Card
+TX-2026-01129,2026-07-30,V010,Pinnacle Recruitment Ltd,HR,Job advert package,629.10,EUR,Card
+TX-2026-01130,2026-07-30,V015,Vector Logistics Software Inc,Operations,Additional user seats,5300.00,USD,Bank transfer
+TX-2026-01131,2026-07-30,V017,Tidewater Insurance Brokers Ltd,Operations,Fleet insurance premium,568.75,EUR,Card
+TX-2026-01132,2026-07-30,V020,Granite Construction Works Ltd,Facilities,Loading bay works,850.45,EUR,Card
+TX-2026-01133,2026-07-30,V023,Summit Training Academy Ltd,HR,Forklift licence training,1091.07,EUR,Card
+TX-2026-01134,2026-07-30,V024,Quayside Tyres Ltd,Fleet,Tyre rotation,767.93,EUR,Card
+TX-2026-01135,2026-07-31,V003,Bluefin Office Supplies Ltd,Facilities,Stationery,1084.76,EUR,Bank transfer
+TX-2026-01136,2026-07-31,V004,Coastline Fleet Repairs Ltd,Fleet,Fleet inspection,2400.00,EUR,Bank transfer
+TX-2026-01137,2026-07-31,V006,Limestone Facilities Management Ltd,Facilities,HVAC maintenance,1233.04,EUR,Bank transfer
+TX-2026-01138,2026-07-31,V007,Meridian Software Licensing Ltd,IT,Additional user seats,304.48,EUR,Card
+TX-2026-01139,2026-07-31,V007,Meridian Software Licensing Ltd,IT,Software subscription,5744.82,EUR,Bank transfer
+TX-2026-01140,2026-07-31,V007,Meridian Software Licensing Ltd,IT,Software subscription,8873.36,EUR,Bank transfer
+TX-2026-01141,2026-07-31,V009,Atlas Forklift Hire Ltd,Warehouse,Forklift hire,540.38,EUR,Bank transfer
+TX-2026-01142,2026-07-31,V010,Pinnacle Recruitment Ltd,HR,Job advert package,168.21,EUR,Bank transfer
+TX-2026-01143,2026-07-31,V012,Sunvale Packaging Ltd,Warehouse,Cardboard boxes,291.04,EUR,Card
+TX-2026-01144,2026-07-31,V017,Tidewater Insurance Brokers Ltd,Operations,Fleet insurance premium,31850.00,EUR,Bank transfer
+TX-2026-01145,2026-08-03,V001,Kestrel Print Services Ltd,Marketing,Signage,331.22,EUR,Card
+TX-2026-01146,2026-08-03,V007,Meridian Software Licensing Ltd,IT,Software subscription,320.04,EUR,Bank transfer
+TX-2026-01147,2026-08-03,V008,Seabreeze Catering Ltd,HR,Staff event catering,775.61,EUR,Bank transfer
+TX-2026-01148,2026-08-03,V009,Atlas Forklift Hire Ltd,Warehouse,Forklift hire,19521.07,EUR,Bank transfer
+TX-2026-01149,2026-08-03,V010,Pinnacle Recruitment Ltd,HR,Job advert package,307.76,EUR,Card
+TX-2026-01150,2026-08-03,V012,Sunvale Packaging Ltd,Warehouse,Cardboard boxes,420.72,EUR,Bank transfer
+TX-2026-01151,2026-08-03,V017,Tidewater Insurance Brokers Ltd,Operations,Cargo insurance premium,878.86,EUR,Card
+TX-2026-01152,2026-08-04,V008,Seabreeze Catering Ltd,HR,Staff event catering,14197.79,EUR,Bank transfer
+TX-2026-01153,2026-08-04,V012,Sunvale Packaging Ltd,Warehouse,Pallet wrap,202.43,EUR,Card
+TX-2026-01154,2026-08-04,V014,Greenleaf Cleaning Ltd,Facilities,Warehouse deep clean,1384.04,EUR,Bank transfer
+TX-2026-01155,2026-08-04,V019,Keystone Legal Advisors,Operations,Legal advice,589.30,EUR,Bank transfer
+TX-2026-01156,2026-08-04,V021,Nova Marketing Studio Ltd,Marketing,Campaign design,475.84,EUR,Card
+TX-2026-01157,2026-08-05,V009,Atlas Forklift Hire Ltd,Warehouse,Forklift hire,891.76,EUR,Bank transfer
+TX-2026-01158,2026-08-05,V017,Tidewater Insurance Brokers Ltd,Operations,Cargo insurance premium,453.99,EUR,Card
+TX-2026-01159,2026-08-05,V018,Silverline Couriers Ltd,Operations,Same-day deliveries,449.97,EUR,Bank transfer
+TX-2026-01160,2026-08-05,V023,Summit Training Academy Ltd,HR,Forklift licence training,1975.39,EUR,Bank transfer
+TX-2026-01161,2026-08-05,V024,Quayside Tyres Ltd,Fleet,Tyre rotation,358.23,EUR,Bank transfer
+TX-2026-01162,2026-08-06,V002,Harbour IT Services Ltd,IT,Laptop repairs,459.00,EUR,Card
+TX-2026-01163,2026-08-06,V004,Coastline Fleet Repairs Ltd,Fleet,Van service,452.33,EUR,Card
+TX-2026-01164,2026-08-06,V011,Brightlink Telecom Ltd,IT,Phone handsets,638.33,EUR,Card
+TX-2026-01165,2026-08-06,V020,Granite Construction Works Ltd,Facilities,Yard resurfacing,527.49,EUR,Card
+TX-2026-01166,2026-08-06,V024,Quayside Tyres Ltd,Fleet,Tyre replacement,581.11,EUR,Card
+TX-2026-01167,2026-08-07,V006,Limestone Facilities Management Ltd,Facilities,Plumbing works,184.31,EUR,Card
+TX-2026-01168,2026-08-07,V006,Limestone Facilities Management Ltd,Facilities,HVAC maintenance,1175.88,EUR,Card
+TX-2026-01169,2026-08-07,V007,Meridian Software Licensing Ltd,IT,Software subscription,236.83,EUR,Card
+TX-2026-01170,2026-08-07,V007,Meridian Software Licensing Ltd,IT,Software subscription,243.60,EUR,Bank transfer
+TX-2026-01171,2026-08-07,V009,Atlas Forklift Hire Ltd,Warehouse,Generator hire,641.88,EUR,Bank transfer
+TX-2026-01172,2026-08-07,V010,Pinnacle Recruitment Ltd,HR,Job advert package,15158.94,EUR,Bank transfer
+TX-2026-01173,2026-08-07,V011,Brightlink Telecom Ltd,IT,Phone handsets,17912.97,EUR,Bank transfer
+TX-2026-01174,2026-08-07,V015,Vector Logistics Software Inc,Operations,Additional user seats,460.88,USD,Bank transfer
+TX-2026-01175,2026-08-07,V019,Keystone Legal Advisors,Operations,Contract review,281.14,EUR,Bank transfer
+TX-2026-01176,2026-08-10,V020,Granite Construction Works Ltd,Facilities,Yard resurfacing,777.36,EUR,Card
+TX-2026-01177,2026-08-10,V021,Nova Marketing Studio Ltd,Marketing,Social media management,104.10,EUR,Card
+TX-2026-01178,2026-08-10,V022,Polar Refrigeration Services Ltd,Warehouse,Cold store maintenance,265.29,EUR,Bank transfer
+TX-2026-01179,2026-08-11,V001,Kestrel Print Services Ltd,Marketing,Brochure print run - batch 1,4800.00,EUR,Bank transfer
+TX-2026-01180,2026-08-11,V011,Brightlink Telecom Ltd,IT,Phone handsets,888.35,EUR,Card
+TX-2026-01181,2026-08-12,V002,Harbour IT Services Ltd,IT,Network maintenance,841.77,EUR,Bank transfer
+TX-2026-01182,2026-08-12,V007,Meridian Software Licensing Ltd,IT,Licence renewal,555.50,EUR,Card
+TX-2026-01183,2026-08-12,V016,Redwood Furniture Ltd,Facilities,Office chairs,163.13,EUR,Bank transfer
+TX-2026-01184,2026-08-13,V001,Kestrel Print Services Ltd,Marketing,Brochure print run - batch 2,4750.00,EUR,Bank transfer
+TX-2026-01185,2026-08-13,V002,Harbour IT Services Ltd,IT,Server support,223.97,EUR,Bank transfer
+TX-2026-01186,2026-08-13,V006,Limestone Facilities Management Ltd,Facilities,Plumbing works,6297.24,EUR,Bank transfer
+TX-2026-01187,2026-08-13,V008,Seabreeze Catering Ltd,HR,Training day lunch,939.09,EUR,Bank transfer
+TX-2026-01188,2026-08-13,V012,Sunvale Packaging Ltd,Warehouse,Packing tape,425.97,EUR,Bank transfer
+TX-2026-01189,2026-08-13,V016,Redwood Furniture Ltd,Facilities,Desks,454.92,EUR,Card
+TX-2026-01190,2026-08-13,V017,Tidewater Insurance Brokers Ltd,Operations,Fleet insurance premium,214.28,EUR,Card
+TX-2026-01191,2026-08-14,V005,Northgate Fuel Distributors Ltd,Fleet,Fuel cards top-up,2282.20,EUR,Bank transfer
+TX-2026-01192,2026-08-14,V015,Vector Logistics Software Inc,Operations,Software subscription,204.39,USD,Card
+TX-2026-01193,2026-08-14,V016,Redwood Furniture Ltd,Facilities,Office chairs,336.22,EUR,Card
+TX-2026-01194,2026-08-14,V020,Granite Construction Works Ltd,Facilities,Yard resurfacing,125.68,EUR,Bank transfer
+TX-2026-01195,2026-08-14,V021,Nova Marketing Studio Ltd,Marketing,Social media management,216.31,EUR,Card
+TX-2026-01196,2026-08-17,V001,Kestrel Print Services Ltd,Marketing,Brochure print run - batch 3,4900.00,EUR,Bank transfer
+TX-2026-01197,2026-08-17,V003,Bluefin Office Supplies Ltd,Facilities,Office consumables,123.35,EUR,Card
+TX-2026-01198,2026-08-17,V007,Meridian Software Licensing Ltd,IT,Licence renewal,272.48,EUR,Bank transfer
+TX-2026-01199,2026-08-17,V007,Meridian Software Licensing Ltd,IT,Software subscription,421.81,EUR,Bank transfer
+TX-2026-01200,2026-08-17,V014,Greenleaf Cleaning Ltd,Facilities,Warehouse deep clean,2014.38,EUR,Bank transfer
+TX-2026-01201,2026-08-17,V024,Quayside Tyres Ltd,Fleet,Tyre replacement,331.81,EUR,Card
+TX-2026-01202,2026-08-18,V003,Bluefin Office Supplies Ltd,Facilities,Stationery,279.22,EUR,Bank transfer
+TX-2026-01203,2026-08-18,V006,Limestone Facilities Management Ltd,Facilities,HVAC maintenance,231.95,EUR,Bank transfer
+TX-2026-01204,2026-08-18,V006,Limestone Facilities Management Ltd,Facilities,Lighting replacement,732.36,EUR,Bank transfer
+TX-2026-01205,2026-08-18,V017,Tidewater Insurance Brokers Ltd,Operations,Cargo insurance premium,360.74,EUR,Bank transfer
+TX-2026-01206,2026-08-18,V018,Silverline Couriers Ltd,Operations,Same-day deliveries,289.34,EUR,Card
+TX-2026-01207,2026-08-18,V020,Granite Construction Works Ltd,Facilities,Loading bay works,258.43,EUR,Card
+TX-2026-01208,2026-08-18,V021,Nova Marketing Studio Ltd,Marketing,Campaign design,1029.56,EUR,Card
+TX-2026-01209,2026-08-18,V021,Nova Marketing Studio Ltd,Marketing,Campaign design,1223.73,EUR,Card
+TX-2026-01210,2026-08-19,V003,Bluefin Office Supplies Ltd,Facilities,Stationery,677.41,EUR,Card
+TX-2026-01211,2026-08-19,V008,Seabreeze Catering Ltd,HR,Staff event catering,249.06,EUR,Bank transfer
+TX-2026-01212,2026-08-19,V010,Pinnacle Recruitment Ltd,HR,Job advert package,222.75,EUR,Bank transfer
+TX-2026-01213,2026-08-19,V013,Orion Security Services Ltd,Facilities,CCTV maintenance,260.95,EUR,Card
+TX-2026-01214,2026-08-19,V016,Redwood Furniture Ltd,Facilities,Office chairs,277.82,EUR,Bank transfer
+TX-2026-01215,2026-08-19,V021,Nova Marketing Studio Ltd,Marketing,Campaign design,515.43,EUR,Bank transfer
+TX-2026-01216,2026-08-19,V025,Rapid Hire Solutions Ltd,Operations,Generator hire,6400.00,EUR,Bank transfer
+TX-2026-01217,2026-08-20,V005,Northgate Fuel Distributors Ltd,Fleet,Fuel cards top-up,618.46,EUR,Card
+TX-2026-01218,2026-08-20,V015,Vector Logistics Software Inc,Operations,Licence renewal,658.92,USD,Card
+TX-2026-01219,2026-08-20,V018,Silverline Couriers Ltd,Operations,Courier services,288.70,EUR,Card
+TX-2026-01220,2026-08-20,V018,Silverline Couriers Ltd,Operations,Same-day deliveries,18046.46,EUR,Bank transfer
+TX-2026-01221,2026-08-20,V020,Granite Construction Works Ltd,Facilities,Loading bay works,602.95,EUR,Bank transfer
+TX-2026-01222,2026-08-21,V011,Brightlink Telecom Ltd,IT,Mobile plans,1209.95,EUR,Card
+TX-2026-01223,2026-08-21,V013,Orion Security Services Ltd,Facilities,CCTV maintenance,1091.67,EUR,Bank transfer
+TX-2026-01224,2026-08-21,V019,Keystone Legal Advisors,Operations,Contract review,1510.49,EUR,Bank transfer
+TX-2026-01225,2026-08-24,V005,Northgate Fuel Distributors Ltd,Fleet,Diesel delivery,258.43,EUR,Bank transfer
+TX-2026-01226,2026-08-24,V012,Sunvale Packaging Ltd,Warehouse,Cardboard boxes,95.03,EUR,Bank transfer
+TX-2026-01227,2026-08-24,V016,Redwood Furniture Ltd,Facilities,Meeting room table,961.98,EUR,Card
+TX-2026-01228,2026-08-24,V019,Keystone Legal Advisors,Operations,Contract review,382.12,EUR,Bank transfer
+TX-2026-01229,2026-08-24,V021,Nova Marketing Studio Ltd,Marketing,Campaign design,417.98,EUR,Card
+TX-2026-01230,2026-08-24,V022,Polar Refrigeration Services Ltd,Warehouse,Compressor repair,1190.14,EUR,Card
+TX-2026-01231,2026-08-24,V022,Polar Refrigeration Services Ltd,Warehouse,Compressor repair,7850.00,EUR,Bank transfer
+TX-2026-01232,2026-08-25,V006,Limestone Facilities Management Ltd,Facilities,Plumbing works,2400.00,EUR,Bank transfer
+TX-2026-01233,2026-08-25,V009,Atlas Forklift Hire Ltd,Warehouse,Forklift hire,1847.42,EUR,Bank transfer
+TX-2026-01234,2026-08-25,V011,Brightlink Telecom Ltd,IT,Phone handsets,9775.98,EUR,Bank transfer
+TX-2026-01235,2026-08-25,V016,Redwood Furniture Ltd,Facilities,Desks,304.03,EUR,Bank transfer
+TX-2026-01236,2026-08-25,V018,Silverline Couriers Ltd,Operations,Same-day deliveries,380.23,EUR,Card
+TX-2026-01237,2026-08-25,V024,Quayside Tyres Ltd,Fleet,Tyre replacement,795.57,EUR,Bank transfer
+TX-2026-01238,2026-08-26,V005,Northgate Fuel Distributors Ltd,Fleet,Fuel cards top-up,281.54,EUR,Card
+TX-2026-01239,2026-08-26,V007,Meridian Software Licensing Ltd,IT,Licence renewal,829.29,EUR,Bank transfer
+TX-2026-01240,2026-08-26,V011,Brightlink Telecom Ltd,IT,Mobile plans,442.19,EUR,Bank transfer
+TX-2026-01241,2026-08-26,V011,Brightlink Telecom Ltd,IT,Leased line,611.95,EUR,Bank transfer
+TX-2026-01242,2026-08-27,V004,Coastline Fleet Repairs Ltd,Fleet,Truck brake repair,22414.86,EUR,Bank transfer
+TX-2026-01243,2026-08-27,V005,Northgate Fuel Distributors Ltd,Fleet,Fuel cards top-up,892.07,EUR,Bank transfer
+TX-2026-01244,2026-08-27,V007,Meridian Software Licensing Ltd,IT,Software subscription,11756.10,EUR,Bank transfer
+TX-2026-01245,2026-08-27,V009,Atlas Forklift Hire Ltd,Warehouse,Generator hire,267.99,EUR,Card
+TX-2026-01246,2026-08-27,V011,Brightlink Telecom Ltd,IT,Phone handsets,155.02,EUR,Bank transfer
+TX-2026-01247,2026-08-27,V014,Greenleaf Cleaning Ltd,Facilities,Warehouse deep clean,649.12,EUR,Card
+TX-2026-01248,2026-08-27,V015,Vector Logistics Software Inc,Operations,Software subscription,750.55,USD,Bank transfer
+TX-2026-01249,2026-08-27,V017,Tidewater Insurance Brokers Ltd,Operations,Cargo insurance premium,709.74,EUR,Bank transfer
+TX-2026-01250,2026-08-27,V019,Keystone Legal Advisors,Operations,Legal advice,465.90,EUR,Bank transfer
+TX-2026-01251,2026-08-27,V023,Summit Training Academy Ltd,HR,Manager training,219.08,EUR,Card
+TX-2026-01252,2026-08-27,V023,Summit Training Academy Ltd,HR,Forklift licence training,654.89,EUR,Bank transfer
+TX-2026-01253,2026-08-27,V024,Quayside Tyres Ltd,Fleet,Tyre rotation,257.84,EUR,Bank transfer
+TX-2026-01254,2026-08-27,V024,Quayside Tyres Ltd,Fleet,Tyre replacement,1317.71,EUR,Bank transfer
+TX-2026-01255,2026-08-28,V001,Kestrel Print Services Ltd,Marketing,Business cards,1314.02,EUR,Card
+TX-2026-01256,2026-08-28,V007,Meridian Software Licensing Ltd,IT,Additional user seats,272.99,EUR,Bank transfer
+TX-2026-01257,2026-08-28,V009,Atlas Forklift Hire Ltd,Warehouse,Forklift hire,184.07,EUR,Bank transfer
+TX-2026-01258,2026-08-28,V011,Brightlink Telecom Ltd,IT,Mobile plans,6169.67,EUR,Bank transfer
+TX-2026-01259,2026-08-28,V021,Nova Marketing Studio Ltd,Marketing,Social media management,311.21,EUR,Card
+TX-2026-01260,2026-08-31,V001,Kestrel Print Services Ltd,Marketing,Signage,500.88,EUR,Card
+TX-2026-01261,2026-08-31,V003,Bluefin Office Supplies Ltd,Facilities,Office consumables,187.50,EUR,Card
+TX-2026-01262,2026-08-31,V007,Meridian Software Licensing Ltd,IT,Software subscription,1322.47,EUR,Card
+TX-2026-01263,2026-08-31,V008,Seabreeze Catering Ltd,HR,Staff event catering,223.70,EUR,Bank transfer
+TX-2026-01264,2026-08-31,V010,Pinnacle Recruitment Ltd,HR,Recruitment fee,1805.06,EUR,Bank transfer
+TX-2026-01265,2026-08-31,V015,Vector Logistics Software Inc,Operations,Software subscription,137.61,USD,Card
+TX-2026-01266,2026-08-31,V017,Tidewater Insurance Brokers Ltd,Operations,Fleet insurance premium,265.45,EUR,Card
+TX-2026-01267,2026-08-31,V020,Granite Construction Works Ltd,Facilities,Yard resurfacing,644.76,EUR,Card
+TX-2026-01268,2026-09-01,V002,Harbour IT Services Ltd,IT,Server support - project phase 1,4950.00,EUR,Bank transfer
+TX-2026-01269,2026-09-01,V009,Atlas Forklift Hire Ltd,Warehouse,Pallet jack hire,423.12,EUR,Card
+TX-2026-01270,2026-09-01,V010,Pinnacle Recruitment Ltd,HR,Job advert package,17336.30,EUR,Bank transfer
+TX-2026-01271,2026-09-01,V012,Sunvale Packaging Ltd,Warehouse,Cardboard boxes,726.37,EUR,Card
+TX-2026-01272,2026-09-01,V016,Redwood Furniture Ltd,Facilities,Office chairs,798.23,EUR,Bank transfer
+TX-2026-01273,2026-09-01,V022,Polar Refrigeration Services Ltd,Warehouse,Cold store maintenance,980.49,EUR,Bank transfer
+TX-2026-01274,2026-09-01,V024,Quayside Tyres Ltd,Fleet,Tyre replacement,400.59,EUR,Card
+TX-2026-01275,2026-09-02,V005,Northgate Fuel Distributors Ltd,Fleet,Fuel cards top-up,2305.74,EUR,Bank transfer
+TX-2026-01276,2026-09-02,V006,Limestone Facilities Management Ltd,Facilities,HVAC maintenance,199.61,EUR,Card
+TX-2026-01277,2026-09-02,V011,Brightlink Telecom Ltd,IT,Phone handsets,686.23,EUR,Card
+TX-2026-01278,2026-09-02,V015,Vector Logistics Software Inc,Operations,Software subscription,229.46,USD,Bank transfer
+TX-2026-01279,2026-09-02,V018,Silverline Couriers Ltd,Operations,Courier services,338.43,EUR,Bank transfer
+TX-2026-01280,2026-09-02,V019,Keystone Legal Advisors,Operations,Legal advice,108.66,EUR,Bank transfer
+TX-2026-01281,2026-09-03,V002,Harbour IT Services Ltd,IT,Server support - project phase 2,3200.00,EUR,Bank transfer
+TX-2026-01282,2026-09-03,V006,Limestone Facilities Management Ltd,Facilities,Lighting replacement,2400.00,EUR,Bank transfer
+TX-2026-01283,2026-09-03,V009,Atlas Forklift Hire Ltd,Warehouse,Forklift hire,109.00,EUR,Card
+TX-2026-01284,2026-09-03,V012,Sunvale Packaging Ltd,Warehouse,Cardboard boxes,755.01,EUR,Card
+TX-2026-01285,2026-09-03,V022,Polar Refrigeration Services Ltd,Warehouse,Compressor repair,326.45,EUR,Card
+TX-2026-01286,2026-09-03,V023,Summit Training Academy Ltd,HR,Forklift licence training,376.19,EUR,Card
+TX-2026-01287,2026-09-03,V024,Quayside Tyres Ltd,Fleet,Tyre replacement,648.60,EUR,Card
+TX-2026-01288,2026-09-04,V005,Northgate Fuel Distributors Ltd,Fleet,Fuel cards top-up,173.98,EUR,Card
+TX-2026-01289,2026-09-04,V008,Seabreeze Catering Ltd,HR,Training day lunch,576.52,EUR,Card
+TX-2026-01290,2026-09-04,V009,Atlas Forklift Hire Ltd,Warehouse,Forklift hire,537.54,EUR,Bank transfer
+TX-2026-01291,2026-09-04,V016,Redwood Furniture Ltd,Facilities,Meeting room table,192.99,EUR,Card
+TX-2026-01292,2026-09-04,V016,Redwood Furniture Ltd,Facilities,Desks,644.82,EUR,Card
+TX-2026-01293,2026-09-04,V023,Summit Training Academy Ltd,HR,Forklift licence training,934.75,EUR,Card
+TX-2026-01294,2026-09-07,V001,Kestrel Print Services Ltd,Marketing,Signage,378.46,EUR,Card
+TX-2026-01295,2026-09-07,V008,Seabreeze Catering Ltd,HR,Staff event catering,577.58,EUR,Card
+TX-2026-01296,2026-09-07,V010,Pinnacle Recruitment Ltd,HR,Job advert package,445.71,EUR,Bank transfer
+TX-2026-01297,2026-09-07,V012,Sunvale Packaging Ltd,Warehouse,Cardboard boxes,438.89,EUR,Card
+TX-2026-01298,2026-09-07,V020,Granite Construction Works Ltd,Facilities,Yard resurfacing,806.51,EUR,Bank transfer
+TX-2026-01299,2026-09-07,V021,Nova Marketing Studio Ltd,Marketing,Social media management,368.74,EUR,Bank transfer
+TX-2026-01300,2026-09-08,V014,Greenleaf Cleaning Ltd,Facilities,Warehouse deep clean,16493.35,EUR,Bank transfer
+TX-2026-01301,2026-09-08,V019,Keystone Legal Advisors,Operations,Legal advice,326.67,EUR,Card
+TX-2026-01302,2026-09-08,V019,Keystone Legal Advisors,Operations,Contract review,1792.09,EUR,Bank transfer
+TX-2026-01303,2026-09-09,V005,Northgate Fuel Distributors Ltd,Fleet,Diesel delivery,877.61,EUR,Card
+TX-2026-01304,2026-09-09,V008,Seabreeze Catering Ltd,HR,Training day lunch,504.76,EUR,Card
+TX-2026-01305,2026-09-09,V009,Atlas Forklift Hire Ltd,Warehouse,Forklift hire,920.37,EUR,Bank transfer
+TX-2026-01306,2026-09-09,V013,Orion Security Services Ltd,Facilities,Night security,65.14,EUR,Card
+TX-2026-01307,2026-09-09,V016,Redwood Furniture Ltd,Facilities,Desks,613.25,EUR,Card
+TX-2026-01308,2026-09-09,V019,Keystone Legal Advisors,Operations,Contract review,15006.80,EUR,Bank transfer
+TX-2026-01309,2026-09-09,V021,Nova Marketing Studio Ltd,Marketing,Campaign design,21589.39,EUR,Bank transfer
+TX-2026-01310,2026-09-10,V006,Limestone Facilities Management Ltd,Facilities,Lighting replacement,11044.75,EUR,Bank transfer
+TX-2026-01311,2026-09-10,V006,Limestone Facilities Management Ltd,Facilities,HVAC maintenance,48200.00,EUR,Bank transfer
+TX-2026-01312,2026-09-10,V008,Seabreeze Catering Ltd,HR,Training day lunch,510.02,EUR,Bank transfer
+TX-2026-01313,2026-09-10,V009,Atlas Forklift Hire Ltd,Warehouse,Forklift hire,251.76,EUR,Bank transfer
+TX-2026-01314,2026-09-10,V011,Brightlink Telecom Ltd,IT,Leased line,1387.68,EUR,Card
+TX-2026-01315,2026-09-10,V014,Greenleaf Cleaning Ltd,Facilities,Warehouse deep clean,307.29,EUR,Card
+TX-2026-01316,2026-09-10,V022,Polar Refrigeration Services Ltd,Warehouse,Compressor repair,373.11,EUR,Card
+TX-2026-01317,2026-09-10,V023,Summit Training Academy Ltd,HR,First aid course,13606.93,EUR,Bank transfer
+TX-2026-01318,2026-09-11,V001,Kestrel Print Services Ltd,Marketing,Business cards,225.63,EUR,Card
+TX-2026-01319,2026-09-11,V006,Limestone Facilities Management Ltd,Facilities,Lighting replacement,701.81,EUR,Bank transfer
+TX-2026-01320,2026-09-11,V016,Redwood Furniture Ltd,Facilities,Office chairs,182.06,EUR,Bank transfer
+TX-2026-01321,2026-09-11,V019,Keystone Legal Advisors,Operations,Legal advice,412.46,EUR,Bank transfer
+TX-2026-01322,2026-09-11,V019,Keystone Legal Advisors,Operations,Contract review,796.44,EUR,Card
+TX-2026-01323,2026-09-11,V019,Keystone Legal Advisors,Operations,Contract review,1465.24,EUR,Card
+TX-2026-01324,2026-09-11,V020,Granite Construction Works Ltd,Facilities,Loading bay works,542.23,EUR,Card
+TX-2026-01325,2026-09-11,V020,Granite Construction Works Ltd,Facilities,Yard resurfacing,776.24,EUR,Card
+TX-2026-01326,2026-09-11,V023,Summit Training Academy Ltd,HR,Manager training,2380.40,EUR,Bank transfer
+TX-2026-01327,2026-09-14,V003,Bluefin Office Supplies Ltd,Facilities,Printer toner,353.81,EUR,Bank transfer
+TX-2026-01328,2026-09-14,V006,Limestone Facilities Management Ltd,Facilities,HVAC maintenance,375.18,EUR,Bank transfer
+TX-2026-01329,2026-09-14,V006,Limestone Facilities Management Ltd,Facilities,HVAC maintenance,1091.11,EUR,Card
+TX-2026-01330,2026-09-14,V008,Seabreeze Catering Ltd,HR,Training day lunch,431.38,EUR,Card
+TX-2026-01331,2026-09-14,V017,Tidewater Insurance Brokers Ltd,Operations,Fleet insurance premium,1021.58,EUR,Card
+TX-2026-01332,2026-09-15,V001,Kestrel Print Services Ltd,Marketing,Signage,126.21,EUR,Bank transfer
+TX-2026-01333,2026-09-15,V001,Kestrel Print Services Ltd,Marketing,Brochure print run,804.79,EUR,Card
+TX-2026-01334,2026-09-15,V002,Harbour IT Services Ltd,IT,Laptop repairs,647.21,EUR,Bank transfer
+TX-2026-01335,2026-09-15,V005,Northgate Fuel Distributors Ltd,Fleet,Fuel cards top-up,292.99,EUR,Card
+TX-2026-01336,2026-09-15,V008,Seabreeze Catering Ltd,HR,Staff event catering,157.11,EUR,Card
+TX-2026-01337,2026-09-15,V009,Atlas Forklift Hire Ltd,Warehouse,Forklift hire,647.24,EUR,Bank transfer
+TX-2026-01338,2026-09-15,V015,Vector Logistics Software Inc,Operations,Licence renewal,30000.00,USD,Bank transfer
+TX-2026-01339,2026-09-15,V020,Granite Construction Works Ltd,Facilities,Yard resurfacing,148.91,EUR,Bank transfer
+TX-2026-01340,2026-09-16,V002,Harbour IT Services Ltd,IT,Helpdesk retainer,660.23,EUR,Card
+TX-2026-01341,2026-09-16,V002,Harbour IT Services Ltd,IT,Network maintenance,738.00,EUR,Bank transfer
+TX-2026-01342,2026-09-16,V002,Harbour IT Services Ltd,IT,Server support,904.55,EUR,Card
+TX-2026-01343,2026-09-16,V003,Bluefin Office Supplies Ltd,Facilities,Office consumables,202.44,EUR,Card
+TX-2026-01344,2026-09-16,V004,Coastline Fleet Repairs Ltd,Fleet,Fleet inspection,347.81,EUR,Card
+TX-2026-01345,2026-09-16,V010,Pinnacle Recruitment Ltd,HR,Recruitment fee,296.15,EUR,Card
+TX-2026-01346,2026-09-16,V014,Greenleaf Cleaning Ltd,Facilities,Warehouse deep clean,1046.25,EUR,Card
+TX-2026-01347,2026-09-16,V015,Vector Logistics Software Inc,Operations,Software subscription,458.20,USD,Bank transfer
+TX-2026-01348,2026-09-16,V016,Redwood Furniture Ltd,Facilities,Office chairs,185.56,EUR,Bank transfer
+TX-2026-01349,2026-09-17,V003,Bluefin Office Supplies Ltd,Facilities,Printer toner,101.41,EUR,Bank transfer
+TX-2026-01350,2026-09-17,V005,Northgate Fuel Distributors Ltd,Fleet,Diesel delivery,1150.15,EUR,Bank transfer
+TX-2026-01351,2026-09-17,V006,Limestone Facilities Management Ltd,Facilities,HVAC maintenance,1744.45,EUR,Bank transfer
+TX-2026-01352,2026-09-17,V008,Seabreeze Catering Ltd,HR,Staff event catering,1333.45,EUR,Bank transfer
+TX-2026-01353,2026-09-17,V020,Granite Construction Works Ltd,Facilities,Loading bay works,1275.27,EUR,Card
+TX-2026-01354,2026-09-17,V021,Nova Marketing Studio Ltd,Marketing,Social media management,142.97,EUR,Card
+TX-2026-01355,2026-09-18,V002,Harbour IT Services Ltd,IT,Helpdesk retainer,305.15,EUR,Card
+TX-2026-01356,2026-09-18,V008,Seabreeze Catering Ltd,HR,Training day lunch,659.76,EUR,Card
+TX-2026-01357,2026-09-18,V012,Sunvale Packaging Ltd,Warehouse,Cardboard boxes,768.52,EUR,Card
+TX-2026-01358,2026-09-18,V014,Greenleaf Cleaning Ltd,Facilities,Office cleaning,582.18,EUR,Card
+TX-2026-01359,2026-09-18,V015,Vector Logistics Software Inc,Operations,Licence renewal,180.67,USD,Card
+TX-2026-01360,2026-09-18,V016,Redwood Furniture Ltd,Facilities,Office chairs,1115.19,EUR,Card
+TX-2026-01361,2026-09-18,V017,Tidewater Insurance Brokers Ltd,Operations,Cargo insurance premium,5962.72,EUR,Bank transfer
+TX-2026-01362,2026-09-18,V018,Silverline Couriers Ltd,Operations,Courier services,17731.10,EUR,Bank transfer
+TX-2026-01363,2026-09-21,V002,Harbour IT Services Ltd,IT,Laptop repairs,377.16,EUR,Card
+TX-2026-01364,2026-09-21,V003,Bluefin Office Supplies Ltd,Facilities,Printer toner,849.82,EUR,Card
+TX-2026-01365,2026-09-21,V007,Meridian Software Licensing Ltd,IT,Software subscription,6498.66,EUR,Bank transfer
+TX-2026-01366,2026-09-21,V012,Sunvale Packaging Ltd,Warehouse,Cardboard boxes,1029.51,EUR,Bank transfer
+TX-2026-01367,2026-09-21,V014,Greenleaf Cleaning Ltd,Facilities,Office cleaning,349.72,EUR,Card
+TX-2026-01368,2026-09-21,V018,Silverline Couriers Ltd,Operations,Courier services,328.44,EUR,Card
+TX-2026-01369,2026-09-21,V022,Polar Refrigeration Services Ltd,Warehouse,Compressor repair,7065.40,EUR,Bank transfer
+TX-2026-01370,2026-09-22,V001,Kestrel Print Services Ltd,Marketing,Business cards,2400.00,EUR,Bank transfer
+TX-2026-01371,2026-09-22,V005,Northgate Fuel Distributors Ltd,Fleet,Fuel cards top-up,336.82,EUR,Card
+TX-2026-01372,2026-09-22,V006,Limestone Facilities Management Ltd,Facilities,Lighting replacement,588.21,EUR,Card
+TX-2026-01373,2026-09-22,V009,Atlas Forklift Hire Ltd,Warehouse,Generator hire,222.41,EUR,Card
+TX-2026-01374,2026-09-22,V013,Orion Security Services Ltd,Facilities,CCTV maintenance,2400.00,EUR,Bank transfer
+TX-2026-01375,2026-09-22,V014,Greenleaf Cleaning Ltd,Facilities,Office cleaning,696.07,EUR,Card
+TX-2026-01376,2026-09-22,V016,Redwood Furniture Ltd,Facilities,Office chairs,616.48,EUR,Card
+TX-2026-01377,2026-09-22,V021,Nova Marketing Studio Ltd,Marketing,Campaign design,213.33,EUR,Bank transfer
+TX-2026-01378,2026-09-22,V021,Nova Marketing Studio Ltd,Marketing,Campaign design,9100.00,EUR,Bank transfer
+TX-2026-01379,2026-09-23,V002,Harbour IT Services Ltd,IT,Server support,739.94,EUR,Card
+TX-2026-01380,2026-09-23,V012,Sunvale Packaging Ltd,Warehouse,Pallet wrap,789.38,EUR,Card
+TX-2026-01381,2026-09-23,V016,Redwood Furniture Ltd,Facilities,Desks,285.94,EUR,Card
+TX-2026-01382,2026-09-23,V017,Tidewater Insurance Brokers Ltd,Operations,Fleet insurance premium,268.40,EUR,Bank transfer
+TX-2026-01383,2026-09-23,V019,Keystone Legal Advisors,Operations,Contract review,414.76,EUR,Bank transfer
+TX-2026-01384,2026-09-23,V024,Quayside Tyres Ltd,Fleet,Tyre rotation,694.14,EUR,Card
+TX-2026-01385,2026-09-24,V001,Kestrel Print Services Ltd,Marketing,Signage,492.58,EUR,Bank transfer
+TX-2026-01386,2026-09-24,V002,Harbour IT Services Ltd,IT,Server support,222.11,EUR,Bank transfer
+TX-2026-01387,2026-09-24,V003,Bluefin Office Supplies Ltd,Facilities,Office consumables,329.53,EUR,Bank transfer
+TX-2026-01388,2026-09-24,V011,Brightlink Telecom Ltd,IT,Mobile plans,1152.12,EUR,Bank transfer
+TX-2026-01389,2026-09-24,V013,Orion Security Services Ltd,Facilities,CCTV maintenance,1159.11,EUR,Card
+TX-2026-01390,2026-09-24,V016,Redwood Furniture Ltd,Facilities,Office chairs,229.14,EUR,Bank transfer
+TX-2026-01391,2026-09-24,V017,Tidewater Insurance Brokers Ltd,Operations,Cargo insurance premium,1581.48,EUR,Bank transfer
+TX-2026-01392,2026-09-24,V020,Granite Construction Works Ltd,Facilities,Yard resurfacing,334.45,EUR,Bank transfer
+TX-2026-01393,2026-09-24,V023,Summit Training Academy Ltd,HR,Manager training,905.33,EUR,Bank transfer
+TX-2026-01394,2026-09-24,V023,Summit Training Academy Ltd,HR,First aid course,1260.86,EUR,Bank transfer
+TX-2026-01395,2026-09-25,V003,Bluefin Office Supplies Ltd,Facilities,Office consumables,189.85,EUR,Bank transfer
+TX-2026-01396,2026-09-25,V005,Northgate Fuel Distributors Ltd,Fleet,Fuel cards top-up,1563.95,EUR,Bank transfer
+TX-2026-01397,2026-09-25,V006,Limestone Facilities Management Ltd,Facilities,Lighting replacement,876.99,EUR,Bank transfer
+TX-2026-01398,2026-09-25,V011,Brightlink Telecom Ltd,IT,Phone handsets,915.29,EUR,Card
+TX-2026-01399,2026-09-25,V012,Sunvale Packaging Ltd,Warehouse,Cardboard boxes,566.14,EUR,Card
+TX-2026-01400,2026-09-25,V012,Sunvale Packaging Ltd,Warehouse,Pallet wrap,22514.37,EUR,Bank transfer
+TX-2026-01401,2026-09-25,V013,Orion Security Services Ltd,Facilities,Night security,427.93,EUR,Bank transfer
+TX-2026-01402,2026-09-25,V016,Redwood Furniture Ltd,Facilities,Meeting room table,176.10,EUR,Bank transfer
+TX-2026-01403,2026-09-28,V001,Kestrel Print Services Ltd,Marketing,Brochure print run,704.61,EUR,Bank transfer
+TX-2026-01404,2026-09-28,V003,Bluefin Office Supplies Ltd,Facilities,Printer toner,418.78,EUR,Card
+TX-2026-01405,2026-09-28,V004,Coastline Fleet Repairs Ltd,Fleet,Van service,250.15,EUR,Bank transfer
+TX-2026-01406,2026-09-28,V005,Northgate Fuel Distributors Ltd,Fleet,Fuel cards top-up,889.35,EUR,Bank transfer
+TX-2026-01407,2026-09-28,V007,Meridian Software Licensing Ltd,IT,Additional user seats,332.05,EUR,Card
+TX-2026-01408,2026-09-28,V009,Atlas Forklift Hire Ltd,Warehouse,Generator hire,349.61,EUR,Card
+TX-2026-01409,2026-09-28,V016,Redwood Furniture Ltd,Facilities,Office chairs,221.30,EUR,Card
+TX-2026-01410,2026-09-29,V003,Bluefin Office Supplies Ltd,Facilities,Printer toner,21392.00,EUR,Bank transfer
+TX-2026-01411,2026-09-29,V005,Northgate Fuel Distributors Ltd,Fleet,Diesel delivery,480.59,EUR,Bank transfer
+TX-2026-01412,2026-09-29,V014,Greenleaf Cleaning Ltd,Facilities,Warehouse deep clean,956.49,EUR,Bank transfer
+TX-2026-01413,2026-09-29,V019,Keystone Legal Advisors,Operations,Contract review,656.11,EUR,Card
+TX-2026-01414,2026-09-29,V019,Keystone Legal Advisors,Operations,Contract review,902.72,EUR,Bank transfer
+TX-2026-01415,2026-09-29,V022,Polar Refrigeration Services Ltd,Warehouse,Cold store maintenance,618.91,EUR,Bank transfer
+TX-2026-01416,2026-09-30,V006,Limestone Facilities Management Ltd,Facilities,Lighting replacement,741.46,EUR,Card
+TX-2026-01417,2026-09-30,V008,Seabreeze Catering Ltd,HR,Training day lunch,1838.26,EUR,Bank transfer
+TX-2026-01418,2026-09-30,V009,Atlas Forklift Hire Ltd,Warehouse,Forklift hire,585.01,EUR,Bank transfer
+TX-2026-01419,2026-09-30,V009,Atlas Forklift Hire Ltd,Warehouse,Pallet jack hire,18324.39,EUR,Bank transfer
+TX-2026-01420,2026-09-30,V011,Brightlink Telecom Ltd,IT,Leased line,705.66,EUR,Card
+TX-2026-01421,2026-09-30,V018,Silverline Couriers Ltd,Operations,Courier services,770.96,EUR,Card
+TX-2026-01422,2026-09-30,V020,Granite Construction Works Ltd,Facilities,Loading bay works,252.63,EUR,Bank transfer
+TX-2026-01423,2026-09-30,V021,Nova Marketing Studio Ltd,Marketing,Social media management,1386.42,EUR,Card
+TX-2026-01424,2026-09-30,V022,Polar Refrigeration Services Ltd,Warehouse,Cold store maintenance,202.88,EUR,Bank transfer
+TX-2026-01425,2026-09-30,V022,Polar Refrigeration Services Ltd,Warehouse,Compressor repair,1290.49,EUR,Card
+TX-2026-01426,2026-09-30,V024,Quayside Tyres Ltd,Fleet,Tyre rotation,1095.57,EUR,Card

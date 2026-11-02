@@ -1,0 +1,97 @@
+{
+"query": "MATCH (c:Compound {name: 'Warfarin'})-[:BINDS]->(g:Gene)<-[:ASSOCIATES]-(d:Disease) WITH d, g ORDER BY g.name WITH d, collect(DISTINCT g.name) AS genes RETURN d.name AS disease, size(genes) AS shared_genes, genes[..5] AS genes ORDER BY shared_genes DESC, disease LIMIT 10",
+"captured": null,
+"source": "computed from the same Hetionet subset with pandas and NetworkX (not yet captured from Neo4j)",
+"rows": [
+{
+"disease": "chronic kidney failure",
+"shared_genes": 5,
+"genes": [
+"ALB",
+"CYP1A1",
+"CYP2C18",
+"CYP2C19",
+"CYP3A4"
+]
+},
+{
+"disease": "prostate cancer",
+"shared_genes": 4,
+"genes": [
+"CYP1A1",
+"CYP2C18",
+"CYP2C19",
+"CYP3A4"
+]
+},
+{
+"disease": "breast cancer",
+"shared_genes": 3,
+"genes": [
+"ALB",
+"CYP1A1",
+"CYP3A4"
+]
+},
+{
+"disease": "chronic obstructive pulmonary disease",
+"shared_genes": 3,
+"genes": [
+"ALB",
+"CYP1A1",
+"CYP1A2"
+]
+},
+{
+"disease": "coronary artery disease",
+"shared_genes": 3,
+"genes": [
+"ALB",
+"CYP2C19",
+"VKORC1"
+]
+},
+{
+"disease": "hypertension",
+"shared_genes": 3,
+"genes": [
+"ALB",
+"CYP1A1",
+"CYP2C18"
+]
+},
+{
+"disease": "type 2 diabetes mellitus",
+"shared_genes": 3,
+"genes": [
+"ALB",
+"CYP1A2",
+"CYP3A4"
+]
+},
+{
+"disease": "anemia",
+"shared_genes": 2,
+"genes": [
+"ALB",
+"CYP1A2"
+]
+},
+{
+"disease": "epilepsy syndrome",
+"shared_genes": 2,
+"genes": [
+"ALB",
+"CYP2C19"
+]
+},
+{
+"disease": "liver cancer",
+"shared_genes": 2,
+"genes": [
+"ALB",
+"CYP1A1"
+]
+}
+]
+}

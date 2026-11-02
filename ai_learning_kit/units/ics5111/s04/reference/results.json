@@ -1,0 +1,1720 @@
+{
+ "version": "2026-10-31",
+ "seed": 5111,
+ "torch": "2.15.0+cu132",
+ "hetionet_sha256": {
+  "hetionet_nodes": "3ad9eb86c031df8bc7d5efefa6edc93562182eb9a6a71e5129d3f18b9d42c50e",
+  "hetionet_edges": "611f0411ac666be4e0270e54bbca67407e14720bfc3099311f0f5eec25c5a947"
+ },
+ "ddi": {
+  "drugs": 17,
+  "enzymes": 4,
+  "asserted_triples": 52,
+  "rule_rows": 15,
+  "rule": [
+   {
+    "perpetrator": "fluconazole",
+    "victim": "clopidogrel",
+    "enzyme": "CYP2C19"
+   },
+   {
+    "perpetrator": "omeprazole",
+    "victim": "clopidogrel",
+    "enzyme": "CYP2C19"
+   },
+   {
+    "perpetrator": "amiodarone",
+    "victim": "warfarin",
+    "enzyme": "CYP2C9"
+   },
+   {
+    "perpetrator": "fluconazole",
+    "victim": "warfarin",
+    "enzyme": "CYP2C9"
+   },
+   {
+    "perpetrator": "fluoxetine",
+    "victim": "codeine",
+    "enzyme": "CYP2D6"
+   },
+   {
+    "perpetrator": "paroxetine",
+    "victim": "codeine",
+    "enzyme": "CYP2D6"
+   },
+   {
+    "perpetrator": "clarithromycin",
+    "victim": "atorvastatin",
+    "enzyme": "CYP3A4"
+   },
+   {
+    "perpetrator": "clarithromycin",
+    "victim": "midazolam",
+    "enzyme": "CYP3A4"
+   },
+   {
+    "perpetrator": "clarithromycin",
+    "victim": "simvastatin",
+    "enzyme": "CYP3A4"
+   },
+   {
+    "perpetrator": "fluconazole",
+    "victim": "atorvastatin",
+    "enzyme": "CYP3A4"
+   },
+   {
+    "perpetrator": "fluconazole",
+    "victim": "midazolam",
+    "enzyme": "CYP3A4"
+   },
+   {
+    "perpetrator": "fluconazole",
+    "victim": "simvastatin",
+    "enzyme": "CYP3A4"
+   },
+   {
+    "perpetrator": "itraconazole",
+    "victim": "atorvastatin",
+    "enzyme": "CYP3A4"
+   },
+   {
+    "perpetrator": "itraconazole",
+    "victim": "midazolam",
+    "enzyme": "CYP3A4"
+   },
+   {
+    "perpetrator": "itraconazole",
+    "victim": "simvastatin",
+    "enzyme": "CYP3A4"
+   }
+  ],
+  "inferred_triples_owlrl": 220,
+  "drugs_typed_before": 0,
+  "drugs_typed_after": 17,
+  "grapefruit_juice_becomes_drug": true,
+  "pairs_symmetric": 16,
+  "self_pairs_symmetric": 0,
+  "pairs_transitive": 58,
+  "self_pairs_transitive": 14,
+  "transitive_examples": [
+   [
+    "amiodarone",
+    "aspirin"
+   ],
+   [
+    "amiodarone",
+    "atorvastatin"
+   ],
+   [
+    "amiodarone",
+    "clarithromycin"
+   ],
+   [
+    "amiodarone",
+    "clopidogrel"
+   ],
+   [
+    "amiodarone",
+    "fluconazole"
+   ],
+   [
+    "amiodarone",
+    "itraconazole"
+   ]
+  ],
+  "drugs_without_mechanism_interaction": [
+   "amiodarone",
+   "aspirin",
+   "azithromycin",
+   "clarithromycin",
+   "fluconazole",
+   "fluoxetine",
+   "itraconazole",
+   "omeprazole",
+   "paroxetine",
+   "pravastatin",
+   "rosuvastatin"
+  ]
+ },
+ "hetionet": {
+  "nodes": 47031,
+  "edges": 2250197,
+  "kinds": 11,
+  "metaedges": 24,
+  "kind_counts": {
+   "Gene": 20945,
+   "Biological Process": 11381,
+   "Side Effect": 5734,
+   "Molecular Function": 2884,
+   "Pathway": 1822,
+   "Compound": 1552,
+   "Cellular Component": 1391,
+   "Symptom": 438,
+   "Anatomy": 402,
+   "Pharmacologic Class": 345,
+   "Disease": 137
+  },
+  "neo4j_subset": {
+   "nodes": 19754,
+   "relationships": 242732,
+   "labels": {
+    "Gene": 16929,
+    "Compound": 1531,
+    "Symptom": 415,
+    "Anatomy": 398,
+    "PharmacologicClass": 345,
+    "Disease": 136
+   },
+   "rel_pairs": [
+    {
+     "source_label": "Gene",
+     "type": "INTERACTS",
+     "target_label": "Gene",
+     "metaedge": "GiG",
+     "edges": 147164
+    },
+    {
+     "source_label": "Compound",
+     "type": "DOWNREGULATES",
+     "target_label": "Gene",
+     "metaedge": "CdG",
+     "edges": 21102
+    },
+    {
+     "source_label": "Compound",
+     "type": "UPREGULATES",
+     "target_label": "Gene",
+     "metaedge": "CuG",
+     "edges": 18756
+    },
+    {
+     "source_label": "Disease",
+     "type": "ASSOCIATES",
+     "target_label": "Gene",
+     "metaedge": "DaG",
+     "edges": 12623
+    },
+    {
+     "source_label": "Compound",
+     "type": "BINDS",
+     "target_label": "Gene",
+     "metaedge": "CbG",
+     "edges": 11571
+    },
+    {
+     "source_label": "Disease",
+     "type": "UPREGULATES",
+     "target_label": "Gene",
+     "metaedge": "DuG",
+     "edges": 7731
+    },
+    {
+     "source_label": "Disease",
+     "type": "DOWNREGULATES",
+     "target_label": "Gene",
+     "metaedge": "DdG",
+     "edges": 7623
+    },
+    {
+     "source_label": "Compound",
+     "type": "RESEMBLES",
+     "target_label": "Compound",
+     "metaedge": "CrC",
+     "edges": 6486
+    },
+    {
+     "source_label": "Disease",
+     "type": "LOCALIZES",
+     "target_label": "Anatomy",
+     "metaedge": "DlA",
+     "edges": 3602
+    },
+    {
+     "source_label": "Disease",
+     "type": "PRESENTS",
+     "target_label": "Symptom",
+     "metaedge": "DpS",
+     "edges": 3357
+    },
+    {
+     "source_label": "PharmacologicClass",
+     "type": "INCLUDES",
+     "target_label": "Compound",
+     "metaedge": "PCiC",
+     "edges": 1029
+    },
+    {
+     "source_label": "Compound",
+     "type": "TREATS",
+     "target_label": "Disease",
+     "metaedge": "CtD",
+     "edges": 755
+    },
+    {
+     "source_label": "Disease",
+     "type": "RESEMBLES",
+     "target_label": "Disease",
+     "metaedge": "DrD",
+     "edges": 543
+    },
+    {
+     "source_label": "Compound",
+     "type": "PALLIATES",
+     "target_label": "Disease",
+     "metaedge": "CpD",
+     "edges": 390
+    }
+   ]
+  }
+ },
+ "saved_queries": {
+  "count_nodes": [
+   {
+    "label": "Gene",
+    "nodes": 16929
+   },
+   {
+    "label": "Compound",
+    "nodes": 1531
+   },
+   {
+    "label": "Symptom",
+    "nodes": 415
+   },
+   {
+    "label": "Anatomy",
+    "nodes": 398
+   },
+   {
+    "label": "PharmacologicClass",
+    "nodes": 345
+   },
+   {
+    "label": "Disease",
+    "nodes": 136
+   }
+  ],
+  "count_rels": [
+   {
+    "type": "INTERACTS",
+    "relationships": 147164
+   },
+   {
+    "type": "DOWNREGULATES",
+    "relationships": 28725
+   },
+   {
+    "type": "UPREGULATES",
+    "relationships": 26487
+   },
+   {
+    "type": "ASSOCIATES",
+    "relationships": 12623
+   },
+   {
+    "type": "BINDS",
+    "relationships": 11571
+   },
+   {
+    "type": "RESEMBLES",
+    "relationships": 7029
+   },
+   {
+    "type": "LOCALIZES",
+    "relationships": 3602
+   },
+   {
+    "type": "PRESENTS",
+    "relationships": 3357
+   },
+   {
+    "type": "INCLUDES",
+    "relationships": 1029
+   },
+   {
+    "type": "TREATS",
+    "relationships": 755
+   },
+   {
+    "type": "PALLIATES",
+    "relationships": 390
+   }
+  ],
+  "ddi_cleanup": [
+   {
+    "deleted": 21
+   }
+  ],
+  "ddi_rule": [
+   {
+    "perpetrator": "fluconazole",
+    "victim": "clopidogrel",
+    "enzyme": "CYP2C19"
+   },
+   {
+    "perpetrator": "omeprazole",
+    "victim": "clopidogrel",
+    "enzyme": "CYP2C19"
+   },
+   {
+    "perpetrator": "amiodarone",
+    "victim": "warfarin",
+    "enzyme": "CYP2C9"
+   },
+   {
+    "perpetrator": "fluconazole",
+    "victim": "warfarin",
+    "enzyme": "CYP2C9"
+   },
+   {
+    "perpetrator": "fluoxetine",
+    "victim": "codeine",
+    "enzyme": "CYP2D6"
+   },
+   {
+    "perpetrator": "paroxetine",
+    "victim": "codeine",
+    "enzyme": "CYP2D6"
+   },
+   {
+    "perpetrator": "clarithromycin",
+    "victim": "atorvastatin",
+    "enzyme": "CYP3A4"
+   },
+   {
+    "perpetrator": "clarithromycin",
+    "victim": "midazolam",
+    "enzyme": "CYP3A4"
+   },
+   {
+    "perpetrator": "clarithromycin",
+    "victim": "simvastatin",
+    "enzyme": "CYP3A4"
+   },
+   {
+    "perpetrator": "fluconazole",
+    "victim": "atorvastatin",
+    "enzyme": "CYP3A4"
+   },
+   {
+    "perpetrator": "fluconazole",
+    "victim": "midazolam",
+    "enzyme": "CYP3A4"
+   },
+   {
+    "perpetrator": "fluconazole",
+    "victim": "simvastatin",
+    "enzyme": "CYP3A4"
+   },
+   {
+    "perpetrator": "itraconazole",
+    "victim": "atorvastatin",
+    "enzyme": "CYP3A4"
+   },
+   {
+    "perpetrator": "itraconazole",
+    "victim": "midazolam",
+    "enzyme": "CYP3A4"
+   },
+   {
+    "perpetrator": "itraconazole",
+    "victim": "simvastatin",
+    "enzyme": "CYP3A4"
+   }
+  ],
+  "gene_degree_top": [
+   {
+    "gene": "UBC",
+    "degree": 8613
+   },
+   {
+    "gene": "APP",
+    "degree": 1914
+   },
+   {
+    "gene": "SUMO2",
+    "degree": 1124
+   },
+   {
+    "gene": "CUL3",
+    "degree": 1066
+   },
+   {
+    "gene": "GRB2",
+    "degree": 895
+   },
+   {
+    "gene": "ESR1",
+    "degree": 855
+   },
+   {
+    "gene": "KIAA0101",
+    "degree": 804
+   },
+   {
+    "gene": "COPS5",
+    "degree": 722
+   },
+   {
+    "gene": "HSP90AB1",
+    "degree": 679
+   },
+   {
+    "gene": "SIRT7",
+    "degree": 642
+   }
+  ],
+  "most_treated": [
+   {
+    "disease": "hypertension",
+    "compounds": 68
+   },
+   {
+    "disease": "hematologic cancer",
+    "compounds": 51
+   },
+   {
+    "disease": "asthma",
+    "compounds": 37
+   },
+   {
+    "disease": "breast cancer",
+    "compounds": 29
+   },
+   {
+    "disease": "coronary artery disease",
+    "compounds": 28
+   },
+   {
+    "disease": "epilepsy syndrome",
+    "compounds": 25
+   },
+   {
+    "disease": "type 2 diabetes mellitus",
+    "compounds": 22
+   },
+   {
+    "disease": "glaucoma",
+    "compounds": 21
+   },
+   {
+    "disease": "prostate cancer",
+    "compounds": 21
+   },
+   {
+    "disease": "psoriasis",
+    "compounds": 21
+   }
+  ],
+  "repurposing": [
+   {
+    "compound": "Calcidiol",
+    "genes": 3,
+    "via": [
+     "CYP24A1",
+     "CYP27B1",
+     "VDR"
+    ]
+   },
+   {
+    "compound": "Ergocalciferol",
+    "genes": 3,
+    "via": [
+     "CYP24A1",
+     "CYP27B1",
+     "VDR"
+    ]
+   },
+   {
+    "compound": "Glucosamine",
+    "genes": 3,
+    "via": [
+     "IFNG",
+     "MMP9",
+     "TNF"
+    ]
+   },
+   {
+    "compound": "Alfacalcidol",
+    "genes": 2,
+    "via": [
+     "CYP27B1",
+     "VDR"
+    ]
+   },
+   {
+    "compound": "Ampicillin",
+    "genes": 2,
+    "via": [
+     "ALB",
+     "SLC15A2"
+    ]
+   },
+   {
+    "compound": "Calcipotriol",
+    "genes": 2,
+    "via": [
+     "CYP24A1",
+     "VDR"
+    ]
+   },
+   {
+    "compound": "Calcitriol",
+    "genes": 2,
+    "via": [
+     "CYP24A1",
+     "VDR"
+    ]
+   },
+   {
+    "compound": "Captopril",
+    "genes": 2,
+    "via": [
+     "ALB",
+     "MMP9"
+    ]
+   },
+   {
+    "compound": "Carvedilol",
+    "genes": 2,
+    "via": [
+     "SELE",
+     "VCAM1"
+    ]
+   },
+   {
+    "compound": "Cefalotin",
+    "genes": 2,
+    "via": [
+     "ALB",
+     "SLC15A2"
+    ]
+   }
+  ],
+  "schema_pairs": [
+   {
+    "source": "Gene",
+    "type": "INTERACTS",
+    "target": "Gene",
+    "relationships": 147164
+   },
+   {
+    "source": "Compound",
+    "type": "DOWNREGULATES",
+    "target": "Gene",
+    "relationships": 21102
+   },
+   {
+    "source": "Compound",
+    "type": "UPREGULATES",
+    "target": "Gene",
+    "relationships": 18756
+   },
+   {
+    "source": "Disease",
+    "type": "ASSOCIATES",
+    "target": "Gene",
+    "relationships": 12623
+   },
+   {
+    "source": "Compound",
+    "type": "BINDS",
+    "target": "Gene",
+    "relationships": 11571
+   },
+   {
+    "source": "Disease",
+    "type": "UPREGULATES",
+    "target": "Gene",
+    "relationships": 7731
+   },
+   {
+    "source": "Disease",
+    "type": "DOWNREGULATES",
+    "target": "Gene",
+    "relationships": 7623
+   },
+   {
+    "source": "Compound",
+    "type": "RESEMBLES",
+    "target": "Compound",
+    "relationships": 6486
+   },
+   {
+    "source": "Disease",
+    "type": "LOCALIZES",
+    "target": "Anatomy",
+    "relationships": 3602
+   },
+   {
+    "source": "Disease",
+    "type": "PRESENTS",
+    "target": "Symptom",
+    "relationships": 3357
+   },
+   {
+    "source": "PharmacologicClass",
+    "type": "INCLUDES",
+    "target": "Compound",
+    "relationships": 1029
+   },
+   {
+    "source": "Compound",
+    "type": "TREATS",
+    "target": "Disease",
+    "relationships": 755
+   },
+   {
+    "source": "Disease",
+    "type": "RESEMBLES",
+    "target": "Disease",
+    "relationships": 543
+   },
+   {
+    "source": "Compound",
+    "type": "PALLIATES",
+    "target": "Disease",
+    "relationships": 390
+   }
+  ],
+  "shortest_paths": [
+   {
+    "hops": 2,
+    "path": [
+     "Warfarin",
+     "CYP2C8",
+     "Alzheimer's disease"
+    ],
+    "types": [
+     "BINDS",
+     "DOWNREGULATES"
+    ]
+   }
+  ],
+  "similar_compounds": [
+   {
+    "hops": 1,
+    "compounds": 17
+   },
+   {
+    "hops": 2,
+    "compounds": 139
+   }
+  ],
+  "treats_epilepsy": [
+   {
+    "compound": "Acetazolamide"
+   },
+   {
+    "compound": "Amobarbital"
+   },
+   {
+    "compound": "Carbamazepine"
+   },
+   {
+    "compound": "Clobazam"
+   },
+   {
+    "compound": "Clonazepam"
+   },
+   {
+    "compound": "Diazepam"
+   },
+   {
+    "compound": "Felbamate"
+   },
+   {
+    "compound": "Fosphenytoin"
+   },
+   {
+    "compound": "Gabapentin"
+   },
+   {
+    "compound": "Lacosamide"
+   },
+   {
+    "compound": "Lamotrigine"
+   },
+   {
+    "compound": "Levetiracetam"
+   },
+   {
+    "compound": "Midazolam"
+   },
+   {
+    "compound": "Oxcarbazepine"
+   },
+   {
+    "compound": "Phenobarbital"
+   },
+   {
+    "compound": "Phenytoin"
+   },
+   {
+    "compound": "Pregabalin"
+   },
+   {
+    "compound": "Primidone"
+   },
+   {
+    "compound": "Propofol"
+   },
+   {
+    "compound": "Rufinamide"
+   },
+   {
+    "compound": "Topiramate"
+   },
+   {
+    "compound": "Trimethadione"
+   },
+   {
+    "compound": "Valproic Acid"
+   },
+   {
+    "compound": "Vigabatrin"
+   },
+   {
+    "compound": "Zonisamide"
+   }
+  ],
+  "two_hop_genes": [
+   {
+    "disease": "chronic kidney failure",
+    "shared_genes": 5,
+    "genes": [
+     "ALB",
+     "CYP1A1",
+     "CYP2C18",
+     "CYP2C19",
+     "CYP3A4"
+    ]
+   },
+   {
+    "disease": "prostate cancer",
+    "shared_genes": 4,
+    "genes": [
+     "CYP1A1",
+     "CYP2C18",
+     "CYP2C19",
+     "CYP3A4"
+    ]
+   },
+   {
+    "disease": "breast cancer",
+    "shared_genes": 3,
+    "genes": [
+     "ALB",
+     "CYP1A1",
+     "CYP3A4"
+    ]
+   },
+   {
+    "disease": "chronic obstructive pulmonary disease",
+    "shared_genes": 3,
+    "genes": [
+     "ALB",
+     "CYP1A1",
+     "CYP1A2"
+    ]
+   },
+   {
+    "disease": "coronary artery disease",
+    "shared_genes": 3,
+    "genes": [
+     "ALB",
+     "CYP2C19",
+     "VKORC1"
+    ]
+   },
+   {
+    "disease": "hypertension",
+    "shared_genes": 3,
+    "genes": [
+     "ALB",
+     "CYP1A1",
+     "CYP2C18"
+    ]
+   },
+   {
+    "disease": "type 2 diabetes mellitus",
+    "shared_genes": 3,
+    "genes": [
+     "ALB",
+     "CYP1A2",
+     "CYP3A4"
+    ]
+   },
+   {
+    "disease": "anemia",
+    "shared_genes": 2,
+    "genes": [
+     "ALB",
+     "CYP1A2"
+    ]
+   },
+   {
+    "disease": "epilepsy syndrome",
+    "shared_genes": 2,
+    "genes": [
+     "ALB",
+     "CYP2C19"
+    ]
+   },
+   {
+    "disease": "liver cancer",
+    "shared_genes": 2,
+    "genes": [
+     "ALB",
+     "CYP1A1"
+    ]
+   }
+  ],
+  "untreated_diseases": [
+   {
+    "diseases_without_a_treatment": 59
+   }
+  ]
+ },
+ "algorithms": {
+  "gene_network": {
+   "nodes": 15165,
+   "edges": 147164
+  },
+  "pagerank_top10": [
+   {
+    "gene": "UBC",
+    "networkx": 0.0413178316809089,
+    "gds_formula": 613.8513588609366,
+    "degree": 8611
+   },
+   {
+    "gene": "APP",
+    "networkx": 0.00858883505150008,
+    "gds_formula": 127.34079574418887,
+    "degree": 1906
+   },
+   {
+    "gene": "SUMO2",
+    "networkx": 0.003274682255787405,
+    "gds_formula": 48.17782177193274,
+    "degree": 1121
+   },
+   {
+    "gene": "CUL3",
+    "networkx": 0.0030146349944183554,
+    "gds_formula": 44.49423818344917,
+    "degree": 1060
+   },
+   {
+    "gene": "GRB2",
+    "networkx": 0.0027625224508169488,
+    "gds_formula": 40.451491483392005,
+    "degree": 893
+   },
+   {
+    "gene": "ESR1",
+    "networkx": 0.0021663368627260634,
+    "gds_formula": 31.790691808139286,
+    "degree": 807
+   },
+   {
+    "gene": "KIAA0101",
+    "networkx": 0.0021086387004923563,
+    "gds_formula": 31.085636410830602,
+    "degree": 784
+   },
+   {
+    "gene": "COPS5",
+    "networkx": 0.001967537071228853,
+    "gds_formula": 29.037015296411642,
+    "degree": 721
+   },
+   {
+    "gene": "HSP90AB1",
+    "networkx": 0.0018112550716435935,
+    "gds_formula": 26.62027035672619,
+    "degree": 673
+   },
+   {
+    "gene": "HSP90AA1",
+    "networkx": 0.0017894714405751293,
+    "gds_formula": 26.21724350921723,
+    "degree": 608
+   }
+  ],
+  "pagerank_sum": {
+   "networkx": 1.0000000000000036,
+   "gds_formula": 14665.379954437798
+  },
+  "networkx_vs_gds_formula": {
+   "nodes": 15165,
+   "spearman": 0.999956042054738,
+   "top20_overlap": 1.0
+  },
+  "pagerank_vs_degree": {
+   "nodes": 15165,
+   "spearman": 0.9751676407174906,
+   "top20_overlap": 0.95
+  },
+  "louvain": {
+   "seed5111": {
+    "communities": 31,
+    "modularity": 0.41602789042755356,
+    "largest": 3894
+   },
+   "other_seeds": {
+    "1": {
+     "ARI": 0.5583871650161841,
+     "NMI": 0.5304828799888116,
+     "communities_1": 31,
+     "communities_2": 28,
+     "modularity_1": 0.41602789042755356,
+     "modularity_2": 0.40480773067929304
+    },
+    "2": {
+     "ARI": 0.5246584279213974,
+     "NMI": 0.5388162542414552,
+     "communities_1": 31,
+     "communities_2": 27,
+     "modularity_1": 0.41602789042755356,
+     "modularity_2": 0.4142646208976609
+    },
+    "3": {
+     "ARI": 0.5945332937214188,
+     "NMI": 0.5424175043439896,
+     "communities_1": 31,
+     "communities_2": 27,
+     "modularity_1": 0.41602789042755356,
+     "modularity_2": 0.4117487968723385
+    },
+    "4": {
+     "ARI": 0.6359121950546073,
+     "NMI": 0.6048935521863649,
+     "communities_1": 31,
+     "communities_2": 25,
+     "modularity_1": 0.41602789042755356,
+     "modularity_2": 0.41909134743445875
+    }
+   }
+  }
+ },
+ "kge_data": {
+  "triples": 40356,
+  "entities": 8928,
+  "relations": [
+   "CbG",
+   "CpD",
+   "CrC",
+   "CtD",
+   "DaG",
+   "DlA",
+   "DpS",
+   "DrD",
+   "PCiC"
+  ],
+  "train": 33058,
+  "val": 3639,
+  "test": 3659,
+  "moved_back": 772,
+  "random_mrr": 0.0010835819166735425,
+  "per_relation_counts": {
+   "DaG": 12623,
+   "CbG": 11571,
+   "CrC": 6486,
+   "DlA": 3602,
+   "DpS": 3357,
+   "PCiC": 1029,
+   "CtD": 755,
+   "DrD": 543,
+   "CpD": 390
+  }
+ },
+ "transe": {
+  "config": {
+   "dim": 64,
+   "epochs": 100,
+   "lr": 0.003,
+   "margin": 1.0,
+   "p_norm": 1,
+   "batch": 1024
+  },
+  "seconds_train_seed0": 16.7274003120001,
+  "loss_seed0": [
+   0.9651679194293039,
+   0.42864260863598624,
+   0.27701250863952254,
+   0.21611880255059931,
+   0.18648600118444694,
+   0.1677341227968416,
+   0.15228663934118064,
+   0.1468006655897489,
+   0.139491545817937,
+   0.13492491294817105
+  ],
+  "test_seed0": {
+   "MRR": 0.11623324177491155,
+   "Hits@1": 0.053293249521727246,
+   "Hits@3": 0.11997813610276031,
+   "Hits@10": 0.23285050560262366,
+   "MR": 339.05062858704565,
+   "n": 7318
+  },
+  "test_5seeds": {
+   "MRR": [
+    0.1206775783908864,
+    0.0036738136709565197
+   ],
+   "Hits@1": [
+    0.057775348455862255,
+    0.0031057606386109297
+   ],
+   "Hits@3": [
+    0.12541678054113145,
+    0.0053697460101707105
+   ],
+   "Hits@10": [
+    0.23776988248155234,
+    0.005431016939622404
+   ],
+   "MR": [
+    337.68442197321673,
+    2.566696196667615
+   ]
+  },
+  "test_typed_seed0": {
+   "MRR": 0.11623628619246926,
+   "Hits@1": 0.053293249521727246,
+   "Hits@3": 0.11997813610276031,
+   "Hits@10": 0.23285050560262366,
+   "MR": 331.64191035802133,
+   "n": 7318
+  },
+  "per_relation_seed0": {
+   "CbG": {
+    "MRR": 0.0815,
+    "Hits@1": 0.0408,
+    "Hits@3": 0.0755,
+    "Hits@10": 0.1534,
+    "MR": 356.9195,
+    "n": 2106.0
+   },
+   "CpD": {
+    "MRR": 0.1087,
+    "Hits@1": 0.0278,
+    "Hits@3": 0.0833,
+    "Hits@10": 0.2778,
+    "MR": 139.8333,
+    "n": 72.0
+   },
+   "CrC": {
+    "MRR": 0.2955,
+    "Hits@1": 0.1677,
+    "Hits@3": 0.3541,
+    "Hits@10": 0.5338,
+    "MR": 76.3729,
+    "n": 1330.0
+   },
+   "CtD": {
+    "MRR": 0.1026,
+    "Hits@1": 0.0357,
+    "Hits@3": 0.0833,
+    "Hits@10": 0.2619,
+    "MR": 153.3452,
+    "n": 168.0
+   },
+   "DaG": {
+    "MRR": 0.0581,
+    "Hits@1": 0.0137,
+    "Hits@3": 0.0454,
+    "Hits@10": 0.1372,
+    "MR": 708.6055,
+    "n": 2048.0
+   },
+   "DlA": {
+    "MRR": 0.0738,
+    "Hits@1": 0.0246,
+    "Hits@3": 0.06,
+    "Hits@10": 0.1554,
+    "MR": 87.1323,
+    "n": 650.0
+   },
+   "DpS": {
+    "MRR": 0.0819,
+    "Hits@1": 0.0207,
+    "Hits@3": 0.074,
+    "Hits@10": 0.1997,
+    "MR": 69.8891,
+    "n": 676.0
+   },
+   "DrD": {
+    "MRR": 0.1367,
+    "Hits@1": 0.0,
+    "Hits@3": 0.2037,
+    "Hits@10": 0.4074,
+    "MR": 26.7315,
+    "n": 108.0
+   },
+   "PCiC": {
+    "MRR": 0.1479,
+    "Hits@1": 0.0938,
+    "Hits@3": 0.15,
+    "Hits@10": 0.2875,
+    "MR": 213.1375,
+    "n": 160.0
+   }
+  },
+  "mrr_by_answer_degree": {
+   "lowest quarter": {
+    "MRR": 0.034135427325963974,
+    "median_degree": 4.0
+   },
+   "second": {
+    "MRR": 0.15023817121982574,
+    "median_degree": 15.0
+   },
+   "third": {
+    "MRR": 0.1342693716287613,
+    "median_degree": 38.0
+   },
+   "highest quarter": {
+    "MRR": 0.1537773460149765,
+    "median_degree": 229.0
+   }
+  },
+  "ms_top10": [
+   {
+    "compound": "Irinotecan",
+    "known_treatment": false,
+    "in_train": false
+   },
+   {
+    "compound": "Doxorubicin",
+    "known_treatment": false,
+    "in_train": false
+   },
+   {
+    "compound": "Docetaxel",
+    "known_treatment": false,
+    "in_train": false
+   },
+   {
+    "compound": "Mitoxantrone",
+    "known_treatment": true,
+    "in_train": true
+   },
+   {
+    "compound": "Carboplatin",
+    "known_treatment": false,
+    "in_train": false
+   },
+   {
+    "compound": "Epirubicin",
+    "known_treatment": false,
+    "in_train": false
+   },
+   {
+    "compound": "Etoposide",
+    "known_treatment": false,
+    "in_train": false
+   },
+   {
+    "compound": "Dactinomycin",
+    "known_treatment": false,
+    "in_train": false
+   },
+   {
+    "compound": "Cisplatin",
+    "known_treatment": false,
+    "in_train": false
+   },
+   {
+    "compound": "Capecitabine",
+    "known_treatment": false,
+    "in_train": false
+   }
+  ]
+ },
+ "variants": {
+  "TransE": {
+   "MRR": 0.11623324177491155,
+   "Hits@1": 0.053293249521727246,
+   "Hits@3": 0.11997813610276031,
+   "Hits@10": 0.23285050560262366,
+   "MR": 339.05062858704565,
+   "n": 7318
+  },
+  "DistMult": {
+   "MRR": 0.12190683491768879,
+   "Hits@1": 0.053293249521727246,
+   "Hits@3": 0.1273572014211533,
+   "Hits@10": 0.26373326045367584,
+   "MR": 713.0147581306368,
+   "n": 7318
+  },
+  "ComplEx": {
+   "MRR": 0.16237399009460557,
+   "Hits@1": 0.07898332877835475,
+   "Hits@3": 0.1854331784640612,
+   "Hits@10": 0.33151134189669307,
+   "MR": 660.9011341896693,
+   "n": 7318
+  },
+  "RotatE": {
+   "MRR": 0.07712980930541105,
+   "Hits@1": 0.02418693632139929,
+   "Hits@3": 0.07392730254167805,
+   "Hits@10": 0.17545777534845586,
+   "MR": 366.14723968297346,
+   "n": 7318
+  }
+ },
+ "toy": {
+  "triples": 55,
+  "norm_capital_of": 0.7190413475036621,
+  "norm_borders": 0.03825705125927925,
+  "mean_cos_capital": 0.9000125802480258,
+  "mean_dist_bordering": 0.34854769706726074,
+  "mean_dist_not_bordering": 0.6931060552597046,
+  "pca": {
+   "France": [
+    0.429500013589859,
+    -0.04659999907016754
+   ],
+   "Germany": [
+    0.4611000120639801,
+    -0.09359999746084213
+   ],
+   "Spain": [
+    0.29679998755455017,
+    0.3901999890804291
+   ],
+   "Portugal": [
+    0.26420000195503235,
+    0.4316999912261963
+   ],
+   "Italy": [
+    0.3125999867916107,
+    0.09309999644756317
+   ],
+   "Austria": [
+    0.2718999981880188,
+    0.08380000293254852
+   ],
+   "Switzerland": [
+    0.375,
+    -0.01119999960064888
+   ],
+   "Belgium": [
+    0.4083999991416931,
+    -0.17679999768733978
+   ],
+   "Netherlands": [
+    0.3278000056743622,
+    -0.32249999046325684
+   ],
+   "Poland": [
+    0.2029999941587448,
+    0.14710000157356262
+   ],
+   "Czechia": [
+    0.218299999833107,
+    0.16089999675750732
+   ],
+   "Luxembourg": [
+    0.4296000003814697,
+    -0.1436000019311905
+   ],
+   "Malta": [
+    -0.2117999941110611,
+    0.44440001249313354
+   ],
+   "Paris": [
+    -0.27649998664855957,
+    -0.37860000133514404
+   ],
+   "Berlin": [
+    -0.17960000038146973,
+    -0.29350000619888306
+   ],
+   "Madrid": [
+    -0.16110000014305115,
+    0.03869999945163727
+   ],
+   "Lisbon": [
+    -0.12680000066757202,
+    0.12540000677108765
+   ],
+   "Rome": [
+    -0.2775999903678894,
+    0.018400000408291817
+   ],
+   "Vienna": [
+    -0.2849000096321106,
+    0.09539999812841415
+   ],
+   "Bern": [
+    -0.2897999882698059,
+    -0.27250000834465027
+   ],
+   "Brussels": [
+    -0.2353000044822693,
+    -0.2662000060081482
+   ],
+   "Amsterdam": [
+    -0.24120000004768372,
+    -0.2847000062465668
+   ],
+   "Warsaw": [
+    -0.4081999957561493,
+    0.04809999838471413
+   ],
+   "Prague": [
+    -0.37290000915527344,
+    0.1143999993801117
+   ],
+   "Luxembourg City": [
+    -0.2883000075817108,
+    -0.3743000030517578
+   ],
+   "Valletta": [
+    -0.6444000005722046,
+    0.4724000096321106
+   ]
+  }
+ },
+ "hand_step": {
+  "d_pos": 0.671,
+  "d_neg": 1.004,
+  "loss": 0.667,
+  "grad_r": [
+   0.102,
+   -1.029,
+   0.258
+  ],
+  "Paris": [
+   0.194,
+   -0.398,
+   0.268
+  ],
+  "capital_of": [
+   0.04,
+   0.433,
+   -0.236
+  ],
+  "France": [
+   0.68,
+   0.127,
+   -0.154
+  ],
+  "Berlin": [
+   -0.315,
+   0.461,
+   0.206
+  ],
+  "d_pos_after": 0.492,
+  "d_neg_after": 1.231,
+  "loss_after": 0.261
+ },
+ "metrics_example": {
+  "ranks": [
+   1,
+   3,
+   2,
+   10
+  ],
+  "MRR": 0.483,
+  "Hits@1": 0.25,
+  "Hits@3": 0.75,
+  "Hits@10": 1.0,
+  "MR": 4.0
+ },
+ "bias": {
+  "metaedges": [
+   {
+    "metaedge": "GpBP",
+    "source": "Gene",
+    "relation": "participates",
+    "target": "Biological Process",
+    "edges": 559504,
+    "unbiased": 0,
+    "share_systematic": 0.0
+   },
+   {
+    "metaedge": "AeG",
+    "source": "Anatomy",
+    "relation": "expresses",
+    "target": "Gene",
+    "edges": 526407,
+    "unbiased": 453477,
+    "share_systematic": 0.861
+   },
+   {
+    "metaedge": "Gr>G",
+    "source": "Gene",
+    "relation": "regulates",
+    "target": "Gene",
+    "edges": 265672,
+    "unbiased": 265672,
+    "share_systematic": 1.0
+   },
+   {
+    "metaedge": "GiG",
+    "source": "Gene",
+    "relation": "interacts",
+    "target": "Gene",
+    "edges": 147164,
+    "unbiased": 15517,
+    "share_systematic": 0.105
+   },
+   {
+    "metaedge": "CcSE",
+    "source": "Compound",
+    "relation": "causes",
+    "target": "Side Effect",
+    "edges": 138944,
+    "unbiased": 0,
+    "share_systematic": 0.0
+   },
+   {
+    "metaedge": "AdG",
+    "source": "Anatomy",
+    "relation": "downregulates",
+    "target": "Gene",
+    "edges": 102240,
+    "unbiased": 102240,
+    "share_systematic": 1.0
+   },
+   {
+    "metaedge": "AuG",
+    "source": "Anatomy",
+    "relation": "upregulates",
+    "target": "Gene",
+    "edges": 97848,
+    "unbiased": 97848,
+    "share_systematic": 1.0
+   },
+   {
+    "metaedge": "GpMF",
+    "source": "Gene",
+    "relation": "participates",
+    "target": "Molecular Function",
+    "edges": 97222,
+    "unbiased": 0,
+    "share_systematic": 0.0
+   },
+   {
+    "metaedge": "GpPW",
+    "source": "Gene",
+    "relation": "participates",
+    "target": "Pathway",
+    "edges": 84372,
+    "unbiased": 0,
+    "share_systematic": 0.0
+   },
+   {
+    "metaedge": "GpCC",
+    "source": "Gene",
+    "relation": "participates",
+    "target": "Cellular Component",
+    "edges": 73566,
+    "unbiased": 0,
+    "share_systematic": 0.0
+   },
+   {
+    "metaedge": "GcG",
+    "source": "Gene",
+    "relation": "covaries",
+    "target": "Gene",
+    "edges": 61690,
+    "unbiased": 61690,
+    "share_systematic": 1.0
+   },
+   {
+    "metaedge": "CdG",
+    "source": "Compound",
+    "relation": "downregulates",
+    "target": "Gene",
+    "edges": 21102,
+    "unbiased": 21102,
+    "share_systematic": 1.0
+   },
+   {
+    "metaedge": "CuG",
+    "source": "Compound",
+    "relation": "upregulates",
+    "target": "Gene",
+    "edges": 18756,
+    "unbiased": 18756,
+    "share_systematic": 1.0
+   },
+   {
+    "metaedge": "DaG",
+    "source": "Disease",
+    "relation": "associates",
+    "target": "Gene",
+    "edges": 12623,
+    "unbiased": 1284,
+    "share_systematic": 0.102
+   },
+   {
+    "metaedge": "CbG",
+    "source": "Compound",
+    "relation": "binds",
+    "target": "Gene",
+    "edges": 11571,
+    "unbiased": 0,
+    "share_systematic": 0.0
+   },
+   {
+    "metaedge": "DuG",
+    "source": "Disease",
+    "relation": "upregulates",
+    "target": "Gene",
+    "edges": 7731,
+    "unbiased": 7731,
+    "share_systematic": 1.0
+   },
+   {
+    "metaedge": "DdG",
+    "source": "Disease",
+    "relation": "downregulates",
+    "target": "Gene",
+    "edges": 7623,
+    "unbiased": 7623,
+    "share_systematic": 1.0
+   },
+   {
+    "metaedge": "CrC",
+    "source": "Compound",
+    "relation": "resembles",
+    "target": "Compound",
+    "edges": 6486,
+    "unbiased": 6486,
+    "share_systematic": 1.0
+   },
+   {
+    "metaedge": "DlA",
+    "source": "Disease",
+    "relation": "localizes",
+    "target": "Anatomy",
+    "edges": 3602,
+    "unbiased": 0,
+    "share_systematic": 0.0
+   },
+   {
+    "metaedge": "DpS",
+    "source": "Disease",
+    "relation": "presents",
+    "target": "Symptom",
+    "edges": 3357,
+    "unbiased": 0,
+    "share_systematic": 0.0
+   },
+   {
+    "metaedge": "PCiC",
+    "source": "Pharmacologic Class",
+    "relation": "includes",
+    "target": "Compound",
+    "edges": 1029,
+    "unbiased": 0,
+    "share_systematic": 0.0
+   },
+   {
+    "metaedge": "CtD",
+    "source": "Compound",
+    "relation": "treats",
+    "target": "Disease",
+    "edges": 755,
+    "unbiased": 0,
+    "share_systematic": 0.0
+   },
+   {
+    "metaedge": "DrD",
+    "source": "Disease",
+    "relation": "resembles",
+    "target": "Disease",
+    "edges": 543,
+    "unbiased": 0,
+    "share_systematic": 0.0
+   },
+   {
+    "metaedge": "CpD",
+    "source": "Compound",
+    "relation": "palliates",
+    "target": "Disease",
+    "edges": 390,
+    "unbiased": 0,
+    "share_systematic": 0.0
+   }
+  ],
+  "subset_share_systematic": 0.3233978214656494,
+  "concentration": [
+   {
+    "metaedge": "CbG",
+    "nodes": 1689,
+    "edges": 11571,
+    "gini": 0.7355955475344411,
+    "top1pct_share": 0.2630714717829055
+   },
+   {
+    "metaedge": "DaG",
+    "nodes": 5392,
+    "edges": 12623,
+    "gini": 0.4533023094295162,
+    "top1pct_share": 0.10607621009268794
+   },
+   {
+    "metaedge": "CtD",
+    "nodes": 77,
+    "edges": 755,
+    "gini": 0.5139760901350305,
+    "top1pct_share": 0.09006622516556291
+   },
+   {
+    "metaedge": "CtD",
+    "nodes": 387,
+    "edges": 755,
+    "gini": 0.4056881770111402,
+    "top1pct_share": 0.08609271523178808
+   }
+  ],
+  "coverage": [
+   {
+    "check": "Compounds that treat at least one disease (CtD)",
+    "count": 387,
+    "of": 1552,
+    "share": 0.249
+   },
+   {
+    "check": "Compounds with at least one target gene (CbG)",
+    "count": 1389,
+    "of": 1552,
+    "share": 0.895
+   },
+   {
+    "check": "Compounds with at least one side effect (CcSE)",
+    "count": 1071,
+    "of": 1552,
+    "share": 0.69
+   },
+   {
+    "check": "Diseases with at least one treatment (CtD)",
+    "count": 77,
+    "of": 137,
+    "share": 0.562
+   },
+   {
+    "check": "Diseases with at least one associated gene (DaG)",
+    "count": 134,
+    "of": 137,
+    "share": 0.978
+   }
+  ],
+  "ubc": {
+   "degree_gig": 8611,
+   "pagerank_rank": 1
+  }
+ },
+ "seconds_total": 423.5706822872162
+}

@@ -1,0 +1,4 @@
+{
+  "_about": "Course copies of third-party datasets, read by ai-learning-kit only when the publisher's site and the copies built into the kit cannot be reached. A copy is used only if its SHA-256 matches the checksum recorded in the kit. Add a URL here to reach notebooks that install an earlier version of the kit.",
+  "cora": ["https://github.com/charlieabela/ai-learning-kit/releases/download/data-1/cora.tgz"]
+}
