@@ -1,179 +1,62 @@
-# ai-learning-kit
+# ari1101kit
 
-A sandbox library for the AI study units at the University of Malta
-(ARI1101 Foundations of Data Science, ICS2205 Web Intelligence, ICS5111 Mining
-Large Scale Data, and others to come).
+A teaching sandbox for **ARI1101 Foundations of Data Science** at the University of Malta.
 
-The kit holds a **library of problems**, each a frozen set of data sources in
-several formats with helper code that does the heavy lifting, and, for each
-**unit**, **sessions**. A session either binds a problem to a sequence of graded
-**tasks** with an answer book, or supplies **helpers and data** to notebooks that
-check themselves. The notebooks themselves are not stored here: they are kept and
-distributed with the rest of a session's material, and run unchanged in Notebook
-Tutor and in Colab because everything they depend on comes from the kit. A session
-hides the steps that are not its topic, so that students concentrate on the
-step that is: given the text of a policy, the kit extracts the rules and the
-students choose a format to store them; given tables of transactions, the kit
-checks compliance and the students decide what to count. Each task poses a
-question; answers are saved in an answer book next to the notebook; formative
-feedback says what is right, what is not, and the evidence.
+The unit follows one running case through the OSEMN lifecycle: the **Q3 2026 expenditure compliance review** at Brightwater Logistics Ltd, a fictional company. The question is how many payments above €5,000 were made in the quarter, and whether they followed the company's Expenditure Approval Policy.
 
-All companies, people and documents in the problems are fictional. Real
-datasets (Cora, for example) are not copied into the kit: it downloads them from
-their owners, as described under *Data* below.
+Answering that question involves extraction, conversion, cleaning, de-duplication, exploration and reporting, which is too much for the first weeks of the unit. The kit hides the steps that are not the topic of the current session, so that students can concentrate on the step that is. Each session hands a different step back to the students.
+
+All companies, people, accounts and documents in the case are fictional.
+
+## Use in Google Colab
+
+```python
+%pip install -q "git+https://github.com/charlieabela/ari1101kit@v0.2.4"
+import ari1101kit as kit
+
+kit.start("S02", student="Your Name")   # in Colab, connects Google Drive for the work folder
+kit.workspace()                          # copies the case files into <work folder>/brightwater_q3
+kit.task("T1.1")                         # explains a task: what to do, why, an example, what to record
+```
+
+**Where work is kept: next to the notebook.** `kit.start` finds the folder that holds the running notebook and makes it the current folder, so the answer book, the case files and every file saved with a plain name sit next to the notebook. In Jupyter and VS Code that is the notebook's folder. In Colab the kit connects Google Drive, asks the runtime which notebook is open, and finds that file in Drive (by name, or through the Drive API if the name is not unique). A notebook that is not in the student's own Drive (opened from GitHub or from someone else's shared link) cannot have files saved next to it; the kit then uses `My Drive/ARI1101/<session>` and tells the student to use File › Save a copy in Drive. `kit.start(..., folder="...")` chooses another folder: in Colab a relative path is a folder in My Drive (`folder="ARI1101/S02"`), and Drive is connected first; elsewhere it is relative to the notebook. `drive=False` skips Drive in Colab. Colab copies files to Drive in the background; `kit.sync()` sends them immediately, and `kit.submit()` calls it.
+
+Always install a tagged version (`@v0.2.4`), so that a notebook keeps working when later sessions are added.
+
+## The case files
+
+| Source | File | Format |
+|---|---|---|
+| Expenditure Approval Policy v3.1 | `expenditure_policy_v3_1.docx` | Word |
+| ERP payments, Q3 | `erp_payments_q3.csv` | CSV |
+| Bank statement feed, Q3 | `bank_feed_q3.json` | JSON |
+| Approval workflow (PWS) export | `approvals_pws_q3.xml` | XML |
+| Approved Vendor List | `approved_vendors.xlsx` | Excel |
+| Finance emails | `finance_emails_q3.txt` | plain text |
+| Q3 Finance Summary for the Board | `q3_finance_summary.pdf` | PDF |
+
+The files are frozen: every version of the kit ships the same data, so results discussed in one session remain valid in the next.
+
+## What the kit provides
+
+| Module | Purpose |
+|---|---|
+| `kit.sources()`, `kit.workspace()`, `kit.peek()`, `kit.path()` | list, copy and preview the case files |
+| `kit.extract` | text, rules and tables from Word, Excel, PDF and email files |
+| `kit.reference` | the kit's own clean versions of the ERP, bank and approval data |
+| `kit.pipeline` | the compliance check and the split-purchase search |
+| `kit.report` | assemble findings into an HTML and Word report |
+| `kit.start()`, `kit.answer()`, `kit.check()`, `kit.progress()`, `kit.submit()` | the answer book (formative) |
+| `kit.explain()`, `kit.source()` | describe any kit function, or show its code |
+
+## Sessions and versions
+
+| Version | Session | Students do | The kit does |
+|---|---|---|---|
+| 0.2.0 | S02 Data formats | read CSV, JSON and XML; store extracted rules and tables as JSON or CSV; combine sources; choose and compare formats | document extraction, cleaning inside its checks, compliance check, report layout |
+
+Each new session adds a module in `ari1101kit/sessions/` and a new tagged release; earlier modules and the data are not changed. See `CHANGELOG.md`.
 
 ## Notebooks
 
-Students open a session's notebooks in
-[Notebook Tutor](https://github.com/charlieabela/notebook-tutor), which ships the
-kit and keeps each student's copy, with their work, in its own clone; or in Colab,
-from Drive. Every notebook follows one contract (`docs/NOTEBOOK_CONTRACT.md`): it
-starts with the kit's install line and `kit.start(...)`, and nothing in it depends
-on where it runs. Check and stamp a notebook file wherever it is:
-
-```
-python -m ai_learning_kit.dev.notebooks check S02_1_prepare_setup.ipynb
-python -m ai_learning_kit.dev.notebooks stamp 0.5.0 S02_1_prepare_setup.ipynb
-```
-
-## Use in a notebook (Notebook Tutor, Colab, Jupyter or VS Code)
-
-A session with graded tasks:
-
-```python
-%pip install -q "ai-learning-kit@https://github.com/charlieabela/ai-learning-kit/archive/refs/tags/v0.11.1.zip"
-import ai_learning_kit as kit
-
-kit.start("ARI1101", "S02", student="Your Name")   # work is kept next to this notebook
-kit.workspace()                                     # copy the problem's case files there
-kit.task("T1.1")                                    # what to do, why, a typical example, what to record
-kit.peek("erp")                                     # look at a raw file
-rules = kit.extract.policy_rules()                  # the problem's helpers: extract, pipeline, report, reference
-kit.answer("T2.1", value=len(rules), reasoning="rules is a list of dictionaries")
-kit.progress(); kit.submit()
-```
-
-A session whose notebooks check themselves (no answer book, no name needed):
-
-```python
-%pip install -q "ai-learning-kit[graphs]@https://github.com/charlieabela/ai-learning-kit/archive/refs/tags/v0.11.1.zip"
-import ai_learning_kit as kit
-kit.start("ICS5111", "S02")        # downloads the session's datasets from their owners
-T = kit.tools()                    # the session's helper functions
-G, X, y, paper_ids, classes, split = T.load_cora()
-```
-
-The install line uses GitHub's archive of the release, so it needs only pip, not git.
-
-Always install a tagged version, so that a notebook keeps working when later
-sessions are added. `kit.catalog()` lists every unit, session and problem in
-the installed version; `kit.explain(fn)` and `kit.source(fn)` show what any kit
-function does and how.
-
-**Where work is kept.** `kit.start` finds the folder of the running notebook and
-makes it the current folder: the answer book (`answers/`), the case files and
-every file saved with a plain name sit next to the notebook. In Colab the kit
-connects Google Drive and finds the notebook there; `kit.sync()` pushes pending
-writes, and `kit.submit()` calls it. `folder=` chooses another folder (in Colab,
-relative to My Drive).
-
-**What to install.** The plain line covers ARI1101 (scikit-learn included). Sessions on graphs add
-`[graphs]` (networkx), and sessions on embeddings and graph neural
-networks add `[advanced]` (PyTorch, PyTorch Geometric):
-`%pip install -q "ai-learning-kit[advanced]@https://github.com/charlieabela/ai-learning-kit/archive/refs/tags/v0.11.1.zip"`.
-Each session records its extra, and its notebooks install it.
-
-**Data.** `ai_learning_kit.datasets` records, for every external dataset, its
-owner, download address, checksum, licence note and citation. The kit downloads
-it from the owner the first time a notebook needs it, checks the checksum, and
-keeps it in its data folder. When the owner's site cannot be reached, it uses a
-copy from somewhere else, checked the same way:
-
-```python
-kit.datasets.use("cora", "~/Downloads/cora.tgz")                       # a file on this computer
-kit.datasets.add_folder("~/Library/CloudStorage/GoogleDrive-me/My Drive/ICS5111")   # a synced folder
-kit.datasets.use("cora", "https://drive.google.com/file/d/<id>/view")   # a shared copy (Drive, OneDrive, Dropbox)
-kit.datasets.status()                                                   # what is where
-```
-
-A file dropped next to the notebook, or in its `data/` folder, is found too. The
-data folder is the `data/` folder of the clone when the kit or Notebook Tutor runs
-from a git clone (ignored by git), My Drive › ai-learning-kit › data in Colab with
-Drive connected, and the user's cache folder otherwise. Small research datasets
-(the karate club, Les Misérables, the Florentine families, Davis's Southern women)
-are stored in the kit with their citations: `kit.datasets.small("karate")`.
-
-**Language models are optional.** With a model configured (a Gemini, Anthropic
-or OpenAI API key, or an open-weight model behind Ollama, vLLM or any
-OpenAI-compatible server),
-`kit.hint(task)` gives one next step and `kit.ask(task, question)` explains a
-concept. Without one, everything else works unchanged. See `docs/LLM.md`.
-
-## Contents of this version
-
-| Unit | Sessions | Problem |
-|---|---|---|
-| ARI1101 Foundations of Data Science | S02 Data formats: CSV, JSON, XML and documents | `brightwater_q3` |
-| | S03 Web pages, web APIs and data cleaning (helpers, the fictional Campus Lets website, saved Open-Meteo responses) | none (helpers and data) |
-| | S04 Exploring data: descriptive statistics, distributions, correlation and visualisation (Palmer penguins, a year of Malta weather) | none (helpers and data) |
-| | S05 Modelling: linear regression, logistic regression and k-nearest neighbours with scikit-learn (Palmer penguins, Auto MPG) | none (helpers and data) |
-| ICS2205 Web Intelligence | none yet | |
-| ICS5111 Mining Large Scale Data | S02 Graph embeddings (helpers, Cora from LINQS, reference results) | none (helpers and data) |
-| ICS5111 Mining Large Scale Data | S05 RAG and Graph-RAG (formulary and MedQuAD subset in the kit, Hetionet; no framework, no language model needed) | none (helpers and data) |
-| ICS5111 Mining Large Scale Data | S04 Knowledge graphs (Hetionet from GitHub, Neo4j with saved results, TransE with PyG; needs `[advanced]`) | none (helpers and data) |
-| ICS5111 Mining Large Scale Data | S03 Graph neural networks (plain-PyTorch helpers, Cora from LINQS, reference results; needs `[advanced]`) | none (helpers and data) |
-
-**brightwater_q3**: the Q3 2026 expenditure compliance review at Brightwater
-Logistics Ltd. Seven sources in seven formats (DOCX policy, CSV payments, JSON
-bank feed, XML approvals, XLSX vendor list, TXT emails, PDF board report), eleven
-planted breaches, two split purchases, duplicated bank lines and an over-counting
-Board report.
-
-## Structure
-
-```
-ai_learning_kit/core       the engine: problems, sessions, checks, feedback, answer book, work folder
-ai_learning_kit/problems   the problem library (unit-independent)
-ai_learning_kit/units      one package per unit; sessions bind a problem to tasks
-ai_learning_kit/llm        optional language-model providers and the tutor helpers
-ai_learning_kit/datasets   external datasets: owner, address, checksum, licence; download and cache
-ai_learning_kit/dev        validator (problems, sessions), the notebook checker, and the release step
-templates/                 skeletons for a new problem and a new session
-docs/                      ARCHITECTURE, AUTHORING_A_PROBLEM, AUTHORING_A_SESSION, LLM, prompts/
-```
-
-`docs/ARCHITECTURE.md` explains the layers and contracts. To add a problem or a
-session, follow the authoring guides; `docs/prompts/` holds prompts that draft
-either from a topic and guidelines with a language model, for the lecturer to
-review. `python -m ai_learning_kit.dev.validate` checks every contract.
-
-## Development
-
-```
-pip install -e ".[dev,graphs]"
-pytest -q
-python -m ai_learning_kit.dev.validate          # problems, sessions and every notebook named by a session
-python -m ai_learning_kit.dev.release 0.6.0     # a release: version and docs
-```
-
-CI runs the tests and the validator on Linux, macOS and Windows, and checks that
-every registered dataset's owner still serves the exact file (an owner that refuses
-the connection is reported as a warning).
-
-## Licence
-
-Copyright © 2026 Charlie Abela, University of Malta.
-
-ai-learning-kit is free software: you can redistribute it and/or modify it under the terms of the
-GNU Affero General Public License, version 3 (AGPL-3.0-only), as published by the Free Software
-Foundation; see [LICENSE](LICENSE). It is distributed in the hope that it will be useful, but
-without any warranty; without even the implied warranty of merchantability or fitness for a
-particular purpose.
-
-In short: you may use, study, change and share the kit, including in teaching. If you distribute
-the kit or a work based on it, or let people use a modified version over a network (for example
-inside a hosted notebook service), you must make the complete source of that version available
-under the same licence. Releases up to v0.11.0 were published under GPL-3.0-or-later.
-
-Datasets the kit downloads or stores keep their own licences, recorded with each dataset
-(`kit.datasets.catalog()` and the `data/README.md` of each session that stores data).
+`notebooks/S02_Sandbox_Q3_Compliance_Review.ipynb` is the student notebook for Session 02.
