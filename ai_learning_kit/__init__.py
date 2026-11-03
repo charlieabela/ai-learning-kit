@@ -104,7 +104,7 @@ def start(unit: str, session: str | None = None, student: str = "", folder=None,
         first = next(iter(mod.TASKS))
         print(f"{len(mod.TASKS)} tasks. kit.task('{first}') explains a task; kit.progress() shows what is left.")
     elif helpers is not None:
-        print("Helpers: T = kit.tools(). The kit keeps no answer book in this session: the notebook's check cells give the feedback.")
+        print("Helpers: T = kit.tools(). This session has no answer book: the notebook checks itself.")
 
 
 def tools():

@@ -41,7 +41,7 @@ python -m ai_learning_kit.dev.notebooks stamp 0.5.0 S02_1_prepare_setup.ipynb
 A session with graded tasks:
 
 ```python
-%pip install -q "ai-learning-kit@https://github.com/charlieabela/ai-learning-kit/archive/refs/tags/v0.11.1.zip"
+%pip install -q "ai-learning-kit@https://github.com/charlieabela/ai-learning-kit/archive/refs/tags/v0.6.0.zip"
 import ai_learning_kit as kit
 
 kit.start("ARI1101", "S02", student="Your Name")   # work is kept next to this notebook
@@ -56,7 +56,7 @@ kit.progress(); kit.submit()
 A session whose notebooks check themselves (no answer book, no name needed):
 
 ```python
-%pip install -q "ai-learning-kit[graphs]@https://github.com/charlieabela/ai-learning-kit/archive/refs/tags/v0.11.1.zip"
+%pip install -q "ai-learning-kit[graphs]@https://github.com/charlieabela/ai-learning-kit/archive/refs/tags/v0.6.0.zip"
 import ai_learning_kit as kit
 kit.start("ICS5111", "S02")        # downloads the session's datasets from their owners
 T = kit.tools()                    # the session's helper functions
@@ -77,10 +77,10 @@ connects Google Drive and finds the notebook there; `kit.sync()` pushes pending
 writes, and `kit.submit()` calls it. `folder=` chooses another folder (in Colab,
 relative to My Drive).
 
-**What to install.** The plain line covers ARI1101 (scikit-learn included). Sessions on graphs add
-`[graphs]` (networkx), and sessions on embeddings and graph neural
+**What to install.** The plain line covers ARI1101. Sessions on graphs add
+`[graphs]` (networkx, scikit-learn), and sessions on embeddings and graph neural
 networks add `[advanced]` (PyTorch, PyTorch Geometric):
-`%pip install -q "ai-learning-kit[advanced]@https://github.com/charlieabela/ai-learning-kit/archive/refs/tags/v0.11.1.zip"`.
+`%pip install -q "ai-learning-kit[advanced]@https://github.com/charlieabela/ai-learning-kit/archive/refs/tags/v0.6.0.zip"`.
 Each session records its extra, and its notebooks install it.
 
 **Data.** `ai_learning_kit.datasets` records, for every external dataset, its
@@ -115,13 +115,8 @@ concept. Without one, everything else works unchanged. See `docs/LLM.md`.
 |---|---|---|
 | ARI1101 Foundations of Data Science | S02 Data formats: CSV, JSON, XML and documents | `brightwater_q3` |
 | | S03 Web pages, web APIs and data cleaning (helpers, the fictional Campus Lets website, saved Open-Meteo responses) | none (helpers and data) |
-| | S04 Exploring data: descriptive statistics, distributions, correlation and visualisation (Palmer penguins, a year of Malta weather) | none (helpers and data) |
-| | S05 Modelling: linear regression, logistic regression and k-nearest neighbours with scikit-learn (Palmer penguins, Auto MPG) | none (helpers and data) |
 | ICS2205 Web Intelligence | none yet | |
 | ICS5111 Mining Large Scale Data | S02 Graph embeddings (helpers, Cora from LINQS, reference results) | none (helpers and data) |
-| ICS5111 Mining Large Scale Data | S05 RAG and Graph-RAG (formulary and MedQuAD subset in the kit, Hetionet; no framework, no language model needed) | none (helpers and data) |
-| ICS5111 Mining Large Scale Data | S04 Knowledge graphs (Hetionet from GitHub, Neo4j with saved results, TransE with PyG; needs `[advanced]`) | none (helpers and data) |
-| ICS5111 Mining Large Scale Data | S03 Graph neural networks (plain-PyTorch helpers, Cora from LINQS, reference results; needs `[advanced]`) | none (helpers and data) |
 
 **brightwater_q3**: the Q3 2026 expenditure compliance review at Brightwater
 Logistics Ltd. Seven sources in seven formats (DOCX policy, CSV payments, JSON
@@ -160,20 +155,4 @@ CI runs the tests and the validator on Linux, macOS and Windows, and checks that
 every registered dataset's owner still serves the exact file (an owner that refuses
 the connection is reported as a warning).
 
-## Licence
-
-Copyright © 2026 Charlie Abela, University of Malta.
-
-ai-learning-kit is free software: you can redistribute it and/or modify it under the terms of the
-GNU Affero General Public License, version 3 (AGPL-3.0-only), as published by the Free Software
-Foundation; see [LICENSE](LICENSE). It is distributed in the hope that it will be useful, but
-without any warranty; without even the implied warranty of merchantability or fitness for a
-particular purpose.
-
-In short: you may use, study, change and share the kit, including in teaching. If you distribute
-the kit or a work based on it, or let people use a modified version over a network (for example
-inside a hosted notebook service), you must make the complete source of that version available
-under the same licence. Releases up to v0.11.0 were published under GPL-3.0-or-later.
-
-Datasets the kit downloads or stores keep their own licences, recorded with each dataset
-(`kit.datasets.catalog()` and the `data/README.md` of each session that stores data).
+Licence: GPL-3.0-or-later.
