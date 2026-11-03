@@ -14,5 +14,4 @@ SESSIONS = {
     "S02": ".s02",      # Data formats: CSV, JSON, XML and documents (problem: brightwater_q3)
     "S03": ".s03",      # Obtaining data from web pages and APIs, and cleaning it (no problem; notebooks check themselves)
     "S04": ".s04",      # Exploring data: descriptive statistics, distributions, correlation and visualisation
-    "S05": ".s05",      # Modelling: linear regression, logistic regression and k-nearest neighbours
 }
