@@ -1,4 +1,4 @@
-"""Discovery: which units, sessions and problems this version of the kit contains.
+"""Discovery: which topics, problems and datasets this version of the kit contains.
 
 catalog() returns plain data (dicts and lists), so that other tools, such as a
 notebook tutor, can list what is available without importing the kit's internals.
@@ -6,30 +6,31 @@ notebook tutor, can list what is available without importing the kit's internals
 from __future__ import annotations
 
 from .. import problems as _problems
-from .. import units as _units
+from .. import topics as _topics
 from .._version import __version__
+from . import levels as _levels
 
-SESSION_FIELDS = ("UNIT", "SESSION", "TITLE")          # required in every session module
-SESSION_DEFAULTS = {                                     # optional, with these defaults
-    "PROBLEM": None,      # an id from the problem library, or None for a session without a case problem
+TOPIC_FIELDS = ("TOPIC", "TITLE")                       # required in every topic module
+TOPIC_DEFAULTS = {                                       # optional, with these defaults
+    "PROBLEM": None,      # an id from the problem library, or None for a topic without a case problem
     "TASKS": {},          # graded tasks with an answer book; {} when the notebooks check themselves
-    "TOOLS": None,        # dotted path (relative to the session) of the helper module kit.tools() returns
+    "TOOLS": None,        # dotted path (relative to the topic) of the helper module kit.tools() returns
     "DATASETS": (),       # external datasets (ai_learning_kit.datasets) that kit.start fetches
-    "EXTRAS": "",         # the pip extra the session's notebooks install, e.g. "graphs"
-    "SAVES_WORK": None,   # True when students' work must be kept (default: when there are tasks)
+    "EXTRAS": "",         # the pip extra the topic's notebooks install, e.g. "graphs"
+    "SAVES_WORK": None,   # True when learners' work must be kept (default: when there are tasks)
+    "BUILDS_ON": (),      # topics whose ideas are assumed
 }
 
 
-def unit(code: str):
-    return _units.unit(code)
-
-
-def session(unit_code: str, session_code: str):
-    mod = _units.session(unit_code, session_code)
-    missing = [f for f in SESSION_FIELDS if not hasattr(mod, f)]
+def topic(name: str):
+    """A topic module with every optional field filled in (see ai_learning_kit.topics)."""
+    mod = _topics.topic(name)
+    missing = [f for f in TOPIC_FIELDS if not hasattr(mod, f)]
     if missing:
-        raise AttributeError(f"Session module {mod.__name__} lacks {', '.join(missing)}")
-    for name, default in SESSION_DEFAULTS.items():
+        raise AttributeError(f"Topic module {mod.__name__} lacks {', '.join(missing)}")
+    if not hasattr(mod, "LEVEL"):
+        mod.LEVEL = _levels.DEFAULT_LEVEL
+    for name, default in TOPIC_DEFAULTS.items():
         if not hasattr(mod, name):
             setattr(mod, name, type(default)() if isinstance(default, (dict, tuple)) else default)
     if mod.SAVES_WORK is None:
@@ -38,7 +39,7 @@ def session(unit_code: str, session_code: str):
 
 
 def tools(mod):
-    """The helper module of a session (what kit.tools() returns), or None when it has none."""
+    """The helper module of a topic (what kit.tools() returns), or None when it has none."""
     if not mod.TOOLS:
         return None
     from importlib import import_module
@@ -60,24 +61,28 @@ def task_summary(task_id: str, task: dict) -> dict:
             "auto_checked": task.get("check") is not None, "written_checklist": task.get("written") is not None}
 
 
-def session_summary(mod) -> dict:
-    return {"unit": mod.UNIT, "session": mod.SESSION, "title": mod.TITLE, "problem": mod.PROBLEM,
-            "stages": dict(getattr(mod, "STAGES", {}) or {}),
+def topic_summary(mod) -> dict:
+    return {"topic": mod.TOPIC, "title": mod.TITLE, "level": mod.LEVEL, "builds_on": list(mod.BUILDS_ON),
+            "problem": mod.PROBLEM, "stages": dict(getattr(mod, "STAGES", {}) or {}),
             "tasks": [task_summary(tid, t) for tid, t in mod.TASKS.items()],
             "tools": bool(mod.TOOLS), "datasets": list(mod.DATASETS), "extras": mod.EXTRAS}
 
 
-def tutor_context(unit_code: str, session_code: str) -> dict:
-    """What a tutor needs to pitch its help for a session: cohort, problem, scope and tasks."""
+def tutor_context(name: str, level: str | None = None) -> dict:
+    """What a tutor needs to pitch its help: the learner's level, and the topic's problem, scope and tasks.
+
+    tutor_context("knowledge-graphs", level="advanced"); level defaults to the topic's own LEVEL.
+    """
     from .session import render_guide, scope_text
-    mod = session(unit_code, session_code)
-    pkg = unit(unit_code)
+    mod = topic(name)
+    lvl = _levels.normalise_level(level or mod.LEVEL)
+    head = {"topic": mod.TOPIC, "title": mod.TITLE, "level": lvl, "builds_on": list(mod.BUILDS_ON),
+            "cohort": _levels.describe(lvl)}
     prob = problem(mod.PROBLEM) if mod.PROBLEM else None
     helpers = tools(mod)
     from .. import datasets as _datasets
     return {
-        "unit": dict(pkg.UNIT), "session": mod.SESSION, "title": mod.TITLE,
-        "cohort": f"{pkg.UNIT['code']} {pkg.UNIT['title']} ({pkg.UNIT['programme']}, {pkg.UNIT['level']}). {pkg.UNIT['notes']}",
+        **head,
         "problem": ({"id": prob.id, "title": prob.title, "question": prob.question, "summary": prob.summary}
                     if prob else None),
         "about": _first_paragraph(mod.__doc__),
@@ -96,16 +101,12 @@ def tutor_context(unit_code: str, session_code: str) -> dict:
 
 def catalog(include_tasks: bool = True) -> dict:
     """Everything this version of the kit offers, as plain data."""
-    out = {"kit": "ai-learning-kit", "version": __version__, "units": [], "problems": []}
-    for code in _units.REGISTRY:
-        pkg = _units.unit(code)
-        entry = dict(pkg.UNIT)
-        entry["sessions"] = []
-        for scode in getattr(pkg, "SESSIONS", {}):
-            mod = session(code, scode)
-            s = session_summary(mod) if include_tasks else {"session": scode, "title": mod.TITLE, "problem": mod.PROBLEM}
-            entry["sessions"].append(s)
-        out["units"].append(entry)
+    out = {"kit": "ai-learning-kit", "version": __version__, "topics": [], "problems": [],
+           "levels": {k: v["label"] for k, v in _levels.LEVELS.items()}}
+    for name in _topics.names():
+        mod = topic(name)
+        out["topics"].append(topic_summary(mod) if include_tasks else
+                             {"topic": mod.TOPIC, "title": mod.TITLE, "level": mod.LEVEL})
     for pid in _problems.ids():
         out["problems"].append(_problems.get(pid).describe())
     from .. import datasets as _datasets

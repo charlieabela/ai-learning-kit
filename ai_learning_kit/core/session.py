@@ -1,21 +1,20 @@
-"""Helpers for writing a session module. See docs/AUTHORING_A_SESSION.md.
+"""Helpers for writing a topic module. See docs/AUTHORING_A_TOPIC.md.
 
-A session module defines:
-    UNIT     = "ARI1101"
-    SESSION  = "S02"
+A topic module (ai_learning_kit/topics/<name>/__init__.py) defines:
+    TOPIC    = "data-formats"
     TITLE    = "Data formats: ..."
-    PROBLEM  = "brightwater_q3"          # an id from the problem library
-    TASKS    = {"T1.1": task(...), ...}  # ordered; ids are shown to students
+    PROBLEM  = "brightwater_q3"          # an id from the problem library, or None
+    TASKS    = {"T1.1": task(...), ...}  # ordered; ids are shown to students; {} when notebooks check themselves
 and, usually, a GUIDE dict in a companion module with four parts per task,
 attached with attach_guides(TASKS, GUIDE, example_case=...).
 
-Optionally (and recommended), STAGES describes how visible each stage of the
-problem is in this session, so that a tutor knows how deeply to explain it:
+STAGES describes how visible each step is in this topic, so that a learner can stay on the
+topic's focus and a tutor knows how deeply to explain each step:
     STAGES = {
         "extract": stage("Extracting rules and entities from the documents", BLACK_BOX,
-                         how="kit.extract", taught_in="ICS2205 Part A"),
+                         how="kit.extract", taught_in="the text-to-graphs topic"),
         "formats": stage("Reading CSV, JSON and XML", FOCUS),
-        "cleaning": stage("Cleaning and de-duplication", OUT_OF_SCOPE, taught_in="ARI1101 Scrub session"),
+        "cleaning": stage("Cleaning and de-duplication", OUT_OF_SCOPE, taught_in="the data-cleaning topic"),
     }
 FOCUS: students do it; explain in depth. ON_REQUEST: the kit does it, and students
 may look inside: say what goes in, what comes out and why; explain how it works only
@@ -34,10 +33,10 @@ VISIBILITY = (FOCUS, ON_REQUEST, BLACK_BOX, OUT_OF_SCOPE)
 
 def stage(label: str, visibility: str, how: str | None = None, taught_in: str | None = None,
           note: str | None = None) -> dict:
-    """One stage of the problem's workflow and how visible it is in this session.
+    """One step of the topic's workflow and how visible it is in this topic.
 
     how       : where the kit does it (e.g. "kit.extract.policy_rules"), for black boxes
-    taught_in : where students meet it properly (e.g. "ICS5111 Session 03")
+    taught_in : where learners meet it properly (e.g. "the graph-neural-networks topic")
     note      : anything the tutor should know (e.g. "say only that embeddings place similar nodes close together")
     """
     if visibility not in VISIBILITY:
@@ -46,11 +45,11 @@ def stage(label: str, visibility: str, how: str | None = None, taught_in: str | 
 
 
 def scope_text(mod) -> str:
-    """The session's stages as instructions for a tutor (empty when the session declares none)."""
+    """The topic's stages as instructions for a tutor (empty when the topic declares none)."""
     stages = getattr(mod, "STAGES", None) or {}
     if not stages:
         return ""
-    lines = ["SCOPE OF THIS SESSION (follow it when you explain):"]
+    lines = ["SCOPE OF THIS TOPIC (follow it when you explain):"]
     groups = ((FOCUS, "In focus: students do these themselves. Explain them in depth, with the Python mechanics and the idea."),
               (ON_REQUEST, "Available on request: the kit does these for the students, and the notebook offers an "
                            "optional look inside. By default say what goes in, what comes out and why the step is "

@@ -1,6 +1,6 @@
-"""Saved copies of web pages and API responses that session notebooks request.
+"""Saved copies of web pages and API responses that topic notebooks request.
 
-A session whose helpers send web requests (ARI1101 S03) keeps a copy of every response its
+A topic whose helpers send web requests (web-data, exploring-data) keeps a copy of every response its
 notebooks use, so that the notebooks run when the network does not. This tool compares the
 copies with the live sites and services, and captures them again:
 
@@ -24,15 +24,17 @@ from datetime import date
 VOLATILE = ("generationtime_ms",)       # fields that differ on every request
 
 
-def _sessions():
+def _topics():
     from ..core import registry
-    from .. import units
-    for code in units.REGISTRY:
-        for scode in getattr(units.unit(code), "SESSIONS", {}):
-            mod = registry.session(code, scode)
+    from .. import topics
+    for name in topics.names():
+        mod = registry.topic(name)
+        try:
             helpers = registry.tools(mod)
-            if helpers is not None and hasattr(helpers, "SAVED_REQUESTS"):
-                yield mod, helpers
+        except ImportError:                 # a topic whose extra is not installed sends no web requests
+            continue
+        if helpers is not None and "SAVED_REQUESTS" in vars(helpers):
+            yield mod, helpers
 
 
 def _comparable(body: bytes, content_type: str):
@@ -70,10 +72,10 @@ def _live(helpers, url, params):
 
 
 def check() -> int:
-    for mod, h in _sessions():
+    for mod, h in _topics():
         index = h._index()
         for name, (url, params) in h.SAVED_REQUESTS.items():
-            title = f"{mod.UNIT} {mod.SESSION} {name}"
+            title = f"{mod.TOPIC} {name}"
             try:
                 r = _live(h, url, params)
             except Exception as e:
@@ -93,7 +95,7 @@ def check() -> int:
         if site_files is not None:
             import requests
             for path in sorted(site_files.iterdir()):
-                title = f"{mod.UNIT} {mod.SESSION} site/{path.name}"
+                title = f"{mod.TOPIC} site/{path.name}"
                 try:
                     r = requests.get(h.SITE + path.name, headers=h.HEADERS, timeout=30)
                 except Exception as e:
@@ -109,7 +111,7 @@ def check() -> int:
 
 
 def capture() -> int:
-    for mod, h in _sessions():
+    for mod, h in _topics():
         h.SAVED.mkdir(parents=True, exist_ok=True)
         index = h._index()
         for name, (url, params) in h.SAVED_REQUESTS.items():
@@ -117,7 +119,7 @@ def capture() -> int:
             (h.SAVED / name).write_bytes(r.content)
             index[name] = {"status": r.status_code, "content_type": r.headers.get("Content-Type", ""),
                            "url": r.url, "captured": date.today().isoformat()}
-            print(f"{mod.UNIT} {mod.SESSION} {name}: {r.status_code}, {len(r.content)} bytes")
+            print(f"{mod.TOPIC} {name}: {r.status_code}, {len(r.content)} bytes")
         (h.SAVED / "saved.json").write_text(json.dumps(index, indent=1, sort_keys=True) + "\n", encoding="utf-8")
     return 0
 

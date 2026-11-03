@@ -51,18 +51,18 @@ def _serialise(value):
 
 
 class AnswerBook:
-    def __init__(self, unit: str, session: str, student: str, tasks: dict, folder: Path | None = None,
+    def __init__(self, topic: str, student: str, tasks: dict, folder: Path | None = None,
                  problem: str | None = None):
-        self.unit, self.session, self.student, self.tasks = unit, session, student, tasks
+        self.topic, self.student, self.tasks = topic, student, tasks
         answer_dir = Path(folder or Path.cwd()).resolve() / ANSWER_DIR
         answer_dir.mkdir(parents=True, exist_ok=True)
         safe = "".join(ch if ch.isalnum() else "_" for ch in student).strip("_") or "student"
-        self.path = answer_dir / f"{unit}_{session}_{safe}.json"
+        self.path = answer_dir / f"{topic}_{safe}.json"
         if self.path.exists():
             self.data = json.loads(self.path.read_text(encoding="utf-8"))
             print(f"Continuing your answer book: {self.path} ({len(self.data['answers'])} answers so far)")
         else:
-            self.data = {"kit": "ai-learning-kit", "kit_version": __version__, "unit": unit, "session": session,
+            self.data = {"kit": "ai-learning-kit", "kit_version": __version__, "topic": topic,
                          "problem": problem, "student": student,
                          "started": datetime.now().isoformat(timespec="seconds"), "answers": {}}
             self._save()
@@ -78,7 +78,7 @@ class AnswerBook:
 
     def record(self, task_id: str, value=None, reasoning: str | None = None):
         if task_id not in self.tasks:
-            raise KeyError(f"{task_id} is not a task in {self.unit} {self.session}. Tasks: {', '.join(self.tasks)}")
+            raise KeyError(f"{task_id} is not a task in {self.topic}. Tasks: {', '.join(self.tasks)}")
         task = self.tasks[task_id]
         previous = self.data["answers"].get(task_id, {})
         attempts = previous.get("attempts", 1 if previous else 0) + 1

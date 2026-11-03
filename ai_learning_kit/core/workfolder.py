@@ -14,11 +14,11 @@ How the notebook's folder is found
   name is not unique, through the Drive API (which asks for permission once).
 
 kit.start(..., folder=...) chooses another folder. In Colab a relative path is a
-folder in My Drive ("ARI1101/S02"); elsewhere it is relative to the notebook.
+folder in My Drive ("data-formats"); elsewhere it is relative to the notebook.
 
 When there is no such folder (a notebook opened from GitHub or from someone
 else's shared link is not in the student's own Drive), the kit says why, keeps
-the work in My Drive/ai-learning-kit/<unit>/<session>, and explains how to save a copy.
+the work in My Drive/ai-learning-kit/<topic>, and explains how to save a copy.
 """
 from __future__ import annotations
 
@@ -33,7 +33,7 @@ from pathlib import Path
 
 COLAB_DRIVE = Path("/content/drive")      # where Colab mounts Google Drive
 COLAB_LOCAL = Path("/content")            # Colab's temporary disk
-KIT_FOLDER = "ai-learning-kit"            # fallback folder in My Drive: ai-learning-kit/<unit>/<session>
+KIT_FOLDER = "ai-learning-kit"            # fallback folder in My Drive: ai-learning-kit/<topic>
 START_DIR = Path.cwd()                    # where the kernel started: the notebook's folder in Jupyter
 SAVE_A_COPY = ("To keep your work next to the notebook, open it in Colab, choose File › Save a copy in Drive, "
                "open that copy, and run kit.start again.")
@@ -212,7 +212,7 @@ def ensure_drive() -> None:
 def resolve_folder(folder) -> Path:
     """Turn the folder= argument into a path.
 
-    In Colab, a relative path is a folder in My Drive: "ARI1101/S02" means My Drive › ARI1101 › S02, and a
+    In Colab, a relative path is a folder in My Drive: "Data science/formats" means My Drive › Data science › formats, and a
     leading "My Drive/" or "MyDrive/" is accepted too. Elsewhere, a relative path is taken from the
     notebook's folder.
     """
@@ -262,8 +262,12 @@ def colab_notebook_folder(mount=True) -> tuple[Path | None, str]:
 
 
 # --------------------------------------------------------------------------- choice
-def choose(unit: str, session: str, folder=None, drive: bool = True) -> tuple[Path, str]:
-    """Return (work folder, a plain description of where it is); the folder becomes the current folder."""
+def choose(topic: str, folder=None, drive: bool = True) -> tuple[Path, str]:
+    """Return (work folder, a plain description of where it is); the folder becomes the current folder.
+
+    topic: the folder name used when no notebook folder can be found."""
+    parts = [topic]
+    shown = " › ".join(parts)
     if folder is not None:
         base, where = resolve_folder(folder), "the folder you chose"
         if in_colab() and _under(base, COLAB_DRIVE):
@@ -281,16 +285,16 @@ def choose(unit: str, session: str, folder=None, drive: bool = True) -> tuple[Pa
         if base is not None:
             where = reason
         elif drive_mounted():
-            base = COLAB_DRIVE / "MyDrive" / KIT_FOLDER / unit / session
-            where = (f"a folder in your Google Drive (My Drive › {KIT_FOLDER} › {unit} › {session}), because {reason}. "
+            base = COLAB_DRIVE / "MyDrive" / KIT_FOLDER / Path(*parts)
+            where = (f"a folder in your Google Drive (My Drive › {KIT_FOLDER} › {shown}), because {reason}. "
                      f"{SAVE_A_COPY}")
         else:
-            base = COLAB_LOCAL / KIT_FOLDER / unit / session
+            base = COLAB_LOCAL / KIT_FOLDER / Path(*parts)
             where = (f"Colab's temporary storage, because {reason}. WARNING: these files are deleted when Colab "
                      "disconnects. Run kit.start again and allow Drive access, or download your answer book with "
                      "kit.submit() before you close the notebook")
     elif in_colab():
-        base = COLAB_LOCAL / KIT_FOLDER / unit / session
+        base = COLAB_LOCAL / KIT_FOLDER / Path(*parts)
         where = "Colab's temporary storage (deleted when Colab disconnects), because you chose drive=False"
     else:
         base, where = local_notebook_folder()

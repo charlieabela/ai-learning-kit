@@ -1,37 +1,29 @@
-"""ai-learning-kit: a sandbox library for the AI study units at the University of Malta.
+"""ai-learning-kit: a library for learning data science and AI by doing.
 
-The kit holds a library of problems (frozen datasets with helper code that does
-the heavy lifting) and, for each study unit, sessions that bind a problem to a
-sequence of tasks. A session hides the steps that are not its topic, so that
-students concentrate on the step that is. Questions are posed per task, answers
-are saved in an answer book next to the notebook, and formative feedback is given
-at once.
+The kit is organised by topic: what is learnt, independent of any course. A notebook starts the
+topic it is about; the kit then supplies everything that is not the topic's focus (data, the steps
+taught elsewhere, connections to databases and language models) as helpers, so that the learner can
+concentrate on the topic. Each helper can be opened with kit.source(T.<name>) for those who want to
+look inside.
 
-Typical use in a notebook with graded tasks:
+A topic whose notebooks check themselves:
 
     import ai_learning_kit as kit
-    kit.start("ARI1101", "S02", student="Your Name")
-    kit.workspace()                 # copy the problem's case files next to the notebook
-    kit.peek("erp")                 # look at a raw file
-    kit.task("T2.1")                # what to do, why, a typical example, what to record
-    rules = kit.extract.policy_rules()
-    kit.answer("T2.1", value=len(rules), reasoning="...")
+    kit.start("knowledge-graphs")      # also downloads the topic's datasets from their owners, once
+    T = kit.tools()                    # the topic's helper functions
+    nodes = T.hetionet_nodes()
+
+A topic with graded tasks keeps an answer book next to the notebook:
+
+    kit.start("<topic>", student="Your Name")
+    kit.task("T2.1")                   # what to do, why, a typical example, what to record
+    kit.answer("T2.1", value=..., reasoning="...")
     kit.submit()
 
-A session without graded tasks (its notebooks check themselves) needs no name:
+kit.catalog() lists every topic, problem and dataset in this version. Optional: kit.hint() and
+kit.ask() use a language model when one is configured (see ai_learning_kit.llm); nothing else does.
 
-    import ai_learning_kit as kit
-    kit.start("ICS5111", "S02")     # also downloads the session's datasets from their owners
-    T = kit.tools()                 # the session's helper functions
-    G, X, y, paper_ids, classes, split = T.load_cora()
-
-kit.extract, kit.pipeline, kit.report and kit.reference are the helper modules of
-the problem that the current session uses. kit.catalog() lists every unit,
-session and problem in this version. Optional: kit.hint() and kit.ask() use a
-language model when one is configured (see ai_learning_kit.llm); nothing else does.
-
-All companies, people and documents in the problems are fictional unless a
-problem says otherwise.
+All companies, people and documents in the problems are fictional unless a problem says otherwise.
 """
 from __future__ import annotations
 
@@ -47,46 +39,38 @@ from . import datasets, llm
 
 __all__ = ["start", "tools", "datasets", "task", "answer", "check", "progress", "submit", "sync", "sources", "workspace",
            "peek", "path", "extract", "pipeline", "reference", "report", "explain", "source",
-           "hint", "ask", "catalog", "problem", "session", "llm", "__version__"]
+           "hint", "ask", "catalog", "problem", "topic", "llm", "__version__"]
 
-_state = {"session": None, "problem": None, "book": None, "folder": None, "tools": None}
+_state = {"topic": None, "problem": None, "book": None, "folder": None, "tools": None}
 
 
-# --------------------------------------------------------------------------- session
-def start(unit: str, session: str | None = None, student: str = "", folder=None, drive=None) -> None:
-    """Start (or continue) a session: choose the work folder, fetch the session's data and, for a
-    session with graded tasks, open your answer book.
+# --------------------------------------------------------------------------- topic
+def start(topic: str, student: str = "", folder=None, drive=None) -> None:
+    """Start (or continue) a topic: choose the work folder, fetch the topic's data and, for a topic
+    with graded tasks, open your answer book.
 
-    unit    : the study-unit code, for example "ARI1101" (or "ARI1101/S02" in one string)
-    session : the session code, for example "S02"
-    student : your name, used to name the answer file (needed only when the session has tasks)
-    folder  : optional; a different folder for your work. In Colab a relative path
-              is a folder in your Google Drive, for example "ARI1101/S02" for
-              My Drive › ARI1101 › S02; on your computer it is relative to the
-              notebook's folder.
-    drive   : in Colab, whether to connect Google Drive. By default it is connected
-              when the session keeps work you need (an answer book) and not otherwise.
+    topic   : the topic, for example "knowledge-graphs" (kit.catalog() lists them)
+    student : your name, used to name the answer file (needed only when the topic has tasks)
+    folder  : optional; a different folder for your work. In Colab a relative path is a folder in
+              your Google Drive; on your computer it is relative to the notebook's folder.
+    drive   : in Colab, whether to connect Google Drive. By default it is connected when the topic
+              keeps work you need (an answer book) and not otherwise.
 
-    The kit finds the folder that holds this notebook: on your computer (Jupyter,
-    VS Code, Notebook Tutor) that is where the notebook file is; in Colab it connects
-    your Google Drive and finds the notebook there. That folder becomes the current
-    folder, so your answer book, the case files and every file you save with a plain
-    name, such as "policy_rules.json", are kept next to the notebook.
+    The kit finds the folder that holds this notebook: on your computer (Jupyter, VS Code, Notebook
+    Tutor) that is where the notebook file is; in Colab it connects your Google Drive and finds the
+    notebook there. That folder becomes the current folder, so every file you save with a plain name,
+    such as "results.csv", is kept next to the notebook.
     """
-    if session is None and "/" in str(unit):
-        unit, session = str(unit).split("/", 1)
-    if session is None:
-        raise TypeError('Give the unit and the session, for example kit.start("ICS5111", "S02").')
-    mod = registry.session(unit, session)
+    mod = registry.topic(topic)
     if mod.TASKS and not student:
-        raise TypeError(f'Give your name: kit.start("{mod.UNIT}", "{mod.SESSION}", student="Your Name").')
+        raise TypeError(f'Give your name: kit.start("{mod.TOPIC}", student="Your Name").')
     prob = registry.problem(mod.PROBLEM) if mod.PROBLEM else None
     if drive is None:
         drive = bool(mod.SAVES_WORK)
-    base, where = workfolder.choose(mod.UNIT, mod.SESSION, folder=folder, drive=drive)
+    base, where = workfolder.choose(mod.TOPIC, folder=folder, drive=drive)
     helpers = registry.tools(mod)
-    _state.update(session=mod, problem=prob, folder=base, book=None, tools=helpers)
-    print(f"ai-learning-kit {__version__} · {mod.UNIT} {mod.SESSION}: {mod.TITLE}")
+    _state.update(topic=mod, problem=prob, folder=base, book=None, tools=helpers)
+    print(f"ai-learning-kit {__version__} · {mod.TITLE}")
     if prob is not None:
         print(f"Problem: {prob.title}")
     for name in mod.DATASETS:
@@ -100,47 +84,50 @@ def start(unit: str, session: str | None = None, student: str = "", folder=None,
         print(f"  This is {where}.")
     if mod.TASKS:
         print("  Your answer book, the case files and every file you save with a plain file name are kept here.")
-        _state["book"] = AnswerBook(mod.UNIT, mod.SESSION, student, mod.TASKS, folder=base, problem=prob.id if prob else None)
+        _state["book"] = AnswerBook(mod.TOPIC, student, mod.TASKS, folder=base, problem=prob.id if prob else None)
         first = next(iter(mod.TASKS))
         print(f"{len(mod.TASKS)} tasks. kit.task('{first}') explains a task; kit.progress() shows what is left.")
     elif helpers is not None:
-        print("Helpers: T = kit.tools(). The kit keeps no answer book in this session: the notebook's check cells give the feedback.")
+        print("Helpers: T = kit.tools(). The notebook's check cells give the feedback; nothing is recorded.")
 
 
 def tools():
-    """The current session's helper functions, used as T = kit.tools() (after kit.start)."""
-    mod = _state["session"]
+    """The current topic's helper functions, used as T = kit.tools() (after kit.start)."""
+    mod = _state["topic"]
     if mod is None:
-        raise RuntimeError('Run kit.start("<unit>", "<session>") first, for example kit.start("ICS5111", "S02").')
+        raise RuntimeError('Run kit.start("<topic>") first, for example kit.start("knowledge-graphs").')
     if _state["tools"] is None:
-        raise RuntimeError(f"{mod.UNIT} {mod.SESSION} has no helper module; use the functions the notebook defines.")
+        raise RuntimeError(f"{mod.TOPIC} has no helper module; use the functions the notebook defines.")
     return _state["tools"]
 
 
 def _require():
     if _state["book"] is None:
-        mod = _state["session"]
+        mod = _state["topic"]
         if mod is not None and not mod.TASKS:
-            raise RuntimeError(f"{mod.UNIT} {mod.SESSION} has no graded tasks or answer book: its notebook checks "
+            raise RuntimeError(f"{mod.TOPIC} has no graded tasks or answer book: its notebook checks "
                                "itself as you go.")
-        raise RuntimeError('Run kit.start("ARI1101", "S02", student="Your Name") first.')
-    return _state["session"], _state["book"]
+        raise RuntimeError('Run kit.start("<topic>", student="Your Name") first.')
+    return _state["topic"], _state["book"]
 
 
 def _problem():
-    mod = _state["session"]
+    mod = _state["topic"]
     if mod is not None and _state["problem"] is None:
-        raise RuntimeError(f"{mod.UNIT} {mod.SESSION} has no case problem; its data and helpers come from "
+        raise RuntimeError(f"{mod.TOPIC} has no case problem; its data and helpers come from "
                            "T = kit.tools().")
     if _state["problem"] is None:
-        raise RuntimeError('Run kit.start("<unit>", "<session>", student="Your Name") first: '
-                           'the case files belong to the session\'s problem.')
+        raise RuntimeError('Run kit.start("<topic>", student="Your Name") first: '
+                           'the case files belong to the topic\'s problem.')
     return _state["problem"]
 
 
-def session():
-    """The current session module (UNIT, SESSION, TITLE, PROBLEM, TASKS)."""
-    return _require()[0]
+def topic():
+    """The current topic module (TOPIC, TITLE, LEVEL, PROBLEM, TASKS, ...)."""
+    mod = _state["topic"]
+    if mod is None:
+        raise RuntimeError('Run kit.start("<topic>") first.')
+    return mod
 
 
 def problem():
@@ -149,7 +136,7 @@ def problem():
 
 
 def catalog(include_tasks: bool = False) -> dict:
-    """Every unit, session and problem in this version of the kit, as plain data."""
+    """Every topic, problem and dataset in this version of the kit, as plain data."""
     return registry.catalog(include_tasks=include_tasks)
 
 
@@ -198,7 +185,7 @@ class _HelperProxy:
         try:
             return f"<kit.{self._namespace}: helpers of problem {_problem().id!r}>"
         except RuntimeError:
-            return f"<kit.{self._namespace}: no session started>"
+            return f"<kit.{self._namespace}: no topic started>"
 
 
 extract = _HelperProxy("extract")
@@ -232,7 +219,7 @@ def task(task_id: str) -> None:
 def _feedback(task_id: str, value=None, reasoning=None, attempt=None):
     mod, _ = _require()
     if task_id not in mod.TASKS:
-        raise KeyError(f"{task_id} is not a task in {mod.UNIT} {mod.SESSION}. Tasks: {', '.join(mod.TASKS)}")
+        raise KeyError(f"{task_id} is not a task in {mod.TOPIC}. Tasks: {', '.join(mod.TASKS)}")
     t = mod.TASKS[task_id]
     value_fb = as_feedback(t["check"](value)) if value is not None and t.get("check") else None
     written_fb = t["written"](reasoning) if reasoning and t.get("written") else None

@@ -57,7 +57,7 @@ def test_without_configuration_nothing_is_required(capsys):
     assert llm.describe().startswith("none")
     with pytest.raises(LLMError):
         llm.complete("hello")
-    kit.start("ARI1101", "S02", student="No LLM")
+    kit.start("data-formats", student="No LLM")
     kit.hint("T3.3")
     kit.ask("T3.3", "what does euro equivalent mean?")
     out = capsys.readouterr().out
@@ -89,7 +89,7 @@ def test_ollama_autodetect_uses_the_first_installed_model(monkeypatch):
 
 def test_hint_uses_the_task_guide_and_the_students_last_answer(fake_server, capsys):
     llm.configure("openai-compatible", model="m", base_url=fake_server)
-    kit.start("ARI1101", "S02", student="Hint Test")
+    kit.start("data-formats", student="Hint Test")
     kit.answer("T3.3", value=40)
     capsys.readouterr()
     kit.hint("T3.3")
@@ -103,7 +103,7 @@ def test_hint_uses_the_task_guide_and_the_students_last_answer(fake_server, caps
 
 def test_unreachable_server_degrades_gracefully(capsys):
     llm.configure("openai-compatible", model="m", base_url="http://127.0.0.1:9/v1")
-    kit.start("ARI1101", "S02", student="Down")
+    kit.start("data-formats", student="Down")
     kit.hint("T1.1")
     assert "could not be reached" in capsys.readouterr().out
 

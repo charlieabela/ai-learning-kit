@@ -1,6 +1,6 @@
 """Reference values: the correct results, computed from the data, that checks compare with.
 
-Keep these pure functions of the frozen data (cache them). Sessions build their
+Keep these pure functions of the frozen data (cache them). Topics build their
 own cached _ref() dictionary from them, so the numbers are never typed by hand.
 """
 from __future__ import annotations

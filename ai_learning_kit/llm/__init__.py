@@ -189,7 +189,7 @@ def _task_context(mod, task_id: str) -> str:
     t = mod.TASKS[task_id]
     g = t.get("guide") or {}
     scope = scope_text(mod)
-    return (f"Unit {mod.UNIT}, session {mod.SESSION}: {mod.TITLE}\nTask {task_id}: {t['title']}\n"
+    return (f"Topic {mod.TOPIC}: {mod.TITLE}\nTask {task_id}: {t['title']}\n"
             f"Question: {t['question']}\nWhat to do: {g.get('what', '').strip()}\n"
             f"Why it matters: {g.get('why', '').strip()}\nWhat to record: {g.get('record', '').strip()}"
             + (f"\n{scope}" if scope else ""))
@@ -197,7 +197,7 @@ def _task_context(mod, task_id: str) -> str:
 
 def hint(mod, book, task_id: str) -> None:
     if task_id not in mod.TASKS:
-        raise KeyError(f"{task_id} is not a task in {mod.UNIT} {mod.SESSION}.")
+        raise KeyError(f"{task_id} is not a task in {mod.TOPIC}.")
     if not available():
         print(NOT_AVAILABLE.format(tid=task_id))
         return
@@ -219,7 +219,7 @@ def hint(mod, book, task_id: str) -> None:
 
 def ask(mod, problem, task_id: str, question: str) -> None:
     if task_id not in mod.TASKS:
-        raise KeyError(f"{task_id} is not a task in {mod.UNIT} {mod.SESSION}.")
+        raise KeyError(f"{task_id} is not a task in {mod.TOPIC}.")
     if not available():
         print(NOT_AVAILABLE.format(tid=task_id))
         return

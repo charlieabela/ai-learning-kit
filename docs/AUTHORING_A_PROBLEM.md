@@ -2,7 +2,7 @@
 
 A problem is a self-contained case: a question, a story, several data sources in
 several formats, helper code that does the heavy lifting, and reference values.
-It is independent of any unit; sessions decide which parts students do themselves.
+It is independent of any topic or course; topics decide which parts learners do themselves.
 
 ## What makes a good problem
 
@@ -22,10 +22,10 @@ It is independent of any unit; sessions decide which parts students do themselve
    a private script outside the public repository; the repository holds only the
    files.
 5. **Helpers with plain docstrings**, because students can call `kit.explain()`
-   and `kit.source()` on any of them. Helpers do what a session hides; they do
-   not do what a session teaches.
+   and `kit.source()` on any of them. Helpers do what a topic hides; they do
+   not do what a topic teaches.
 6. **Reference values computed, not typed**: the `reference` module derives every
-   correct value from the data, so sessions never hard-code a number.
+   correct value from the data, so topics never hard-code a number.
 
 ## Steps
 
@@ -35,7 +35,7 @@ It is independent of any unit; sessions decide which parts students do themselve
 3. Put the data files in `data/`. Add a `data/README.md` line naming the private
    generator and seed.
 4. Write `extract.py` (documents to data), `reference.py` (correct values, cached),
-   and optionally `pipeline.py` (the end-to-end check a session may hide) and
+   and optionally `pipeline.py` (the end-to-end check a topic may hide) and
    `report.py` (output layout). Register each under a namespace in `modules`.
 5. Add the id to `ai_learning_kit/problems/REGISTRY`.
 6. Run `python -m ai_learning_kit.dev.validate --problem <problem_id>` and fix

@@ -1,6 +1,6 @@
 """The compliance check: applies the policy rules to a table of transactions.
 
-This is the part of the work that the Session 02 sandbox does for you. You
+This is the part of the work that the data-formats topic does for you. You
 provide a table of high-value transactions (a DataFrame, or the path of a CSV
 or JSON file you saved) and the kit checks each one against rules R1 to R8 and
 exception E1, using the approvals, vendor list and emails.

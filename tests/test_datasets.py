@@ -170,7 +170,7 @@ def test_a_copy_beside_the_notebook_or_in_data_is_used(store, monkeypatch, tmp_p
 def test_a_copy_under_another_name_in_a_synced_folder_is_found(store, monkeypatch, tmp_path):
     data = b"synced" * 300
     register(monkeypatch, UNREACHABLE, data)
-    synced = tmp_path / "Google Drive" / "My Drive" / "ICS5111"
+    synced = tmp_path / "Google Drive" / "My Drive" / "course data"
     synced.mkdir(parents=True)
     (synced / "toy (1).bin").write_bytes(data)        # a browser download renamed by the operating system
     with pytest.raises(DatasetUnavailable):

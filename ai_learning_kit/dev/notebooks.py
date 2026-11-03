@@ -5,26 +5,28 @@ students open them in Notebook Tutor, which keeps their copy in its clone, or in
 what notebooks depend on (helpers, data sources, reference results), and this module checks a
 notebook file wherever it is:
 
-    python -m ai_learning_kit.dev.notebooks check  S02_1_prepare_setup.ipynb ...
-    python -m ai_learning_kit.dev.notebooks stamp 0.5.0 S02_1_prepare_setup.ipynb ...   # install line + metadata
+    python -m ai_learning_kit.dev.notebooks check  1_prepare_setup.ipynb ...
+    python -m ai_learning_kit.dev.notebooks stamp 1.0.0 1_prepare_setup.ipynb ...   # install line + metadata
 
 A kit notebook runs unchanged in Notebook Tutor and in Colab, and (best effort) in Jupyter.
 That works because everything that depends on where it runs lives in the kit, not in the
 notebook. The contract (docs/NOTEBOOK_CONTRACT.md explains each rule):
 
-1. metadata["ai_learning_kit"] records unit, session, title, role, kit_version and install,
-   so that a tutor recognises the notebook.
-2. The first code cell is exactly the install line for this kit version, with the session's
+1. metadata["ai_learning_kit"] records topic, title, role, kit_version and install (and,
+   optionally, level), so that a tutor recognises the notebook.
+2. The first code cell is exactly the install line for this kit version, with the topic's
    pip extra (install_line()). Notebook Tutor skips it, because it ships the kit.
-3. The session is started with kit.start("<UNIT>", "<SESSION>"...) in one of the first three code
-   cells, before any other use of the kit, and T = kit.tools() follows it when the session has
-   helpers. New notebooks put both in the second code cell (see the canonical opening below).
+3. The topic is started with kit.start("<topic>"...) in one of the first three code cells, before
+   any other use of the kit, and T = kit.tools() follows it when the topic has helpers. New
+   notebooks put both in the second code cell.
 4. No code that depends on the environment: no Google Drive or Colab calls, no uploads, no
    ZIP handling, no sys.path changes, no further pip installs, no hard-coded /content paths.
-   Data comes from the kit (ai_learning_kit.datasets or the session's helpers).
-5. Every T.<name> the notebook uses exists in the session's helper module.
+   Data comes from the kit (ai_learning_kit.datasets or the topic's helpers).
+5. Every T.<name> the notebook uses exists in the topic's helper module.
 6. Saved outputs contain no errors, except in cells tagged "raises-exception".
 7. The notebook names the kit version it was checked with (stamp() writes it).
+8. Notebooks are shared with learners and others: no cell names a study unit or a numbered course
+   session, and none links to the lecturer's Google Drive.
 """
 from __future__ import annotations
 
@@ -35,7 +37,9 @@ from pathlib import Path
 from .. import _version
 
 REPO = "https://github.com/charlieabela/ai-learning-kit"
-ROLES = ("prepare", "explore", "practice", "session", "solutions")   # session: one notebook for a whole session
+ROLES = ("setup", "prepare", "explore", "practice", "complete", "solutions")
+# setup: checks the learner's environment; explore: the walkthrough; complete: one notebook covering every stage
+LEVELS = ("introductory", "intermediate", "advanced", "research")
 
 FORBIDDEN = [
     (r"\bgoogle\.colab\b|\bdrive\.mount\(", "uses Colab or Google Drive directly (the kit handles both)"),
@@ -87,30 +91,33 @@ def check_notebook(path, mod=None, version: str | None = None) -> list:
         return [(False, f"cannot be read as a notebook: {e}")]
     meta = nb.get("metadata", {}).get("ai_learning_kit")
     if not isinstance(meta, dict):
-        return out + [(False, 'has no metadata["ai_learning_kit"] (unit, session, role, kit_version, install)')]
-    missing = [k for k in ("unit", "session", "title", "role", "kit_version", "install") if not meta.get(k)]
-    out.append((not missing, "metadata records unit, session, title, role, kit_version and install"
+        return out + [(False, 'has no metadata["ai_learning_kit"] (topic, title, role, kit_version, install)')]
+    names = ("topic", "title", "role", "kit_version", "install")
+    missing = [k for k in names if not meta.get(k)]
+    out.append((not missing, f"metadata records {', '.join(names[:-1])} and {names[-1]}"
                 + (f" (missing: {', '.join(missing)})" if missing else "")))
     out.append((meta.get("role") in ROLES, f"role {meta.get('role')!r} is one of {', '.join(ROLES)}"))
+    if meta.get("level") is not None:
+        out.append((meta.get("level") in LEVELS, f"level {meta.get('level')!r} is one of {', '.join(LEVELS)}"))
     if mod is None:
         try:
-            mod = registry.session(meta.get("unit", ""), meta.get("session", ""))
+            mod = registry.topic(meta.get("topic", ""))
         except Exception as e:
-            return out + [(False, f"metadata names a session the kit does not have: {e}")]
-    out.append((meta.get("unit") == mod.UNIT and meta.get("session") == mod.SESSION,
-                f"metadata names {mod.UNIT} {mod.SESSION}"))
+            return out + [(False, f"metadata names a topic the kit does not have: {e}")]
+    out.append((meta.get("topic") == mod.TOPIC, f"metadata names the topic {mod.TOPIC}"))
     out.append((meta.get("kit_version") == version, f"stamped with kit version {version} (has {meta.get('kit_version')})"))
     expected = install_line(version, mod.EXTRAS)
     code = _code_cells(nb)
     out.append((bool(code) and _src(code[0]).strip() == expected, "first code cell is the install line for this version"))
     out.append((meta.get("install") == expected.lstrip("%"), "metadata install line matches the first cell"))
-    pattern = rf'kit\.start\(\s*["\']{mod.UNIT}["\']\s*,\s*["\']{mod.SESSION}["\']'
+    pattern = rf'kit\.start\(\s*["\']{re.escape(mod.TOPIC)}["\']'
+    call = f'kit.start("{mod.TOPIC}"...)'
     starts = [i for i, c in enumerate(code[1:4], start=1) if re.search(pattern, _src(c))]
     first_use = next((i for i, c in enumerate(code[1:], start=1)
                       if re.search(r"\bkit\.(?!__version__)\w+|\bT\.\w+", _src(c))), None)
     out.append((bool(starts) and first_use is not None and starts[0] <= first_use,
-                f'the session is started with kit.start("{mod.UNIT}", "{mod.SESSION}"...) within the first three '
-                f'code cells, before any other use of the kit'))
+                f'the topic is started with {call} within the first three code cells, before any other use '
+                f'of the kit'))
     if mod.TOOLS:
         start = _src(code[starts[0]]) if starts else ""
         out.append(("kit.tools()" in start, "the same cell gets the helpers with T = kit.tools()"))
@@ -124,6 +131,13 @@ def check_notebook(path, mod=None, version: str | None = None) -> list:
         absent = [n for n in used if not hasattr(helpers, n)]
         out.append((not absent, f"every T.<name> used exists in the helpers ({len(used)} used)"
                     + (f"; missing: {', '.join(absent)}" if absent else "")))
+    from .validate import COURSE_CODE, COURSE_SESSION
+    every = [(i, _src(c)) for i, c in enumerate(nb.get("cells", []), start=1)]
+    named = [i for i, t in every if COURSE_CODE.search(t) or COURSE_SESSION.search(t)]
+    out.append((not named, "no cell names a study unit or a numbered course session" if not named else
+                f"cell(s) {named} name a study unit or a numbered course session"))
+    drive = [i for i, t in every if re.search(r"(drive|docs)\.google\.com", t)]
+    out.append((not drive, "no cell links to Google Drive" if not drive else f"cell(s) {drive} link to Google Drive"))
     errors = [i for i, c in enumerate(code, start=1)
               if any(o.get("output_type") == "error" for o in c.get("outputs", []))
               and "raises-exception" not in c.get("metadata", {}).get("tags", [])]
@@ -138,7 +152,7 @@ def stamp(path, version: str, mod=None) -> bool:
     text = path.read_text(encoding="utf-8")
     nb = json.loads(text)
     meta = nb.setdefault("metadata", {}).setdefault("ai_learning_kit", {})
-    mod = mod or registry.session(meta["unit"], meta["session"])
+    mod = mod or registry.topic(meta["topic"])
     line = install_line(version, mod.EXTRAS)
     code = _code_cells(nb)
     if not code or not re.search(r"pip\s+install", _src(code[0])) or "ai-learning-kit" not in _src(code[0]):

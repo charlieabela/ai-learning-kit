@@ -4,7 +4,7 @@ Nothing in the kit requires a language model. Every check and every piece of
 feedback is deterministic and comes from reference values computed from the
 data. A model, when available, adds two things for students, `kit.hint(task)`
 (one next step, never the answer) and `kit.ask(task, question)` (a concept
-explained in the task's context), and gives session authors `llm.complete()` for
+explained in the task's context), and gives topic authors `llm.complete()` for
 their own uses. The model never grades: the answer book records only the kit's
 checks.
 
@@ -79,7 +79,7 @@ final answer or the completing code, gives one next step in at most 120 words,
 refers to the task guidance it is given, and must not invent facts about the data.
 `hint()` passes the task's guide, the student's last saved value and reasoning,
 and the kit's verdict; `ask()` passes the guide and the problem summary. Both
-pass the session's scope when it declares `STAGES`, so the model explains the
+pass the topic's scope when it declares `STAGES`, so the model explains the
 steps in focus and treats the kit's black boxes as black boxes. A
 student can still coax a model into more than a hint; because nothing is graded
 by the model and the deterministic feedback already reveals the answer after

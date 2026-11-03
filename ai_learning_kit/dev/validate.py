@@ -1,16 +1,19 @@
-"""Check that a problem or a session meets the kit's contracts.
+"""Check that a problem or a topic meets the kit's contracts.
 
     python -m ai_learning_kit.dev.validate                    # everything registered
     python -m ai_learning_kit.dev.validate --problem brightwater_q3
-    python -m ai_learning_kit.dev.validate --session ARI1101 S02
-    python -m ai_learning_kit.dev.validate --notebook path/to/S02_3_practice.ipynb   # any notebook file
+    python -m ai_learning_kit.dev.validate --topic knowledge-graphs
+    python -m ai_learning_kit.dev.validate --notebook path/to/practice.ipynb   # any notebook file
 
 Each check prints OK or a problem description; the exit code is non-zero when
 anything fails. Run it before opening a pull request that adds or changes a
-problem or a session.
+problem or a topic. Running it with no arguments also checks that no file in the
+package names a study unit or a numbered course session: topics are independent of
+any course.
 """
 from __future__ import annotations
 
+import re
 import sys
 import tempfile
 from contextlib import redirect_stdout
@@ -20,7 +23,8 @@ from pathlib import Path
 from ..core import registry
 from ..core.feedback import Feedback
 from ..core.session import GUIDE_PARTS
-from .. import problems, units
+from .. import problems, topics
+from ..core import levels
 
 
 class Report:
@@ -90,17 +94,55 @@ def validate_problem(problem_id: str) -> Report:
     return r
 
 
-# --------------------------------------------------------------------------- sessions
-def validate_session(unit_code: str, session_code: str) -> Report:
+# --------------------------------------------------------------------------- topics
+COURSE_CODE = re.compile(r"\b[A-Z]{3}\s?\d{4}\b")       # a study-unit code: three capitals and four digits
+COURSE_SESSION = re.compile(r"\b[Ss]essions? \d{1,2}\b")  # "Session" or "Sessions" followed by a number
+TEXT_SUFFIXES = (".py", ".json", ".md", ".html", ".txt", ".csv", ".ttl", ".toml", ".yml", ".yaml", ".cfg")
+
+
+def course_references(folder: Path) -> list:
+    """Every study-unit code or numbered course session in the text files under folder, as 'file: match'."""
+    hits = []
+    for f in sorted(folder.rglob("*")):
+        if f.is_file() and f.suffix in TEXT_SUFFIXES and "__pycache__" not in f.parts:
+            text = f.read_text(encoding="utf-8", errors="ignore")
+            for pattern in (COURSE_CODE, COURSE_SESSION):
+                hits += [f"{f.relative_to(folder)}: {m.group(0)}" for m in pattern.finditer(text)]
+    return hits
+
+
+def validate_package_text() -> Report:
+    """No file of the installed package names a study unit or a numbered course session."""
+    r = Report()
+    hits = course_references(Path(__file__).resolve().parents[1])
+    r.check(not hits, "no study-unit codes or numbered course sessions in the package"
+            + (f" ({'; '.join(hits[:8])}{' ...' if len(hits) > 8 else ''})" if hits else ""))
+    return r
+
+
+def validate_topic(name: str) -> Report:
     r = Report()
     try:
-        mod = registry.session(unit_code, session_code)
+        mod = registry.topic(name)
     except Exception as e:
-        r.fail(f"{unit_code} {session_code}: cannot load ({e})")
+        r.fail(f"{name}: cannot load ({e})")
         return r
-    pkg = units.unit(unit_code)
-    r.check(mod.UNIT == pkg.UNIT["code"], f"UNIT is {pkg.UNIT['code']!r}")
-    r.check(mod.SESSION == units.normalise_session(session_code), f"SESSION is {mod.SESSION!r}")
+    key = topics.normalise_topic(name)
+    r.check(mod.TOPIC == key, f"TOPIC is {key!r}")
+    r.check(re.fullmatch(r"[a-z0-9]+(-[a-z0-9]+)*", mod.TOPIC or "") is not None,
+            "TOPIC is lower case words joined by hyphens")
+    r.check(mod.LEVEL in levels.LEVELS, f"LEVEL {mod.LEVEL!r} is one of {', '.join(levels.LEVELS)}")
+    later = [b for b in mod.BUILDS_ON if b not in topics.REGISTRY]
+    r.ok(f"builds on {', '.join(mod.BUILDS_ON) or 'nothing'}"
+         + (f" ({', '.join(later)} not a topic yet)" if later else ""))
+    hits = course_references(Path(mod.__file__).parent)
+    r.check(not hits, "no study-unit codes or numbered course sessions in the topic's files"
+            + (f" ({'; '.join(hits[:5])})" if hits else ""))
+    _validate_body(r, mod)
+    return r
+
+
+def _validate_body(r: Report, mod) -> None:
     r.check(bool(mod.TITLE.strip()), "TITLE is filled in")
     if mod.PROBLEM is None:
         r.ok("no case problem (PROBLEM = None)")
@@ -124,7 +166,7 @@ def validate_session(unit_code: str, session_code: str) -> Report:
             r.fail(f"dataset {name!r} is not registered in ai_learning_kit.datasets: {e}")
     try:
         import json
-        json.dumps(registry.tutor_context(mod.UNIT, mod.SESSION))
+        json.dumps(registry.tutor_context(mod.TOPIC))
         r.ok("tutor_context() is JSON-able")
     except Exception as e:
         r.fail(f"tutor_context() failed: {e}")
@@ -167,7 +209,6 @@ def validate_session(unit_code: str, session_code: str) -> Report:
                         f"{tid}: check returns Feedback for a wrong-typed value")
             except Exception as e:
                 r.fail(f"{tid}: check raised on a wrong-typed value: {e}")
-    return r
 
 
 def validate_all() -> int:
@@ -177,12 +218,15 @@ def validate_all() -> int:
         rep = validate_problem(pid)
         print(rep)
         total += rep.failures
-    for u in units.REGISTRY:
-        for code in units.unit(u).SESSIONS:
-            print(f"Session {u} {code}")
-            rep = validate_session(u, code)
-            print(rep)
-            total += rep.failures
+    for name in topics.names():
+        print(f"Topic {name}")
+        rep = validate_topic(name)
+        print(rep)
+        total += rep.failures
+    print("Package")
+    rep = validate_package_text()
+    print(rep)
+    total += rep.failures
     print(f"\n{'All checks passed.' if total == 0 else f'{total} check(s) failed.'}")
     return 1 if total else 0
 
@@ -200,8 +244,8 @@ def main(argv=None) -> int:
             print(f"  {'OK  ' if ok else 'FAIL'} {msg}")
             fails += not ok
         return 1 if fails else 0
-    if argv[0] == "--session" and len(argv) == 3:
-        rep = validate_session(argv[1], argv[2]); print(rep); return 1 if rep.failures else 0
+    if argv[0] == "--topic" and len(argv) == 2:
+        rep = validate_topic(argv[1]); print(rep); return 1 if rep.failures else 0
     print(__doc__)
     return 2
 

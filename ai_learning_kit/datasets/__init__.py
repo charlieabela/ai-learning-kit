@@ -15,7 +15,7 @@ There are three kinds, and a problem or session may use any of them:
     datasets.fetch("cora")                     # path to the checked file, downloading it the first time
     datasets.use("cora", "~/Downloads/cora.tgz")                     # a copy on this computer
     datasets.use("cora", "https://drive.google.com/file/d/.../view") # a shared copy in the cloud
-    datasets.add_folder("~/Library/CloudStorage/GoogleDrive-me/My Drive/ICS5111/data")
+    datasets.add_folder("~/Library/CloudStorage/GoogleDrive-me/My Drive/course data")
     datasets.small("karate")                   # a small dataset stored in the kit
     datasets.status()                          # what is where
 
@@ -124,6 +124,23 @@ SOURCES: dict[str, Source] = {
         licence="Hetionet's original content is CC0; it integrates 29 resources whose own licences vary (the hetionet repository links a per-source table). The kit downloads the files from the hetionet repository rather than copying them.",
         citation='Himmelstein, D. S., Lizee, A., Hessler, C., Brueggeman, L., Chen, S. L., Hadley, D., Green, A., Khankhanian, P. and Baranzini, S. E. (2017). Systematic integration of biomedical knowledge prioritizes drugs for repurposing. eLife, 6, e26726.',
         notes="2,250,197 edges of 24 kinds (source, metaedge, target); stored with Git LFS, so the address is GitHub's media host, and the checksum equals the LFS object id.",
+    ),
+    "scifact": Source(
+        name="scifact",
+        title="SciFact (Allen Institute for AI): corpus of 5,183 abstracts and the claims",
+        owner="Allen Institute for AI (Wadden et al.), GitHub allenai/scifact",
+        url="https://scifact.s3-us-west-2.amazonaws.com/release/latest/data.tar.gz",
+        filename="scifact_data.tar.gz",
+        sha256="11c621288d41ac144d29b13b0f8503b3820b7d6e8b1f6ff24dff335c196d76be",
+        size=3115079,
+        landing="https://github.com/allenai/scifact",
+        licence=("The dataset card lists CC BY-NC 2.0 (non-commercial use with attribution). The kit downloads the "
+                 "archive from the Allen Institute's address rather than copying it."),
+        citation=("Wadden, D., Lin, S., Lo, K., Wang, L. L., van Zuylen, M., Cohan, A. and Hajishirzi, H. (2020). "
+                  "Fact or fiction: Verifying scientific claims. In Proceedings of the 2020 Conference on Empirical "
+                  "Methods in Natural Language Processing (EMNLP), pp. 7534-7550."),
+        notes=("5,183 abstracts in data/corpus.jsonl (doc_id, title, abstract as a list of sentences) and the claims "
+               "with their evidence (claims_train, claims_dev, claims_test, cross-validation folds)."),
     ),
 }
 

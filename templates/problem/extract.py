@@ -1,4 +1,4 @@
-"""Heavy lifting that sessions may hide from students: turn documents into data.
+"""Heavy lifting that topics may hide from learners: turn documents into data.
 
 Every public function has a docstring in plain language, because students can
 call kit.explain(kit.extract.<function>) and kit.source(...) to look inside.
