@@ -9,7 +9,7 @@ description = "A sandbox library of problems, sessions and formative feedback fo
 readme = "README.md"
 requires-python = ">=3.9"
 authors = [{ name = "Charlie Abela" }]
-license = { text = "AGPL-3.0-only" }
+license = { text = "GPL-3.0-or-later" }
 dependencies = [
     "pandas>=2.0",
     "numpy",

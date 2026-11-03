@@ -1,9 +1,5 @@
 # Changelog
 
-## 0.11.1 · Licence: GNU AGPL-3.0
-
-- **The kit is now licensed under the GNU Affero General Public License, version 3 (AGPL-3.0-only)**, replacing GPL-3.0-or-later. Anyone may still use, study, change and share it; whoever distributes a modified version, or offers it to users over a network, must publish the complete source of that version under the same licence. `LICENSE`, `pyproject.toml` and the README say so. Nothing else changes: helpers, data and notebooks behave as in 0.11.0, and releases up to v0.11.0 remain available under GPL-3.0-or-later.
-
 ## 0.11.0 · ARI1101 S05, modelling
 
 - **ARI1101 S05 (Model: linear regression, logistic regression and k-nearest neighbours)**, a session whose notebooks check themselves. Students fit their first models with scikit-learn and prepare the data themselves (features and target, one-hot encoding, a stratified training, validation and test split, filling gaps and scaling with values learned from the training set only). `T = kit.tools()` provides the **Palmer penguins** (as in S04), the **Auto MPG** data (Quinlan, 1993, UCI Machine Learning Repository, CC BY 4.0; stored in the session's `data/` with its citation), helpers students may look inside (`line_by_hand`, `scores_by_hand`, `sigmoid`, `knn_by_hand`, each repeating a scikit-learn calculation step by step), pictures (`plot_line`, `plot_predictions`, `plot_probability`, `plot_confusion`, `plot_regions`) and checks for the practice notebook (`T.check("E1")` ... `T.check("E6")`). The notebooks are distributed with the session's material.
