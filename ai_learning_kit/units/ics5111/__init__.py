@@ -1,6 +1,6 @@
 """ICS5111 Mining Large Scale Data (MSc in AI and MSc in Data Science).
 
-The graph block covers graph analysis, graph
+No sessions are registered yet. The graph block covers graph analysis, graph
 representation learning including GNNs, knowledge graphs, and RAG / GraphRAG,
 with a different corpus per session matched to the technique (biomedical
 abstracts for text-to-graph work, financial data for anomaly detection, legal
@@ -17,9 +17,4 @@ UNIT = {
               "focus on the method and its assumptions rather than on Python syntax."),
 }
 
-SESSIONS = {
-    "S02": ".s02",      # Graph embeddings (no case problem; Cora from LINQS; notebooks check themselves)
-    "S03": ".s03",      # Graph neural networks (no case problem; Cora from LINQS; plain PyTorch helpers)
-    "S04": ".s04",      # Knowledge graphs (no case problem; Hetionet from GitHub; Neo4j with saved results)
-    "S05": ".s05",      # RAG and Graph-RAG (formulary + MedQuAD subset in the kit; Hetionet; no framework, no LLM needed)
-}
+SESSIONS = {}

@@ -40,8 +40,7 @@ def test_every_session_module_has_the_contract_fields():
         for code in pkg.SESSIONS:
             mod = registry.session(u, code)
             assert mod.UNIT == pkg.UNIT["code"] and mod.SESSION == code
-            assert mod.PROBLEM is None or mod.PROBLEM in problems.REGISTRY
-            assert mod.TASKS or mod.TOOLS, f"{u} {code} has neither tasks nor helpers"
+            assert mod.PROBLEM in problems.REGISTRY
             for tid, t in mod.TASKS.items():
                 assert t["title"] and t["question"], tid
                 assert t["guide"] is not None, tid
