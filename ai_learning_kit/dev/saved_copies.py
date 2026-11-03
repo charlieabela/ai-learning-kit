@@ -49,7 +49,6 @@ def _comparable(body: bytes, content_type: str):
 
 
 def _note(level: str, title: str, text: str) -> None:
-    """A GitHub annotation in CI (GitHub shows at most 10 of each level per step, so only problems use them)."""
     if os.environ.get("GITHUB_ACTIONS") == "true":
         text = text.replace("%", "%25").replace("\r", "").replace("\n", "%0A")
         print(f"::{level} title={title}::{text}")
@@ -88,7 +87,7 @@ def check() -> int:
                 _note("warning", title, f"the live response differs from the saved copy (live status {r.status_code})")
                 _attach(title, r.status_code, ctype, r.content)
             else:
-                print(f"{title}: the saved copy matches the live response")
+                _note("notice", title, "the saved copy matches the live response")
         site_files = getattr(h, "SITE_FILES", None)
         if site_files is not None:
             import requests
@@ -104,7 +103,7 @@ def check() -> int:
                 elif r.content != path.read_bytes():
                     _note("warning", title, "the published page differs from the kit's copy")
                 else:
-                    print(f"{title}: the published page matches the kit's copy")
+                    _note("notice", title, "the published page matches the kit's copy")
     return 0
 
 
