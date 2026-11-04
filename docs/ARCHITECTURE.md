@@ -45,6 +45,8 @@ ai_learning_kit/
     validate.py    python -m ai_learning_kit.dev.validate [--problem id | --topic name | --notebook path]
     notebooks.py   the notebook contract for notebook files anywhere: check_notebook(), stamp(), install_line()
     saved_copies.py  compare (and capture) the saved copies of web pages and API responses
+    reference.py   docs/reference/: one page per topic, generated from its stages and helpers' docstrings;
+                   page(name) gives one page to a front end
     release.py     python -m ai_learning_kit.dev.release X.Y.Z: version and docs
   __init__.py    the learner's API: start, tools, task, answer, check, progress, submit, sync,
                  sources, workspace, peek, path, extract/pipeline/report/reference (proxies),
@@ -156,7 +158,7 @@ works on notebook files wherever they are.
 
 ## Versioning and compatibility
 
-Releases are tagged; notebooks install a tag (`@v1.0.0`). A problem's data and a
+Releases are tagged; notebooks install a tag (`@v1.1.0`). A problem's data and a
 released topic's helpers and tasks are never changed afterwards: fix a problem by
 adding a new id, change a helper by adding a new function. Earlier tags remain
 installable, so a notebook keeps working against the tag it installs (notebooks
@@ -173,6 +175,8 @@ A notebook tutor can treat this kit as its back end:
   kit version and install line, and optionally a level, so a tutor can open a
   notebook and know what it is about; `registry.tutor_context(topic, level=...)`
   gives the level's description, the scope, the tasks, the helpers and the datasets;
+- `dev.reference.page(topic)` is the topic's reference page as Markdown (what is in focus, on request and
+  support, and every helper), generated from the installed kit, for showing to learners;
 - answer books are plain JSON with attempts, results and timestamps per task;
 - `Feedback` objects (not only their printed form) are returned by `check`
   functions, so a tutor can render them its own way;

@@ -73,3 +73,23 @@ def test_shared_notebooks_name_no_course_and_link_no_drive(tmp_path, text, why):
 
 def test_a_notebook_for_an_unknown_topic_is_reported(tmp_path):
     assert any("does not have" in m for m in fails(notebook(tmp_path, [START], topic="not-a-topic")))
+
+
+def test_plan_notes_list_practice_exercises_without_a_plan(tmp_path):
+    import json
+    from ai_learning_kit.dev import notebooks as nbc
+
+    def md(t):
+        return {"cell_type": "markdown", "metadata": {}, "source": t}
+
+    def code(t):
+        return {"cell_type": "code", "metadata": {}, "outputs": [], "execution_count": None, "source": t}
+    cells = [md("# Practice"), md("## E1 · Count\n\n**From question to code (plan given, with the tools).** ..."),
+             code("# 1 count them   (len)\nn = None   # TODO"), md("## E2 · Sum"), code("total = None   # TODO"),
+             md("## E3 · Average\n\n**From question to code (your plan).** ..."), code("data = [1, 2]"),
+             md("Now write it."), code("mean = None   # TODO")]      # the plan sits above code the exercise uses
+    for role, expected in (("practice", 1), ("explore", 0)):
+        p = tmp_path / f"{role}.ipynb"
+        p.write_text(json.dumps({"nbformat": 4, "metadata": {"ai_learning_kit": {"role": role}}, "cells": cells}))
+        notes = nbc.plan_notes(p)
+        assert len(notes) == expected and (not notes or "[5]" in notes[0]), notes

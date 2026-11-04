@@ -24,6 +24,8 @@ A topic is one of two kinds:
 Either kind's notebooks follow `docs/NOTEBOOK_CONTRACT.md`; they are kept and distributed with
 the course's material, not in the kit.
 
+In a practice notebook, give every exercise a plan from question to code that fades across the notebook (contract, section 6): the topic's `STAGES` say what is in focus, and the plans are about those steps.
+
 ## Keep the learner on the focus: three layers
 
 Every topic is built in three layers, so that a learner can concentrate on one thing without
@@ -94,7 +96,10 @@ combines the level (who is learning) with the topic's stages (what is in scope).
    `ROOT / "reference" / ...`.
 5. Register the topic in `ai_learning_kit/topics/__init__.py` (`REGISTRY`), add tests in
    `tests/test_topic_<name>.py`, and run
-   `python -m ai_learning_kit.dev.validate --topic <name>`. The validator also fails if a
+   `python -m ai_learning_kit.dev.validate --topic <name>`. Then write the topic's reference page with
+   `python -m ai_learning_kit.dev.reference write` (a test fails when `docs/reference/` and the kit disagree).
+   Name every helper in the `how` of a stage: the page lists the helpers no stage names as "not yet placed in a
+   layer", because a tutor cannot tell how to treat them. The validator also fails if a
    topic's files name a study unit or a numbered course session; refer to other topics by name.
 6. Write the notebooks to the contract, run
    `python -m ai_learning_kit.dev.notebooks check <the notebook files>`, execute each notebook

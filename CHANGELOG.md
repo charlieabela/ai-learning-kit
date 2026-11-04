@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.1.0 · A topic reference
+
+Nothing a notebook calls has changed: a notebook written for 1.0.0 runs unchanged on 1.1.0.
+
+- **A topic reference, generated from the kit** (`docs/reference/`): one page per topic with what it covers, its level, the topics it builds on, its data and extra, how to start it, its three layers, and every helper of `T = kit.tools()` with its signature and the first paragraph of its docstring, grouped by the layer whose stage names it; an index lists the topics, the levels and the kit's own functions. `python -m ai_learning_kit.dev.reference write` writes it, the release step rewrites it, and a test fails when the pages and the kit disagree. Helpers that no stage names are listed as not yet placed in a layer.
+- **The reference for tutors and other front ends**: `reference.page(name)` returns one page as Markdown, generated from the kit that is installed (the index with no name), so Notebook Tutor shows learners the page of the topic they are working on. A topic whose extra is not installed still has its page, with its layers and a line saying which library its helpers need. Path defaults and memory addresses are written the same on every machine.
+- **Practice: from question to code** (docs/NOTEBOOK_CONTRACT.md, section 6): each exercise of a practice notebook gets a plan, the steps that turn the question into code, in its statement and as numbered comments in the starter code, fading from steps with their tools to a plan the learner writes, at a pace set by the level. `dev.notebooks check` lists, as a NOTE that never fails, the exercises of a practice notebook without a plan (`plan_notes()`). Notebook Tutor 0.3.0 uses the plans in its code checks and hints.
+
 ## 1.0.0 · Topics instead of courses
 
 The kit no longer knows about courses. It is organised by **topic**, what is learnt, and by **level**, who is learning it; courses choose the topics they use and the level they work at. Nothing in the package names a study unit or a numbered course session, and the validator fails if anything does. Notebooks written for earlier versions start a course session and keep working, because they install the version they name.

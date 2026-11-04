@@ -65,6 +65,8 @@ def main(argv=None) -> int:
     from .validate import validate_all
     if validate_all():
         return 1
+    from . import reference
+    reference.main(["write"])                      # the topic reference in docs/reference/, generated from the kit
     print(f"\nNext: add a CHANGELOG entry, commit, open a pull request, merge, then create the tag v{version} on main, "
           f"update Notebook Tutor to bundle it, and stamp the notebooks you distribute "
           f"(python -m ai_learning_kit.dev.notebooks stamp {version} <files>).")

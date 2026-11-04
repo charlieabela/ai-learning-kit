@@ -35,7 +35,7 @@ in its student form.
 ## 2. The opening: two cells, always the same
 
 ```python
-%pip install -q "ai-learning-kit[graphs]@https://github.com/charlieabela/ai-learning-kit/archive/refs/tags/v1.0.0.zip"
+%pip install -q "ai-learning-kit[graphs]@https://github.com/charlieabela/ai-learning-kit/archive/refs/tags/v1.1.0.zip"
 ```
 
 ```python
@@ -127,7 +127,45 @@ the notebook's folder (or, in Colab, its Drive folder) the current folder.
 - Helpers never change once a version is released, so a notebook that names that version keeps
   giving the numbers on its slides. A change is a new function.
 
-## 6. Metadata
+## 6. Practice: from question to code
+
+Learners can follow what finished code does and still not see how it came about. In a practice notebook, give
+each exercise a **plan**: the steps that turn the question into code, before any code is written. Append it to
+the exercise's statement (the markdown just before the exercise cell, which a tutor reads as the task), with a
+bold label that names the stage, and repeat the steps as numbered comments in the starter code:
+
+```markdown
+**From question to code (plan given, with the tools).** *Goal:* one line per step.
+
+1. Keep the payments above the threshold (a boolean filter, `df[df["amount"] > 5000]`).
+2. Count them (`len`).
+```
+
+```python
+# 1 keep the payments above the threshold     (a boolean filter)
+# 2 count them                                 (len)
+n_large = None   # TODO
+```
+
+The plans **fade** across the notebook, and the notebook's first cell says how:
+
+| Stage | Label | The learner gets |
+|---|---|---|
+| 1 | plan given, with the tools | the steps, each with the function or method it needs |
+| 2 | steps given, tools yours | the steps only |
+| 3 | steps as labels only | numbered comments in the code |
+| 4 | your plan | a goal; the learner writes the numbered comments first |
+| 5 | questions instead of steps, or goal only | for evaluation and design exercises, and the last one |
+
+The pace follows the level: introductory notebooks stay at stage 1 for two or three exercises and reach stage 4
+at most once, at the end; advanced notebooks fade faster. The answers copy keeps the same comments with the
+solution lines under them, so the plan and the code can be read together. Every step must match the code under
+it. Notebook Tutor recognises the label and the numbered comments: its code check says which steps are done, and
+its hints follow the plan. `dev.notebooks check` lists, as a note, the exercises of a practice notebook that have
+no plan. The approach rests on subgoal labels (Margulieux, Guzdial and Catrambone, ICER 2012) and faded worked
+examples (Renkl and Atkinson, *Educational Psychologist*, 2003).
+
+## 7. Metadata
 
 `metadata["ai_learning_kit"]` holds **(checked)**:
 
@@ -146,13 +184,13 @@ for its explanations at the notebook's level, and to say so when the notebook wa
 another kit version. (Notebooks handed out before 1.0.0 record a course and a session instead; they
 install the earlier kit version they name and keep working.)
 
-## 7. Saved outputs
+## 8. Saved outputs
 
 Notebooks are distributed **executed**, so that a student who cannot run a cell still sees the
 expected result. Saved outputs contain no errors, except in cells tagged `raises-exception` (a
 cell that demonstrates an error on purpose). **(checked)**
 
-## 8. Shared with others
+## 9. Shared with others
 
 Notebooks are given to learners and may be passed on, so **(checked)**:
 
@@ -162,7 +200,7 @@ Notebooks are given to learners and may be passed on, so **(checked)**:
 - no cell links to Google Drive (`drive.google.com`, `docs.google.com`): the lecturer's Drive is
   private, and data comes from the kit.
 
-## 9. Releasing
+## 10. Releasing
 
 `python -m ai_learning_kit.dev.release X.Y.Z` sets the version, updates the docs and runs the
 validator. After the pull request is merged, publish the release `vX.Y.Z` on main. The kit is developed

@@ -42,7 +42,7 @@ python -m ai_learning_kit.dev.notebooks stamp 1.0.0 1_prepare.ipynb
 ## Use in a notebook (Notebook Tutor, Colab, Jupyter or VS Code)
 
 ```python
-%pip install -q "ai-learning-kit[advanced]@https://github.com/charlieabela/ai-learning-kit/archive/refs/tags/v1.0.0.zip"
+%pip install -q "ai-learning-kit[advanced]@https://github.com/charlieabela/ai-learning-kit/archive/refs/tags/v1.1.0.zip"
 import ai_learning_kit as kit
 kit.start("knowledge-graphs")      # downloads the topic's datasets from their owners, once
 T = kit.tools()                    # the topic's helper functions
@@ -129,8 +129,11 @@ ai_learning_kit/llm        optional language-model providers and the tutor helpe
 ai_learning_kit/datasets   external datasets: owner, address, checksum, licence; download and cache
 ai_learning_kit/dev        validator (problems, topics), the notebook checker, and the release step
 templates/                 skeletons for a new problem, a new topic, and a topic with graded tasks
-docs/                      ARCHITECTURE, AUTHORING_A_PROBLEM, AUTHORING_A_TOPIC, LLM, prompts/
+docs/                      ARCHITECTURE, AUTHORING_A_PROBLEM, AUTHORING_A_TOPIC, LLM, prompts/, reference/ (generated)
 ```
+
+**`docs/reference/`** has one page per topic, generated from the kit: what it covers, its level and data, its
+three layers, and every helper with its signature and description.
 
 `docs/ARCHITECTURE.md` explains the layers and contracts. To add a problem or a topic, follow the
 authoring guides; `docs/prompts/` holds prompts that draft either with a language model, for the

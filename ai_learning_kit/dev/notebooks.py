@@ -27,6 +27,9 @@ notebook. The contract (docs/NOTEBOOK_CONTRACT.md explains each rule):
 7. The notebook names the kit version it was checked with (stamp() writes it).
 8. Notebooks are shared with learners and others: no cell names a study unit or a numbered course
    session, and none links to the lecturer's Google Drive.
+
+Advice, printed as NOTE and never a failure: in a practice notebook, each exercise has a plan from question to
+code (plan_notes()).
 """
 from __future__ import annotations
 
@@ -145,6 +148,36 @@ def check_notebook(path, mod=None, version: str | None = None) -> list:
     return out
 
 
+EXERCISE = re.compile(r"#\s*(TODO|YOUR CODE HERE|(write|add|put) your (own )?(code|answer|solution) here)\b|^\s*___|raise NotImplementedError", re.M | re.I)
+PLAN = re.compile(r"\*\*From question to code\b", re.I)
+
+
+def plan_notes(path) -> list:
+    """Advice for a practice notebook: the exercises whose statement has no plan from question to code
+    (docs/NOTEBOOK_CONTRACT.md, section 6). An exercise is a code cell with a TODO, YOUR CODE HERE, Write your code here, ___ or
+    raise NotImplementedError; its plan is in a markdown cell above it, within its section (back to the heading)."""
+    nb = json.loads(Path(path).read_text(encoding="utf-8"))
+    if (nb.get("metadata", {}).get("ai_learning_kit") or {}).get("role") != "practice":
+        return []
+    cells, missing = nb.get("cells", []), []
+    for i, c in enumerate(cells):
+        if c.get("cell_type") != "code" or not EXERCISE.search(_src(c)):
+            continue
+        found = False
+        for x in reversed(cells[:i]):
+            if x.get("cell_type") != "markdown":
+                continue
+            if PLAN.search(_src(x)):
+                found = True
+                break
+            if re.search(r"^#{1,3}\s", _src(x), re.M):         # the start of the exercise's section
+                break
+        if not found:
+            missing.append(i + 1)
+    return [f"exercise cell(s) {missing} have no plan from question to code (see the notebook contract, section 6)"] \
+        if missing else []
+
+
 def stamp(path, version: str, mod=None) -> bool:
     """Rewrite a notebook's install line and metadata for a kit version; returns True if it changed."""
     from ..core import registry
@@ -176,6 +209,8 @@ def main(argv=None) -> int:
             for ok, msg in check_notebook(Path(f)):
                 print(f"  {'OK  ' if ok else 'FAIL'} {msg}")
                 failures += not ok
+            for msg in plan_notes(Path(f)):
+                print(f"  NOTE {msg}")
         return 1 if failures else 0
     if len(argv) >= 3 and argv[0] == "stamp" and re.fullmatch(r"\d+\.\d+\.\d+", argv[1]):
         for f in argv[2:]:
