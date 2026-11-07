@@ -47,7 +47,8 @@ def _request(url: str, payload: dict | None, headers: dict, timeout: float = 120
     data = json.dumps(payload).encode("utf-8") if payload is not None else None
     req = urllib.request.Request(url, data=data, method="POST" if data is not None else "GET",
                                  headers={"Content-Type": "application/json", **headers})
-    opener = urllib.request.build_opener()       # honours HTTP(S)_PROXY like any client
+    from ..core import tls
+    opener = tls.opener()                         # the system's certificates; honours HTTP(S)_PROXY
     try:
         with opener.open(req, timeout=timeout) as r:
             return json.load(r)
@@ -279,7 +280,8 @@ class Gemini(Provider):
 def ollama_models(host: str, timeout: float = 1.5) -> list:
     """Names of the models an Ollama server has installed, or [] when it is not reachable."""
     try:
-        with urllib.request.build_opener().open(f"{host.rstrip('/')}/api/tags", timeout=timeout) as r:
+        from ..core import tls
+        with tls.opener().open(f"{host.rstrip('/')}/api/tags", timeout=timeout) as r:
             return [m["name"] for m in json.load(r).get("models", [])]
     except Exception:
         return []

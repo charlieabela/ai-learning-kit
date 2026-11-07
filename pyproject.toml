@@ -21,6 +21,8 @@ dependencies = [
     "beautifulsoup4>=4.11",
     "scipy>=1.9",            # pandas needs it for .corr(method="spearman")
     "scikit-learn>=1.3",     # the modelling topic onwards: the first machine-learning models
+    "truststore>=0.9",       # HTTPS trusts the operating system's certificates (core/tls.py)
+    "certifi",               # and Mozilla's list where the system's cannot be read
 ]
 
 [project.optional-dependencies]

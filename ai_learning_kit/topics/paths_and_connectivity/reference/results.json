@@ -1,0 +1,634 @@
+{
+ "version": "2026-11-02",
+ "paths_toy": {
+  "hops": {
+   "source": "Amy",
+   "target": "Hana",
+   "route": "Amy > Dylan > Hana",
+   "edges": 2,
+   "total": 2,
+   "weight": "hops",
+   "definition": "fewest edges: every link costs 1, whatever it carries",
+   "ties": 1
+  },
+  "km": {
+   "source": "Amy",
+   "target": "Hana",
+   "route": "Amy > Ben > Clara > Gianni > Hana",
+   "edges": 4,
+   "total": 10,
+   "weight": "km",
+   "definition": "smallest total distance: each link costs its km, the distance between the two homes",
+   "ties": 1
+  },
+  "cost": {
+   "source": "Amy",
+   "target": "Hana",
+   "route": "Amy > Ella > Fabio > Hana",
+   "edges": 3,
+   "total": 0.2,
+   "weight": "cost",
+   "definition": "strongest chain: each link costs 1/frequency, so frequent interaction makes a link short",
+   "ties": 1
+  },
+  "msgs": {
+   "source": "Amy",
+   "target": "Hana",
+   "route": "Amy > Dylan > Hana",
+   "edges": 2,
+   "total": 3,
+   "weight": "msgs",
+   "definition": "WRONG for routing: each link costs its frequency, so the weakest links look shortest",
+   "ties": 1
+  }
+ },
+ "paths_toy_ties": {
+  "Ben-Fabio": [
+   [
+    "Ben",
+    "Clara",
+    "Fabio"
+   ],
+   [
+    "Ben",
+    "Ella",
+    "Fabio"
+   ]
+  ]
+ },
+ "paths_toy_bfs_layers_from_Amy": {
+  "0": [
+   "Amy"
+  ],
+  "1": [
+   "Ben",
+   "Dylan",
+   "Ella"
+  ],
+  "2": [
+   "Clara",
+   "Fabio",
+   "Gianni",
+   "Hana"
+  ]
+ },
+ "paths_toy_all_routes": [
+  {
+   "route": "Amy > Dylan > Hana",
+   "edges": 2,
+   "km": 17,
+   "cost": 1.5,
+   "msgs_sum": 3
+  },
+  {
+   "route": "Amy > Dylan > Gianni > Hana",
+   "edges": 3,
+   "km": 18,
+   "cost": 1.8333,
+   "msgs_sum": 6
+  },
+  {
+   "route": "Amy > Ella > Fabio > Hana",
+   "edges": 3,
+   "km": 18,
+   "cost": 0.2,
+   "msgs_sum": 47
+  },
+  {
+   "route": "Amy > Ben > Clara > Gianni > Hana",
+   "edges": 4,
+   "km": 10,
+   "cost": 1.4167,
+   "msgs_sum": 12
+  },
+  {
+   "route": "Amy > Ben > Clara > Fabio > Hana",
+   "edges": 4,
+   "km": 16,
+   "cost": 1.1167,
+   "msgs_sum": 22
+  },
+  {
+   "route": "Amy > Ben > Ella > Fabio > Hana",
+   "edges": 4,
+   "km": 19,
+   "cost": 0.65,
+   "msgs_sum": 36
+  },
+  {
+   "route": "Amy > Ella > Ben > Clara > Gianni > Hana",
+   "edges": 5,
+   "km": 19,
+   "cost": 1.3,
+   "msgs_sum": 35
+  },
+  {
+   "route": "Amy > Ella > Fabio > Clara > Gianni > Hana",
+   "edges": 5,
+   "km": 20,
+   "cost": 0.9,
+   "msgs_sum": 47
+  },
+  {
+   "route": "Amy > Ben > Clara > Gianni > Dylan > Hana",
+   "edges": 5,
+   "km": 21,
+   "cost": 2.0833,
+   "msgs_sum": 13
+  },
+  {
+   "route": "Amy > Ella > Ben > Clara > Fabio > Hana",
+   "edges": 5,
+   "km": 25,
+   "cost": 1.0,
+   "msgs_sum": 45
+  },
+  {
+   "route": "Amy > Dylan > Gianni > Clara > Fabio > Hana",
+   "edges": 5,
+   "km": 28,
+   "cost": 2.0333,
+   "msgs_sum": 24
+  },
+  {
+   "route": "Amy > Ben > Ella > Fabio > Clara > Gianni > Hana",
+   "edges": 6,
+   "km": 21,
+   "cost": 1.35,
+   "msgs_sum": 36
+  },
+  {
+   "route": "Amy > Ella > Ben > Clara > Gianni > Dylan > Hana",
+   "edges": 6,
+   "km": 30,
+   "cost": 1.9667,
+   "msgs_sum": 36
+  },
+  {
+   "route": "Amy > Ella > Fabio > Clara > Gianni > Dylan > Hana",
+   "edges": 6,
+   "km": 31,
+   "cost": 1.5667,
+   "msgs_sum": 48
+  },
+  {
+   "route": "Amy > Ben > Ella > Fabio > Clara > Gianni > Dylan > Hana",
+   "edges": 7,
+   "km": 32,
+   "cost": 2.0167,
+   "msgs_sum": 37
+  },
+  {
+   "route": "Amy > Dylan > Gianni > Clara > Ben > Ella > Fabio > Hana",
+   "edges": 7,
+   "km": 37,
+   "cost": 2.5667,
+   "msgs_sum": 42
+  }
+ ],
+ "reply_toy": {
+  "reachable_from_Amy": [
+   "Ben",
+   "Clara",
+   "Dylan",
+   "Ella",
+   "Hana"
+  ],
+  "can_reach_Amy": [
+   "Ben",
+   "Clara",
+   "Fabio"
+  ],
+  "unreachable": [
+   {
+    "user": "Kurt",
+    "reason": "isolated"
+   },
+   {
+    "user": "Fabio",
+    "reason": "never_replied"
+   },
+   {
+    "user": "Gianni",
+    "reason": "never_replied"
+   },
+   {
+    "user": "Ivan",
+    "reason": "other_component"
+   },
+   {
+    "user": "Julia",
+    "reason": "other_component"
+   }
+  ],
+  "weak_components": [
+   [
+    "Amy",
+    "Ben",
+    "Clara",
+    "Dylan",
+    "Ella",
+    "Fabio",
+    "Gianni",
+    "Hana"
+   ],
+   [
+    "Ivan",
+    "Julia"
+   ],
+   [
+    "Kurt"
+   ]
+  ],
+  "strong_components": [
+   [
+    "Hana"
+   ],
+   [
+    "Dylan",
+    "Ella"
+   ],
+   [
+    "Amy",
+    "Ben",
+    "Clara"
+   ],
+   [
+    "Fabio"
+   ],
+   [
+    "Gianni"
+   ],
+   [
+    "Ivan",
+    "Julia"
+   ],
+   [
+    "Kurt"
+   ]
+  ],
+  "in_degree": {
+   "Amy": 2,
+   "Ben": 1,
+   "Clara": 1,
+   "Dylan": 2,
+   "Ella": 1,
+   "Fabio": 0,
+   "Gianni": 0,
+   "Hana": 2,
+   "Ivan": 1,
+   "Julia": 1,
+   "Kurt": 0
+  },
+  "out_degree": {
+   "Amy": 1,
+   "Ben": 1,
+   "Clara": 2,
+   "Dylan": 1,
+   "Ella": 2,
+   "Fabio": 1,
+   "Gianni": 1,
+   "Hana": 0,
+   "Ivan": 1,
+   "Julia": 1,
+   "Kurt": 0
+  }
+ },
+ "forum": {
+  "users": 300,
+  "rows": 3968,
+  "self_loop_rows": 31,
+  "roles": {
+   "member": 296,
+   "tutor": 3,
+   "bot": 1
+  },
+  "replies_total": 4969,
+  "replies_per_pair": {
+   "1": 3275,
+   "2": 504,
+   "3": 130,
+   "4": 36,
+   "5": 10,
+   "6": 3,
+   "7": 5,
+   "8": 2,
+   "9": 1,
+   "11": 1,
+   "13": 1
+  },
+  "start": "kristina_debono",
+  "summary": {
+   "users": 300,
+   "edges": 3937,
+   "density": 0.04389,
+   "isolated": 13,
+   "weak_components": 15,
+   "largest_weak_share": 0.9233,
+   "strong_components": 57,
+   "largest_strong_share": 0.77,
+   "reciprocity": 0.1351,
+   "reachable_from_start": 233,
+   "start": "kristina_debono"
+  },
+  "unreachable_counts": {
+   "never_replied": 37,
+   "isolated": 13,
+   "other_component": 10,
+   "upstream_only": 6
+  },
+  "unreachable_examples": {
+   "isolated": [
+    "aidan_cassar93",
+    "bettina_caruana21",
+    "chiara_caruana"
+   ],
+   "other_component": [
+    "aidan_abela",
+    "andrea_camilleri37",
+    "denise_spiteri"
+   ],
+   "never_replied": [
+    "andrea_abela",
+    "bettina_spiteri",
+    "chiara_agius"
+   ],
+   "upstream_only": [
+    "francesca_galea",
+    "gabriel_cassar",
+    "glen_debono18"
+   ]
+  },
+  "can_reach_start": 273,
+  "path_comparison": {
+   "reachable": 233,
+   "longer_strength_route": 59,
+   "hops_distribution": {
+    "1": 57,
+    "2": 144,
+    "3": 31,
+    "4": 1
+   },
+   "strength_edges_distribution": {
+    "1": 55,
+    "2": 105,
+    "3": 41,
+    "4": 26,
+    "5": 6
+   },
+   "max_extra_edges": 3
+  },
+  "example_pair": {
+   "target": "michela_debono",
+   "hops_route": [
+    "kristina_debono",
+    "kurt_azzopardi",
+    "michela_debono"
+   ],
+   "strength_route": [
+    "kristina_debono",
+    "warren_vella",
+    "glen_debono",
+    "isabel_galea",
+    "luca_vella",
+    "michela_debono"
+   ],
+   "hops_route_replies": [
+    1,
+    1
+   ],
+   "strength_route_replies": [
+    3,
+    3,
+    3,
+    3,
+    2
+   ]
+  },
+  "structure": [
+   {
+    "view": "directed",
+    "nodes": 300,
+    "edges": 3937,
+    "density": 0.04389,
+    "mean_degree": 13.123,
+    "isolated": 13,
+    "weak_components": 15,
+    "strong_components": 57.0,
+    "avg_clustering": null,
+    "transitivity": null
+   },
+   {
+    "view": "undirected",
+    "nodes": 300,
+    "edges": 3671,
+    "density": 0.08185,
+    "mean_degree": 24.473,
+    "isolated": 13,
+    "weak_components": 15,
+    "strong_components": null,
+    "avg_clustering": 0.3081,
+    "transitivity": 0.2581
+   },
+   {
+    "view": "reciprocal",
+    "nodes": 300,
+    "edges": 266,
+    "density": 0.00593,
+    "mean_degree": 1.773,
+    "isolated": 143,
+    "weak_components": 149,
+    "strong_components": null,
+    "avg_clustering": 0.0923,
+    "transitivity": 0.1309
+   },
+   {
+    "view": "strong (>= 3 replies)",
+    "nodes": 300,
+    "edges": 189,
+    "density": 0.00211,
+    "mean_degree": 0.63,
+    "isolated": 180,
+    "weak_components": 185,
+    "strong_components": 293.0,
+    "avg_clustering": null,
+    "transitivity": null
+   }
+  ],
+  "random_baseline_clustering": 0.0826,
+  "top_out": [
+   [
+    "studyhub_announcements",
+    118
+   ],
+   [
+    "chiara_azzopardi",
+    75
+   ],
+   [
+    "isabel_galea",
+    64
+   ],
+   [
+    "kristina_debono",
+    57
+   ],
+   [
+    "bettina_cassar",
+    56
+   ],
+   [
+    "glen_debono",
+    51
+   ]
+  ],
+  "top_in": [
+   [
+    "miriam_abela",
+    101
+   ],
+   [
+    "kristina_debono",
+    86
+   ],
+   [
+    "kristina_farrugia",
+    57
+   ],
+   [
+    "roberta_spiteri",
+    56
+   ],
+   [
+    "glen_debono6",
+    53
+   ],
+   [
+    "sara_sammut",
+    53
+   ]
+  ],
+  "top_undirected": [
+   [
+    "studyhub_announcements",
+    118
+   ],
+   [
+    "miriam_abela",
+    117
+   ],
+   [
+    "kristina_debono",
+    114
+   ],
+   [
+    "chiara_azzopardi",
+    86
+   ],
+   [
+    "isabel_galea",
+    86
+   ],
+   [
+    "glen_debono6",
+    74
+   ]
+  ],
+  "bot": {
+   "out": 118,
+   "in": 0,
+   "undirected": 118,
+   "clustering_undirected": 0.1585
+  },
+  "out_degree": {
+   "mean": 13.123,
+   "median": 10.0,
+   "max": 118,
+   "zero": 17,
+   "share_of_edges_top10pct": 0.3218,
+   "tail_fits": [
+    {
+     "xmin": 3,
+     "n_tail": 255,
+     "alpha": 1.657,
+     "lognormal_mu": 2.361,
+     "lognormal_sigma": 0.832,
+     "R": -78.174,
+     "p": 0.0,
+     "verdict": "log-normal favoured"
+    },
+    {
+     "xmin": 8,
+     "n_tail": 175,
+     "alpha": 2.203,
+     "lognormal_mu": 2.641,
+     "lognormal_sigma": 0.664,
+     "R": -24.778,
+     "p": 0.0,
+     "verdict": "log-normal favoured"
+    }
+   ]
+  }
+ },
+ "scifact_knn5_indegree": {
+  "mean": 5.0,
+  "median": 4.0,
+  "max": 55,
+  "zero": 222,
+  "top": [
+   [
+    "52188256",
+    55
+   ],
+   [
+    "10078024",
+    38
+   ],
+   [
+    "39801095",
+    38
+   ],
+   [
+    "32534305",
+    33
+   ],
+   [
+    "3360421",
+    29
+   ]
+  ],
+  "share_at_least_20": 0.0087,
+  "tail_fits": [
+   {
+    "xmin": 5,
+    "n_tail": 2378,
+    "alpha": 2.97,
+    "lognormal_mu": 1.612,
+    "lognormal_sigma": 0.584,
+    "R": -142.843,
+    "p": 0.0,
+    "verdict": "log-normal favoured"
+   },
+   {
+    "xmin": 12,
+    "n_tail": 330,
+    "alpha": 4.768,
+    "lognormal_mu": 1.428,
+    "lognormal_sigma": 0.629,
+    "R": -2.643,
+    "p": 0.2362,
+    "verdict": "cannot tell them apart"
+   },
+   {
+    "xmin": 20,
+    "n_tail": 45,
+    "alpha": 5.813,
+    "lognormal_mu": -3.935,
+    "lognormal_sigma": 1.233,
+    "R": -0.015,
+    "p": 0.9192,
+    "verdict": "cannot tell them apart"
+   }
+  ]
+ }
+}

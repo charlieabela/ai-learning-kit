@@ -44,7 +44,7 @@ Written for the **intermediate** level: Learners who are comfortable with basic 
 
 ### Left out of this topic
 
-- Centrality measures, communities and link analysis (PageRank) (taught in later graph-analysis topics)
+- Centrality measures, communities and link analysis (PageRank) (taught in the centrality-and-link-analysis topic; communities in later graph-analysis topics)
 
 ## Helpers: `T = kit.tools()`
 

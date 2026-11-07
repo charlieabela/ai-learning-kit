@@ -12,6 +12,8 @@
 | [`exploring-data`](exploring-data.md) | introductory | data-cleaning | — | Exploring data: descriptive statistics, distributions, correlation and visualisation. |
 | [`modelling`](modelling.md) | introductory | exploring-data | — | Modelling: linear regression, logistic regression and k-nearest neighbours. |
 | [`text-to-graphs`](text-to-graphs.md) | intermediate | — | graphs | Text to graphs: turning a corpus into graphs and exploring them (term-document graphs and their projections, co-occurrence with count and lift thresholds, k-nearest-neighbour document graphs, traversal, components and shortest paths, and what construction and preprocessing choices do to the result). |
+| [`paths-and-connectivity`](paths-and-connectivity.md) | intermediate | text-to-graphs | graphs | Paths, connectivity and structure: what a shortest path, a reachable set and a structural measure mean. |
+| [`centrality-and-link-analysis`](centrality-and-link-analysis.md) | intermediate | text-to-graphs, paths-and-connectivity | graphs | Centrality and link analysis: what "important" means in a graph, and how degree, betweenness, closeness, PageRank and HITS each answer it. |
 | [`graph-embeddings`](graph-embeddings.md) | advanced | — | graphs | Graph embeddings: random walks, skip-gram, node2vec, evaluation and TransE. |
 | [`graph-neural-networks`](graph-neural-networks.md) | advanced | graph-embeddings | advanced | Graph neural networks: message passing, GCN, depth, GraphSAGE, limits and tasks. |
 | [`knowledge-graphs`](knowledge-graphs.md) | advanced | graph-embeddings, graph-neural-networks | advanced | Knowledge graphs: property graphs and RDF, Neo4j and Cypher, graph algorithms in the database, TransE for link prediction, coverage and bias. |

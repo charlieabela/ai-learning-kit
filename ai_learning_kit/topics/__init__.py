@@ -26,6 +26,8 @@ REGISTRY = {
     "exploring-data": ".exploring_data",
     "modelling": ".modelling",
     "text-to-graphs": ".text_to_graphs",
+    "paths-and-connectivity": ".paths_and_connectivity",
+    "centrality-and-link-analysis": ".centrality_and_link_analysis",
     "graph-embeddings": ".graph_embeddings",
     "graph-neural-networks": ".graph_neural_networks",
     "knowledge-graphs": ".knowledge_graphs",

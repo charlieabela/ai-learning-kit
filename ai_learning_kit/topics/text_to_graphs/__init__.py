@@ -57,5 +57,6 @@ STAGES = {
     "efficient_scc": stage("Tarjan's and Kosaraju's algorithms for strong components", ON_REQUEST,
                            note="mentioned in an optional cell; explain at the level of the idea only when asked"),
     "centrality": stage("Centrality measures, communities and link analysis (PageRank)", OUT_OF_SCOPE,
-                        taught_in="later graph-analysis topics"),
+                        taught_in="the centrality-and-link-analysis topic; communities in later graph-analysis "
+                                  "topics"),
 }

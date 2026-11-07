@@ -158,7 +158,7 @@ works on notebook files wherever they are.
 
 ## Versioning and compatibility
 
-Releases are tagged; notebooks install a tag (`@v1.1.0`). A problem's data and a
+Releases are tagged; notebooks install a tag (`@v1.2.0`). A problem's data and a
 released topic's helpers and tasks are never changed afterwards: fix a problem by
 adding a new id, change a helper by adding a new function. Earlier tags remain
 installable, so a notebook keeps working against the tag it installs (notebooks

@@ -386,7 +386,8 @@ def _download(url: str, target: Path, s: Source, quiet: bool, timeout: int = 30)
     os.close(fd)
     tmp = Path(tmp)
     try:
-        with urllib.request.urlopen(request, timeout=timeout) as response, open(tmp, "wb") as out:
+        from ..core import tls
+        with tls.opener().open(request, timeout=timeout) as response, open(tmp, "wb") as out:
             kind = response.headers.get("Content-Type", "")
             total, done, last = int(response.headers.get("Content-Length") or s.size), 0, 0.0
             while True:
@@ -497,7 +498,8 @@ def _remote_copies() -> dict:
         return {}
     try:
         request = urllib.request.Request(url, headers={"User-Agent": f"ai-learning-kit/{__version__} (teaching)"})
-        with urllib.request.urlopen(request, timeout=10) as response:
+        from ..core import tls
+        with tls.opener().open(request, timeout=10) as response:
             data = json.loads(response.read(200_000).decode("utf-8"))
         return {str(k).lower(): [str(u) for u in v if re.match(r"^https://", str(u))]
                 for k, v in data.items() if isinstance(v, list)}

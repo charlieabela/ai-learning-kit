@@ -42,7 +42,7 @@ python -m ai_learning_kit.dev.notebooks stamp 1.0.0 1_prepare.ipynb
 ## Use in a notebook (Notebook Tutor, Colab, Jupyter or VS Code)
 
 ```python
-%pip install -q "ai-learning-kit[advanced]@https://github.com/charlieabela/ai-learning-kit/archive/refs/tags/v1.1.0.zip"
+%pip install -q "ai-learning-kit[advanced]@https://github.com/charlieabela/ai-learning-kit/archive/refs/tags/v1.2.0.zip"
 import ai_learning_kit as kit
 kit.start("knowledge-graphs")      # downloads the topic's datasets from their owners, once
 T = kit.tools()                    # the topic's helper functions
@@ -109,6 +109,8 @@ can pitch the same topic at another level. A topic's notebooks may assume the to
 | `exploring-data` | introductory | descriptive statistics, distributions, outliers, correlation and visualisation; a preview of sampling | the Palmer penguins, a year of daily weather for Malta, Anscombe's quartet | |
 | `modelling` | introductory | linear regression, logistic regression and k-nearest neighbours with scikit-learn, with the data prepared by hand (encoding, splits, scaling) | the Palmer penguins, Auto MPG | |
 | `text-to-graphs` | intermediate | graphs as data structures (adjacency lists and matrices), BFS and DFS, connected and strongly connected components, shortest paths and turning similarity into distance, concept co-occurrence graphs (counts and lift) and k-nearest-neighbour document graphs, and what preprocessing choices do to a graph | SciFact abstracts (Wadden et al., 2020, from its owners), a six-abstract miniature | `graphs` |
+| `paths-and-connectivity` | intermediate | what a path means (hops, a distance, an interaction frequency turned into a cost), reachability in directed graphs and why users cannot be reached, graph views (directed, undirected, reciprocal, strong ties), degree, density and clustering against a baseline, degree distributions and why a straight log-log plot is not a power law | two hand-checkable graphs, StudyHub (a fictional forum, generated), SciFact's kNN graph | `graphs` |
+| `centrality-and-link-analysis` | intermediate | what "important" means: degree and strength, betweenness pair by pair, closeness on disconnected data, PageRank as probability flow (dangling nodes, teleportation, damping), HITS hubs and authorities, comparing rankings and perturbing one edge | two hand-checkable graphs, StudyHub as an attention graph (generated) | `graphs` |
 | `graph-embeddings` | advanced | random walks, skip-gram, node2vec, evaluating embeddings, TransE | Cora (from LINQS), small classic graphs | `graphs` |
 | `graph-neural-networks` | advanced | message passing, GCN, depth and over-smoothing, GraphSAGE, the limits of GNNs, node classification and link prediction | Cora (from LINQS), a five-paper graph, synthetic graphs | `advanced` |
 | `knowledge-graphs` | advanced | property graphs and RDF, Neo4j and Cypher, graph algorithms in the database, TransE for link prediction, coverage and bias | Hetionet v1.0 (from GitHub), a drug-interaction example | `advanced` |
